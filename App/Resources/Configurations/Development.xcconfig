@@ -1,0 +1,14 @@
+//
+//  Development.xcconfig
+//  Boilerplate
+//
+//  Created by Radyslav Krechet on 8/16/19.
+//  Copyright © 2019 RubyGarage. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "Common.xcconfig"
+
+APP_NAME = $(PRODUCT_NAME) α

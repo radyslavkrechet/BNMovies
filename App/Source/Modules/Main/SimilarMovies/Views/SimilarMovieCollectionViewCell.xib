@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="SimilarMovieCollectionViewCell" customModule="Boilerplate" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="250" height="150"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="250" height="150"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NPq-Vj-IHo">
+                        <rect key="frame" x="0.0" y="0.0" width="250" height="125"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="NPq-Vj-IHo" secondAttribute="height" multiplier="2:1" priority="999" id="h08-vZ-mbw"/>
+                        </constraints>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="bottom" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="W00-q9-C3h">
+                        <rect key="frame" x="0.0" y="133" width="250" height="17"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mCN-ZE-gRA">
+                                <rect key="frame" x="0.0" y="2.5" width="25" height="14.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qs8-3n-AFc" customClass="UserScoreLabel" customModule="Boilerplate" customModuleProvider="target">
+                                <rect key="frame" x="188.5" y="2.5" width="61.5" height="14.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="NPq-Vj-IHo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="2xH-C6-cA0"/>
+                <constraint firstItem="NPq-Vj-IHo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="GpK-EO-ynB"/>
+                <constraint firstAttribute="trailing" secondItem="NPq-Vj-IHo" secondAttribute="trailing" id="ONV-TL-rpQ"/>
+                <constraint firstAttribute="trailing" secondItem="W00-q9-C3h" secondAttribute="trailing" id="VTz-dP-hp0"/>
+                <constraint firstAttribute="bottom" secondItem="W00-q9-C3h" secondAttribute="bottom" id="Voz-dI-ZWN"/>
+                <constraint firstItem="W00-q9-C3h" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="gMj-M9-x76"/>
+                <constraint firstItem="W00-q9-C3h" firstAttribute="top" secondItem="NPq-Vj-IHo" secondAttribute="bottom" constant="8" id="su6-zK-Zx1"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="210" height="146"/>
+            <connections>
+                <outlet property="backdropImageView" destination="NPq-Vj-IHo" id="72h-ac-JSJ"/>
+                <outlet property="titleLabel" destination="mCN-ZE-gRA" id="D0K-mi-GMd"/>
+                <outlet property="userScoreLabel" destination="Qs8-3n-AFc" id="dKL-pF-nhC"/>
+            </connections>
+            <point key="canvasLocation" x="111.59420289855073" y="174.10714285714286"/>
+        </collectionViewCell>
+    </objects>
+</document>

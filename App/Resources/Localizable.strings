@@ -1,0 +1,17 @@
+/* 
+  Localizable.strings
+  Boilerplate
+
+  Created by Radyslav Krechet on 8/27/19.
+  Copyright © 2019 RubyGarage. All rights reserved.
+*/
+
+"UIViewController.alert.title" = "Error";
+"UIViewController.alert.ok" = "OK";
+
+"FavouritesViewController.emptyStateText" = "There are no favourite movies";
+
+"DetailsViewController.favouriteTitle.add" = "Add";
+"DetailsViewController.favouriteTitle.remove" = "Remove";
+
+"SimilarMoviesViewController.emptyStateText" = "There are no similar movies";

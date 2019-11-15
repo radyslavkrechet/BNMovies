@@ -1,0 +1,19 @@
+//
+//  String+Localization.swift
+//  Boilerplate
+//
+//  Created by Radyslav Krechet on 8/16/19.
+//  Copyright © 2019 RubyGarage. All rights reserved.
+//
+
+import Foundation
+
+extension String {
+    var localized: String {
+        return NSLocalizedString(self, comment: "")
+    }
+
+    func localizedFormat(_ arguments: CVarArg...) -> String {
+        return String(format: localized, arguments: arguments)
+    }
+}
