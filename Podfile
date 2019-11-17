@@ -2,7 +2,7 @@ platform :ios, '12.0'
 inhibit_all_warnings!
 
 def swinject
-  pod 'Swinject'
+  pod 'Swinject', '2.6.2'
 end
 
 def swift_lint

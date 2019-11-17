@@ -1,9 +1,9 @@
 //
 //  AnalyticsManager.swift
-//  Boilerplate
+//  Analytics
 //
 //  Created by Radyslav Krechet on 9/12/19.
-//  Copyright © 2019 RubyGarage. All rights reserved.
+//  Copyright © 2019 Radyslav Krechet. All rights reserved.
 //
 
 import Firebase
@@ -11,7 +11,7 @@ import Firebase
 private let keys = (eventCategory: "eventCategory", eventLabel: "eventLabel")
 
 struct AnalyticsManager: AnalyticsManagerProtocol {
-    private enum EventName: String {
+    private enum Event: String {
         case presentation, click, pagination, pullToRefresh, itemSelection, signIn, signOut
     }
 
@@ -47,7 +47,7 @@ struct AnalyticsManager: AnalyticsManagerProtocol {
         logEvent(.signOut)
     }
 
-    private func logEvent(_ name: EventName, responder: String? = nil, label: String? = nil) {
+    private func logEvent(_ event: Event, responder: String? = nil, label: String? = nil) {
         var parameters = [String: String]()
         if let responder = responder {
             parameters[keys.eventCategory] = responder
@@ -56,6 +56,6 @@ struct AnalyticsManager: AnalyticsManagerProtocol {
             parameters[keys.eventLabel] = label
         }
 
-        Analytics.logEvent(name.rawValue, parameters: parameters.isEmpty ? nil : parameters)
+        Analytics.logEvent(event.rawValue, parameters: parameters.isEmpty ? nil : parameters)
     }
 }

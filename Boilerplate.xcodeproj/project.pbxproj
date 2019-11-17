@@ -107,7 +107,7 @@
 		0BB1B1A4232A6AE000CB8FCD /* MovieDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6326892315B42F00B08D6F /* MovieDAO.swift */; };
 		0BB1B1A5232A6AE000CB8FCD /* UserDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6326872315B41A00B08D6F /* UserDAO.swift */; };
 		0BB1B1A6232A6AE000CB8FCD /* DatabaseAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6326772315AF1B00B08D6F /* DatabaseAssembly.swift */; };
-		0BB1B1AB232A6BE600CB8FCD /* CoreStore+CompletionOnGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B204A9623276C4800CE54BB /* CoreStore+CompletionOnGlobal.swift */; };
+		0BB1B1AB232A6BE600CB8FCD /* DataStack+CompletionOnGlobal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B204A9623276C4800CE54BB /* DataStack+CompletionOnGlobal.swift */; };
 		0BB1B1AC232A6BE900CB8FCD /* SessionAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B632702231D54BC00B08D6F /* SessionAdapter.swift */; };
 		0BB1B1AD232A6BE900CB8FCD /* UserAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B632704231D54CD00B08D6F /* UserAdapter.swift */; };
 		0BB1B1AE232A6BE900CB8FCD /* MovieAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B632706231D54E100B08D6F /* MovieAdapter.swift */; };
@@ -250,7 +250,7 @@
 		0B204A8D232248D300CE54BB /* SimilarMovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarMovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		0B204A8E232248D300CE54BB /* SimilarMovieCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimilarMovieCollectionViewCell.xib; sourceTree = "<group>"; };
 		0B204A9123228D2C00CE54BB /* CoderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoderService.swift; sourceTree = "<group>"; };
-		0B204A9623276C4800CE54BB /* CoreStore+CompletionOnGlobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreStore+CompletionOnGlobal.swift"; sourceTree = "<group>"; };
+		0B204A9623276C4800CE54BB /* DataStack+CompletionOnGlobal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataStack+CompletionOnGlobal.swift"; sourceTree = "<group>"; };
 		0B204A98232782FC00CE54BB /* UseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseCase.swift; sourceTree = "<group>"; };
 		0B204A9A2327830800CE54BB /* ParameterizableUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterizableUseCase.swift; sourceTree = "<group>"; };
 		0B204A9C23278DD000CE54BB /* RxSwift+ObserveOnMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxSwift+ObserveOnMain.swift"; sourceTree = "<group>"; };
@@ -597,7 +597,7 @@
 		0B204A9523276C3000CE54BB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0B204A9623276C4800CE54BB /* CoreStore+CompletionOnGlobal.swift */,
+				0B204A9623276C4800CE54BB /* DataStack+CompletionOnGlobal.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -890,6 +890,49 @@
 			path = Database;
 			sourceTree = "<group>";
 		};
+		0BD66079237EEAEB00E6EFA7 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				0BE7D890230AD5280003A02E /* UIView+LoadFromNib.swift */,
+				0B204A7523215CF000CE54BB /* UIView+CornerRadius.swift */,
+				0B204A7923215E2B00CE54BB /* UITableView+RegisterNib.swift */,
+				0BE7D894230AD5280003A02E /* UITableView+Dequeue.swift */,
+				0B204A7B23215E5600CE54BB /* UICollectionView+RegisterNib.swift */,
+				0BE7D88D230AD5280003A02E /* UICollectionView+Dequeue.swift */,
+				0B6326B12316B78A00B08D6F /* UIViewController+Navigation.swift */,
+				0B204A7723215D7200CE54BB /* UIViewController+Alert.swift */,
+				0B6326DB2319329300B08D6F /* UIStoryboard+Navigation.swift */,
+				0BA8308D232A470000D81840 /* UIWindow+Motion.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		0BD6607A237EEAFC00E6EFA7 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				0B6326DE231D032000B08D6F /* User+Displaying.swift */,
+				0B632718231FCF6600B08D6F /* Movie+Displaying.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		0BD6607B237EEB0F00E6EFA7 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				0BE7D88C230AD5280003A02E /* String+Localization.swift */,
+				0BE7D88E230AD5280003A02E /* NSObject+NameOfClass.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		0BD6607C237EEB2400E6EFA7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0B204A9C23278DD000CE54BB /* RxSwift+ObserveOnMain.swift */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		0BE7D835230AC9EB0003A02E /* Entities */ = {
 			isa = PBXGroup;
 			children = (
@@ -982,21 +1025,10 @@
 		0BE7D83E230ACA8A0003A02E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				0BE7D88C230AD5280003A02E /* String+Localization.swift */,
-				0BE7D88E230AD5280003A02E /* NSObject+NameOfClass.swift */,
-				0BE7D890230AD5280003A02E /* UIView+LoadFromNib.swift */,
-				0B204A7523215CF000CE54BB /* UIView+CornerRadius.swift */,
-				0B204A7923215E2B00CE54BB /* UITableView+RegisterNib.swift */,
-				0BE7D894230AD5280003A02E /* UITableView+Dequeue.swift */,
-				0B204A7B23215E5600CE54BB /* UICollectionView+RegisterNib.swift */,
-				0BE7D88D230AD5280003A02E /* UICollectionView+Dequeue.swift */,
-				0B6326B12316B78A00B08D6F /* UIViewController+Navigation.swift */,
-				0B204A7723215D7200CE54BB /* UIViewController+Alert.swift */,
-				0B6326DB2319329300B08D6F /* UIStoryboard+Navigation.swift */,
-				0BA8308D232A470000D81840 /* UIWindow+Motion.swift */,
-				0B6326DE231D032000B08D6F /* User+Displaying.swift */,
-				0B632718231FCF6600B08D6F /* Movie+Displaying.swift */,
-				0B204A9C23278DD000CE54BB /* RxSwift+ObserveOnMain.swift */,
+				0BD6607B237EEB0F00E6EFA7 /* Foundation */,
+				0BD66079237EEAEB00E6EFA7 /* UIKit */,
+				0BD6607A237EEAFC00E6EFA7 /* Domain */,
+				0BD6607C237EEB2400E6EFA7 /* Pods */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1677,7 +1709,7 @@
 				0BB1B1A6232A6AE000CB8FCD /* DatabaseAssembly.swift in Sources */,
 				0BB1B1AF232A6BE900CB8FCD /* GenreAdapter.swift in Sources */,
 				0BB1B1B4232A6BF000CB8FCD /* DatabaseService.swift in Sources */,
-				0BB1B1AB232A6BE600CB8FCD /* CoreStore+CompletionOnGlobal.swift in Sources */,
+				0BB1B1AB232A6BE600CB8FCD /* DataStack+CompletionOnGlobal.swift in Sources */,
 				0BB1B1B0232A6BED00CB8FCD /* SessionEntity.swift in Sources */,
 				0BB1B1B2232A6BED00CB8FCD /* MovieEntity.swift in Sources */,
 				0BB1B1A4232A6AE000CB8FCD /* MovieDAO.swift in Sources */,
@@ -1869,13 +1901,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = K2WTD52A5C;
+				DEVELOPMENT_TEAM = BM3ZT94MUH;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Lists/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.boilerplate;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
@@ -1892,13 +1925,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = K2WTD52A5C;
+				DEVELOPMENT_TEAM = BM3ZT94MUH;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Lists/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.boilerplate;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
@@ -1978,13 +2012,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = K2WTD52A5C;
+				DEVELOPMENT_TEAM = BM3ZT94MUH;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Lists/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.boilerplate;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
@@ -2064,13 +2099,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = K2WTD52A5C;
+				DEVELOPMENT_TEAM = BM3ZT94MUH;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Lists/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.boilerplate;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
@@ -2145,13 +2181,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = K2WTD52A5C;
+				DEVELOPMENT_TEAM = BM3ZT94MUH;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Lists/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.boilerplate;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
@@ -2226,13 +2263,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = K2WTD52A5C;
+				DEVELOPMENT_TEAM = BM3ZT94MUH;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Lists/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.boilerplate;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "";
@@ -2311,14 +2349,15 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.net;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.net;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2394,14 +2433,15 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.net;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.net;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2477,14 +2517,15 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.net;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.net;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2553,14 +2594,15 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.net;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.net;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -2630,14 +2672,15 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.net;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.net;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -2707,14 +2750,15 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.net;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.net;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -2791,14 +2835,15 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.domain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.domain;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2874,14 +2919,15 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.domain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.domain;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -2957,14 +3003,15 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.domain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.domain;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -3033,14 +3080,15 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.domain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.domain;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3110,14 +3158,15 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.domain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.domain;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3187,14 +3236,15 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.domain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.domain;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3271,14 +3321,15 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.data;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.data;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -3354,14 +3405,15 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.data;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.data;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -3437,14 +3489,15 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.data;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.data;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -3513,14 +3566,15 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.data;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.data;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3590,14 +3644,15 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.data;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.data;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3667,14 +3722,15 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.data;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.data;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3751,15 +3807,16 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.database;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.database;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -3835,15 +3892,16 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.database;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.database;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -3919,15 +3977,16 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.database;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.database;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -3996,15 +4055,16 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.database;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.database;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -4074,15 +4134,16 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.database;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.database;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -4152,15 +4213,16 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = org.rubygarage.database;
+				PRODUCT_BUNDLE_IDENTIFIER = com.radyslavkrechet.boilerplate.database;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

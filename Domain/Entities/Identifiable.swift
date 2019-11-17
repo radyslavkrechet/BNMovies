@@ -1,9 +1,9 @@
 //
 //  Identifiable.swift
-//  Boilerplate
+//  Domain
 //
 //  Created by Radyslav Krechet on 9/10/19.
-//  Copyright © 2019 RubyGarage. All rights reserved.
+//  Copyright © 2019 Radyslav Krechet. All rights reserved.
 //
 
 import Foundation

@@ -1,9 +1,9 @@
 //
 //  UserRepository.swift
-//  Boilerplate
+//  Data
 //
 //  Created by Radyslav Krechet on 8/23/19.
-//  Copyright © 2019 RubyGarage. All rights reserved.
+//  Copyright © 2019 Radyslav Krechet. All rights reserved.
 //
 
 import Domain

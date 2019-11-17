@@ -3,7 +3,7 @@
 //  Boilerplate
 //
 //  Created by Radyslav Krechet on 8/30/19.
-//  Copyright © 2019 RubyGarage. All rights reserved.
+//  Copyright © 2019 Radyslav Krechet. All rights reserved.
 //
 
 import Domain
@@ -40,12 +40,12 @@ struct DependencyInjectionManager {
 
     private func applyAssemblies(with baseURL: String, apiKey: String) {
         #if RELEASE
-        // Setup Firebase for Crashlytics only
-        let analytics = AnalyticsAssembly()
-        #if PRODUCTION
-        // Inject AnalyticsManager into the app
-        assembler.apply(assembly: analytics)
-        #endif
+            // Setup Firebase for Crashlytics only
+            let analytics = AnalyticsAssembly()
+            #if PRODUCTION
+            // Inject AnalyticsManager into the app
+            assembler.apply(assembly: analytics)
+            #endif
         #endif
 
         let net = NetAssembly(with: baseURL, apiKey: apiKey)

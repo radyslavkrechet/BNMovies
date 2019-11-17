@@ -1,9 +1,9 @@
 //
 //  SessionDAO.swift
-//  Boilerplate
+//  Database
 //
 //  Created by Radyslav Krechet on 8/27/19.
-//  Copyright © 2019 RubyGarage. All rights reserved.
+//  Copyright © 2019 Radyslav Krechet. All rights reserved.
 //
 
 import Domain
@@ -12,7 +12,7 @@ import CoreStore
 
 class SessionDAO: SessionDAOProtocol {
     func set(_ session: Session, handler: @escaping Handler<Session>) {
-        CoreStore.perform(asynchronous: { transaction in
+        CoreStoreDefaults.dataStack.perform(asynchronous: { transaction in
             let from = From<SessionEntity>()
             let into = Into<SessionEntity>()
             let entity = try transaction.fetchOne(from) ?? transaction.create(into)
@@ -26,7 +26,7 @@ class SessionDAO: SessionDAOProtocol {
     }
 
     func getSession(handler: @escaping Handler<Session?>) {
-        CoreStore.perform(asynchronous: { transaction -> Session? in
+        CoreStoreDefaults.dataStack.perform(asynchronous: { transaction -> Session? in
             let from = From<SessionEntity>()
             let entity = try transaction.fetchOne(from)
 
@@ -44,7 +44,7 @@ class SessionDAO: SessionDAOProtocol {
     }
 
     func deleteSession(handler: @escaping Handler<Void>) {
-        CoreStore.perform(asynchronous: { transaction in
+        CoreStoreDefaults.dataStack.perform(asynchronous: { transaction in
             let from = From<SessionEntity>()
             try transaction.deleteAll(from)
         }, completionOnGlobal: { result in

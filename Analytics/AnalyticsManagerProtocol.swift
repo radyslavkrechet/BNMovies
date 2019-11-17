@@ -1,9 +1,9 @@
 //
 //  AnalyticsManagerProtocol.swift
-//  Boilerplate
+//  Analytics
 //
 //  Created by Radyslav Krechet on 9/12/19.
-//  Copyright © 2019 RubyGarage. All rights reserved.
+//  Copyright © 2019 Radyslav Krechet. All rights reserved.
 //
 
 import Foundation

@@ -1,9 +1,9 @@
 //
 //  NetAssembly.swift
-//  Boilerplate
+//  Net
 //
 //  Created by Radyslav Krechet on 8/27/19.
-//  Copyright © 2019 RubyGarage. All rights reserved.
+//  Copyright © 2019 Radyslav Krechet. All rights reserved.
 //
 
 import Data
@@ -11,7 +11,6 @@ import Swinject
 
 public struct NetAssembly: Assembly {
     public init(with baseURL: String, apiKey: String) {
-        NetworkService.setup()
         ServerManager.setup(with: baseURL, apiKey: apiKey)
     }
 

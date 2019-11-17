@@ -1,19 +1,19 @@
 //
 //  UseCase.swift
-//  Boilerplate
+//  Domain
 //
 //  Created by Radyslav Krechet on 9/10/19.
-//  Copyright © 2019 RubyGarage. All rights reserved.
+//  Copyright © 2019 Radyslav Krechet. All rights reserved.
 //
 
 import Foundation
 
-public class UseCase<S> {
-    public func execute(handler: @escaping Handler<S>) {
+public class UseCase<R> {
+    public func execute(handler: @escaping Handler<R>) {
         DispatchQueue.global(qos: .userInitiated).async {
             self.work(handler: handler)
         }
     }
 
-    func work(handler: @escaping Handler<S>) {}
+    func work(handler: @escaping Handler<R>) {}
 }

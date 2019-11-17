@@ -1,9 +1,9 @@
 //
 //  MovieDAO.swift
-//  Boilerplate
+//  Database
 //
 //  Created by Radyslav Krechet on 8/27/19.
-//  Copyright © 2019 RubyGarage. All rights reserved.
+//  Copyright © 2019 Radyslav Krechet. All rights reserved.
 //
 
 import Domain
@@ -12,7 +12,7 @@ import CoreStore
 
 class MovieDAO: MovieDAOProtocol {
     func set(_ movie: Movie, handler: @escaping Handler<Movie>) {
-        CoreStore.perform(asynchronous: { transaction in
+        CoreStoreDefaults.dataStack.perform(asynchronous: { transaction in
             let genreEntities = try movie.genres.map { genre -> GenreEntity in
                 let builder = From<GenreEntity>().where(\.id == genre.id)
                 let into = Into<GenreEntity>()
@@ -34,7 +34,7 @@ class MovieDAO: MovieDAOProtocol {
     }
 
     func getFavourites(handler: @escaping Handler<[Movie]>) {
-        CoreStore.perform(asynchronous: { transaction -> [Movie] in
+        CoreStoreDefaults.dataStack.perform(asynchronous: { transaction -> [Movie] in
             let builder = From<MovieEntity>().where(\.isFavourite == true)
             let entities = try transaction.fetchAll(builder)
             return entities.map { MovieAdapter.fromStorage($0) }.reversed()
@@ -47,7 +47,7 @@ class MovieDAO: MovieDAOProtocol {
     }
 
     func getMovie(with id: String, handler: @escaping Handler<Movie?>) {
-        CoreStore.perform(asynchronous: { transaction -> Movie? in
+        CoreStoreDefaults.dataStack.perform(asynchronous: { transaction -> Movie? in
             let builder = From<MovieEntity>().where(\.id == id)
             let entity = try transaction.fetchOne(builder)
 
