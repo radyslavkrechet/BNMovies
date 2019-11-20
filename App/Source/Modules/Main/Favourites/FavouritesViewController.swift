@@ -9,7 +9,9 @@
 import Domain
 import UIKit
 
-class FavouritesViewController: ListViewController<FavouritesViewModel, MoviesTableProvider> {
+class FavouritesViewController<Presenter: FavouritesPresenterProtocol,
+    DataSource: MoviesDataSourceProtocol>: ListViewController<Presenter, DataSource>, FavouritesViewProtocol {
+
     @IBOutlet private(set) weak var tableView: UITableView!
 
     override var emptyStateText: String {
@@ -21,7 +23,15 @@ class FavouritesViewController: ListViewController<FavouritesViewModel, MoviesTa
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        viewModel.getContent()
+        presenter.getContent()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let deailsViewController = segue.destination as? DetailsViewController<DetailsPresenter>,
+            let movie = sender as? Movie {
+
+            deailsViewController.presenter.id = movie.id
+        }
     }
 
     // MARK: - Setup
@@ -30,22 +40,11 @@ class FavouritesViewController: ListViewController<FavouritesViewModel, MoviesTa
         super.setupViews()
 
         tableView.registerNibForCell(MovieTableViewCell.self)
-        tableView.dataSource = recyclerProvider
-        tableView.delegate = recyclerProvider
+        tableView.dataSource = dataSource
+        tableView.delegate = dataSource
     }
 
-    override func setupBinding() {
-        super.setupBinding()
-
-        viewModel.movies.distinctUntilChanged().subscribe(onNext: { [weak self] movies in
-            self?.process(movies)
-        }).disposed(by: disposeBag)
-    }
-
-    private func process(_ movies: [Movie]) {
-        recyclerProvider.items.value = movies
-        tableView.reloadData()
-    }
+    // MARK: - DataSource
 
     override func userDidSelectItem(_ item: Movie) {
         super.userDidSelectItem(item)
@@ -53,11 +52,10 @@ class FavouritesViewController: ListViewController<FavouritesViewModel, MoviesTa
         present(.Details, with: item)
     }
 
-    // MARK: - Navigation
+    // MARK: - FavouritesViewProtocol
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let deailsViewController = segue.destination as? DetailsViewController, let movie = sender as? Movie {
-            deailsViewController.viewModel.id = movie.id
-        }
+    func populate(with movies: [Movie]) {
+        dataSource.populate(with: movies)
+        tableView.reloadData()
     }
 }

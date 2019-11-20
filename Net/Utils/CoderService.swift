@@ -9,7 +9,7 @@
 import Alamofire
 
 enum CoderService {
-    static func encode<V: Encodable>(_ body: V) throws -> Parameters {
+    static func encode<Body: Encodable>(_ body: Body) throws -> Parameters {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
 
@@ -21,13 +21,13 @@ enum CoderService {
         }
     }
 
-    static func decode<V: Decodable>(_ json: Any) throws -> V {
+    static func decode<Response: Decodable>(_ json: Any) throws -> Response {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
 
         do {
             let data = try JSONSerialization.data(withJSONObject: json)
-            return try decoder.decode(V.self, from: data)
+            return try decoder.decode(Response.self, from: data)
         } catch {
             throw error
         }

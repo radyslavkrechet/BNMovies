@@ -73,12 +73,6 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
-  - RxCocoa (5.0.1):
-    - RxRelay (~> 5)
-    - RxSwift (~> 5)
-  - RxRelay (5.0.1):
-    - RxSwift (~> 5)
-  - RxSwift (5.0.1)
   - SwiftLint (0.37.0)
   - Swinject (2.6.2)
   - SwinjectStoryboard (2.2.0):
@@ -92,8 +86,6 @@ DEPENDENCIES:
   - Firebase/Analytics
   - FLEX
   - Kingfisher
-  - RxCocoa
-  - RxSwift
   - SwiftLint
   - Swinject (= 2.6.2)
   - SwinjectStoryboard
@@ -117,9 +109,6 @@ SPEC REPOS:
     - GoogleUtilities
     - Kingfisher
     - nanopb
-    - RxCocoa
-    - RxRelay
-    - RxSwift
     - SwiftLint
     - Swinject
     - SwinjectStoryboard
@@ -142,13 +131,10 @@ SPEC CHECKSUMS:
   GoogleUtilities: 547a86735c6f0ee30ad17e94df4fc21f616b71cb
   Kingfisher: ff98240aebb7302bdc4f1ecd701761030ce18b16
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
-  RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
-  RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
-  RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
   SwiftLint: c078a14d7d7ade75e5507795d185e3da41d844d2
   Swinject: cf7458774b1b00323080a9c67e47a1ee7f9d2af1
   SwinjectStoryboard: 32512ef16c2b0ff5b8f823b23539c4a50f6d3383
 
-PODFILE CHECKSUM: 22c1e9b80c95748c6fb9c61d8e4341b3f9bc4da2
+PODFILE CHECKSUM: 3fe5eb96addc98e50921dc59aa00e9643c193e1a
 
 COCOAPODS: 1.8.3

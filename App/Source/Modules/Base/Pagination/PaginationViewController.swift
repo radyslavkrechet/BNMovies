@@ -8,35 +8,34 @@
 
 import UIKit
 
-class PaginationViewController<V: PaginationViewModelProtocol,
-    P: PaginationProviderProtocol>: ListViewController<V, P> {
+class PaginationViewController<Presenter: PaginationPresenterProtocol,
+    DataSource: PaginationDataSourceProtocol>: ListViewController<Presenter, DataSource>, PaginationViewProtocol {
 
     let refreshControl = UIRefreshControl()
 
     // MARK: - Setup
 
-    override func setupBinding() {
-        super.setupBinding()
+    override func setupViews() {
+        super.setupViews()
 
-        refreshControl.rx.controlEvent(.valueChanged)
-            .do(onNext: { [weak self] _ in
-                self?.refreshControlDidPull()
-            })
-            .bind(to: viewModel.refreshControlDidPull)
-            .disposed(by: disposeBag)
-
-        recyclerProvider.lastItemWillDisplay.subscribe(onNext: { [weak self] _ in
-            self?.lastItemWillDisplay()
-        }).disposed(by: disposeBag)
+        refreshControl.addTarget(self, action: #selector(refreshControlDidPull), for: .valueChanged)
     }
 
-    private func refreshControlDidPull() {
+    @objc private func refreshControlDidPull() {
         analyticsManager?.logPullToRefresh(in: self.nameOfClass)
+        presenter.refreshContent()
     }
 
-    private func lastItemWillDisplay() {
-        analyticsManager?.logPagination(in: self.nameOfClass)
+    override func setupDataSource() {
+        super.setupDataSource()
 
-        viewModel.getMoreContent()
+        dataSource.lastItemWillDisplay = lastItemWillDisplay
+    }
+
+    // MARK: - DataSource
+
+    func lastItemWillDisplay() {
+        analyticsManager?.logPagination(in: self.nameOfClass)
+        presenter.getMoreContent()
     }
 }

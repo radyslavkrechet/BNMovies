@@ -79,7 +79,11 @@
                         <viewLayoutGuide key="safeArea" id="goJ-l6-Q9t"/>
                     </view>
                     <navigationItem key="navigationItem" title="Account" id="Qmc-Pt-Pzg">
-                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="fV6-sb-t8H"/>
+                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="fV6-sb-t8H">
+                            <connections>
+                                <action selector="signOutButtonDidTap:" destination="VJ5-3A-qHn" id="eDx-wA-Fq0"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="avatarImageView" destination="4vb-p8-VfF" id="9fa-if-0A0"/>
@@ -255,7 +259,11 @@ Genres</string>
                         <viewLayoutGuide key="safeArea" id="pzg-Fy-vvP"/>
                     </view>
                     <navigationItem key="navigationItem" title="Details" largeTitleDisplayMode="never" id="2Jo-HT-5Xo">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="xys-gz-YFG"/>
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="xys-gz-YFG">
+                            <connections>
+                                <action selector="favouriteButtonDidTap:" destination="qZu-Gt-At7" id="iK2-Ro-LCh"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="backdropImageView" destination="fnM-Bp-Ukc" id="XrC-ku-2ay"/>

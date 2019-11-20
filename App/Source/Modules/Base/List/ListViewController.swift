@@ -6,22 +6,31 @@
 //  Copyright © 2019 Radyslav Krechet. All rights reserved.
 //
 
+import Domain
 import UIKit
 
-class ListViewController<V: ListViewModelProtocol, P: ListProviderProtocol>: ContentViewController<V> {
-    var recyclerProvider: P!
+class ListViewController<Presenter: ListPresenterProtocol,
+    DataSource: ListDataSourceProtocol>: ContentViewController<Presenter>, ListViewProtocol {
+
+    var dataSource: DataSource!
+
+    // MARK: - Lifecycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        setupDataSource()
+    }
 
     // MARK: - Setup
 
-    override func setupBinding() {
-        super.setupBinding()
-
-        recyclerProvider.userDidSelectItem.subscribe(onNext: { [weak self] item in
-            self?.userDidSelectItem(item)
-        }).disposed(by: disposeBag)
+    func setupDataSource() {
+        dataSource.userDidSelectItem = userDidSelectItem
     }
 
-    func userDidSelectItem(_ item: P.Item) {
+    // MARK: - DataSource
+
+    func userDidSelectItem(_ item: DataSource.Item) {
         analyticsManager?.logItemSelection(in: self.nameOfClass, itemId: item.id)
     }
 }

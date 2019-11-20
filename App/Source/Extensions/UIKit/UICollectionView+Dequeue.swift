@@ -9,15 +9,15 @@
 import UIKit
 
 extension UICollectionView {
-    func dequeueReusableCellForIndexPath<T: UICollectionViewCell>(_ indexPath: IndexPath) -> T {
-        return dequeueReusableCell(withReuseIdentifier: T.nameOfClass, for: indexPath) as? T ?? T()
+    func dequeueReusableCellForIndexPath<Cell: UICollectionViewCell>(_ indexPath: IndexPath) -> Cell {
+        return dequeueReusableCell(withReuseIdentifier: Cell.nameOfClass, for: indexPath) as? Cell ?? Cell()
     }
 
-    func dequeueReusableSupplementaryViewForIndexPath<T: UICollectionReusableView>(_ indexPath: IndexPath,
-                                                                                   of kind: String) -> T {
+    func dequeueReusableSupplementaryViewForIndexPath<View: UICollectionReusableView>(_ indexPath: IndexPath,
+                                                                                      of kind: String) -> View {
 
         return dequeueReusableSupplementaryView(ofKind: kind,
-                                                withReuseIdentifier: T.nameOfClass,
-                                                for: indexPath) as? T ?? T()
+                                                withReuseIdentifier: View.nameOfClass,
+                                                for: indexPath) as? View ?? View()
     }
 }

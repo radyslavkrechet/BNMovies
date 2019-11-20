@@ -11,13 +11,14 @@ import Swinject
 
 struct SignInModuleAssembly: Assembly {
     func assemble(container: Container) {
-        container.register(SignInViewModel.self) { resolver in
+        container.register(SignInPresenter.self) { resolver in
             let signInUseCase = resolver.resolve(SignInUseCase.self)!
-            return SignInViewModel(signInUseCase: signInUseCase)
+            return SignInPresenter(signInUseCase: signInUseCase)
         }
 
-        container.storyboardInitCompleted(SignInViewController.self) { resolver, controller in
-            controller.viewModel = resolver.resolve(SignInViewModel.self)!
+        container.storyboardInitCompleted(SignInViewController<SignInPresenter>.self) { resolver, controller in
+            controller.presenter = resolver.resolve(SignInPresenter.self)!
+            controller.presenter.view = controller
             controller.analyticsManager = resolver.resolve(AnalyticsManagerProtocol.self)
         }
     }

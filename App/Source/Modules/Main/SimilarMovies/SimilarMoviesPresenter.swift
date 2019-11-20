@@ -1,5 +1,5 @@
 //
-//  SimilarMoviesViewModel.swift
+//  SimilarMoviesPresenter.swift
 //  Boilerplate
 //
 //  Created by Radyslav Krechet on 9/6/19.
@@ -7,16 +7,12 @@
 //
 
 import Domain
-import RxSwift
 
-class SimilarMoviesViewModel: ListViewModelProtocol {
+class SimilarMoviesPresenter: SimilarMoviesPresenterProtocol {
+    weak var view: SimilarMoviesViewProtocol?
+
     var id: String!
 
-    private(set) lazy var state: Observable<ContentState> = stateSubject.observeOnMain()
-    private(set) lazy var movies: Observable<[Movie]> = moviesSubject.observeOnMain()
-
-    private let stateSubject = PublishSubject<ContentState>()
-    private let moviesSubject = PublishSubject<[Movie]>()
     private let getSimilarMoviesUseCase: GetSimilarMoviesUseCase
 
     init(getSimilarMoviesUseCase: GetSimilarMoviesUseCase) {
@@ -32,18 +28,18 @@ class SimilarMoviesViewModel: ListViewModelProtocol {
     }
 
     private func getMovies() {
-        stateSubject.onNext(.loading)
+        view?.populate(with: .loading)
         getSimilarMoviesUseCase.parameters = GetSimilarMoviesUseCase.Parameters(id: id)
         getSimilarMoviesUseCase.execute { [weak self] result in
             switch result {
-            case .failure(let error): self?.stateSubject.onNext(.error(error))
+            case .failure(let error): self?.view?.populate(with: .error(error))
             case .success(let movies): self?.process(movies)
             }
         }
     }
 
     private func process(_ movies: [Movie]) {
-        moviesSubject.onNext(movies)
-        stateSubject.onNext(movies.isEmpty ? .empty : .content)
+        view?.populate(with: movies)
+        view?.populate(with: movies.isEmpty ? .empty : .content)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  MoviesTableProvider.swift
+//  MoviesDataSource.swift
 //  Boilerplate
 //
 //  Created by Radyslav Krechet on 8/29/19.
@@ -7,25 +7,25 @@
 //
 
 import Domain
-import RxSwift
 
-class MoviesTableProvider: NSObject, PaginationTableProviderProtocol {
-    let items = Variable<[Movie]>([])
+class MoviesDataSource: NSObject, MoviesDataSourceProtocol {
+    var userDidSelectItem: ((Movie) -> Void)?
+    var lastItemWillDisplay: (() -> Void)?
 
-    private(set) lazy var userDidSelectItem: Observable<Movie> = userDidSelectItemSubject.observeOnMain()
-    private(set) lazy var lastItemWillDisplay: Observable<Void> = lastItemWillDisplaySubject.observeOnMain()
+    private var items = [Movie]()
 
-    private let userDidSelectItemSubject = PublishSubject<Movie>()
-    private let lastItemWillDisplaySubject = PublishSubject<Void>()
+    func populate(with items: [Movie]) {
+        self.items = items
+    }
 
     // MARK: - UITableViewDataSource
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return items.value.count
+        return items.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let movie = items.value[indexPath.row]
+        let movie = items[indexPath.row]
         let cell: MovieTableViewCell = tableView.dequeueReusableCellForIndexPath(indexPath)
         cell.populate(with: movie)
         return cell
@@ -36,13 +36,13 @@ class MoviesTableProvider: NSObject, PaginationTableProviderProtocol {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        let movie = items.value[indexPath.row]
-        userDidSelectItemSubject.onNext(movie)
+        let movie = items[indexPath.row]
+        userDidSelectItem?(movie)
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.item == items.value.count - 1 {
-            lastItemWillDisplaySubject.onNext(())
+        if indexPath.item == items.count - 1 {
+            lastItemWillDisplay?()
         }
     }
 }

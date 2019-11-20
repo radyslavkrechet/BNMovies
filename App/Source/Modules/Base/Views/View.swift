@@ -6,10 +6,9 @@
 //  Copyright © 2019 Radyslav Krechet. All rights reserved.
 //
 
-import RxSwift
+import UIKit
 
 class View: UIView {
-    let disposeBag = DisposeBag()
 
     // MARK: - Lifecycle
 

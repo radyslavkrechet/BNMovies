@@ -1,5 +1,5 @@
 //
-//  ViewModelProtocol.swift
+//  PresenterProtocol.swift
 //  Boilerplate
 //
 //  Created by Radyslav Krechet on 8/27/19.
@@ -8,4 +8,4 @@
 
 import Foundation
 
-protocol ViewModelProtocol {}
+protocol PresenterProtocol: class {}

@@ -1,5 +1,5 @@
 //
-//  SimilarMoviesCollectionProvider.swift
+//  SimilarMoviesDataSource.swift
 //  Boilerplate
 //
 //  Created by Radyslav Krechet on 9/6/19.
@@ -7,25 +7,26 @@
 //
 
 import Domain
-import RxSwift
 
-class SimilarMoviesCollectionProvider: NSObject, ListCollectionProviderProtocol {
-    let items = Variable<[Movie]>([])
+class SimilarMoviesDataSource: NSObject, SimilarMoviesDataSourceProtocol {
+    var userDidSelectItem: ((Movie) -> Void)?
 
-    private(set) lazy var userDidSelectItem: Observable<Movie> = userDidSelectItemSubject.observeOnMain()
+    private var items = [Movie]()
 
-    private let userDidSelectItemSubject = PublishSubject<Movie>()
+    func populate(with items: [Movie]) {
+        self.items = items
+    }
 
     // MARK: - UICollectionViewDataSource
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return items.value.count
+        return items.count
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        let movie = items.value[indexPath.row]
+        let movie = items[indexPath.row]
         let cell: SimilarMovieCollectionViewCell = collectionView.dequeueReusableCellForIndexPath(indexPath)
         cell.populate(with: movie)
         return cell
@@ -36,7 +37,7 @@ class SimilarMoviesCollectionProvider: NSObject, ListCollectionProviderProtocol 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
 
-        let movie = items.value[indexPath.row]
-        userDidSelectItemSubject.onNext(movie)
+        let movie = items[indexPath.row]
+        userDidSelectItem?(movie)
     }
 }

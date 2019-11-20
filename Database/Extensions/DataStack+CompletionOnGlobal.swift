@@ -9,8 +9,8 @@
 import CoreStore
 
 extension DataStack {
-    func perform<T>(asynchronous task: @escaping (_ transaction: AsynchronousDataTransaction) throws -> T,
-                    completionOnGlobal completion: @escaping (AsynchronousDataTransaction.Result<T>) -> Void) {
+    func perform<Task>(asynchronous task: @escaping (_ transaction: AsynchronousDataTransaction) throws -> Task,
+                       completionOnGlobal completion: @escaping (AsynchronousDataTransaction.Result<Task>) -> Void) {
 
         self.perform(asynchronous: task, completion: { result in
             DispatchQueue.global(qos: .userInitiated).async {

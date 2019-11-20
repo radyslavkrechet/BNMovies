@@ -1,5 +1,5 @@
 //
-//  FavouritesViewModel.swift
+//  FavouritesPresenter.swift
 //  Boilerplate
 //
 //  Created by Radyslav Krechet on 8/28/19.
@@ -7,14 +7,10 @@
 //
 
 import Domain
-import RxSwift
 
-class FavouritesViewModel: ListViewModelProtocol {
-    private(set) lazy var state: Observable<ContentState> = stateSubject.observeOnMain()
-    private(set) lazy var movies: Observable<[Movie]> = moviesSubject.observeOnMain()
+class FavouritesPresenter: FavouritesPresenterProtocol {
+    weak var view: FavouritesViewProtocol?
 
-    private let stateSubject = PublishSubject<ContentState>()
-    private let moviesSubject = PublishSubject<[Movie]>()
     private let getFavouritesUseCase: GetFavouritesUseCase
     private var isNeedToShowLoading = true
 
@@ -33,12 +29,12 @@ class FavouritesViewModel: ListViewModelProtocol {
 
     private func getMovies() {
         if isNeedToShowLoading {
-            stateSubject.onNext(.loading)
+            view?.populate(with: .loading)
         }
 
         getFavouritesUseCase.execute { [weak self] result in
             switch result {
-            case .failure(let error): self?.stateSubject.onNext(.error(error))
+            case .failure(let error): self?.view?.populate(with: .error(error))
             case .success(let movies): self?.process(movies)
             }
         }
@@ -46,7 +42,7 @@ class FavouritesViewModel: ListViewModelProtocol {
 
     private func process(_ movies: [Movie]) {
         isNeedToShowLoading = false
-        moviesSubject.onNext(movies)
-        stateSubject.onNext(movies.isEmpty ? .empty : .content)
+        view?.populate(with: movies)
+        view?.populate(with: movies.isEmpty ? .empty : .content)
     }
 }

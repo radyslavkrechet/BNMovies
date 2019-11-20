@@ -11,68 +11,79 @@ import Swinject
 
 struct MainModuleAssembly: Assembly {
     func assemble(container: Container) {
-        container.register(MoviesTableProvider.self) { _ in
-            MoviesTableProvider()
+        container.register(MoviesDataSource.self) { _ in
+            MoviesDataSource()
         }
 
-        container.register(HomeViewModel.self) { resolver in
+        container.register(HomePresenter.self) { resolver in
             let getMoviesUseCase = resolver.resolve(GetMoviesUseCase.self)!
-            return HomeViewModel(getMoviesUseCase: getMoviesUseCase)
+            return HomePresenter(getMoviesUseCase: getMoviesUseCase)
         }
 
-        container.storyboardInitCompleted(HomeViewController.self) { resolver, controller in
-            controller.viewModel = resolver.resolve(HomeViewModel.self)!
+        container.storyboardInitCompleted(HomeViewController<HomePresenter,
+            MoviesDataSource>.self) { resolver, controller in
+
+            controller.presenter = resolver.resolve(HomePresenter.self)!
+            controller.presenter.view = controller
+            controller.dataSource = resolver.resolve(MoviesDataSource.self)!
             controller.analyticsManager = resolver.resolve(AnalyticsManagerProtocol.self)
-            controller.recyclerProvider = resolver.resolve(MoviesTableProvider.self)!
         }
 
-        container.register(FavouritesViewModel.self) { resolver in
+        container.register(FavouritesPresenter.self) { resolver in
             let getFavouritesUseCase = resolver.resolve(GetFavouritesUseCase.self)!
-            return FavouritesViewModel(getFavouritesUseCase: getFavouritesUseCase)
+            return FavouritesPresenter(getFavouritesUseCase: getFavouritesUseCase)
         }
 
-        container.storyboardInitCompleted(FavouritesViewController.self) { resolver, controller in
-            controller.viewModel = resolver.resolve(FavouritesViewModel.self)!
+        container.storyboardInitCompleted(FavouritesViewController<FavouritesPresenter,
+            MoviesDataSource>.self) { resolver, controller in
+
+            controller.presenter = resolver.resolve(FavouritesPresenter.self)!
+            controller.presenter.view = controller
+            controller.dataSource = resolver.resolve(MoviesDataSource.self)!
             controller.analyticsManager = resolver.resolve(AnalyticsManagerProtocol.self)
-            controller.recyclerProvider = resolver.resolve(MoviesTableProvider.self)!
         }
 
-        container.register(AccountViewModel.self) { resolver in
+        container.register(AccountPresenter.self) { resolver in
             let getUserUseCase = resolver.resolve(GetUserUseCase.self)!
             let signOutUseCase = resolver.resolve(SignOutUseCase.self)!
-            return AccountViewModel(getUserUseCase: getUserUseCase, signOutUseCase: signOutUseCase)
+            return AccountPresenter(getUserUseCase: getUserUseCase, signOutUseCase: signOutUseCase)
         }
 
-        container.storyboardInitCompleted(AccountViewController.self) { resolver, controller in
-            controller.viewModel = resolver.resolve(AccountViewModel.self)!
+        container.storyboardInitCompleted(AccountViewController<AccountPresenter>.self) { resolver, controller in
+            controller.presenter = resolver.resolve(AccountPresenter.self)!
+            controller.presenter.view = controller
             controller.analyticsManager = resolver.resolve(AnalyticsManagerProtocol.self)
         }
 
-        container.register(DetailsViewModel.self) { resolver in
+        container.register(DetailsPresenter.self) { resolver in
             let getMovieUseCase = resolver.resolve(GetMovieUseCase.self)!
             let changeMovieFavouriteStateUseCase = resolver.resolve(ChangeMovieFavouriteStateUseCase.self)!
-            return DetailsViewModel(getMovieUseCase: getMovieUseCase,
+            return DetailsPresenter(getMovieUseCase: getMovieUseCase,
                                     changeMovieFavouriteStateUseCase: changeMovieFavouriteStateUseCase)
         }
 
-        container.storyboardInitCompleted(DetailsViewController.self) { resolver, controller in
-            controller.viewModel = resolver.resolve(DetailsViewModel.self)!
+        container.storyboardInitCompleted(DetailsViewController<DetailsPresenter>.self) { resolver, controller in
+            controller.presenter = resolver.resolve(DetailsPresenter.self)!
+            controller.presenter.view = controller
             controller.analyticsManager = resolver.resolve(AnalyticsManagerProtocol.self)
         }
 
-        container.register(SimilarMoviesCollectionProvider.self) { _ in
-            SimilarMoviesCollectionProvider()
-        }
-
-        container.register(SimilarMoviesViewModel.self) { resolver in
+        container.register(SimilarMoviesPresenter.self) { resolver in
             let getSimilarMoviesUseCase = resolver.resolve(GetSimilarMoviesUseCase.self)!
-            return SimilarMoviesViewModel(getSimilarMoviesUseCase: getSimilarMoviesUseCase)
+            return SimilarMoviesPresenter(getSimilarMoviesUseCase: getSimilarMoviesUseCase)
         }
 
-        container.storyboardInitCompleted(SimilarMoviesViewController.self) { resolver, controller in
-            controller.viewModel = resolver.resolve(SimilarMoviesViewModel.self)!
+        container.register(SimilarMoviesDataSource.self) { _ in
+            SimilarMoviesDataSource()
+        }
+
+        container.storyboardInitCompleted(SimilarMoviesViewController<SimilarMoviesPresenter,
+            SimilarMoviesDataSource>.self) { resolver, controller in
+
+            controller.presenter = resolver.resolve(SimilarMoviesPresenter.self)!
+            controller.presenter.view = controller
+            controller.dataSource = resolver.resolve(SimilarMoviesDataSource.self)!
             controller.analyticsManager = resolver.resolve(AnalyticsManagerProtocol.self)
-            controller.recyclerProvider = resolver.resolve(SimilarMoviesCollectionProvider.self)!
         }
     }
 }

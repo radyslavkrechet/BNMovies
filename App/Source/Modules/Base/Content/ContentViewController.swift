@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContentViewController<V: ContentViewModelProtocol>: ViewController<V> {
+class ContentViewController<Presenter: ContentPresenterProtocol>: ViewController<Presenter>, ContentViewProtocol {
     var loadingStateText: String? {
         return nil
     }
@@ -36,20 +36,12 @@ class ContentViewController<V: ContentViewModelProtocol>: ViewController<V> {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        viewModel.getContent()
+        presenter.getContent()
     }
 
-    // MARK: - Setup
+    // MARK: - ContentViewProtocol
 
-    override func setupBinding() {
-        super.setupBinding()
-
-        viewModel.state.distinctUntilChanged().subscribe(onNext: { [weak self] state in
-            self?.process(state)
-        }).disposed(by: disposeBag)
-    }
-
-    private func process(_ state: ContentState) {
+    func populate(with state: ContentState) {
         stateView?.removeFromSuperview()
 
         switch state {
@@ -67,9 +59,12 @@ class ContentViewController<V: ContentViewModelProtocol>: ViewController<V> {
             let errorView = ErrorView()
             errorView.populate(with: error.localizedDescription, image: errorStateImage)
 
+            // TODO: Replace with delegate
+            /*
             errorView.tryAgainButton.rx.tap.subscribe(onNext: { [weak self] _ in
                 self?.viewModel.tryAgain()
             }).disposed(by: errorView.disposeBag)
+            */
 
             stateView = errorView
         }

@@ -9,11 +9,11 @@
 import UIKit
 
 extension UITableView {
-    func dequeueReusableCellForIndexPath<T: UITableViewCell>(_ indexPath: IndexPath) -> T {
-        return dequeueReusableCell(withIdentifier: T.nameOfClass, for: indexPath) as? T ?? T()
+    func dequeueReusableCellForIndexPath<Cell: UITableViewCell>(_ indexPath: IndexPath) -> Cell {
+        return dequeueReusableCell(withIdentifier: Cell.nameOfClass, for: indexPath) as? Cell ?? Cell()
     }
 
-    func dequeueReusableHeaderFooterView<T: UITableViewHeaderFooterView>() -> T {
-        return dequeueReusableHeaderFooterView(withIdentifier: T.nameOfClass) as? T ?? T()
+    func dequeueReusableHeaderFooterView<View: UITableViewHeaderFooterView>() -> View {
+        return dequeueReusableHeaderFooterView(withIdentifier: View.nameOfClass) as? View ?? View()
     }
 }

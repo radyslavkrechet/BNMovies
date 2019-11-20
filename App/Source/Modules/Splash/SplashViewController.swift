@@ -8,15 +8,11 @@
 
 import UIKit
 
-class SplashViewController: ContentViewController<SplashViewModel> {
+class SplashViewController<Presenter: SplashPresenterProtocol>: ContentViewController<Presenter>, SplashViewProtocol {
 
-    // MARK: - Setup
+    // MARK: - SplashViewProtocol
 
-    override func setupBinding() {
-        super.setupBinding()
-
-        viewModel.isSignedIn.subscribe(onNext: { isSignedIn in
-            UIStoryboard.set(isSignedIn ? .Main : .SignIn)
-        }).disposed(by: disposeBag)
+    func navigate(_ isSignedIn: Bool) {
+        UIStoryboard.set(isSignedIn ? .Main : .SignIn)
     }
 }

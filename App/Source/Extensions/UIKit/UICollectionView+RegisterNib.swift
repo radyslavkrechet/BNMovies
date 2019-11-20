@@ -9,13 +9,13 @@
 import UIKit
 
 extension UICollectionView {
-    func registerNibForCell<T: UICollectionViewCell>(_ cell: T.Type) {
-        let cellNib = UINib(nibName: T.nameOfClass, bundle: nil)
-        register(cellNib, forCellWithReuseIdentifier: T.nameOfClass)
+    func registerNibForCell<Cell: UICollectionViewCell>(_ cell: Cell.Type) {
+        let cellNib = UINib(nibName: Cell.nameOfClass, bundle: nil)
+        register(cellNib, forCellWithReuseIdentifier: Cell.nameOfClass)
     }
 
-    func registerNibForSupplementaryView<T: UICollectionReusableView>(_ cell: T.Type, of kind: String) {
-        let cellNib = UINib(nibName: T.nameOfClass, bundle: nil)
-        register(cellNib, forSupplementaryViewOfKind: kind, withReuseIdentifier: T.nameOfClass)
+    func registerNibForSupplementaryView<View: UICollectionReusableView>(_ cell: View.Type, of kind: String) {
+        let viewNib = UINib(nibName: View.nameOfClass, bundle: nil)
+        register(viewNib, forSupplementaryViewOfKind: kind, withReuseIdentifier: View.nameOfClass)
     }
 }

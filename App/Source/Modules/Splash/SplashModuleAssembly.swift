@@ -11,13 +11,14 @@ import Swinject
 
 struct SplashModuleAssembly: Assembly {
     func assemble(container: Container) {
-        container.register(SplashViewModel.self) { resolver in
+        container.register(SplashPresenter.self) { resolver in
             let checkSessionUseCase = resolver.resolve(CheckSessionUseCase.self)!
-            return SplashViewModel(checkSessionUseCase: checkSessionUseCase)
+            return SplashPresenter(checkSessionUseCase: checkSessionUseCase)
         }
 
-        container.storyboardInitCompleted(SplashViewController.self) { resolver, controller in
-            controller.viewModel = resolver.resolve(SplashViewModel.self)!
+        container.storyboardInitCompleted(SplashViewController<SplashPresenter>.self) { resolver, controller in
+            controller.presenter = resolver.resolve(SplashPresenter.self)!
+            controller.presenter.view = controller
             controller.analyticsManager = resolver.resolve(AnalyticsManagerProtocol.self)
         }
     }

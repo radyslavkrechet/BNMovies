@@ -14,9 +14,6 @@ target 'Boilerplate' do
 
   pod 'Kingfisher'
 
-  pod 'RxSwift'
-  pod 'RxCocoa'
-
   pod 'SwinjectStoryboard'
 
   pod 'Firebase/Analytics'

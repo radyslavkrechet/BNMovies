@@ -8,12 +8,12 @@
 
 import Foundation
 
-public class UseCase<R> {
-    public func execute(handler: @escaping Handler<R>) {
+public class UseCase<Result> {
+    public func execute(handler: @escaping Handler<Result>) {
         DispatchQueue.global(qos: .userInitiated).async {
             self.work(handler: handler)
         }
     }
 
-    func work(handler: @escaping Handler<R>) {}
+    func work(handler: @escaping Handler<Result>) {}
 }

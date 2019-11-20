@@ -9,11 +9,23 @@
 import Domain
 import UIKit
 
-class SimilarMoviesViewController: ListViewController<SimilarMoviesViewModel, SimilarMoviesCollectionProvider> {
+class SimilarMoviesViewController<Presenter: SimilarMoviesPresenterProtocol,
+    DataSource: SimilarMoviesDataSourceProtocol>: ListViewController<Presenter, DataSource>, SimilarMoviesViewProtocol {
+
     @IBOutlet private(set) weak var collectionView: UICollectionView!
 
     override var emptyStateText: String {
         return "SimilarMoviesViewController.emptyStateText".localized
+    }
+
+    // MARK: - Lifecycle
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let deailsViewController = segue.destination as? DetailsViewController<DetailsPresenter>,
+            let movie = sender as? Movie {
+
+            deailsViewController.presenter.id = movie.id
+        }
     }
 
     // MARK: - Setup
@@ -22,22 +34,11 @@ class SimilarMoviesViewController: ListViewController<SimilarMoviesViewModel, Si
         super.setupViews()
 
         collectionView.registerNibForCell(SimilarMovieCollectionViewCell.self)
-        collectionView.dataSource = recyclerProvider
-        collectionView.delegate = recyclerProvider
+        collectionView.dataSource = dataSource
+        collectionView.delegate = dataSource
     }
 
-    override func setupBinding() {
-        super.setupBinding()
-
-        viewModel.movies.subscribe(onNext: { [weak self] movies in
-            self?.process(movies)
-        }).disposed(by: disposeBag)
-    }
-
-    private func process(_ movies: [Movie]) {
-        recyclerProvider.items.value = movies
-        collectionView.reloadData()
-    }
+    // MARK: - DataSource
 
     override func userDidSelectItem(_ item: Movie) {
         super.userDidSelectItem(item)
@@ -45,11 +46,10 @@ class SimilarMoviesViewController: ListViewController<SimilarMoviesViewModel, Si
         present(.Details, with: item)
     }
 
-    // MARK: - Navigation
+    // MARK: - SimilarMoviesViewProtocol
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let deailsViewController = segue.destination as? DetailsViewController, let movie = sender as? Movie {
-            deailsViewController.viewModel.id = movie.id
-        }
+    func populate(with movies: [Movie]) {
+        dataSource.populate(with: movies)
+        collectionView.reloadData()
     }
 }

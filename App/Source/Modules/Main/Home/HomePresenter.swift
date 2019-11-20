@@ -1,5 +1,5 @@
 //
-//  HomeViewModel.swift
+//  HomePresenter.swift
 //  Boilerplate
 //
 //  Created by Radyslav Krechet on 8/28/19.
@@ -7,20 +7,10 @@
 //
 
 import Domain
-import RxSwift
 
-class HomeViewModel: PaginationViewModelProtocol {
-    private(set) lazy var state: Observable<ContentState> = stateSubject.observeOnMain()
-    private(set) lazy var movies: Observable<[Movie]> = moviesSubject.observeOnMain()
+class HomePresenter: HomePresenterProtocol {
+    weak var view: HomeViewProtocol?
 
-    private(set) lazy var refreshControlDidPull: AnyObserver<Void> = AnyObserver { [weak self] event in
-        if case .next = event {
-            self?.refreshMovies()
-        }
-    }
-
-    private let stateSubject = PublishSubject<ContentState>()
-    private let moviesSubject = PublishSubject<[Movie]>()
     private let getMoviesUseCase: GetMoviesUseCase
     private var paginationManager = PaginationManager()
     private var moviesValue: [Movie]!
@@ -33,13 +23,19 @@ class HomeViewModel: PaginationViewModelProtocol {
         getMovies()
     }
 
+    func refreshContent() {
+        paginationManager.reset()
+        getMovies()
+    }
+
     func getMoreContent () {
         getMovies()
     }
 
     func tryAgain() {
         moviesValue = nil
-        refreshMovies()
+        paginationManager.reset()
+        getMovies()
     }
 
     private func getMovies() {
@@ -47,13 +43,13 @@ class HomeViewModel: PaginationViewModelProtocol {
         paginationManager.startLoading()
 
         if moviesValue == nil {
-            stateSubject.onNext(.loading)
+            view?.populate(with: .loading)
         }
 
         getMoviesUseCase.parameters = GetMoviesUseCase.Parameters(page: paginationManager.value)
         getMoviesUseCase.execute { [weak self] result in
             switch result {
-            case .failure(let error): self?.stateSubject.onNext(.error(error))
+            case .failure(let error): self?.view?.populate(with: .error(error))
             case .success(let movies): self?.process(movies)
             }
         }
@@ -66,14 +62,9 @@ class HomeViewModel: PaginationViewModelProtocol {
             moviesValue += movies
         }
 
-        moviesSubject.onNext(moviesValue)
-        stateSubject.onNext(moviesValue.isEmpty ? .empty : .content)
+        view?.populate(with: movies)
+        view?.populate(with: moviesValue.isEmpty ? .empty : .content)
 
         paginationManager.stopLoading(with: movies.count)
-    }
-
-    private func refreshMovies() {
-        paginationManager.reset()
-        getMovies()
     }
 }

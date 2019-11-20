@@ -8,4 +8,4 @@
 
 import Foundation
 
-public typealias Handler<S> = (Result<S, Error>) -> Void
+public typealias Handler<Success> = (Result<Success, Error>) -> Void

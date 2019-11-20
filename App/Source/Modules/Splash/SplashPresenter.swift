@@ -1,5 +1,5 @@
 //
-//  SplashViewModel.swift
+//  SplashPresenter.swift
 //  Boilerplate
 //
 //  Created by Radyslav Krechet on 8/28/19.
@@ -7,14 +7,10 @@
 //
 
 import Domain
-import RxSwift
 
-class SplashViewModel: ContentViewModelProtocol {
-    private(set) lazy var state: Observable<ContentState> = stateSubject.observeOnMain()
-    private(set) lazy var isSignedIn: Observable<Bool> = isSignedInSubject.observeOnMain()
+class SplashPresenter: SplashPresenterProtocol {
+    weak var view: SplashViewProtocol?
 
-    private let stateSubject = PublishSubject<ContentState>()
-    private let isSignedInSubject = PublishSubject<Bool>()
     private let checkSessionUseCase: CheckSessionUseCase
 
     init(checkSessionUseCase: CheckSessionUseCase) {
@@ -32,8 +28,8 @@ class SplashViewModel: ContentViewModelProtocol {
     private func checkSession() {
         checkSessionUseCase.execute { [weak self] result in
             switch result {
-            case .failure(let error): self?.stateSubject.onNext(.error(error))
-            case .success(let isSignedIn): self?.isSignedInSubject.onNext(isSignedIn)
+            case .failure(let error): self?.view?.populate(with: .error(error))
+            case .success(let isSignedIn): self?.view?.navigate(isSignedIn)
             }
         }
     }

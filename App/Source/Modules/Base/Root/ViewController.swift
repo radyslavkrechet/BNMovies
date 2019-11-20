@@ -6,11 +6,10 @@
 //  Copyright © 2019 Radyslav Krechet. All rights reserved.
 //
 
-import RxSwift
+import UIKit
 
-class ViewController<V: ViewModelProtocol>: UIViewController {
-    let disposeBag = DisposeBag()
-    var viewModel: V!
+class ViewController<Presenter: PresenterProtocol>: UIViewController, ViewProtocol {
+    var presenter: Presenter!
     var analyticsManager: AnalyticsManagerProtocol?
 
     // MARK: - Lifecycle
@@ -19,7 +18,6 @@ class ViewController<V: ViewModelProtocol>: UIViewController {
         super.viewDidLoad()
 
         setupViews()
-        setupBinding()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -31,6 +29,4 @@ class ViewController<V: ViewModelProtocol>: UIViewController {
     // MARK: - Setup
 
     func setupViews() {}
-
-    func setupBinding() {}
 }

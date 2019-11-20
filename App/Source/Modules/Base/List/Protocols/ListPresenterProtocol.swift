@@ -1,5 +1,5 @@
 //
-//  ListViewModelProtocol.swift
+//  ListPresenterProtocol.swift
 //  Boilerplate
 //
 //  Created by Radyslav Krechet on 8/29/19.
@@ -8,4 +8,4 @@
 
 import Foundation
 
-protocol ListViewModelProtocol: ContentViewModelProtocol {}
+protocol ListPresenterProtocol: ContentPresenterProtocol {}

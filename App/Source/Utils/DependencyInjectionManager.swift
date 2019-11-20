@@ -39,6 +39,8 @@ struct DependencyInjectionManager {
     }
 
     private func applyAssemblies(with baseURL: String, apiKey: String) {
+        // TODO: Uncomment next code
+        /*
         #if RELEASE
             // Setup Firebase for Crashlytics only
             let analytics = AnalyticsAssembly()
@@ -47,6 +49,7 @@ struct DependencyInjectionManager {
             assembler.apply(assembly: analytics)
             #endif
         #endif
+        */
 
         let net = NetAssembly(with: baseURL, apiKey: apiKey)
         assembler.apply(assembly: net)

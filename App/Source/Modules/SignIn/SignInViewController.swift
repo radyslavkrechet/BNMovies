@@ -6,9 +6,11 @@
 //  Copyright © 2019 Radyslav Krechet. All rights reserved.
 //
 
-import RxCocoa
+import UIKit
 
-class SignInViewController: ViewController<SignInViewModel>, UITextFieldDelegate {
+class SignInViewController<Presenter: SignInPresenterProtocol>: ViewController<Presenter>, SignInViewProtocol,
+    UITextFieldDelegate {
+
     @IBOutlet private(set) weak var usernameTextField: UITextField!
     @IBOutlet private(set) weak var passwordTextField: UITextField!
     @IBOutlet private(set) weak var signInButton: UIButton!
@@ -31,54 +33,6 @@ class SignInViewController: ViewController<SignInViewModel>, UITextFieldDelegate
         }
     }
 
-    // MARK: - Setup
-
-    override func setupBinding() {
-        super.setupBinding()
-
-        usernameTextField.rx.text.orEmpty
-            .bind(to: viewModel.username)
-            .disposed(by: disposeBag)
-
-        passwordTextField.rx.text.orEmpty
-            .bind(to: viewModel.password)
-            .disposed(by: disposeBag)
-
-        signInButton.rx.tap
-            .bind(to: viewModel.signInDidTap)
-            .disposed(by: disposeBag)
-
-        viewModel.loading.subscribe(onNext: { [weak self] _ in
-            self?.processLoading()
-        }).disposed(by: disposeBag)
-
-        viewModel.error.subscribe(onNext: { [weak self] error in
-            self?.process(error)
-        }).disposed(by: disposeBag)
-
-        viewModel.userDidSignIn.subscribe(onNext: { [weak self] _ in
-            self?.userDidSignIn()
-        }).disposed(by: disposeBag)
-    }
-
-    private func processLoading() {
-        view.endEditing(true)
-        activityIndicatorView.startAnimating()
-        signInButton.isHidden = true
-    }
-
-    private func process(_ error: Error) {
-        activityIndicatorView.stopAnimating()
-        signInButton.isHidden = false
-        presentErrorAlert(with: error.localizedDescription)
-    }
-
-    private func userDidSignIn() {
-        analyticsManager?.logSignIn()
-
-        UIStoryboard.set(.Main)
-    }
-
     // MARK: - Notifications
 
     private func registerNotifications() {
@@ -97,7 +51,7 @@ class SignInViewController: ViewController<SignInViewModel>, UITextFieldDelegate
         updateBottomLayoutConstraint(with: notification)
     }
 
-    @objc func keyboardWillHide(notification: Notification) {
+    @objc private func keyboardWillHide(notification: Notification) {
         updateBottomLayoutConstraint(with: notification, keyboardWillHide: true)
     }
 
@@ -118,7 +72,41 @@ class SignInViewController: ViewController<SignInViewModel>, UITextFieldDelegate
         })
     }
 
+    // MARK: - Actions
+
+    @IBAction private func signInButtonDidTap(_ sender: UIButton) {
+        presenter.signIn()
+    }
+
+    // MARK: - SignInViewProtocol
+
+    func populate(with state: SignInState) {
+        switch state {
+        case .loading:
+            view.endEditing(true)
+            activityIndicatorView.startAnimating()
+            signInButton.isHidden = true
+        case .error(let error):
+            activityIndicatorView.stopAnimating()
+            signInButton.isHidden = false
+            presentErrorAlert(with: error.localizedDescription)
+        }
+    }
+
+    func userDidSignIn() {
+        analyticsManager?.logSignIn()
+        UIStoryboard.set(.Main)
+    }
+
     // MARK: - UITextFieldDelegate
+
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        if textField == usernameTextField {
+            presenter.username = textField.text!
+        } else {
+            presenter.password = passwordTextField.text!
+        }
+    }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let nextTextFieldTag = textField.tag + 1
