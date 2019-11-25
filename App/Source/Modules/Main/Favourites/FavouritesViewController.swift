@@ -7,7 +7,10 @@
 //
 
 import Domain
-import UIKit
+
+protocol FavouritesViewProtocol: ListViewProtocol {
+    func populate(with movies: [Movie])
+}
 
 class FavouritesViewController<Presenter: FavouritesPresenterProtocol,
     DataSource: MoviesDataSourceProtocol>: ListViewController<Presenter, DataSource>, FavouritesViewProtocol {

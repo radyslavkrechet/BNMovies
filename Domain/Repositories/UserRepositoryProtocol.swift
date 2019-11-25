@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol UserRepositoryProtocol {
+public protocol UserRepositoryProtocol: class {
     func getUser(with token: String, handler: @escaping Handler<User>)
     func deleteUser(handler: @escaping Handler<Void>)
 }

@@ -8,7 +8,7 @@
 
 import Domain
 
-public protocol SessionDAOProtocol {
+public protocol SessionDAOProtocol: class {
     func set(_ session: Session, handler: @escaping Handler<Session>)
     func getSession(handler: @escaping Handler<Session?>)
     func deleteSession(handler: @escaping Handler<Void>)

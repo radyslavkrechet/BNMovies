@@ -8,18 +8,12 @@
 
 import Foundation
 
-public struct Genre: Equatable {
+public struct Genre: Identifiable {
     public let id: String
     public let name: String
 
     public init(id: String, name: String) {
         self.id = id
         self.name = name
-    }
-
-    // MARK: - Equatable
-
-    public static func == (lhs: Genre, rhs: Genre) -> Bool {
-        return lhs.id == rhs.id && lhs.name == rhs.name
     }
 }

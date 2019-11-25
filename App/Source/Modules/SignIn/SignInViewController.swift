@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol SignInViewProtocol: ViewProtocol {
+    func populate(with state: SignInState)
+    func userDidSignIn()
+}
+
 class SignInViewController<Presenter: SignInPresenterProtocol>: ViewController<Presenter>, SignInViewProtocol,
     UITextFieldDelegate {
 
@@ -75,7 +80,7 @@ class SignInViewController<Presenter: SignInPresenterProtocol>: ViewController<P
     // MARK: - Actions
 
     @IBAction private func signInButtonDidTap(_ sender: UIButton) {
-        presenter.signIn()
+        presenter.signIn(with: usernameTextField.text ?? "", password: passwordTextField.text ?? "")
     }
 
     // MARK: - SignInViewProtocol
@@ -99,14 +104,6 @@ class SignInViewController<Presenter: SignInPresenterProtocol>: ViewController<P
     }
 
     // MARK: - UITextFieldDelegate
-
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        if textField == usernameTextField {
-            presenter.username = textField.text!
-        } else {
-            presenter.password = passwordTextField.text!
-        }
-    }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let nextTextFieldTag = textField.tag + 1

@@ -8,6 +8,8 @@
 
 import UIKit
 
+protocol PaginationViewProtocol: ListViewProtocol {}
+
 class PaginationViewController<Presenter: PaginationPresenterProtocol,
     DataSource: PaginationDataSourceProtocol>: ListViewController<Presenter, DataSource>, PaginationViewProtocol {
 

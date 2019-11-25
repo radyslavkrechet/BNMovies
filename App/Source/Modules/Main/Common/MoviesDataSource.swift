@@ -8,6 +8,8 @@
 
 import Domain
 
+protocol MoviesDataSourceProtocol: PaginationTableDataSourceProtocol where Item == Movie {}
+
 class MoviesDataSource: NSObject, MoviesDataSourceProtocol {
     var userDidSelectItem: ((Movie) -> Void)?
     var lastItemWillDisplay: (() -> Void)?

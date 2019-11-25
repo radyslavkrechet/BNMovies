@@ -8,28 +8,27 @@
 
 import Foundation
 
-public class ChangeMovieFavouriteStateUseCase: ParameterizableUseCase<Movie,
-    ChangeMovieFavouriteStateUseCase.Parameters> {
+public protocol ChangeMovieFavouriteStateUseCaseProtocol: Executable {
+    func set(_ movie: Movie, handler: @escaping Handler<Movie>) -> Self
+}
 
-    public struct Parameters {
-        let movie: Movie
-
-        public init(movie: Movie) {
-            self.movie = movie
-        }
-    }
-
+public class ChangeMovieFavouriteStateUseCase: ChangeMovieFavouriteStateUseCaseProtocol, Workable {
     private let movieRepository: MovieRepositoryProtocol
+    private var movie: Movie!
+    private var handler: Handler<Movie>!
 
     init(movieRepository: MovieRepositoryProtocol) {
         self.movieRepository = movieRepository
     }
 
-    override func work(handler: @escaping Handler<Movie>) {
-        let action = parameters.movie.isFavourite
-            ? movieRepository.deleteFromFavourites
-            : movieRepository.addToFavourites
+    public func set(_ movie: Movie, handler: @escaping Handler<Movie>) -> Self {
+        self.movie = movie
+        self.handler = handler
+        return self
+    }
 
-        action(parameters.movie, handler)
+    func work() {
+        let action = movie.isFavourite ? movieRepository.deleteFromFavourites : movieRepository.addToFavourites
+        action(movie, handler)
     }
 }

@@ -8,13 +8,17 @@
 
 import Domain
 
+protocol AccountPresenterProtocol: ContentPresenterProtocol {
+    func signOut()
+}
+
 class AccountPresenter: AccountPresenterProtocol {
     weak var view: AccountViewProtocol?
 
-    private let getUserUseCase: GetUserUseCase
-    private let signOutUseCase: SignOutUseCase
+    private let getUserUseCase: GetUserUseCaseProtocol
+    private let signOutUseCase: SignOutUseCaseProtocol
 
-    init(getUserUseCase: GetUserUseCase, signOutUseCase: SignOutUseCase) {
+    init(getUserUseCase: GetUserUseCaseProtocol, signOutUseCase: SignOutUseCaseProtocol) {
         self.getUserUseCase = getUserUseCase
         self.signOutUseCase = signOutUseCase
     }
@@ -28,22 +32,22 @@ class AccountPresenter: AccountPresenterProtocol {
     }
 
     func signOut() {
-        signOutUseCase.execute { [weak self] result in
+        signOutUseCase.set { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.presentSignOutError(error)
             case .success: self?.view?.userDidSignOut()
             }
-        }
+        }.execute()
     }
 
     private func getUser() {
         view?.populate(with: .loading)
-        getUserUseCase.execute { [weak self] result in
+        getUserUseCase.set { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.populate(with: .error(error))
             case .success(let user): self?.process(user)
             }
-        }
+        }.execute()
     }
 
     private func process(_ user: User) {

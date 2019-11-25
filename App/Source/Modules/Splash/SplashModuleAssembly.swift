@@ -12,7 +12,7 @@ import Swinject
 struct SplashModuleAssembly: Assembly {
     func assemble(container: Container) {
         container.register(SplashPresenter.self) { resolver in
-            let checkSessionUseCase = resolver.resolve(CheckSessionUseCase.self)!
+            let checkSessionUseCase = resolver.resolve(CheckSessionUseCaseProtocol.self)!
             return SplashPresenter(checkSessionUseCase: checkSessionUseCase)
         }
 

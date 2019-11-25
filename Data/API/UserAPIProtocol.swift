@@ -8,6 +8,6 @@
 
 import Domain
 
-public protocol UserAPIProtocol {
+public protocol UserAPIProtocol: class {
     func getUser(with token: String, handler: @escaping Handler<User>)
 }

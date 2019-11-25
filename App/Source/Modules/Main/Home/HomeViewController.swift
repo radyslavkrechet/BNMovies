@@ -7,7 +7,10 @@
 //
 
 import Domain
-import UIKit
+
+protocol HomeViewProtocol: PaginationViewProtocol {
+    func populate(with movies: [Movie])
+}
 
 class HomeViewController<Presenter: HomePresenterProtocol,
     DataSource: MoviesDataSourceProtocol>: PaginationViewController<Presenter, DataSource>, HomeViewProtocol {

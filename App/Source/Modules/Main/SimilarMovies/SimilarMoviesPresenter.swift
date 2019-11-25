@@ -8,14 +8,18 @@
 
 import Domain
 
+protocol SimilarMoviesPresenterProtocol: ListPresenterProtocol {
+    var id: String! { get set }
+}
+
 class SimilarMoviesPresenter: SimilarMoviesPresenterProtocol {
     weak var view: SimilarMoviesViewProtocol?
 
     var id: String!
 
-    private let getSimilarMoviesUseCase: GetSimilarMoviesUseCase
+    private let getSimilarMoviesUseCase: GetSimilarMoviesUseCaseProtocol
 
-    init(getSimilarMoviesUseCase: GetSimilarMoviesUseCase) {
+    init(getSimilarMoviesUseCase: GetSimilarMoviesUseCaseProtocol) {
         self.getSimilarMoviesUseCase = getSimilarMoviesUseCase
     }
 
@@ -29,13 +33,12 @@ class SimilarMoviesPresenter: SimilarMoviesPresenterProtocol {
 
     private func getMovies() {
         view?.populate(with: .loading)
-        getSimilarMoviesUseCase.parameters = GetSimilarMoviesUseCase.Parameters(id: id)
-        getSimilarMoviesUseCase.execute { [weak self] result in
+        getSimilarMoviesUseCase.set(id) { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.populate(with: .error(error))
             case .success(let movies): self?.process(movies)
             }
-        }
+        }.execute()
     }
 
     private func process(_ movies: [Movie]) {

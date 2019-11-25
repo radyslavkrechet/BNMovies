@@ -8,7 +8,7 @@
 
 import Domain
 
-public protocol UserDAOProtocol {
+public protocol UserDAOProtocol: class {
     func set(_ user: User, handler: @escaping Handler<User>)
     func getUser(handler: @escaping Handler<User?>)
     func deleteUser(handler: @escaping Handler<Void>)

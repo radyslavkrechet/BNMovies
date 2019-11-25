@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Movie: Identifiable, Equatable {
+public struct Movie: Identifiable {
     public let id: String
     public let title: String
     public let overview: String
@@ -41,19 +41,5 @@ public struct Movie: Identifiable, Equatable {
         self.userScore = userScore
         self.genres = genres
         self.isFavourite = isFavourite
-    }
-
-    // MARK: - Equatable
-
-    public static func == (lhs: Movie, rhs: Movie) -> Bool {
-        return lhs.id == rhs.id
-            && lhs.title == rhs.title
-            && lhs.overview == rhs.overview
-            && lhs.posterSource == rhs.posterSource
-            && lhs.backdropSource == rhs.backdropSource
-            && lhs.runtime == rhs.runtime
-            && lhs.releaseDate == rhs.releaseDate
-            && lhs.genres == rhs.genres
-            && lhs.isFavourite == rhs.isFavourite
     }
 }

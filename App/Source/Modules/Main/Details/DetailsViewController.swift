@@ -9,6 +9,12 @@
 import Domain
 import Kingfisher
 
+protocol DetailsViewProtocol: ContentViewProtocol {
+    func populate(with movie: Movie)
+    func populate(with favouriteTitle: String)
+    func presentFavouriteError(_ error: Error)
+}
+
 class DetailsViewController<Presenter: DetailsPresenterProtocol>: ContentViewController<Presenter>,
     DetailsViewProtocol {
 

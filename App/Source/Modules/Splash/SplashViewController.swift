@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol SplashViewProtocol: ContentViewProtocol {
+    func navigate(_ isSignedIn: Bool)
+}
+
 class SplashViewController<Presenter: SplashPresenterProtocol>: ContentViewController<Presenter>, SplashViewProtocol {
 
     // MARK: - SplashViewProtocol

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ContentViewProtocol: ViewProtocol {
+    func populate(with state: ContentState)
+}
+
 class ContentViewController<Presenter: ContentPresenterProtocol>: ViewController<Presenter>, ContentViewProtocol {
     var loadingStateText: String? {
         return nil
@@ -58,15 +62,14 @@ class ContentViewController<Presenter: ContentPresenterProtocol>: ViewController
         case .error(let error):
             let errorView = ErrorView()
             errorView.populate(with: error.localizedDescription, image: errorStateImage)
-
-            // TODO: Replace with delegate
-            /*
-            errorView.tryAgainButton.rx.tap.subscribe(onNext: { [weak self] _ in
-                self?.viewModel.tryAgain()
-            }).disposed(by: errorView.disposeBag)
-            */
-
+            errorView.tryAgainButtonDidTap = tryAgainButtonDidTap
             stateView = errorView
         }
+    }
+
+    // MARK: - ErrorView
+
+    func tryAgainButtonDidTap() {
+        presenter.tryAgain()
     }
 }

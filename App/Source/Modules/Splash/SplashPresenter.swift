@@ -8,12 +8,14 @@
 
 import Domain
 
+protocol SplashPresenterProtocol: ContentPresenterProtocol {}
+
 class SplashPresenter: SplashPresenterProtocol {
     weak var view: SplashViewProtocol?
 
-    private let checkSessionUseCase: CheckSessionUseCase
+    private let checkSessionUseCase: CheckSessionUseCaseProtocol
 
-    init(checkSessionUseCase: CheckSessionUseCase) {
+    init(checkSessionUseCase: CheckSessionUseCaseProtocol) {
         self.checkSessionUseCase = checkSessionUseCase
     }
 
@@ -26,11 +28,11 @@ class SplashPresenter: SplashPresenterProtocol {
     }
 
     private func checkSession() {
-        checkSessionUseCase.execute { [weak self] result in
+        checkSessionUseCase.set { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.populate(with: .error(error))
             case .success(let isSignedIn): self?.view?.navigate(isSignedIn)
             }
-        }
+        }.execute()
     }
 }

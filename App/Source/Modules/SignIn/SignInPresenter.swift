@@ -8,26 +8,26 @@
 
 import Domain
 
+protocol SignInPresenterProtocol: PresenterProtocol {
+    func signIn(with username: String, password: String)
+}
+
 class SignInPresenter: SignInPresenterProtocol {
     weak var view: SignInViewProtocol?
 
-    var username = ""
-    var password = ""
+    private let signInUseCase: SignInUseCaseProtocol
 
-    private let signInUseCase: SignInUseCase
-
-    init(signInUseCase: SignInUseCase) {
+    init(signInUseCase: SignInUseCaseProtocol) {
         self.signInUseCase = signInUseCase
     }
 
-    func signIn() {
+    func signIn(with username: String, password: String) {
         view?.populate(with: .loading)
-        signInUseCase.parameters = SignInUseCase.Parameters(username: username, password: password)
-        signInUseCase.execute { [weak self] result in
+        signInUseCase.set(username, password: password) { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.populate(with: .error(error))
             case .success: self?.view?.userDidSignIn()
             }
-        }
+        }.execute()
     }
 }

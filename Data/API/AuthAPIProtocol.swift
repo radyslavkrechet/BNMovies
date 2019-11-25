@@ -8,6 +8,6 @@
 
 import Domain
 
-public protocol AuthAPIProtocol {
+public protocol AuthAPIProtocol: class {
     func signIn(with username: String, password: String, handler: @escaping Handler<Session>)
 }

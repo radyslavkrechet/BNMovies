@@ -12,7 +12,7 @@ import Swinject
 struct SignInModuleAssembly: Assembly {
     func assemble(container: Container) {
         container.register(SignInPresenter.self) { resolver in
-            let signInUseCase = resolver.resolve(SignInUseCase.self)!
+            let signInUseCase = resolver.resolve(SignInUseCaseProtocol.self)!
             return SignInPresenter(signInUseCase: signInUseCase)
         }
 

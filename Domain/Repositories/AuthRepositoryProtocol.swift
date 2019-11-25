@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol AuthRepositoryProtocol {
+public protocol AuthRepositoryProtocol: class {
     func signIn(with username: String, password: String, handler: @escaping Handler<Session>)
     func getSession(handler: @escaping Handler<Session?>)
     func isSignedIn(handler: @escaping Handler<Bool>)

@@ -9,6 +9,12 @@
 import Domain
 import Kingfisher
 
+protocol AccountViewProtocol: ContentViewProtocol {
+    func populate(with user: User)
+    func presentSignOutError(_ error: Error)
+    func userDidSignOut()
+}
+
 class AccountViewController<Presenter: AccountPresenterProtocol>: ContentViewController<Presenter>,
     AccountViewProtocol {
 

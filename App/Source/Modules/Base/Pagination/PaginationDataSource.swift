@@ -1,5 +1,5 @@
 //
-//  PaginationDataSourceProtocol.swift
+//  PaginationDataSource.swift
 //  Boilerplate
 //
 //  Created by Radyslav Krechet on 8/29/19.

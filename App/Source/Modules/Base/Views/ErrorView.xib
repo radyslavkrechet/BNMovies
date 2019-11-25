@@ -12,7 +12,6 @@
             <connections>
                 <outlet property="imageView" destination="qV9-0n-all" id="6zO-Mn-X8e"/>
                 <outlet property="textLabel" destination="7Tk-WX-kYl" id="GG0-gZ-I6h"/>
-                <outlet property="tryAgainButton" destination="gEQ-vE-5gI" id="PXA-yl-P5h"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -39,6 +38,9 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gEQ-vE-5gI">
                             <rect key="frame" x="126.66666666666666" y="127.33333333333334" width="63" height="30"/>
                             <state key="normal" title="Try again"/>
+                            <connections>
+                                <action selector="tryAgainButtonDidTap:" destination="-1" eventType="touchUpInside" id="Kr4-Yr-136"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>

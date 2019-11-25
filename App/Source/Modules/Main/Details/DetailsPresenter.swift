@@ -8,16 +8,24 @@
 
 import Domain
 
+protocol DetailsPresenterProtocol: ContentPresenterProtocol {
+    var id: String! { get set }
+
+    func markMovieAsFavourite()
+}
+
 class DetailsPresenter: DetailsPresenterProtocol {
     weak var view: DetailsViewProtocol?
 
     var id: String!
 
-    private let getMovieUseCase: GetMovieUseCase
-    private let changeMovieFavouriteStateUseCase: ChangeMovieFavouriteStateUseCase
+    private let getMovieUseCase: GetMovieUseCaseProtocol
+    private let changeMovieFavouriteStateUseCase: ChangeMovieFavouriteStateUseCaseProtocol
     private var movie: Movie?
 
-    init(getMovieUseCase: GetMovieUseCase, changeMovieFavouriteStateUseCase: ChangeMovieFavouriteStateUseCase) {
+    init(getMovieUseCase: GetMovieUseCaseProtocol,
+         changeMovieFavouriteStateUseCase: ChangeMovieFavouriteStateUseCaseProtocol) {
+
         self.getMovieUseCase = getMovieUseCase
         self.changeMovieFavouriteStateUseCase = changeMovieFavouriteStateUseCase
     }
@@ -33,13 +41,12 @@ class DetailsPresenter: DetailsPresenterProtocol {
 
     func markMovieAsFavourite() {
         guard let movie = movie else { return }
-        changeMovieFavouriteStateUseCase.parameters = ChangeMovieFavouriteStateUseCase.Parameters(movie: movie)
-        changeMovieFavouriteStateUseCase.execute { [weak self] result in
+        changeMovieFavouriteStateUseCase.set(movie) { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.presentFavouriteError(error)
             case .success(let movie): self?.process(movie)
             }
-        }
+        }.execute()
     }
 
     private func getMovie() {
@@ -47,13 +54,12 @@ class DetailsPresenter: DetailsPresenterProtocol {
             view?.populate(with: .loading)
         }
 
-        getMovieUseCase.parameters = GetMovieUseCase.Parameters(id: id)
-        getMovieUseCase.execute { [weak self] result in
+        getMovieUseCase.set(id) { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.populate(with: .error(error))
             case .success(let movie): self?.process(movie)
             }
-        }
+        }.execute()
     }
 
     private func process(_ movie: Movie) {

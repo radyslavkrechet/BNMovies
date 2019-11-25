@@ -8,6 +8,8 @@
 
 import UIKit
 
+protocol ViewProtocol: class {}
+
 class ViewController<Presenter: PresenterProtocol>: UIViewController, ViewProtocol {
     var presenter: Presenter!
     var analyticsManager: AnalyticsManagerProtocol?

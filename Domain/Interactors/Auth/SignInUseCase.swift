@@ -8,30 +8,35 @@
 
 import Foundation
 
-public class SignInUseCase: ParameterizableUseCase<User, SignInUseCase.Parameters> {
-    public struct Parameters {
-        let username: String
-        let password: String
+public protocol SignInUseCaseProtocol: Executable {
+    func set(_ username: String, password: String, handler: @escaping Handler<User>) -> Self
+}
 
-        public init(username: String, password: String) {
-            self.username = username
-            self.password = password
-        }
-    }
-
+public class SignInUseCase: SignInUseCaseProtocol, Workable {
     private let authRepository: AuthRepositoryProtocol
     private let userRepository: UserRepositoryProtocol
+    private var username: String!
+    private var password: String!
+    private var handler: Handler<User>!
 
     init(authRepository: AuthRepositoryProtocol, userRepository: UserRepositoryProtocol) {
         self.authRepository = authRepository
         self.userRepository = userRepository
     }
 
-    override func work(handler: @escaping Handler<User>) {
-        authRepository.signIn(with: parameters.username, password: parameters.password) { [weak self] result in
+    public func set(_ username: String, password: String, handler: @escaping Handler<User>) -> Self {
+        self.username = username
+        self.password = password
+        self.handler = handler
+        return self
+    }
+
+    func work() {
+        authRepository.signIn(with: username, password: password) { [weak self] result in
+            guard let self = self else { return }
             switch result {
-            case .failure(let error): handler(.failure(error))
-            case .success(let session): self?.userRepository.getUser(with: session.token, handler: handler)
+            case .failure(let error): self.handler(.failure(error))
+            case .success(let session): self.userRepository.getUser(with: session.token, handler: self.handler)
             }
         }
     }

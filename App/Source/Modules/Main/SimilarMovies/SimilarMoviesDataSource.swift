@@ -8,6 +8,8 @@
 
 import Domain
 
+protocol SimilarMoviesDataSourceProtocol: ListCollectionDataSourceProtocol where Item == Movie {}
+
 class SimilarMoviesDataSource: NSObject, SimilarMoviesDataSourceProtocol {
     var userDidSelectItem: ((Movie) -> Void)?
 

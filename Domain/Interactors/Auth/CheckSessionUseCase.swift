@@ -8,14 +8,24 @@
 
 import Foundation
 
-public class CheckSessionUseCase: UseCase<Bool> {
+public protocol CheckSessionUseCaseProtocol: Executable {
+    func set(_ handler: @escaping Handler<Bool>) -> Self
+}
+
+public class CheckSessionUseCase: CheckSessionUseCaseProtocol, Workable {
     private let authRepository: AuthRepositoryProtocol
+    private var handler: Handler<Bool>!
 
     init(authRepository: AuthRepositoryProtocol) {
         self.authRepository = authRepository
     }
 
-    override func work(handler: @escaping Handler<Bool>) {
+    public func set(_ handler: @escaping Handler<Bool>) -> Self {
+        self.handler = handler
+        return self
+    }
+
+    func work() {
         authRepository.isSignedIn(handler: handler)
     }
 }

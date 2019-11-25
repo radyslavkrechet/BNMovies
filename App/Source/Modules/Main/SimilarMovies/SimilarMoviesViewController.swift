@@ -7,7 +7,10 @@
 //
 
 import Domain
-import UIKit
+
+protocol SimilarMoviesViewProtocol: ListViewProtocol {
+    func populate(with movies: [Movie])
+}
 
 class SimilarMoviesViewController<Presenter: SimilarMoviesPresenterProtocol,
     DataSource: SimilarMoviesDataSourceProtocol>: ListViewController<Presenter, DataSource>, SimilarMoviesViewProtocol {

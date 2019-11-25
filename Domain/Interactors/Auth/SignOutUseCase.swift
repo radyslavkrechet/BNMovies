@@ -8,20 +8,31 @@
 
 import Foundation
 
-public class SignOutUseCase: UseCase<Void> {
+public protocol SignOutUseCaseProtocol: Executable {
+    func set(_ handler: @escaping Handler<Void>) -> Self
+}
+
+public class SignOutUseCase: SignOutUseCaseProtocol, Workable {
     private let authRepository: AuthRepositoryProtocol
     private let userRepository: UserRepositoryProtocol
+    private var handler: Handler<Void>!
 
     init(authRepository: AuthRepositoryProtocol, userRepository: UserRepositoryProtocol) {
         self.authRepository = authRepository
         self.userRepository = userRepository
     }
 
-    override func work(handler: @escaping Handler<Void>) {
+    public func set(_ handler: @escaping Handler<Void>) -> Self {
+        self.handler = handler
+        return self
+    }
+
+    func work() {
         authRepository.signOut { [weak self] result in
+            guard let self = self else { return }
             switch result {
-            case .failure: handler(result)
-            case .success: self?.userRepository.deleteUser(handler: handler)
+            case .failure: self.handler(result)
+            case .success: self.userRepository.deleteUser(handler: self.handler)
             }
         }
     }

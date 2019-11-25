@@ -8,22 +8,25 @@
 
 import Foundation
 
-public class GetSimilarMoviesUseCase: ParameterizableUseCase<[Movie], GetSimilarMoviesUseCase.Parameters> {
-    public struct Parameters {
-        let id: String
+public protocol GetSimilarMoviesUseCaseProtocol: Executable {
+    func set(_ id: String, handler: @escaping Handler<[Movie]>) -> Self
+}
 
-        public init(id: String) {
-            self.id = id
-        }
-    }
-
+public class GetSimilarMoviesUseCase: GetSimilarMoviesUseCaseProtocol, Workable {
     private let movieRepository: MovieRepositoryProtocol
+    private var id: String!
+    private var handler: Handler<[Movie]>!
 
     init(movieRepository: MovieRepositoryProtocol) {
         self.movieRepository = movieRepository
     }
 
-    override func work(handler: @escaping Handler<[Movie]>) {
-        movieRepository.getSimilarMovies(parameters.id, handler: handler)
+    public func set(_ id: String, handler: @escaping Handler<[Movie]>) -> Self {
+        self.id = id
+        return self
+    }
+
+    func work() {
+        movieRepository.getSimilarMovies(id, handler: handler)
     }
 }

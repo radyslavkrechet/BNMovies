@@ -20,13 +20,4 @@ public struct User: Equatable {
         self.name = name
         self.avatarSource = avatarSource
     }
-
-    // MARK: - Equatable
-
-    public static func == (lhs: User, rhs: User) -> Bool {
-        return lhs.id == rhs.id
-            && lhs.username == rhs.username
-            && lhs.name == rhs.name
-            && lhs.avatarSource == rhs.avatarSource
-    }
 }

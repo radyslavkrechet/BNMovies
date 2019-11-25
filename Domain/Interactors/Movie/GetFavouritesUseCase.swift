@@ -8,14 +8,24 @@
 
 import Foundation
 
-public class GetFavouritesUseCase: UseCase<[Movie]> {
+public protocol GetFavouritesUseCaseProtocol: Executable {
+    func set(_ handler: @escaping Handler<[Movie]>) -> Self
+}
+
+public class GetFavouritesUseCase: GetFavouritesUseCaseProtocol, Workable {
     private let movieRepository: MovieRepositoryProtocol
+    private var handler: Handler<[Movie]>!
 
     init(movieRepository: MovieRepositoryProtocol) {
         self.movieRepository = movieRepository
     }
 
-    override func work(handler: @escaping Handler<[Movie]>) {
+    public func set(_ handler: @escaping Handler<[Movie]>) -> Self {
+        self.handler = handler
+        return self
+    }
+
+    func work() {
         movieRepository.getFavourites(handler: handler)
     }
 }

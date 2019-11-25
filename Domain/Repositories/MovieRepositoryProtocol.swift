@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol MovieRepositoryProtocol {
+public protocol MovieRepositoryProtocol: class {
     func getMovies(with page: Int, handler: @escaping Handler<[Movie]>)
     func getFavourites(handler: @escaping Handler<[Movie]>)
     func getMovie(with id: String, handler: @escaping Handler<Movie>)

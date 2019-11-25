@@ -8,7 +8,7 @@
 
 import Domain
 
-public protocol MovieAPIProtocol {
+public protocol MovieAPIProtocol: class {
     func getMovies(with page: Int, handler: @escaping Handler<[Movie]>)
     func getMovie(with id: String, handler: @escaping Handler<Movie>)
     func getSimilarMovies(_ id: String, handler: @escaping Handler<[Movie]>)

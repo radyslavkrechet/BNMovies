@@ -11,7 +11,8 @@ import UIKit
 class ErrorView: View {
     @IBOutlet private(set) weak var imageView: UIImageView!
     @IBOutlet private(set) weak var textLabel: UILabel!
-    @IBOutlet private(set) weak var tryAgainButton: UIButton!
+
+    var tryAgainButtonDidTap: (() -> Void)?
 
     // MARK: - Setup
 
@@ -19,5 +20,11 @@ class ErrorView: View {
         textLabel.text = text
         imageView.isHidden = image == nil
         imageView.image = image
+    }
+
+    // MARK: - Actions
+
+    @IBAction private func tryAgainButtonDidTap(_ sender: UIButton) {
+        tryAgainButtonDidTap?()
     }
 }

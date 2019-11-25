@@ -8,22 +8,26 @@
 
 import Foundation
 
-public class GetMovieUseCase: ParameterizableUseCase<Movie, GetMovieUseCase.Parameters> {
-    public struct Parameters {
-        let id: String
+public protocol GetMovieUseCaseProtocol: Executable {
+    func set(_ id: String, handler: @escaping Handler<Movie>) -> Self
+}
 
-        public init(id: String) {
-            self.id = id
-        }
-    }
-
+public class GetMovieUseCase: GetMovieUseCaseProtocol, Workable {
     private let movieRepository: MovieRepositoryProtocol
+    private var id: String!
+    private var handler: Handler<Movie>!
 
     init(movieRepository: MovieRepositoryProtocol) {
         self.movieRepository = movieRepository
     }
 
-    override func work(handler: @escaping Handler<Movie>) {
-        movieRepository.getMovie(with: parameters.id, handler: handler)
+    public func set(_ id: String, handler: @escaping Handler<Movie>) -> Self {
+        self.id = id
+        self.handler = handler
+        return self
+    }
+
+    func work() {
+        movieRepository.getMovie(with: id, handler: handler)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  PresenterProtocol.swift
+//  Presenter.swift
 //  Boilerplate
 //
 //  Created by Radyslav Krechet on 8/27/19.

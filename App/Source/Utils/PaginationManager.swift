@@ -11,7 +11,17 @@ import Foundation
 private let onePageValue = 1
 private let itemsPerPage = 20
 
-struct PaginationManager {
+protocol PaginationManagerProtocol {
+    var value: Int { get }
+    var canGetMore: Bool { get }
+    var isFirstPage: Bool { get }
+
+    mutating func startLoading()
+    mutating func stopLoading(with itemsCount: Int)
+    mutating func reset()
+}
+
+struct PaginationManager: PaginationManagerProtocol {
     private(set) var value = onePageValue
 
     var canGetMore: Bool {

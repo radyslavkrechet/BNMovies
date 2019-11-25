@@ -8,15 +8,20 @@
 
 import Domain
 
+protocol HomePresenterProtocol: PaginationPresenterProtocol {}
+
 class HomePresenter: HomePresenterProtocol {
     weak var view: HomeViewProtocol?
 
-    private let getMoviesUseCase: GetMoviesUseCase
-    private var paginationManager = PaginationManager()
+    private let getMoviesUseCase: GetMoviesUseCaseProtocol
+    private var paginationManager: PaginationManagerProtocol
     private var moviesValue: [Movie]!
 
-    init(getMoviesUseCase: GetMoviesUseCase) {
+    init(getMoviesUseCase: GetMoviesUseCaseProtocol,
+         paginationManager: PaginationManagerProtocol = PaginationManager()) {
+
         self.getMoviesUseCase = getMoviesUseCase
+        self.paginationManager = paginationManager
     }
 
     func getContent() {
@@ -46,13 +51,12 @@ class HomePresenter: HomePresenterProtocol {
             view?.populate(with: .loading)
         }
 
-        getMoviesUseCase.parameters = GetMoviesUseCase.Parameters(page: paginationManager.value)
-        getMoviesUseCase.execute { [weak self] result in
+        getMoviesUseCase.set(paginationManager.value) { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.populate(with: .error(error))
             case .success(let movies): self?.process(movies)
             }
-        }
+        }.execute()
     }
 
     private func process(_ movies: [Movie]) {

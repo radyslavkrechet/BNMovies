@@ -1,5 +1,5 @@
 //
-//  PaginationPresenterProtocol.swift
+//  PaginationPresenter.swift
 //  Boilerplate
 //
 //  Created by Radyslav Krechet on 8/16/19.

@@ -8,26 +8,37 @@
 
 import Foundation
 
-public class GetUserUseCase: UseCase<User> {
+public protocol GetUserUseCaseProtocol: Executable {
+    func set(_ handler: @escaping Handler<User>) -> Self
+}
+
+public class GetUserUseCase: GetUserUseCaseProtocol, Workable {
     private let authRepository: AuthRepositoryProtocol
     private let userRepository: UserRepositoryProtocol
+    private var handler: Handler<User>!
 
     init(authRepository: AuthRepositoryProtocol, userRepository: UserRepositoryProtocol) {
         self.authRepository = authRepository
         self.userRepository = userRepository
     }
 
-    override func work(handler: @escaping Handler<User>) {
+    public func set(_ handler: @escaping Handler<User>) -> Self {
+        self.handler = handler
+        return self
+    }
+
+    func work() {
         authRepository.getSession { [weak self] result in
+            guard let self = self else { return }
             switch result {
-            case .failure(let error): handler(.failure(error))
+            case .failure(let error): self.handler(.failure(error))
             case .success(let session):
                 guard let session = session else {
-                    handler(.failure(Session.Error.noValue))
+                    self.handler(.failure(Session.Error.noValue))
                     return
                 }
 
-                self?.userRepository.getUser(with: session.token, handler: handler)
+                self.userRepository.getUser(with: session.token, handler: self.handler)
             }
         }
     }

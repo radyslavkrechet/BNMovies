@@ -7,7 +7,8 @@
 //
 
 import Domain
-import UIKit
+
+protocol ListViewProtocol: ContentViewProtocol {}
 
 class ListViewController<Presenter: ListPresenterProtocol,
     DataSource: ListDataSourceProtocol>: ContentViewController<Presenter>, ListViewProtocol {
