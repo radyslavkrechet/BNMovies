@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Title-->
+        <!--Boilerplate-->
         <scene sceneID="wq5-yF-zGh">
             <objects>
                 <viewController id="Cuh-cO-bcM" customClass="SignInViewController" customModule="Boilerplate" customModuleProvider="target" sceneMemberID="viewController">
@@ -68,7 +68,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Wyg-S2-0Wx"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="36R-Pp-PlO"/>
+                    <navigationItem key="navigationItem" title="Boilerplate" id="36R-Pp-PlO"/>
                     <connections>
                         <outlet property="activityIndicatorView" destination="3Bs-tQ-EVq" id="PI1-Gz-hQn"/>
                         <outlet property="bottomLayoutConstraint" destination="pln-sV-48E" id="oc4-AZ-jwU"/>

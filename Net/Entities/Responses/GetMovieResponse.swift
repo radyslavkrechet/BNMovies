@@ -15,7 +15,7 @@ struct GetMovieResponse: Decodable {
     let posterPath: String?
     let backdropPath: String?
     let runtime: Int?
-    let releaseDate: String
+    let releaseDate: String?
     let voteAverage: Float
     let genres: [GenreResponse]?
 }

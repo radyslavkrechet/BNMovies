@@ -15,7 +15,7 @@ class HomePresenter: HomePresenterProtocol {
 
     private let getMoviesUseCase: GetMoviesUseCaseProtocol
     private var paginationManager: PaginationManagerProtocol
-    private var moviesValue: [Movie]!
+    private var movies: [Movie]!
 
     init(getMoviesUseCase: GetMoviesUseCaseProtocol,
          paginationManager: PaginationManagerProtocol = PaginationManager()) {
@@ -38,7 +38,7 @@ class HomePresenter: HomePresenterProtocol {
     }
 
     func tryAgain() {
-        moviesValue = nil
+        movies = nil
         paginationManager.reset()
         getMovies()
     }
@@ -47,7 +47,7 @@ class HomePresenter: HomePresenterProtocol {
         guard paginationManager.canGetMore else { return }
         paginationManager.startLoading()
 
-        if moviesValue == nil {
+        if movies == nil {
             view?.populate(with: .loading)
         }
 
@@ -61,13 +61,13 @@ class HomePresenter: HomePresenterProtocol {
 
     private func process(_ movies: [Movie]) {
         if paginationManager.isFirstPage {
-            moviesValue = movies
+            self.movies = movies
         } else {
-            moviesValue += movies
+            self.movies += movies
         }
 
-        view?.populate(with: movies)
-        view?.populate(with: moviesValue.isEmpty ? .empty : .content)
+        view?.populate(with: self.movies)
+        view?.populate(with: self.movies.isEmpty ? .empty : .content)
 
         paginationManager.stopLoading(with: movies.count)
     }

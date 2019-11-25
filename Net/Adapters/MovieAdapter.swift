@@ -20,8 +20,12 @@ enum MovieAdapter {
     }
 
     static func toEntity(_ response: GetMovieResponse) -> Movie {
-        let formatter = DateFormatter()
-        formatter.dateFormat = dateFormat
+        var releaseDate: Date?
+        if let responseReleaseDate = response.releaseDate {
+            let formatter = DateFormatter()
+            formatter.dateFormat = dateFormat
+            releaseDate = formatter.date(from: responseReleaseDate)
+        }
 
         var posterSource = ""
         if let posterPath = response.posterPath {
@@ -39,7 +43,7 @@ enum MovieAdapter {
                      posterSource: posterSource,
                      backdropSource: backdropSource,
                      runtime: response.runtime,
-                     releaseDate: formatter.date(from: response.releaseDate),
+                     releaseDate: releaseDate,
                      userScore: Int(response.voteAverage * 10),
                      genres: response.genres?.map { GenreAdapter.toEntity($0) } ?? [],
                      isFavourite: false)
