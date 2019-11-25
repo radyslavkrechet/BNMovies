@@ -48,7 +48,7 @@ struct DependencyInjectionManager {
             #endif
         #endif
 
-        let net = NetAssembly(with: baseURL, apiKey: apiKey)
+        let net = NetAssembly(baseURL: baseURL, apiKey: apiKey)
         assembler.apply(assembly: net)
 
         let database = DatabaseAssembly()

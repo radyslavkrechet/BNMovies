@@ -21,7 +21,7 @@ public class GetFavouritesUseCase: GetFavouritesUseCaseProtocol, Workable {
     }
 
     public func set(_ handler: @escaping Handler<[Movie]>) -> Self {
-        self.handler = handler
+        self.handler = { result in DispatchQueue.main.async { handler(result) } }
         return self
     }
 

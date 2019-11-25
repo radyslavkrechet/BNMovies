@@ -12,17 +12,13 @@ protocol HomeViewProtocol: PaginationViewProtocol {
     func populate(with movies: [Movie])
 }
 
-class HomeViewController<Presenter: HomePresenterProtocol,
-    DataSource: MoviesDataSourceProtocol>: PaginationViewController<Presenter, DataSource>, HomeViewProtocol {
-
+class HomeViewController: PaginationViewController<HomePresenter, MoviesDataSource>, HomeViewProtocol {
     @IBOutlet private(set) weak var tableView: UITableView!
 
     // MARK: - Lifecycle
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let deailsViewController = segue.destination as? DetailsViewController<DetailsPresenter>,
-            let movie = sender as? Movie {
-
+        if let deailsViewController = segue.destination as? DetailsViewController, let movie = sender as? Movie {
             deailsViewController.presenter.id = movie.id
         }
     }

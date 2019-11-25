@@ -91,7 +91,7 @@
 		0B6326D82319055C00B08D6F /* DependencyInjectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6326D72319055C00B08D6F /* DependencyInjectionManager.swift */; };
 		0B6326DC2319329300B08D6F /* UIStoryboard+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6326DB2319329300B08D6F /* UIStoryboard+Navigation.swift */; };
 		0B6326DF231D032000B08D6F /* User+Displaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6326DE231D032000B08D6F /* User+Displaying.swift */; };
-		0B632713231F8CF000B08D6F /* PropertyListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B632712231F8CF000B08D6F /* PropertyListManager.swift */; };
+		0B632713231F8CF000B08D6F /* PropertyListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B632712231F8CF000B08D6F /* PropertyListService.swift */; };
 		0B632719231FCF6600B08D6F /* Movie+Displaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B632718231FCF6600B08D6F /* Movie+Displaying.swift */; };
 		0B63271F231FD5CF00B08D6F /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B63271E231FD5CF00B08D6F /* PaddingLabel.swift */; };
 		0B977272238BC7C400B73BAE /* ServerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B977271238BC7C400B73BAE /* ServerSettings.swift */; };
@@ -347,7 +347,7 @@
 		0B63270C231E3EA800B08D6F /* SessionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionEntity.swift; sourceTree = "<group>"; };
 		0B63270E231E3EB700B08D6F /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
 		0B632710231E3EC400B08D6F /* MovieEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieEntity.swift; sourceTree = "<group>"; };
-		0B632712231F8CF000B08D6F /* PropertyListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListManager.swift; sourceTree = "<group>"; };
+		0B632712231F8CF000B08D6F /* PropertyListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListService.swift; sourceTree = "<group>"; };
 		0B632718231FCF6600B08D6F /* Movie+Displaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+Displaying.swift"; sourceTree = "<group>"; };
 		0B63271E231FD5CF00B08D6F /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		0B977271238BC7C400B73BAE /* ServerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSettings.swift; sourceTree = "<group>"; };
@@ -744,7 +744,7 @@
 			isa = PBXGroup;
 			children = (
 				0B6326D72319055C00B08D6F /* DependencyInjectionManager.swift */,
-				0B632712231F8CF000B08D6F /* PropertyListManager.swift */,
+				0B632712231F8CF000B08D6F /* PropertyListService.swift */,
 				0BA83093232A4AA000D81840 /* DebuggingService.swift */,
 				0B204A5F231FEF4E00CE54BB /* AppearanceService.swift */,
 				0B6326B42316BB5F00B08D6F /* PaginationManager.swift */,
@@ -1589,7 +1589,7 @@
 				0BE7D8CF230BDBEB0003A02E /* PaginationPresenter.swift in Sources */,
 				0B204A7C23215E5600CE54BB /* UICollectionView+RegisterNib.swift in Sources */,
 				0B6326C92317D33900B08D6F /* ListPresenter.swift in Sources */,
-				0B632713231F8CF000B08D6F /* PropertyListManager.swift in Sources */,
+				0B632713231F8CF000B08D6F /* PropertyListService.swift in Sources */,
 				0B6326AC2316774F00B08D6F /* DetailsViewController.swift in Sources */,
 				0B632661230FFEC100B08D6F /* SignInViewController.swift in Sources */,
 				0B1EE9922306D6BC00380A29 /* AppDelegate.swift in Sources */,

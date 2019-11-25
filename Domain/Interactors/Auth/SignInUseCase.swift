@@ -27,7 +27,7 @@ public class SignInUseCase: SignInUseCaseProtocol, Workable {
     public func set(_ username: String, password: String, handler: @escaping Handler<User>) -> Self {
         self.username = username
         self.password = password
-        self.handler = handler
+        self.handler = { result in DispatchQueue.main.async { handler(result) } }
         return self
     }
 

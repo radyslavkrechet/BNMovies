@@ -57,39 +57,33 @@ struct MainModuleAssembly: Assembly {
     }
 
     private func initViewControllers(from container: Container) {
-        container.storyboardInitCompleted(HomeViewController<HomePresenter,
-            MoviesDataSource>.self) { resolver, controller in
-
+        container.storyboardInitCompleted(HomeViewController.self) { resolver, controller in
             controller.presenter = resolver.resolve(HomePresenter.self)!
             controller.presenter.view = controller
             controller.dataSource = resolver.resolve(MoviesDataSource.self)!
             controller.analyticsManager = resolver.resolve(AnalyticsManagerProtocol.self)
         }
 
-        container.storyboardInitCompleted(FavouritesViewController<FavouritesPresenter,
-            MoviesDataSource>.self) { resolver, controller in
-
+        container.storyboardInitCompleted(FavouritesViewController.self) { resolver, controller in
             controller.presenter = resolver.resolve(FavouritesPresenter.self)!
             controller.presenter.view = controller
             controller.dataSource = resolver.resolve(MoviesDataSource.self)!
             controller.analyticsManager = resolver.resolve(AnalyticsManagerProtocol.self)
         }
 
-        container.storyboardInitCompleted(AccountViewController<AccountPresenter>.self) { resolver, controller in
+        container.storyboardInitCompleted(AccountViewController.self) { resolver, controller in
             controller.presenter = resolver.resolve(AccountPresenter.self)!
             controller.presenter.view = controller
             controller.analyticsManager = resolver.resolve(AnalyticsManagerProtocol.self)
         }
 
-        container.storyboardInitCompleted(DetailsViewController<DetailsPresenter>.self) { resolver, controller in
+        container.storyboardInitCompleted(DetailsViewController.self) { resolver, controller in
             controller.presenter = resolver.resolve(DetailsPresenter.self)!
             controller.presenter.view = controller
             controller.analyticsManager = resolver.resolve(AnalyticsManagerProtocol.self)
         }
 
-        container.storyboardInitCompleted(SimilarMoviesViewController<SimilarMoviesPresenter,
-            SimilarMoviesDataSource>.self) { resolver, controller in
-
+        container.storyboardInitCompleted(SimilarMoviesViewController.self) { resolver, controller in
             controller.presenter = resolver.resolve(SimilarMoviesPresenter.self)!
             controller.presenter.view = controller
             controller.dataSource = resolver.resolve(SimilarMoviesDataSource.self)!

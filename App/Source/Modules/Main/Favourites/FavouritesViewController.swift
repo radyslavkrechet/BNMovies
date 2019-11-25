@@ -12,9 +12,7 @@ protocol FavouritesViewProtocol: ListViewProtocol {
     func populate(with movies: [Movie])
 }
 
-class FavouritesViewController<Presenter: FavouritesPresenterProtocol,
-    DataSource: MoviesDataSourceProtocol>: ListViewController<Presenter, DataSource>, FavouritesViewProtocol {
-
+class FavouritesViewController: ListViewController<FavouritesPresenter, MoviesDataSource>, FavouritesViewProtocol {
     @IBOutlet private(set) weak var tableView: UITableView!
 
     override var emptyStateText: String {
@@ -30,9 +28,7 @@ class FavouritesViewController<Presenter: FavouritesPresenterProtocol,
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let deailsViewController = segue.destination as? DetailsViewController<DetailsPresenter>,
-            let movie = sender as? Movie {
-
+        if let deailsViewController = segue.destination as? DetailsViewController, let movie = sender as? Movie {
             deailsViewController.presenter.id = movie.id
         }
     }

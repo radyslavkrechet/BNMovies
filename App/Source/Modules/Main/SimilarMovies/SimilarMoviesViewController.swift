@@ -12,8 +12,8 @@ protocol SimilarMoviesViewProtocol: ListViewProtocol {
     func populate(with movies: [Movie])
 }
 
-class SimilarMoviesViewController<Presenter: SimilarMoviesPresenterProtocol,
-    DataSource: SimilarMoviesDataSourceProtocol>: ListViewController<Presenter, DataSource>, SimilarMoviesViewProtocol {
+class SimilarMoviesViewController: ListViewController<SimilarMoviesPresenter, SimilarMoviesDataSource>,
+    SimilarMoviesViewProtocol {
 
     @IBOutlet private(set) weak var collectionView: UICollectionView!
 
@@ -24,9 +24,7 @@ class SimilarMoviesViewController<Presenter: SimilarMoviesPresenterProtocol,
     // MARK: - Lifecycle
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let deailsViewController = segue.destination as? DetailsViewController<DetailsPresenter>,
-            let movie = sender as? Movie {
-
+        if let deailsViewController = segue.destination as? DetailsViewController, let movie = sender as? Movie {
             deailsViewController.presenter.id = movie.id
         }
     }

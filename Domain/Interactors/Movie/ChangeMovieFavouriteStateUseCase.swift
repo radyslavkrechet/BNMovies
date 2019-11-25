@@ -23,7 +23,7 @@ public class ChangeMovieFavouriteStateUseCase: ChangeMovieFavouriteStateUseCaseP
 
     public func set(_ movie: Movie, handler: @escaping Handler<Movie>) -> Self {
         self.movie = movie
-        self.handler = handler
+        self.handler = { result in DispatchQueue.main.async { handler(result) } }
         return self
     }
 

@@ -12,7 +12,7 @@ protocol SplashViewProtocol: ContentViewProtocol {
     func navigate(_ isSignedIn: Bool)
 }
 
-class SplashViewController<Presenter: SplashPresenterProtocol>: ContentViewController<Presenter>, SplashViewProtocol {
+class SplashViewController: ContentViewController<SplashPresenter>, SplashViewProtocol {
 
     // MARK: - SplashViewProtocol
 

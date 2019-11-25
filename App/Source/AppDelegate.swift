@@ -14,8 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     override init() {
-        let propertyListManager = PropertyListManager()
-        dependencyInjectionManager = DependencyInjectionManager(serverSource: propertyListManager.properties)
+        dependencyInjectionManager = DependencyInjectionManager(serverSource: PropertyListService.properties)
 
         super.init()
     }

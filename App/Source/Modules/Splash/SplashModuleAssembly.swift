@@ -16,7 +16,7 @@ struct SplashModuleAssembly: Assembly {
             return SplashPresenter(checkSessionUseCase: checkSessionUseCase)
         }
 
-        container.storyboardInitCompleted(SplashViewController<SplashPresenter>.self) { resolver, controller in
+        container.storyboardInitCompleted(SplashViewController.self) { resolver, controller in
             controller.presenter = resolver.resolve(SplashPresenter.self)!
             controller.presenter.view = controller
             controller.analyticsManager = resolver.resolve(AnalyticsManagerProtocol.self)

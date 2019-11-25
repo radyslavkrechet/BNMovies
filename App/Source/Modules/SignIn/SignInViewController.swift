@@ -13,9 +13,7 @@ protocol SignInViewProtocol: ViewProtocol {
     func userDidSignIn()
 }
 
-class SignInViewController<Presenter: SignInPresenterProtocol>: ViewController<Presenter>, SignInViewProtocol,
-    UITextFieldDelegate {
-
+class SignInViewController: ViewController<SignInPresenter>, SignInViewProtocol, UITextFieldDelegate {
     @IBOutlet private(set) weak var usernameTextField: UITextField!
     @IBOutlet private(set) weak var passwordTextField: UITextField!
     @IBOutlet private(set) weak var signInButton: UIButton!

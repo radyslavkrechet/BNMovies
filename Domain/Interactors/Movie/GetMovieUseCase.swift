@@ -23,7 +23,7 @@ public class GetMovieUseCase: GetMovieUseCaseProtocol, Workable {
 
     public func set(_ id: String, handler: @escaping Handler<Movie>) -> Self {
         self.id = id
-        self.handler = handler
+        self.handler = { result in DispatchQueue.main.async { handler(result) } }
         return self
     }
 

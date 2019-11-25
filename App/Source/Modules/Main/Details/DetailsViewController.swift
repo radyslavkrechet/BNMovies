@@ -15,9 +15,7 @@ protocol DetailsViewProtocol: ContentViewProtocol {
     func presentFavouriteError(_ error: Error)
 }
 
-class DetailsViewController<Presenter: DetailsPresenterProtocol>: ContentViewController<Presenter>,
-    DetailsViewProtocol {
-
+class DetailsViewController: ContentViewController<DetailsPresenter>, DetailsViewProtocol {
     @IBOutlet private(set) weak var backdropImageView: UIImageView!
     @IBOutlet private(set) weak var posterImageView: UIImageView!
     @IBOutlet private(set) weak var titleLabel: UILabel!
@@ -36,9 +34,7 @@ class DetailsViewController<Presenter: DetailsPresenterProtocol>: ContentViewCon
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let similarMoviesViewController = segue.destination as? SimilarMoviesViewController<SimilarMoviesPresenter,
-            SimilarMoviesDataSource> {
-
+        if let similarMoviesViewController = segue.destination as? SimilarMoviesViewController {
             similarMoviesViewController.presenter.id = presenter.id
         }
     }

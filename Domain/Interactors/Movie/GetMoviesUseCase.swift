@@ -23,7 +23,7 @@ public class GetMoviesUseCase: GetMoviesUseCaseProtocol, Workable {
 
     public func set(_ page: Int, handler: @escaping Handler<[Movie]>) -> Self {
         self.page = page
-        self.handler = handler
+        self.handler = { result in DispatchQueue.main.async { handler(result) } }
         return self
     }
 

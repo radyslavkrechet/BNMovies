@@ -10,7 +10,7 @@ import Data
 import Swinject
 
 public struct NetAssembly: Assembly {
-    public init(with baseURL: String, apiKey: String) {
+    public init(baseURL: String, apiKey: String) {
         let serverSettings = ServerSettings(baseURL: baseURL, apiKey: apiKey)
         RouterService.setup(with: serverSettings)
     }

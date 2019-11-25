@@ -15,9 +15,7 @@ protocol AccountViewProtocol: ContentViewProtocol {
     func userDidSignOut()
 }
 
-class AccountViewController<Presenter: AccountPresenterProtocol>: ContentViewController<Presenter>,
-    AccountViewProtocol {
-
+class AccountViewController: ContentViewController<AccountPresenter>, AccountViewProtocol {
     @IBOutlet private(set) weak var avatarImageView: UIImageView!
     @IBOutlet private(set) weak var usernameLabel: UILabel!
 
