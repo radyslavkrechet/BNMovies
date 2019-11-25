@@ -1,5 +1,5 @@
 //
-//  NetworkService.swift
+//  NetworkManager.swift
 //  Net
 //
 //  Created by Radyslav Krechet on 9/4/19.
@@ -9,8 +9,12 @@
 import Domain
 import Alamofire
 
-enum NetworkService {
-    static func execute(_ request: URLRequestConvertible, handler: @escaping Handler<Any>) {
+protocol NetworkManagerProtocol {
+    func execute(_ request: URLRequestConvertible, handler: @escaping Handler<Any>)
+}
+
+struct NetworkManager: NetworkManagerProtocol {
+    func execute(_ request: URLRequestConvertible, handler: @escaping Handler<Any>) {
         let queue = DispatchQueue.global(qos: .userInitiated)
         Alamofire.request(request).validate().responseJSON(queue: queue) { response in
             switch response.result {

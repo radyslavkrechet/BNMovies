@@ -11,6 +11,8 @@ import Alamofire
 enum MovieRouter: URLRequestConvertible {
     case getMovies(page: Int), getMovie(id: String), getSimilarMovies(id: String)
 
+    static var serverSettings: ServerSettings!
+
     private var method: HTTPMethod {
         return .get
     }
@@ -25,7 +27,7 @@ enum MovieRouter: URLRequestConvertible {
         }
     }
     private var urlParameters: Parameters {
-        var parameters: Parameters = ["api_key": ServerManager.shared.apiKey]
+        var parameters: Parameters = ["api_key": MovieRouter.serverSettings.apiKey]
         if case .getMovies(let page) = self {
             parameters["page"] = page
         }
@@ -35,7 +37,7 @@ enum MovieRouter: URLRequestConvertible {
     // MARK: - URLRequestConvertible
 
     func asURLRequest() throws -> URLRequest {
-        let url = try ServerManager.shared.baseURL.asURL().appendingPathComponent(path)
+        let url = try MovieRouter.serverSettings.baseURL.asURL().appendingPathComponent(path)
         var urlRequest = URLRequest(url: url)
         urlRequest = try URLEncoding.default.encode(urlRequest, with: urlParameters)
         urlRequest.httpMethod = method.rawValue

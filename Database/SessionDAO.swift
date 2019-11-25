@@ -11,8 +11,14 @@ import Data
 import CoreStore
 
 class SessionDAO: SessionDAOProtocol {
+    private let dataStack: DataStack
+
+    init(dataStack: DataStack = CoreStoreDefaults.dataStack) {
+        self.dataStack = dataStack
+    }
+
     func set(_ session: Session, handler: @escaping Handler<Session>) {
-        CoreStoreDefaults.dataStack.perform(asynchronous: { transaction in
+        dataStack.perform(asynchronous: { transaction in
             let from = From<SessionEntity>()
             let into = Into<SessionEntity>()
             let entity = try transaction.fetchOne(from) ?? transaction.create(into)
@@ -26,7 +32,7 @@ class SessionDAO: SessionDAOProtocol {
     }
 
     func getSession(handler: @escaping Handler<Session?>) {
-        CoreStoreDefaults.dataStack.perform(asynchronous: { transaction -> Session? in
+        dataStack.perform(asynchronous: { transaction -> Session? in
             let from = From<SessionEntity>()
             let entity = try transaction.fetchOne(from)
 
@@ -44,7 +50,7 @@ class SessionDAO: SessionDAOProtocol {
     }
 
     func deleteSession(handler: @escaping Handler<Void>) {
-        CoreStoreDefaults.dataStack.perform(asynchronous: { transaction in
+        dataStack.perform(asynchronous: { transaction in
             let from = From<SessionEntity>()
             try transaction.deleteAll(from)
         }, completionOnGlobal: { result in

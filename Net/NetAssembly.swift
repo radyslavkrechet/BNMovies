@@ -11,7 +11,8 @@ import Swinject
 
 public struct NetAssembly: Assembly {
     public init(with baseURL: String, apiKey: String) {
-        ServerManager.setup(with: baseURL, apiKey: apiKey)
+        let serverSettings = ServerSettings(baseURL: baseURL, apiKey: apiKey)
+        RouterService.setup(with: serverSettings)
     }
 
     public func assemble(container: Container) {

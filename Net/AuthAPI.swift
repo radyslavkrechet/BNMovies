@@ -11,6 +11,12 @@ import Data
 import Alamofire
 
 class AuthAPI: AuthAPIProtocol {
+    private let networkManager: NetworkManagerProtocol
+
+    init(networkManager: NetworkManagerProtocol = NetworkManager()) {
+        self.networkManager = networkManager
+    }
+
     func signIn(with username: String, password: String, handler: @escaping Handler<Session>) {
         createToken { result in
             switch result {
@@ -28,7 +34,7 @@ class AuthAPI: AuthAPIProtocol {
 
     private func createToken(handler: @escaping Handler<String>) {
         let request = AuthRouter.createToken
-        NetworkService.execute(request) { result in
+        networkManager.execute(request) { result in
             switch result {
             case .failure(let error): handler(.failure(error))
             case .success(let json):
@@ -58,7 +64,7 @@ class AuthAPI: AuthAPIProtocol {
         }
 
         let request = AuthRouter.validateToken(parameters: parameters)
-        NetworkService.execute(request) { result in
+        networkManager.execute(request) { result in
             switch result {
             case .failure(let error): handler(.failure(error))
             case .success(let json):
@@ -84,7 +90,7 @@ class AuthAPI: AuthAPIProtocol {
         }
 
         let request = AuthRouter.createSession(parameters: parameters)
-        NetworkService.execute(request) { result in
+        networkManager.execute(request) { result in
             switch result {
             case .failure(let error): handler(.failure(error))
             case .success(let json):

@@ -11,8 +11,14 @@ import Data
 import CoreStore
 
 class MovieDAO: MovieDAOProtocol {
+    private let dataStack: DataStack
+
+    init(dataStack: DataStack = CoreStoreDefaults.dataStack) {
+        self.dataStack = dataStack
+    }
+
     func set(_ movie: Movie, handler: @escaping Handler<Movie>) {
-        CoreStoreDefaults.dataStack.perform(asynchronous: { transaction in
+        dataStack.perform(asynchronous: { transaction in
             let genreEntities = try movie.genres.map { genre -> GenreEntity in
                 let builder = From<GenreEntity>().where(\.id == genre.id)
                 let into = Into<GenreEntity>()
@@ -34,7 +40,7 @@ class MovieDAO: MovieDAOProtocol {
     }
 
     func getFavourites(handler: @escaping Handler<[Movie]>) {
-        CoreStoreDefaults.dataStack.perform(asynchronous: { transaction -> [Movie] in
+        dataStack.perform(asynchronous: { transaction -> [Movie] in
             let builder = From<MovieEntity>().where(\.isFavourite == true)
             let entities = try transaction.fetchAll(builder)
             return entities.map { MovieAdapter.fromStorage($0) }.reversed()
@@ -47,7 +53,7 @@ class MovieDAO: MovieDAOProtocol {
     }
 
     func getMovie(with id: String, handler: @escaping Handler<Movie?>) {
-        CoreStoreDefaults.dataStack.perform(asynchronous: { transaction -> Movie? in
+        dataStack.perform(asynchronous: { transaction -> Movie? in
             let builder = From<MovieEntity>().where(\.id == id)
             let entity = try transaction.fetchOne(builder)
 

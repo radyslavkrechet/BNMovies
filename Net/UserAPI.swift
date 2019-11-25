@@ -11,9 +11,15 @@ import Data
 import Foundation
 
 class UserAPI: UserAPIProtocol {
+    private let networkManager: NetworkManagerProtocol
+
+    init(networkManager: NetworkManagerProtocol = NetworkManager()) {
+        self.networkManager = networkManager
+    }
+
     func getUser(with token: String, handler: @escaping Handler<User>) {
         let request = UserRouter.getUser(token: token)
-        NetworkService.execute(request) { result in
+        networkManager.execute(request) { result in
             switch result {
             case .failure(let error): handler(.failure(error))
             case .success(let json):

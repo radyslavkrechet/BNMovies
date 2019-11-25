@@ -55,8 +55,7 @@
 		0B52EF0F232B8906004939FE /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B63267F2315B3C100B08D6F /* AuthAPI.swift */; };
 		0B52EF10232B8906004939FE /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6326812315B3D700B08D6F /* UserAPI.swift */; };
 		0B52EF11232B8906004939FE /* MovieAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6326832315B3EC00B08D6F /* MovieAPI.swift */; };
-		0B52EF12232B890D004939FE /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B204A61231FFA1400CE54BB /* NetworkService.swift */; };
-		0B52EF13232B890D004939FE /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6326EC231D2EE800B08D6F /* ServerManager.swift */; };
+		0B52EF12232B890D004939FE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B204A61231FFA1400CE54BB /* NetworkManager.swift */; };
 		0B52EF14232B890D004939FE /* CoderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B204A9123228D2C00CE54BB /* CoderService.swift */; };
 		0B5D154B232BB008008C9F30 /* AnalyticsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA83095232A4BED00D81840 /* AnalyticsAssembly.swift */; };
 		0B5D154D232BB008008C9F30 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B52EF2D232B9994004939FE /* AnalyticsManager.swift */; };
@@ -95,6 +94,8 @@
 		0B632713231F8CF000B08D6F /* PropertyListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B632712231F8CF000B08D6F /* PropertyListManager.swift */; };
 		0B632719231FCF6600B08D6F /* Movie+Displaying.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B632718231FCF6600B08D6F /* Movie+Displaying.swift */; };
 		0B63271F231FD5CF00B08D6F /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B63271E231FD5CF00B08D6F /* PaddingLabel.swift */; };
+		0B977272238BC7C400B73BAE /* ServerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B977271238BC7C400B73BAE /* ServerSettings.swift */; };
+		0B977274238BCB9700B73BAE /* RouterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B977273238BCB9700B73BAE /* RouterService.swift */; };
 		0BA8308E232A470000D81840 /* UIWindow+Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA8308D232A470000D81840 /* UIWindow+Motion.swift */; };
 		0BA83094232A4AA000D81840 /* DebuggingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA83093232A4AA000D81840 /* DebuggingService.swift */; };
 		0BA83112232A664700D81840 /* Domain.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BA83110232A664700D81840 /* Domain.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -231,7 +232,7 @@
 		0B1EE9892306D6BC00380A29 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0B1EE9C3230A7EB900380A29 /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
 		0B204A5F231FEF4E00CE54BB /* AppearanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceService.swift; sourceTree = "<group>"; };
-		0B204A61231FFA1400CE54BB /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		0B204A61231FFA1400CE54BB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0B204A632321032C00CE54BB /* TagLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagLabel.swift; sourceTree = "<group>"; };
 		0B204A6523211AEE00CE54BB /* UserScoreLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserScoreLabel.swift; sourceTree = "<group>"; };
 		0B204A672321200600CE54BB /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
@@ -329,7 +330,6 @@
 		0B6326E6231D14AD00B08D6F /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
 		0B6326E8231D14BA00B08D6F /* UserRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRouter.swift; sourceTree = "<group>"; };
 		0B6326EA231D14C900B08D6F /* MovieRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieRouter.swift; sourceTree = "<group>"; };
-		0B6326EC231D2EE800B08D6F /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
 		0B6326EE231D34A100B08D6F /* ValidateTokenRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateTokenRequest.swift; sourceTree = "<group>"; };
 		0B6326F0231D34F800B08D6F /* CreateSessionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSessionRequest.swift; sourceTree = "<group>"; };
 		0B6326F2231D355100B08D6F /* CreateValidateTokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateValidateTokenResponse.swift; sourceTree = "<group>"; };
@@ -350,6 +350,8 @@
 		0B632712231F8CF000B08D6F /* PropertyListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyListManager.swift; sourceTree = "<group>"; };
 		0B632718231FCF6600B08D6F /* Movie+Displaying.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+Displaying.swift"; sourceTree = "<group>"; };
 		0B63271E231FD5CF00B08D6F /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		0B977271238BC7C400B73BAE /* ServerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSettings.swift; sourceTree = "<group>"; };
+		0B977273238BCB9700B73BAE /* RouterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterService.swift; sourceTree = "<group>"; };
 		0BA8308D232A470000D81840 /* UIWindow+Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Motion.swift"; sourceTree = "<group>"; };
 		0BA83093232A4AA000D81840 /* DebuggingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuggingService.swift; sourceTree = "<group>"; };
 		0BA83095232A4BED00D81840 /* AnalyticsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsAssembly.swift; sourceTree = "<group>"; };
@@ -813,9 +815,9 @@
 		0B6326E2231D0DED00B08D6F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				0B204A61231FFA1400CE54BB /* NetworkService.swift */,
-				0B6326EC231D2EE800B08D6F /* ServerManager.swift */,
+				0B977273238BCB9700B73BAE /* RouterService.swift */,
 				0B204A9123228D2C00CE54BB /* CoderService.swift */,
+				0B204A61231FFA1400CE54BB /* NetworkManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1067,6 +1069,7 @@
 			children = (
 				0BE7D8CA230BC0110003A02E /* Requests */,
 				0BE7D8CB230BC0180003A02E /* Responses */,
+				0B977271238BC7C400B73BAE /* ServerSettings.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -1618,12 +1621,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B52EF13232B890D004939FE /* ServerManager.swift in Sources */,
 				0B52EF09232B8906004939FE /* GetMoviesResponse.swift in Sources */,
 				0B52EF0A232B8906004939FE /* GetMovieResponse.swift in Sources */,
 				0B52EF14232B890D004939FE /* CoderService.swift in Sources */,
 				0B52EF03232B8906004939FE /* GenreAdapter.swift in Sources */,
 				0B52EF00232B8905004939FE /* SessionAdapter.swift in Sources */,
+				0B977272238BC7C400B73BAE /* ServerSettings.swift in Sources */,
 				0B52EF10232B8906004939FE /* UserAPI.swift in Sources */,
 				0B52EF0F232B8906004939FE /* AuthAPI.swift in Sources */,
 				0B52EF0C232B8906004939FE /* UserRouter.swift in Sources */,
@@ -1633,9 +1636,10 @@
 				0B52EF07232B8906004939FE /* CreateSessionResponse.swift in Sources */,
 				0B52EF0E232B8906004939FE /* NetAssembly.swift in Sources */,
 				0B52EF0D232B8906004939FE /* MovieRouter.swift in Sources */,
+				0B977274238BCB9700B73BAE /* RouterService.swift in Sources */,
 				0B52EF08232B8906004939FE /* GetUserResponse.swift in Sources */,
 				0B52EF01232B8905004939FE /* UserAdapter.swift in Sources */,
-				0B52EF12232B890D004939FE /* NetworkService.swift in Sources */,
+				0B52EF12232B890D004939FE /* NetworkManager.swift in Sources */,
 				0B52EF11232B8906004939FE /* MovieAPI.swift in Sources */,
 				0B52EF0B232B8906004939FE /* AuthRouter.swift in Sources */,
 				0B52EF02232B8905004939FE /* MovieAdapter.swift in Sources */,

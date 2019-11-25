@@ -11,6 +11,8 @@ import Alamofire
 enum UserRouter: URLRequestConvertible {
     case getUser(token: String)
 
+    static var serverSettings: ServerSettings!
+
     private var method: HTTPMethod {
         return .get
     }
@@ -18,7 +20,7 @@ enum UserRouter: URLRequestConvertible {
         return "/account"
     }
     private var urlParameters: Parameters {
-        var parameters = ["api_key": ServerManager.shared.apiKey]
+        var parameters = ["api_key": UserRouter.serverSettings.apiKey]
         if case .getUser(let token) = self {
             parameters["session_id"] = token
         }
@@ -28,7 +30,7 @@ enum UserRouter: URLRequestConvertible {
     // MARK: - URLRequestConvertible
 
     func asURLRequest() throws -> URLRequest {
-        let url = try ServerManager.shared.baseURL.asURL().appendingPathComponent(path)
+        let url = try UserRouter.serverSettings.baseURL.asURL().appendingPathComponent(path)
         var urlRequest = URLRequest(url: url)
         urlRequest = try URLEncoding.default.encode(urlRequest, with: urlParameters)
         urlRequest.httpMethod = method.rawValue

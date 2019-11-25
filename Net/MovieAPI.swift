@@ -11,9 +11,15 @@ import Data
 import Foundation
 
 class MovieAPI: MovieAPIProtocol {
+    private let networkManager: NetworkManagerProtocol
+
+    init(networkManager: NetworkManagerProtocol = NetworkManager()) {
+        self.networkManager = networkManager
+    }
+
     func getMovies(with page: Int, handler: @escaping Handler<[Movie]>) {
         let request = MovieRouter.getMovies(page: page)
-        NetworkService.execute(request) { result in
+        networkManager.execute(request) { result in
             switch result {
             case .failure(let error): handler(.failure(error))
             case .success(let json):
@@ -30,7 +36,7 @@ class MovieAPI: MovieAPIProtocol {
 
     func getMovie(with id: String, handler: @escaping Handler<Movie>) {
         let request = MovieRouter.getMovie(id: id)
-        NetworkService.execute(request) { result in
+        networkManager.execute(request) { result in
             switch result {
             case .failure(let error): handler(.failure(error))
             case .success(let json):
@@ -47,7 +53,7 @@ class MovieAPI: MovieAPIProtocol {
 
     func getSimilarMovies(_ id: String, handler: @escaping Handler<[Movie]>) {
         let request = MovieRouter.getSimilarMovies(id: id)
-        NetworkService.execute(request) { result in
+        networkManager.execute(request) { result in
             switch result {
             case .failure(let error): handler(.failure(error))
             case .success(let json):

@@ -11,8 +11,14 @@ import Data
 import CoreStore
 
 class UserDAO: UserDAOProtocol {
+    private let dataStack: DataStack
+
+    init(dataStack: DataStack = CoreStoreDefaults.dataStack) {
+        self.dataStack = dataStack
+    }
+
     func set(_ user: User, handler: @escaping Handler<User>) {
-        CoreStoreDefaults.dataStack.perform(asynchronous: { transaction in
+        dataStack.perform(asynchronous: { transaction in
             let from = From<UserEntity>()
             let into = Into<UserEntity>()
             let entity = try transaction.fetchOne(from) ?? transaction.create(into)
@@ -26,7 +32,7 @@ class UserDAO: UserDAOProtocol {
     }
 
     func getUser(handler: @escaping Handler<User?>) {
-        CoreStoreDefaults.dataStack.perform(asynchronous: { transaction -> User? in
+        dataStack.perform(asynchronous: { transaction -> User? in
             let from = From<UserEntity>()
             let entity = try transaction.fetchOne(from)
 
@@ -44,7 +50,7 @@ class UserDAO: UserDAOProtocol {
     }
 
     func deleteUser(handler: @escaping Handler<Void>) {
-        CoreStoreDefaults.dataStack.perform(asynchronous: { transaction in
+        dataStack.perform(asynchronous: { transaction in
             let from = From<UserEntity>()
             try transaction.deleteAll(from)
         }, completionOnGlobal: { result in
