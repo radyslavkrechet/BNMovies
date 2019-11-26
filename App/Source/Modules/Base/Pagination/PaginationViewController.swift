@@ -31,7 +31,9 @@ class PaginationViewController<Presenter: PaginationPresenterProtocol,
     override func setupDataSource() {
         super.setupDataSource()
 
-        dataSource.lastItemWillDisplay = lastItemWillDisplay
+        dataSource.lastItemWillDisplay = { [weak self] in
+            self?.lastItemWillDisplay()
+        }
     }
 
     // MARK: - DataSource

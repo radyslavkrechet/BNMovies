@@ -8,11 +8,15 @@
 
 import UIKit
 
+protocol ErrorViewDelegate: class {
+    func tryAgainButtonDidTap()
+}
+
 class ErrorView: View {
     @IBOutlet private(set) weak var imageView: UIImageView!
     @IBOutlet private(set) weak var textLabel: UILabel!
 
-    var tryAgainButtonDidTap: (() -> Void)?
+    weak var delegate: ErrorViewDelegate?
 
     // MARK: - Setup
 
@@ -25,6 +29,6 @@ class ErrorView: View {
     // MARK: - Actions
 
     @IBAction private func tryAgainButtonDidTap(_ sender: UIButton) {
-        tryAgainButtonDidTap?()
+        delegate?.tryAgainButtonDidTap()
     }
 }

@@ -26,7 +26,9 @@ class ListViewController<Presenter: ListPresenterProtocol,
     // MARK: - Setup
 
     func setupDataSource() {
-        dataSource.userDidSelectItem = userDidSelectItem
+        dataSource.userDidSelectItem = { [weak self] item in
+            self?.userDidSelectItem(item)
+        }
     }
 
     // MARK: - DataSource

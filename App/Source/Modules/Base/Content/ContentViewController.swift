@@ -12,7 +12,9 @@ protocol ContentViewProtocol: ViewProtocol {
     func populate(with state: ContentState)
 }
 
-class ContentViewController<Presenter: ContentPresenterProtocol>: ViewController<Presenter>, ContentViewProtocol {
+class ContentViewController<Presenter: ContentPresenterProtocol>: ViewController<Presenter>, ContentViewProtocol,
+    ErrorViewDelegate {
+
     var loadingStateText: String? {
         return nil
     }
@@ -62,12 +64,12 @@ class ContentViewController<Presenter: ContentPresenterProtocol>: ViewController
         case .error(let error):
             let errorView = ErrorView()
             errorView.populate(with: error.localizedDescription, image: errorStateImage)
-            errorView.tryAgainButtonDidTap = tryAgainButtonDidTap
+            errorView.delegate = self
             stateView = errorView
         }
     }
 
-    // MARK: - ErrorView
+    // MARK: - ErrorViewDelegate
 
     func tryAgainButtonDidTap() {
         presenter.tryAgain()
