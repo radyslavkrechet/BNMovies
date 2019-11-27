@@ -23,11 +23,11 @@ class SignInPresenter: SignInPresenterProtocol {
 
     func signIn(with username: String, password: String) {
         view?.populate(with: .loading)
-        signInUseCase.set(username, password: password) { [weak self] result in
+        signInUseCase.execute(with: username, password: password) { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.populate(with: .error(error))
             case .success: self?.view?.userDidSignIn()
             }
-        }.execute()
+        }
     }
 }

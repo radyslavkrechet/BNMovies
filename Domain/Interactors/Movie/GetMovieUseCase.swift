@@ -8,11 +8,15 @@
 
 import Foundation
 
-public protocol GetMovieUseCaseProtocol: Executable {
-    func set(_ id: String, handler: @escaping Handler<Movie>) -> Self
+public protocol GetMovieUseCaseProtocol {
+    func execute(with id: String, handler: @escaping Handler<Movie>)
 }
 
-public class GetMovieUseCase: GetMovieUseCaseProtocol, Workable {
+public class GetMovieUseCase: GetMovieUseCaseProtocol, Executable {
+    lazy var work = {
+        self.movieRepository.getMovie(with: self.id, handler: self.handler)
+    }
+
     private let movieRepository: MovieRepositoryProtocol
     private var id: String!
     private var handler: Handler<Movie>!
@@ -21,13 +25,9 @@ public class GetMovieUseCase: GetMovieUseCaseProtocol, Workable {
         self.movieRepository = movieRepository
     }
 
-    public func set(_ id: String, handler: @escaping Handler<Movie>) -> Self {
+    public func execute(with id: String, handler: @escaping Handler<Movie>) {
         self.id = id
         self.handler = { result in DispatchQueue.main.async { handler(result) } }
-        return self
-    }
-
-    func work() {
-        movieRepository.getMovie(with: id, handler: handler)
+        execute()
     }
 }

@@ -8,27 +8,13 @@
 
 import Foundation
 
-public protocol GetUserUseCaseProtocol: Executable {
-    func set(_ handler: @escaping Handler<User>) -> Self
+public protocol GetUserUseCaseProtocol {
+    func execute(_ handler: @escaping Handler<User>)
 }
 
-public class GetUserUseCase: GetUserUseCaseProtocol, Workable {
-    private let authRepository: AuthRepositoryProtocol
-    private let userRepository: UserRepositoryProtocol
-    private var handler: Handler<User>!
-
-    init(authRepository: AuthRepositoryProtocol, userRepository: UserRepositoryProtocol) {
-        self.authRepository = authRepository
-        self.userRepository = userRepository
-    }
-
-    public func set(_ handler: @escaping Handler<User>) -> Self {
-        self.handler = { result in DispatchQueue.main.async { handler(result) } }
-        return self
-    }
-
-    func work() {
-        authRepository.getSession { [weak self] result in
+public class GetUserUseCase: GetUserUseCaseProtocol, Executable {
+    lazy var work = {
+        self.authRepository.getSession { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .failure(let error): self.handler(.failure(error))
@@ -41,5 +27,19 @@ public class GetUserUseCase: GetUserUseCaseProtocol, Workable {
                 self.userRepository.getUser(with: session.token, handler: self.handler)
             }
         }
+    }
+
+    private let authRepository: AuthRepositoryProtocol
+    private let userRepository: UserRepositoryProtocol
+    private var handler: Handler<User>!
+
+    init(authRepository: AuthRepositoryProtocol, userRepository: UserRepositoryProtocol) {
+        self.authRepository = authRepository
+        self.userRepository = userRepository
+    }
+
+    public func execute(_ handler: @escaping Handler<User>) {
+        self.handler = { result in DispatchQueue.main.async { handler(result) } }
+        execute()
     }
 }

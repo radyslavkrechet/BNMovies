@@ -41,12 +41,12 @@ class DetailsPresenter: DetailsPresenterProtocol {
 
     func markMovieAsFavourite() {
         guard let movie = movie else { return }
-        changeMovieFavouriteStateUseCase.set(movie) { [weak self] result in
+        changeMovieFavouriteStateUseCase.execute(with: movie) { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.presentFavouriteError(error)
             case .success(let movie): self?.process(movie)
             }
-        }.execute()
+        }
     }
 
     private func getMovie() {
@@ -54,12 +54,12 @@ class DetailsPresenter: DetailsPresenterProtocol {
             view?.populate(with: .loading)
         }
 
-        getMovieUseCase.set(id) { [weak self] result in
+        getMovieUseCase.execute(with: id) { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.populate(with: .error(error))
             case .success(let movie): self?.process(movie)
             }
-        }.execute()
+        }
     }
 
     private func process(_ movie: Movie) {

@@ -33,12 +33,12 @@ class SimilarMoviesPresenter: SimilarMoviesPresenterProtocol {
 
     private func getMovies() {
         view?.populate(with: .loading)
-        getSimilarMoviesUseCase.set(id) { [weak self] result in
+        getSimilarMoviesUseCase.execute(with: id) { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.populate(with: .error(error))
             case .success(let movies): self?.process(movies)
             }
-        }.execute()
+        }
     }
 
     private func process(_ movies: [Movie]) {

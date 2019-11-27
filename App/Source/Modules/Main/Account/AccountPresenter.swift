@@ -32,22 +32,22 @@ class AccountPresenter: AccountPresenterProtocol {
     }
 
     func signOut() {
-        signOutUseCase.set { [weak self] result in
+        signOutUseCase.execute { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.presentSignOutError(error)
             case .success: self?.view?.userDidSignOut()
             }
-        }.execute()
+        }
     }
 
     private func getUser() {
         view?.populate(with: .loading)
-        getUserUseCase.set { [weak self] result in
+        getUserUseCase.execute { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.populate(with: .error(error))
             case .success(let user): self?.process(user)
             }
-        }.execute()
+        }
     }
 
     private func process(_ user: User) {

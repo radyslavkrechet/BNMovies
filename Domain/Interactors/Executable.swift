@@ -8,6 +8,15 @@
 
 import Foundation
 
-public protocol Executable: class {
+protocol Executable: class {
+    var work: () -> Void { get }
     func execute()
+}
+
+extension Executable {
+    func execute() {
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.work()
+        }
+    }
 }

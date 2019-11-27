@@ -9,6 +9,11 @@ def swift_lint
   pod 'SwiftLint'
 end
 
+def tests
+  pod 'Quick'
+  pod 'Nimble'
+end
+
 target 'Boilerplate' do
   use_frameworks!
 
@@ -31,6 +36,13 @@ target 'Domain' do
 
   swinject
   swift_lint
+end
+
+target 'DomainTests' do
+  use_frameworks!
+
+  swift_lint
+  tests
 end
 
 target 'Data' do

@@ -51,12 +51,12 @@ class HomePresenter: HomePresenterProtocol {
             view?.populate(with: .loading)
         }
 
-        getMoviesUseCase.set(paginationManager.value) { [weak self] result in
+        getMoviesUseCase.execute(with: paginationManager.value) { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.populate(with: .error(error))
             case .success(let movies): self?.process(movies)
             }
-        }.execute()
+        }
     }
 
     private func process(_ movies: [Movie]) {

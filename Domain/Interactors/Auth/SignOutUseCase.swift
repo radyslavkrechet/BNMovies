@@ -8,11 +8,21 @@
 
 import Foundation
 
-public protocol SignOutUseCaseProtocol: Executable {
-    func set(_ handler: @escaping Handler<Void>) -> Self
+public protocol SignOutUseCaseProtocol {
+    func execute(_ handler: @escaping Handler<Void>)
 }
 
-public class SignOutUseCase: SignOutUseCaseProtocol, Workable {
+public class SignOutUseCase: SignOutUseCaseProtocol, Executable {
+    lazy var work = {
+        self.authRepository.signOut { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .failure: self.handler(result)
+            case .success: self.userRepository.deleteUser(handler: self.handler)
+            }
+        }
+    }
+
     private let authRepository: AuthRepositoryProtocol
     private let userRepository: UserRepositoryProtocol
     private var handler: Handler<Void>!
@@ -22,18 +32,8 @@ public class SignOutUseCase: SignOutUseCaseProtocol, Workable {
         self.userRepository = userRepository
     }
 
-    public func set(_ handler: @escaping Handler<Void>) -> Self {
+    public func execute(_ handler: @escaping Handler<Void>) {
         self.handler = { result in DispatchQueue.main.async { handler(result) } }
-        return self
-    }
-
-    func work() {
-        authRepository.signOut { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .failure: self.handler(result)
-            case .success: self.userRepository.deleteUser(handler: self.handler)
-            }
-        }
+        execute()
     }
 }

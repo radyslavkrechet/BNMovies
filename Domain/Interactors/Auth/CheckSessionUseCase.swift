@@ -8,11 +8,15 @@
 
 import Foundation
 
-public protocol CheckSessionUseCaseProtocol: Executable {
-    func set(_ handler: @escaping Handler<Bool>) -> Self
+public protocol CheckSessionUseCaseProtocol {
+    func execute(_ handler: @escaping Handler<Bool>)
 }
 
-public class CheckSessionUseCase: CheckSessionUseCaseProtocol, Workable {
+public class CheckSessionUseCase: CheckSessionUseCaseProtocol, Executable {
+    lazy var work = {
+        self.authRepository.isSignedIn(handler: self.handler)
+    }
+
     private let authRepository: AuthRepositoryProtocol
     private var handler: Handler<Bool>!
 
@@ -20,12 +24,8 @@ public class CheckSessionUseCase: CheckSessionUseCaseProtocol, Workable {
         self.authRepository = authRepository
     }
 
-    public func set(_ handler: @escaping Handler<Bool>) -> Self {
+    public func execute(_ handler: @escaping Handler<Bool>) {
         self.handler = { result in DispatchQueue.main.async { handler(result) } }
-        return self
-    }
-
-    func work() {
-        authRepository.isSignedIn(handler: handler)
+        execute()
     }
 }

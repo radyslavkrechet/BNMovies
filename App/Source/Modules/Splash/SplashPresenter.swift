@@ -28,11 +28,11 @@ class SplashPresenter: SplashPresenterProtocol {
     }
 
     private func checkSession() {
-        checkSessionUseCase.set { [weak self] result in
+        checkSessionUseCase.execute { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.populate(with: .error(error))
             case .success(let isSignedIn): self?.view?.navigate(isSignedIn)
             }
-        }.execute()
+        }
     }
 }

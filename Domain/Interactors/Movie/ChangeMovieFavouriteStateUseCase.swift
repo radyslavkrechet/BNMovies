@@ -8,11 +8,19 @@
 
 import Foundation
 
-public protocol ChangeMovieFavouriteStateUseCaseProtocol: Executable {
-    func set(_ movie: Movie, handler: @escaping Handler<Movie>) -> Self
+public protocol ChangeMovieFavouriteStateUseCaseProtocol {
+    func execute(with movie: Movie, handler: @escaping Handler<Movie>)
 }
 
-public class ChangeMovieFavouriteStateUseCase: ChangeMovieFavouriteStateUseCaseProtocol, Workable {
+public class ChangeMovieFavouriteStateUseCase: ChangeMovieFavouriteStateUseCaseProtocol, Executable {
+    lazy var work = {
+        let action = self.movie.isFavourite
+            ? self.movieRepository.deleteFromFavourites
+            : self.movieRepository.addToFavourites
+
+        action(self.movie, self.handler)
+    }
+
     private let movieRepository: MovieRepositoryProtocol
     private var movie: Movie!
     private var handler: Handler<Movie>!
@@ -21,14 +29,9 @@ public class ChangeMovieFavouriteStateUseCase: ChangeMovieFavouriteStateUseCaseP
         self.movieRepository = movieRepository
     }
 
-    public func set(_ movie: Movie, handler: @escaping Handler<Movie>) -> Self {
+    public func execute(with movie: Movie, handler: @escaping Handler<Movie>) {
         self.movie = movie
         self.handler = { result in DispatchQueue.main.async { handler(result) } }
-        return self
-    }
-
-    func work() {
-        let action = movie.isFavourite ? movieRepository.deleteFromFavourites : movieRepository.addToFavourites
-        action(movie, handler)
+        execute()
     }
 }

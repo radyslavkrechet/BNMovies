@@ -34,12 +34,12 @@ class FavouritesPresenter: FavouritesPresenterProtocol {
             view?.populate(with: .loading)
         }
 
-        getFavouritesUseCase.set { [weak self] result in
+        getFavouritesUseCase.execute { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.populate(with: .error(error))
             case .success(let movies): self?.process(movies)
             }
-        }.execute()
+        }
     }
 
     private func process(_ movies: [Movie]) {
