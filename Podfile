@@ -52,6 +52,13 @@ target 'Data' do
   swift_lint
 end
 
+target 'DataTests' do
+  use_frameworks!
+
+  swift_lint
+  tests
+end
+
 target 'Net' do
   use_frameworks!
 

@@ -9,9 +9,28 @@
 import Domain
 
 class MovieRepositoryMock: MovieRepositoryProtocol {
-    var settings: MockSettings
-    var addedToFavourites: Movie?
-    var deletedFromFavourites: Movie?
+    struct Settings {
+        var shouldReturnError = false
+    }
+
+    struct Calls {
+        var getMovies = false
+        var getFavourites = false
+        var getMovie = false
+        var getSimilarMovies = false
+        var addToFavourites = false
+        var deleteFromFavourites = false
+    }
+
+    struct Arguments {
+        var page: Int?
+        var id: String?
+        var movie: Movie?
+    }
+
+    var settings = Settings()
+    var calls = Calls()
+    var arguments = Arguments()
 
     private let movieMock = Movie(id: "id",
                                   title: "title",
@@ -24,53 +43,46 @@ class MovieRepositoryMock: MovieRepositoryProtocol {
                                   genres: [Genre(id: "id", name: "name")],
                                   isFavourite: false)
 
-    init(settings: MockSettings) {
-        self.settings = settings
-    }
-
     func getMovies(with page: Int, handler: @escaping Handler<[Movie]>) {
-        switch settings {
-        case .failure: handler(.failure(MockError.force))
-        case .success: handler(.success([movieMock]))
-        }
+        calls.getMovies = true
+        arguments.page = page
+        movies(handler: handler)
     }
 
     func getFavourites(handler: @escaping Handler<[Movie]>) {
-        switch settings {
-        case .failure: handler(.failure(MockError.force))
-        case .success: handler(.success([movieMock]))
-        }
+        calls.getFavourites = true
+        movies(handler: handler)
     }
 
     func getMovie(with id: String, handler: @escaping Handler<Movie>) {
-        switch settings {
-        case .failure: handler(.failure(MockError.force))
-        case .success: handler(.success(movieMock))
-        }
+        calls.getMovie = true
+        arguments.id = id
+        movie(handler: handler)
     }
 
     func getSimilarMovies(_ id: String, handler: @escaping Handler<[Movie]>) {
-        switch settings {
-        case .failure: handler(.failure(MockError.force))
-        case .success: handler(.success([movieMock]))
-        }
+        calls.getSimilarMovies = true
+        arguments.id = id
+        movies(handler: handler)
     }
 
     func addToFavourites(_ movie: Movie, handler: @escaping Handler<Movie>) {
-        addedToFavourites = movie
-
-        switch settings {
-        case .failure: handler(.failure(MockError.force))
-        case .success: handler(.success(movieMock))
-        }
+        calls.addToFavourites = true
+        arguments.movie = movie
+        self.movie(handler: handler)
     }
 
     func deleteFromFavourites(_ movie: Movie, handler: @escaping Handler<Movie>) {
-        deletedFromFavourites = movie
+        calls.deleteFromFavourites = true
+        arguments.movie = movie
+        self.movie(handler: handler)
+    }
 
-        switch settings {
-        case .failure: handler(.failure(MockError.force))
-        case .success: handler(.success(movieMock))
-        }
+    private func movies(handler: @escaping Handler<[Movie]>) {
+        handler(settings.shouldReturnError ? .failure(MockError.force) : .success([]))
+    }
+
+    private func movie(handler: @escaping Handler<Movie>) {
+        handler(settings.shouldReturnError ? .failure(MockError.force) : .success(movieMock))
     }
 }

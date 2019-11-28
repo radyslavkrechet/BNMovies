@@ -14,15 +14,27 @@ import Quick
 class GetFavouritesUseCaseSpec: QuickSpec {
     override func spec() {
         describe("execute") {
+            var getFavouritesUseCase: GetFavouritesUseCase!
+            var movieRepositoryMock: MovieRepositoryMock!
+
+            beforeEach {
+                movieRepositoryMock = MovieRepositoryMock()
+                getFavouritesUseCase = GetFavouritesUseCase(movieRepository: movieRepositoryMock)
+            }
+
             context("movie repository returns error") {
                 it("returns error") {
-                    let movieRepository = MovieRepositoryMock(settings: .failure)
-                    let getFavouritesUseCase = GetFavouritesUseCase(movieRepository: movieRepository)
+                    movieRepositoryMock.settings.shouldReturnError = true
 
-                    getFavouritesUseCase.execute { result in
-                        switch result {
-                        case .failure: pass()
-                        case .success: fail()
+                    waitUntil { done in
+                        getFavouritesUseCase.execute { result in
+                            guard case .failure = result else {
+                                fail()
+                                return
+                            }
+
+                            expect(movieRepositoryMock.calls.getFavourites) == true
+                            done()
                         }
                     }
                 }
@@ -30,13 +42,15 @@ class GetFavouritesUseCaseSpec: QuickSpec {
 
             context("movie repository returns movies") {
                 it("returns movies") {
-                    let movieRepository = MovieRepositoryMock(settings: .success(isTruthy: true))
-                    let getFavouritesUseCase = GetFavouritesUseCase(movieRepository: movieRepository)
+                    waitUntil { done in
+                        getFavouritesUseCase.execute { result in
+                            guard case .success = result else {
+                                fail()
+                                return
+                            }
 
-                    getFavouritesUseCase.execute { result in
-                        switch result {
-                        case .failure: fail()
-                        case .success: pass()
+                            expect(movieRepositoryMock.calls.getFavourites) == true
+                            done()
                         }
                     }
                 }

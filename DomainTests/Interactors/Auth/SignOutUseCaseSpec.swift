@@ -14,16 +14,29 @@ import Quick
 class SignOutUseCaseSpec: QuickSpec {
     override func spec() {
         describe("execute") {
+            var signOutUseCase: SignOutUseCase!
+            var authRepositoryMock: AuthRepositoryMock!
+            var userRepositoryMock: UserRepositoryMock!
+
+            beforeEach {
+                authRepositoryMock = AuthRepositoryMock()
+                userRepositoryMock = UserRepositoryMock()
+                signOutUseCase = SignOutUseCase(authRepository: authRepositoryMock, userRepository: userRepositoryMock)
+            }
+
             context("auth repository returns error") {
                 it("returns error") {
-                    let authRepository = AuthRepositoryMock(settings: .failure)
-                    let userRepository = UserRepositoryMock(settings: .failure)
-                    let signOutUseCase = SignOutUseCase(authRepository: authRepository, userRepository: userRepository)
+                    authRepositoryMock.settings.shouldReturnError = true
 
-                    signOutUseCase.execute { result in
-                        switch result {
-                        case .failure: pass()
-                        case .success: fail()
+                    waitUntil { done in
+                        signOutUseCase.execute { result in
+                            guard case .failure = result else {
+                                fail()
+                                return
+                            }
+
+                            expect(authRepositoryMock.calls.signOut) == true
+                            done()
                         }
                     }
                 }
@@ -31,14 +44,18 @@ class SignOutUseCaseSpec: QuickSpec {
 
             context("user repository returns error") {
                 it("returns error") {
-                    let authRepository = AuthRepositoryMock(settings: .success(isTruthy: true))
-                    let userRepository = UserRepositoryMock(settings: .failure)
-                    let signOutUseCase = SignOutUseCase(authRepository: authRepository, userRepository: userRepository)
+                    userRepositoryMock.settings.shouldReturnError = true
 
-                    signOutUseCase.execute { result in
-                        switch result {
-                        case .failure: pass()
-                        case .success: fail()
+                    waitUntil { done in
+                        signOutUseCase.execute { result in
+                            guard case .failure = result else {
+                                fail()
+                                return
+                            }
+
+                            expect(authRepositoryMock.calls.signOut) == true
+                            expect(userRepositoryMock.calls.deleteUser) == true
+                            done()
                         }
                     }
                 }
@@ -46,14 +63,16 @@ class SignOutUseCaseSpec: QuickSpec {
 
             context("user repository returns void") {
                 it("returns void") {
-                    let authRepository = AuthRepositoryMock(settings: .success(isTruthy: true))
-                    let userRepository = UserRepositoryMock(settings: .success(isTruthy: true))
-                    let signOutUseCase = SignOutUseCase(authRepository: authRepository, userRepository: userRepository)
+                    waitUntil { done in
+                        signOutUseCase.execute { result in
+                            guard case .success = result else {
+                                fail()
+                                return
+                            }
 
-                    signOutUseCase.execute { result in
-                        switch result {
-                        case .failure: fail()
-                        case .success: pass()
+                            expect(authRepositoryMock.calls.signOut) == true
+                            expect(userRepositoryMock.calls.deleteUser) == true
+                            done()
                         }
                     }
                 }

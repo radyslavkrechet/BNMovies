@@ -12,19 +12,31 @@ import Quick
 @testable import Domain
 
 class GetSimilarMoviesUseCaseSpec: QuickSpec {
-    private let id = "id"
-
     override func spec() {
         describe("execute") {
+            let id = "id"
+            var getSimilarMoviesUseCase: GetSimilarMoviesUseCase!
+            var movieRepositoryMock: MovieRepositoryMock!
+
+            beforeEach {
+                movieRepositoryMock = MovieRepositoryMock()
+                getSimilarMoviesUseCase = GetSimilarMoviesUseCase(movieRepository: movieRepositoryMock)
+            }
+
             context("movie repository returns error") {
                 it("returns error") {
-                    let movieRepository = MovieRepositoryMock(settings: .failure)
-                    let getSimilarMoviesUseCase = GetSimilarMoviesUseCase(movieRepository: movieRepository)
+                    movieRepositoryMock.settings.shouldReturnError = true
 
-                    getSimilarMoviesUseCase.execute(with: self.id) { result in
-                        switch result {
-                        case .failure: pass()
-                        case .success: fail()
+                    waitUntil { done in
+                        getSimilarMoviesUseCase.execute(with: id) { result in
+                            guard case .failure = result else {
+                                fail()
+                                return
+                            }
+
+                            expect(movieRepositoryMock.calls.getSimilarMovies) == true
+                            expect(movieRepositoryMock.arguments.id) == id
+                            done()
                         }
                     }
                 }
@@ -32,13 +44,16 @@ class GetSimilarMoviesUseCaseSpec: QuickSpec {
 
             context("movie repository returns movies") {
                 it("returns movies") {
-                    let movieRepository = MovieRepositoryMock(settings: .success(isTruthy: true))
-                    let getSimilarMoviesUseCase = GetSimilarMoviesUseCase(movieRepository: movieRepository)
+                    waitUntil { done in
+                        getSimilarMoviesUseCase.execute(with: id) { result in
+                            guard case .success = result else {
+                                fail()
+                                return
+                            }
 
-                    getSimilarMoviesUseCase.execute(with: self.id) { result in
-                        switch result {
-                        case .failure: fail()
-                        case .success: pass()
+                            expect(movieRepositoryMock.calls.getSimilarMovies) == true
+                            expect(movieRepositoryMock.arguments.id) == id
+                            done()
                         }
                     }
                 }

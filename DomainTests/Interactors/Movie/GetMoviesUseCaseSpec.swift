@@ -12,19 +12,31 @@ import Quick
 @testable import Domain
 
 class GetMoviesUseCaseSpec: QuickSpec {
-    private let page = 0
-
     override func spec() {
         describe("execute") {
+            let page = 0
+            var getMoviesUseCase: GetMoviesUseCase!
+            var movieRepositoryMock: MovieRepositoryMock!
+
+            beforeEach {
+                movieRepositoryMock = MovieRepositoryMock()
+                getMoviesUseCase = GetMoviesUseCase(movieRepository: movieRepositoryMock)
+            }
+
             context("movie repository returns error") {
                 it("returns error") {
-                    let movieRepository = MovieRepositoryMock(settings: .failure)
-                    let getMoviesUseCase = GetMoviesUseCase(movieRepository: movieRepository)
+                    movieRepositoryMock.settings.shouldReturnError = true
 
-                    getMoviesUseCase.execute(with: self.page) { result in
-                        switch result {
-                        case .failure: pass()
-                        case .success: fail()
+                    waitUntil { done in
+                        getMoviesUseCase.execute(with: page) { result in
+                            guard case .failure = result else {
+                                fail()
+                                return
+                            }
+
+                            expect(movieRepositoryMock.calls.getMovies) == true
+                            expect(movieRepositoryMock.arguments.page) == page
+                            done()
                         }
                     }
                 }
@@ -32,13 +44,16 @@ class GetMoviesUseCaseSpec: QuickSpec {
 
             context("movie repository returns movies") {
                 it("returns movies") {
-                    let movieRepository = MovieRepositoryMock(settings: .success(isTruthy: true))
-                    let getMoviesUseCase = GetMoviesUseCase(movieRepository: movieRepository)
+                    waitUntil { done in
+                        getMoviesUseCase.execute(with: page) { result in
+                            guard case .success = result else {
+                                fail()
+                                return
+                            }
 
-                    getMoviesUseCase.execute(with: self.page) { result in
-                        switch result {
-                        case .failure: fail()
-                        case .success: pass()
+                            expect(movieRepositoryMock.calls.getMovies) == true
+                            expect(movieRepositoryMock.arguments.page) == page
+                            done()
                         }
                     }
                 }

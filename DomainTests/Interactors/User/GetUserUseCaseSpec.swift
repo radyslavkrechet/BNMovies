@@ -12,18 +12,32 @@ import Quick
 @testable import Domain
 
 class GetUserUseCaseSpec: QuickSpec {
+    // swiftlint:disable:next function_body_length
     override func spec() {
         describe("execute") {
+            var getUseUseCase: GetUserUseCase!
+            var authRepositoryMock: AuthRepositoryMock!
+            var userRepositoryMock: UserRepositoryMock!
+
+            beforeEach {
+                authRepositoryMock = AuthRepositoryMock()
+                userRepositoryMock = UserRepositoryMock()
+                getUseUseCase = GetUserUseCase(authRepository: authRepositoryMock, userRepository: userRepositoryMock)
+            }
+
             context("auth repository returns error") {
                 it("returns error") {
-                    let authRepository = AuthRepositoryMock(settings: .failure)
-                    let userRepository = UserRepositoryMock(settings: .failure)
-                    let getUseUseCase = GetUserUseCase(authRepository: authRepository, userRepository: userRepository)
+                    authRepositoryMock.settings.shouldReturnError = true
 
-                    getUseUseCase.execute { result in
-                        switch result {
-                        case .failure: pass()
-                        case .success: fail()
+                    waitUntil { done in
+                        getUseUseCase.execute { result in
+                            guard case .failure = result else {
+                                fail()
+                                return
+                            }
+
+                            expect(authRepositoryMock.calls.getSession) == true
+                            done()
                         }
                     }
                 }
@@ -31,14 +45,17 @@ class GetUserUseCaseSpec: QuickSpec {
 
             context("auth repository returns nil") {
                 it("returns error") {
-                    let authRepository = AuthRepositoryMock(settings: .success(isTruthy: false))
-                    let userRepository = UserRepositoryMock(settings: .failure)
-                    let getUseUseCase = GetUserUseCase(authRepository: authRepository, userRepository: userRepository)
+                    authRepositoryMock.settings.shouldReturnNil = true
 
-                    getUseUseCase.execute { result in
-                        switch result {
-                        case .failure: pass()
-                        case .success: fail()
+                    waitUntil { done in
+                        getUseUseCase.execute { result in
+                            guard case .failure = result else {
+                                fail()
+                                return
+                            }
+
+                            expect(authRepositoryMock.calls.getSession) == true
+                            done()
                         }
                     }
                 }
@@ -46,14 +63,18 @@ class GetUserUseCaseSpec: QuickSpec {
 
             context("user repository returns error") {
                 it("returns error") {
-                    let authRepository = AuthRepositoryMock(settings: .success(isTruthy: true))
-                    let userRepository = UserRepositoryMock(settings: .failure)
-                    let getUseUseCase = GetUserUseCase(authRepository: authRepository, userRepository: userRepository)
+                    userRepositoryMock.settings.shouldReturnError = true
 
-                    getUseUseCase.execute { result in
-                        switch result {
-                        case .failure: pass()
-                        case .success: fail()
+                    waitUntil { done in
+                        getUseUseCase.execute { result in
+                            guard case .failure = result else {
+                                fail()
+                                return
+                            }
+
+                            expect(authRepositoryMock.calls.getSession) == true
+                            expect(userRepositoryMock.calls.getUser) == true
+                            done()
                         }
                     }
                 }
@@ -61,14 +82,16 @@ class GetUserUseCaseSpec: QuickSpec {
 
             context("user repository returns user") {
                 it("returns user") {
-                    let authRepository = AuthRepositoryMock(settings: .success(isTruthy: true))
-                    let userRepository = UserRepositoryMock(settings: .success(isTruthy: true))
-                    let getUseUseCase = GetUserUseCase(authRepository: authRepository, userRepository: userRepository)
+                    waitUntil { done in
+                        getUseUseCase.execute { result in
+                            guard case .success = result else {
+                                fail()
+                                return
+                            }
 
-                    getUseUseCase.execute { result in
-                        switch result {
-                        case .failure: fail()
-                        case .success: pass()
+                            expect(authRepositoryMock.calls.getSession) == true
+                            expect(userRepositoryMock.calls.getUser) == true
+                            done()
                         }
                     }
                 }

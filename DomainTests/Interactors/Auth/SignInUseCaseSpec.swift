@@ -12,21 +12,36 @@ import Quick
 @testable import Domain
 
 class SignInUseCaseSpec: QuickSpec {
-    private let username = "username"
-    private let password = "password"
-
+    // swiftlint:disable:next function_body_length
     override func spec() {
         describe("execute") {
+            let username = "username"
+            let password = "password"
+            var signInUseCase: SignInUseCase!
+            var authRepositoryMock: AuthRepositoryMock!
+            var userRepositoryMock: UserRepositoryMock!
+
+            beforeEach {
+                authRepositoryMock = AuthRepositoryMock()
+                userRepositoryMock = UserRepositoryMock()
+                signInUseCase = SignInUseCase(authRepository: authRepositoryMock, userRepository: userRepositoryMock)
+            }
+
             context("auth repository returns error") {
                 it("returns error") {
-                    let authRepository = AuthRepositoryMock(settings: .failure)
-                    let userRepository = UserRepositoryMock(settings: .failure)
-                    let signInUseCase = SignInUseCase(authRepository: authRepository, userRepository: userRepository)
+                    authRepositoryMock.settings.shouldReturnError = true
 
-                    signInUseCase.execute(with: self.username, password: self.password) { result in
-                        switch result {
-                        case .failure: pass()
-                        case .success: fail()
+                    waitUntil { done in
+                        signInUseCase.execute(with: username, password: password) { result in
+                            guard case .failure = result else {
+                                fail()
+                                return
+                            }
+
+                            expect(authRepositoryMock.calls.signIn) == true
+                            expect(authRepositoryMock.arguments.username) == username
+                            expect(authRepositoryMock.arguments.password) == password
+                            done()
                         }
                     }
                 }
@@ -34,14 +49,20 @@ class SignInUseCaseSpec: QuickSpec {
 
             context("user repository returns error") {
                 it("returns error") {
-                    let authRepository = AuthRepositoryMock(settings: .success(isTruthy: true))
-                    let userRepository = UserRepositoryMock(settings: .failure)
-                    let signInUseCase = SignInUseCase(authRepository: authRepository, userRepository: userRepository)
+                    userRepositoryMock.settings.shouldReturnError = true
 
-                    signInUseCase.execute(with: self.username, password: self.password) { result in
-                        switch result {
-                        case .failure: pass()
-                        case .success: fail()
+                    waitUntil { done in
+                        signInUseCase.execute(with: username, password: password) { result in
+                            guard case .failure = result else {
+                                fail()
+                                return
+                            }
+
+                            expect(authRepositoryMock.calls.signIn) == true
+                            expect(authRepositoryMock.arguments.username) == username
+                            expect(authRepositoryMock.arguments.password) == password
+                            expect(userRepositoryMock.calls.getUser) == true
+                            done()
                         }
                     }
                 }
@@ -49,14 +70,18 @@ class SignInUseCaseSpec: QuickSpec {
 
             context("user repository returns user") {
                 it("returns user") {
-                    let authRepository = AuthRepositoryMock(settings: .success(isTruthy: true))
-                    let userRepository = UserRepositoryMock(settings: .success(isTruthy: true))
-                    let signInUseCase = SignInUseCase(authRepository: authRepository, userRepository: userRepository)
+                    waitUntil { done in
+                        signInUseCase.execute(with: username, password: password) { result in
+                            guard case .success = result else {
+                                fail()
+                                return
+                            }
 
-                    signInUseCase.execute(with: self.username, password: self.password) { result in
-                        switch result {
-                        case .failure: fail()
-                        case .success: pass()
+                            expect(authRepositoryMock.calls.signIn) == true
+                            expect(authRepositoryMock.arguments.username) == username
+                            expect(authRepositoryMock.arguments.password) == password
+                            expect(userRepositoryMock.calls.getUser) == true
+                            done()
                         }
                     }
                 }

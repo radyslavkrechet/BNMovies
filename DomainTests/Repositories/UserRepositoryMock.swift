@@ -9,25 +9,27 @@
 import Domain
 
 class UserRepositoryMock: UserRepositoryProtocol {
-    var settings: MockSettings
+    struct Settings {
+        var shouldReturnError = false
+    }
+
+    struct Calls {
+        var getUser = false
+        var deleteUser = false
+    }
+
+    var settings = Settings()
+    var calls = Calls()
 
     private let userMock = User(id: "id", username: "username", name: "name", avatarSource: "avatarSource")
 
-    init(settings: MockSettings) {
-        self.settings = settings
-    }
-
     func getUser(with token: String, handler: @escaping Handler<User>) {
-        switch settings {
-        case .failure: handler(.failure(MockError.force))
-        case .success: handler(.success(userMock))
-        }
+        calls.getUser = true
+        handler(settings.shouldReturnError ? .failure(MockError.force) : .success(userMock))
     }
 
     func deleteUser(handler: @escaping Handler<Void>) {
-        switch settings {
-        case .failure: handler(.failure(MockError.force))
-        case .success: handler(.success(()))
-        }
+        calls.deleteUser = true
+        handler(settings.shouldReturnError ? .failure(MockError.force) : .success(()))
     }
 }

@@ -14,43 +14,63 @@ import Quick
 class CheckSessionUseCaseSpec: QuickSpec {
     override func spec() {
         describe("execute") {
+            var checkSessionUseCase: CheckSessionUseCase!
+            var authRepositoryMock: AuthRepositoryMock!
+
+            beforeEach {
+                authRepositoryMock = AuthRepositoryMock()
+                checkSessionUseCase = CheckSessionUseCase(authRepository: authRepositoryMock)
+            }
+
             context("auth repository returns error") {
                 it("returns error") {
-                    let authRepository = AuthRepositoryMock(settings: .failure)
-                    let checkSessionUseCase = CheckSessionUseCase(authRepository: authRepository)
+                    authRepositoryMock.settings.shouldReturnError = true
 
-                    checkSessionUseCase.execute { result in
-                        switch result {
-                        case .failure: pass()
-                        case .success: fail()
+                    waitUntil { done in
+                        checkSessionUseCase.execute { result in
+                            guard case .failure = result else {
+                                fail()
+                                return
+                            }
+
+                            expect(authRepositoryMock.calls.isSignedIn) == true
+                            done()
                         }
                     }
                 }
             }
 
-            context("auth repository returns nil") {
+            context("auth repository returns false") {
                 it("returns false") {
-                    let authRepository = AuthRepositoryMock(settings: .success(isTruthy: false))
-                    let checkSessionUseCase = CheckSessionUseCase(authRepository: authRepository)
+                    waitUntil { done in
+                        checkSessionUseCase.execute { result in
+                            guard case .success(let isSignedIn) = result else {
+                                fail()
+                                return
+                            }
 
-                    checkSessionUseCase.execute { result in
-                        switch result {
-                        case .failure: fail()
-                        case .success(let isSignedIn): expect(isSignedIn) == false
+                            expect(authRepositoryMock.calls.isSignedIn) == true
+                            expect(isSignedIn) == false
+                            done()
                         }
                     }
                 }
             }
 
-            context("auth repository returns session") {
+            context("auth repository returns true") {
                 it("returns true") {
-                    let authRepository = AuthRepositoryMock(settings: .success(isTruthy: true))
-                    let checkSessionUseCase = CheckSessionUseCase(authRepository: authRepository)
+                    authRepositoryMock.settings.shouldReturnTrue = true
 
-                    checkSessionUseCase.execute { result in
-                        switch result {
-                        case .failure: fail()
-                        case .success(let isSignedIn): expect(isSignedIn) == true
+                    waitUntil { done in
+                        checkSessionUseCase.execute { result in
+                            guard case .success(let isSignedIn) = result else {
+                                fail()
+                                return
+                            }
+
+                            expect(authRepositoryMock.calls.isSignedIn) == true
+                            expect(isSignedIn) == true
+                            done()
                         }
                     }
                 }
