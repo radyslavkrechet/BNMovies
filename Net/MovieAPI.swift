@@ -25,7 +25,7 @@ class MovieAPI: MovieAPIProtocol {
             case .success(let json):
                 do {
                     let response: GetMoviesResponse = try CoderService.decode(json)
-                    let movies = MovieAdapter.toEntity(response)
+                    let movies = MovieAdapter.toEntities(response)
                     handler(.success(movies))
                 } catch {
                     handler(.failure(error))
@@ -59,7 +59,7 @@ class MovieAPI: MovieAPIProtocol {
             case .success(let json):
                 do {
                     let response: GetMoviesResponse = try CoderService.decode(json)
-                    let movies = MovieAdapter.toEntity(response)
+                    let movies = MovieAdapter.toEntities(response)
                     handler(.success(movies))
                 } catch {
                     handler(.failure(error))

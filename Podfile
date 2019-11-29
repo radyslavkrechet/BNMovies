@@ -68,6 +68,13 @@ target 'Net' do
   swift_lint
 end
 
+target 'NetTests' do
+  use_frameworks!
+
+  swift_lint
+  tests
+end
+
 target 'Database' do
   use_frameworks!
 

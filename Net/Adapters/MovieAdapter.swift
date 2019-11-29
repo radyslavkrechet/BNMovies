@@ -15,7 +15,7 @@ private enum TmdbImageSize: String {
 }
 
 enum MovieAdapter {
-    static func toEntity(_ response: GetMoviesResponse) -> [Movie] {
+    static func toEntities(_ response: GetMoviesResponse) -> [Movie] {
         return response.results.map { toEntity($0) }
     }
 
