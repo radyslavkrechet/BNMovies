@@ -23,7 +23,7 @@ class GetSimilarMoviesUseCaseSpec: QuickSpec {
                 getSimilarMoviesUseCase = GetSimilarMoviesUseCase(movieRepository: movieRepositoryMock)
             }
 
-            context("movie repository returns error") {
+            context("movie repository gets similar movies -> error") {
                 it("returns error") {
                     movieRepositoryMock.settings.shouldReturnError = true
 
@@ -42,7 +42,7 @@ class GetSimilarMoviesUseCaseSpec: QuickSpec {
                 }
             }
 
-            context("movie repository returns movies") {
+            context("movie repository gets similar movies -> movies") {
                 it("returns movies") {
                     waitUntil { done in
                         getSimilarMoviesUseCase.execute(with: id) { result in

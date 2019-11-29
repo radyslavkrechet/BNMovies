@@ -22,7 +22,7 @@ class GetFavouritesUseCaseSpec: QuickSpec {
                 getFavouritesUseCase = GetFavouritesUseCase(movieRepository: movieRepositoryMock)
             }
 
-            context("movie repository returns error") {
+            context("movie repository gets favourites -> error") {
                 it("returns error") {
                     movieRepositoryMock.settings.shouldReturnError = true
 
@@ -40,7 +40,7 @@ class GetFavouritesUseCaseSpec: QuickSpec {
                 }
             }
 
-            context("movie repository returns movies") {
+            context("movie repository gets favourites -> movies") {
                 it("returns movies") {
                     waitUntil { done in
                         getFavouritesUseCase.execute { result in

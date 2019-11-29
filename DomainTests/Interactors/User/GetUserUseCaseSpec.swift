@@ -25,7 +25,7 @@ class GetUserUseCaseSpec: QuickSpec {
                 getUseUseCase = GetUserUseCase(authRepository: authRepositoryMock, userRepository: userRepositoryMock)
             }
 
-            context("auth repository returns error") {
+            context("auth repository gets session -> error") {
                 it("returns error") {
                     authRepositoryMock.settings.shouldReturnError = true
 
@@ -43,7 +43,7 @@ class GetUserUseCaseSpec: QuickSpec {
                 }
             }
 
-            context("auth repository returns nil") {
+            context("auth repository gets session -> nil") {
                 it("returns error") {
                     authRepositoryMock.settings.shouldReturnNil = true
 
@@ -61,7 +61,7 @@ class GetUserUseCaseSpec: QuickSpec {
                 }
             }
 
-            context("user repository returns error") {
+            context("auth repository gets session -> session, user repository gets user -> error") {
                 it("returns error") {
                     userRepositoryMock.settings.shouldReturnError = true
 
@@ -80,7 +80,7 @@ class GetUserUseCaseSpec: QuickSpec {
                 }
             }
 
-            context("user repository returns user") {
+            context("auth repository gets session -> session, user repository gets user -> user") {
                 it("returns user") {
                     waitUntil { done in
                         getUseUseCase.execute { result in

@@ -7,6 +7,7 @@
 //
 
 import Domain
+import Mock
 
 class MovieRepositoryMock: MovieRepositoryProtocol {
     struct Settings {
@@ -31,17 +32,6 @@ class MovieRepositoryMock: MovieRepositoryProtocol {
     var settings = Settings()
     var calls = Calls()
     var arguments = Arguments()
-
-    private let movieMock = Movie(id: "id",
-                                  title: "title",
-                                  overview: "overview",
-                                  posterSource: "posterSource",
-                                  backdropSource: "backdropSource",
-                                  runtime: 0,
-                                  releaseDate: Date(),
-                                  userScore: 0,
-                                  genres: [Genre(id: "id", name: "name")],
-                                  isFavourite: false)
 
     func getMovies(with page: Int, handler: @escaping Handler<[Movie]>) {
         calls.getMovies = true
@@ -79,10 +69,10 @@ class MovieRepositoryMock: MovieRepositoryProtocol {
     }
 
     private func movies(handler: @escaping Handler<[Movie]>) {
-        handler(settings.shouldReturnError ? .failure(MockError.force) : .success([]))
+        handler(settings.shouldReturnError ? .failure(Mock.Error.force) : .success([]))
     }
 
     private func movie(handler: @escaping Handler<Movie>) {
-        handler(settings.shouldReturnError ? .failure(MockError.force) : .success(movieMock))
+        handler(settings.shouldReturnError ? .failure(Mock.Error.force) : .success(Mock.movie))
     }
 }

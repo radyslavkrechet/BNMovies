@@ -22,7 +22,7 @@ class CheckSessionUseCaseSpec: QuickSpec {
                 checkSessionUseCase = CheckSessionUseCase(authRepository: authRepositoryMock)
             }
 
-            context("auth repository returns error") {
+            context("auth repository checks session -> error") {
                 it("returns error") {
                     authRepositoryMock.settings.shouldReturnError = true
 
@@ -40,36 +40,16 @@ class CheckSessionUseCaseSpec: QuickSpec {
                 }
             }
 
-            context("auth repository returns false") {
-                it("returns false") {
+            context("auth repository checks session -> bool") {
+                it("returns bool") {
                     waitUntil { done in
                         checkSessionUseCase.execute { result in
-                            guard case .success(let isSignedIn) = result else {
+                            guard case .success = result else {
                                 fail()
                                 return
                             }
 
                             expect(authRepositoryMock.calls.isSignedIn) == true
-                            expect(isSignedIn) == false
-                            done()
-                        }
-                    }
-                }
-            }
-
-            context("auth repository returns true") {
-                it("returns true") {
-                    authRepositoryMock.settings.shouldReturnTrue = true
-
-                    waitUntil { done in
-                        checkSessionUseCase.execute { result in
-                            guard case .success(let isSignedIn) = result else {
-                                fail()
-                                return
-                            }
-
-                            expect(authRepositoryMock.calls.isSignedIn) == true
-                            expect(isSignedIn) == true
                             done()
                         }
                     }

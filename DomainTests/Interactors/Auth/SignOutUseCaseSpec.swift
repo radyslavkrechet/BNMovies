@@ -24,7 +24,7 @@ class SignOutUseCaseSpec: QuickSpec {
                 signOutUseCase = SignOutUseCase(authRepository: authRepositoryMock, userRepository: userRepositoryMock)
             }
 
-            context("auth repository returns error") {
+            context("auth repository signs out -> error") {
                 it("returns error") {
                     authRepositoryMock.settings.shouldReturnError = true
 
@@ -42,7 +42,7 @@ class SignOutUseCaseSpec: QuickSpec {
                 }
             }
 
-            context("user repository returns error") {
+            context("auth repository signs out -> void, user repository deletes user -> error") {
                 it("returns error") {
                     userRepositoryMock.settings.shouldReturnError = true
 
@@ -61,7 +61,7 @@ class SignOutUseCaseSpec: QuickSpec {
                 }
             }
 
-            context("user repository returns void") {
+            context("auth repository signs out -> void, user repository deletes user -> void") {
                 it("returns void") {
                     waitUntil { done in
                         signOutUseCase.execute { result in

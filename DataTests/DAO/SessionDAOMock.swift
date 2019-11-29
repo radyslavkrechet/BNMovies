@@ -1,41 +1,38 @@
 //
-//  AuthRepositoryMock.swift
-//  DomainTests
+//  SessionDAOMock.swift
+//  DataTests
 //
-//  Created by Radyslav Krechet on 26.11.2019.
+//  Created by Radyslav Krechet on 28.11.2019.
 //  Copyright © 2019 Radyslav Krechet. All rights reserved.
 //
 
+import Data
 import Domain
 import Mock
 
-class AuthRepositoryMock: AuthRepositoryProtocol {
+class SessionDAOMock: SessionDAOProtocol {
     struct Settings {
         var shouldReturnError = false
         var shouldReturnNil = false
-        var shouldReturnTrue = false
     }
 
     struct Calls {
-        var signIn = false
+        var set = false
         var getSession = false
-        var isSignedIn = false
-        var signOut = false
+        var deleteSession = false
     }
 
     struct Arguments {
-        var username: String?
-        var password: String?
+        var session: Session?
     }
 
     var settings = Settings()
     var calls = Calls()
     var arguments = Arguments()
 
-    func signIn(with username: String, password: String, handler: @escaping Handler<Session>) {
-        calls.signIn = true
-        arguments.username = username
-        arguments.password = password
+    func set(_ session: Session, handler: @escaping Handler<Session>) {
+        calls.set = true
+        arguments.session = session
         handler(settings.shouldReturnError ? .failure(Mock.Error.force) : .success(Mock.session))
     }
 
@@ -46,13 +43,8 @@ class AuthRepositoryMock: AuthRepositoryProtocol {
             : .success(settings.shouldReturnNil ? nil : Mock.session))
     }
 
-    func isSignedIn(handler: @escaping Handler<Bool>) {
-        calls.isSignedIn = true
-        handler(settings.shouldReturnError ? .failure(Mock.Error.force) : .success(settings.shouldReturnTrue))
-    }
-
-    func signOut(handler: @escaping Handler<Void>) {
-        calls.signOut = true
+    func deleteSession(handler: @escaping Handler<Void>) {
+        calls.deleteSession = true
         handler(settings.shouldReturnError ? .failure(Mock.Error.force) : .success(()))
     }
 }

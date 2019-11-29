@@ -27,7 +27,7 @@ class SignInUseCaseSpec: QuickSpec {
                 signInUseCase = SignInUseCase(authRepository: authRepositoryMock, userRepository: userRepositoryMock)
             }
 
-            context("auth repository returns error") {
+            context("auth repository signs in -> error") {
                 it("returns error") {
                     authRepositoryMock.settings.shouldReturnError = true
 
@@ -47,7 +47,7 @@ class SignInUseCaseSpec: QuickSpec {
                 }
             }
 
-            context("user repository returns error") {
+            context("auth repository signs in -> session, user repository gets user -> error") {
                 it("returns error") {
                     userRepositoryMock.settings.shouldReturnError = true
 
@@ -68,7 +68,7 @@ class SignInUseCaseSpec: QuickSpec {
                 }
             }
 
-            context("user repository returns user") {
+            context("auth repository signs in -> session, user repository gets user -> user") {
                 it("returns user") {
                     waitUntil { done in
                         signInUseCase.execute(with: username, password: password) { result in

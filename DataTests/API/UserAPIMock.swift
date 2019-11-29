@@ -1,22 +1,22 @@
 //
-//  UserRepositoryMock.swift
-//  DomainTests
+//  UserAPIMock.swift
+//  DataTests
 //
-//  Created by Radyslav Krechet on 26.11.2019.
+//  Created by Radyslav Krechet on 28.11.2019.
 //  Copyright © 2019 Radyslav Krechet. All rights reserved.
 //
 
+import Data
 import Domain
 import Mock
 
-class UserRepositoryMock: UserRepositoryProtocol {
+class UserAPIMock: UserAPIProtocol {
     struct Settings {
         var shouldReturnError = false
     }
 
     struct Calls {
         var getUser = false
-        var deleteUser = false
     }
 
     struct Arguments {
@@ -31,10 +31,5 @@ class UserRepositoryMock: UserRepositoryProtocol {
         calls.getUser = true
         arguments.token = token
         handler(settings.shouldReturnError ? .failure(Mock.Error.force) : .success(Mock.user))
-    }
-
-    func deleteUser(handler: @escaping Handler<Void>) {
-        calls.deleteUser = true
-        handler(settings.shouldReturnError ? .failure(Mock.Error.force) : .success(()))
     }
 }

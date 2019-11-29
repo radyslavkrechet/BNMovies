@@ -46,6 +46,13 @@
             BlueprintName = "Domain"
             ReferencedContainer = "container:Boilerplate.xcodeproj">
          </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0BA83122232A664E00D81840"
+            BuildableName = "Data.framework"
+            BlueprintName = "Data"
+            ReferencedContainer = "container:Boilerplate.xcodeproj">
+         </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
          <TestableReference
@@ -56,6 +63,17 @@
                BlueprintIdentifier = "0B8409E7238D583C00084669"
                BuildableName = "DomainTests.xctest"
                BlueprintName = "DomainTests"
+               ReferencedContainer = "container:Boilerplate.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0B339C0D238E96F4009819B9"
+               BuildableName = "DataTests.xctest"
+               BlueprintName = "DataTests"
                ReferencedContainer = "container:Boilerplate.xcodeproj">
             </BuildableReference>
          </TestableReference>

@@ -24,79 +24,81 @@ class ChangeMovieFavouriteStateUseCaseSpec: QuickSpec {
                     movieRepositoryMock)
             }
 
-            context("movie is favourite, movie repository returns error") {
-                it("returns error") {
-                    let movie = self.movie(isFavourite: true)
-                    movieRepositoryMock.settings.shouldReturnError = true
+            context("movie is favourite") {
+                let movie = self.movie(isFavourite: true)
 
-                    waitUntil { done in
-                        changeMovieFavouriteStateUseCase.execute(with: movie) { result in
-                            guard case .failure = result else {
-                                fail()
-                                return
+                context("movie repository deletes from favourites -> error") {
+                    it("returns error") {
+                        movieRepositoryMock.settings.shouldReturnError = true
+
+                        waitUntil { done in
+                            changeMovieFavouriteStateUseCase.execute(with: movie) { result in
+                                guard case .failure = result else {
+                                    fail()
+                                    return
+                                }
+
+                                expect(movieRepositoryMock.calls.deleteFromFavourites) == true
+                                expect(movieRepositoryMock.arguments.movie).toNot(beNil())
+                                done()
                             }
+                        }
+                    }
+                }
 
-                            expect(movieRepositoryMock.calls.deleteFromFavourites) == true
-                            expect(movieRepositoryMock.arguments.movie).toNot(beNil())
-                            done()
+                context("movie repository deletes from favourites -> movie") {
+                    it("returns movie") {
+                        waitUntil { done in
+                            changeMovieFavouriteStateUseCase.execute(with: movie) { result in
+                                guard case .success = result else {
+                                    fail()
+                                    return
+                                }
+
+                                expect(movieRepositoryMock.calls.deleteFromFavourites) == true
+                                expect(movieRepositoryMock.arguments.movie).toNot(beNil())
+                                done()
+                            }
                         }
                     }
                 }
             }
 
-            context("movie is favourite, movie repository returns movie") {
-                it("returns movie") {
-                    let movie = self.movie(isFavourite: true)
+            context("movie is not favourite") {
+                let movie = self.movie(isFavourite: false)
 
-                    waitUntil { done in
-                        changeMovieFavouriteStateUseCase.execute(with: movie) { result in
-                            guard case .success = result else {
-                                fail()
-                                return
+                context("movie repository adds to favourites -> error") {
+                    it("returns error") {
+                        movieRepositoryMock.settings.shouldReturnError = true
+
+                        waitUntil { done in
+                            changeMovieFavouriteStateUseCase.execute(with: movie) { result in
+                                guard case .failure = result else {
+                                    fail()
+                                    return
+                                }
+
+                                expect(movieRepositoryMock.calls.addToFavourites) == true
+                                expect(movieRepositoryMock.arguments.movie).toNot(beNil())
+                                done()
                             }
-
-                            expect(movieRepositoryMock.calls.deleteFromFavourites) == true
-                            expect(movieRepositoryMock.arguments.movie).toNot(beNil())
-                            done()
                         }
                     }
                 }
-            }
 
-            context("movie is not favourite, movie repository returns error") {
-                it("returns error") {
-                    let movie = self.movie(isFavourite: false)
-                    movieRepositoryMock.settings.shouldReturnError = true
+                context("movie repository adds to favourites -> movie") {
+                    it("returns movie") {
+                        waitUntil { done in
+                            changeMovieFavouriteStateUseCase.execute(with: movie) { result in
+                                guard case .success = result else {
+                                    fail()
+                                    return
+                                }
 
-                    waitUntil { done in
-                        changeMovieFavouriteStateUseCase.execute(with: movie) { result in
-                            guard case .failure = result else {
-                                fail()
-                                return
+                                expect(movieRepositoryMock.calls.addToFavourites) == true
+                                expect(movieRepositoryMock.arguments.movie).toNot(beNil())
+                                done()
                             }
-
-                            expect(movieRepositoryMock.calls.addToFavourites) == true
-                            expect(movieRepositoryMock.arguments.movie).toNot(beNil())
-                            done()
-                        }
-                    }
-                }
-            }
-
-            context("movie is not favourite, movie repository returns movie") {
-                it("returns movie") {
-                    let movie = self.movie(isFavourite: false)
-
-                    waitUntil { done in
-                        changeMovieFavouriteStateUseCase.execute(with: movie) { result in
-                            guard case .success = result else {
-                                fail()
-                                return
-                            }
-
-                            expect(movieRepositoryMock.calls.addToFavourites) == true
-                            expect(movieRepositoryMock.arguments.movie).toNot(beNil())
-                            done()
                         }
                     }
                 }
@@ -110,10 +112,7 @@ class ChangeMovieFavouriteStateUseCaseSpec: QuickSpec {
                      overview: "overview",
                      posterSource: "posterSource",
                      backdropSource: "backdropSource",
-                     runtime: 0,
-                     releaseDate: Date(),
                      userScore: 0,
-                     genres: [Genre(id: "id", name: "name")],
                      isFavourite: isFavourite)
     }
 }
