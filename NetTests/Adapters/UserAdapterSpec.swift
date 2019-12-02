@@ -19,7 +19,7 @@ class UserAdapterSpec: QuickSpec {
                 let gravatar = GravatarResponse(hash: "hash")
                 let avatar = AvatarResponse(gravatar: gravatar)
                 let response = GetUserResponse(id: 0, username: "username", name: "name", avatar: avatar)
-                let user = UserAdapter.toEntity(response)
+                let user = UserAdapter().toEntity(response)
 
                 expect(user.id) == String(response.id)
                 expect(user.username) == response.username

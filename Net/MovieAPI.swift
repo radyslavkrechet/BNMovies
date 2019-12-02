@@ -12,9 +12,16 @@ import Foundation
 
 class MovieAPI: MovieAPIProtocol {
     private let networkManager: NetworkManagerProtocol
+    private let coderService: CoderServiceProtocol
+    private let movieAdapter: MovieAdapterProtocol
 
-    init(networkManager: NetworkManagerProtocol = NetworkManager()) {
+    init(networkManager: NetworkManagerProtocol = NetworkManager(),
+         coderService: CoderServiceProtocol = CoderService(),
+         movieAdapter: MovieAdapterProtocol = MovieAdapter()) {
+
         self.networkManager = networkManager
+        self.coderService = coderService
+        self.movieAdapter = movieAdapter
     }
 
     func getMovies(with page: Int, handler: @escaping Handler<[Movie]>) {
@@ -24,8 +31,8 @@ class MovieAPI: MovieAPIProtocol {
             case .failure(let error): handler(.failure(error))
             case .success(let json):
                 do {
-                    let response: GetMoviesResponse = try CoderService.decode(json)
-                    let movies = MovieAdapter.toEntities(response)
+                    let response: GetMoviesResponse = try self.coderService.decode(json)
+                    let movies = self.movieAdapter.toEntities(response)
                     handler(.success(movies))
                 } catch {
                     handler(.failure(error))
@@ -41,8 +48,8 @@ class MovieAPI: MovieAPIProtocol {
             case .failure(let error): handler(.failure(error))
             case .success(let json):
                 do {
-                    let response: GetMovieResponse = try CoderService.decode(json)
-                    let movie = MovieAdapter.toEntity(response)
+                    let response: GetMovieResponse = try self.coderService.decode(json)
+                    let movie = self.movieAdapter.toEntity(response)
                     handler(.success(movie))
                 } catch {
                     handler(.failure(error))
@@ -58,8 +65,8 @@ class MovieAPI: MovieAPIProtocol {
             case .failure(let error): handler(.failure(error))
             case .success(let json):
                 do {
-                    let response: GetMoviesResponse = try CoderService.decode(json)
-                    let movies = MovieAdapter.toEntities(response)
+                    let response: GetMoviesResponse = try self.coderService.decode(json)
+                    let movies = self.movieAdapter.toEntities(response)
                     handler(.success(movies))
                 } catch {
                     handler(.failure(error))

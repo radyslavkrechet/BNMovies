@@ -13,17 +13,17 @@ import Quick
 
 class SignOutUseCaseSpec: QuickSpec {
     override func spec() {
+        var signOutUseCase: SignOutUseCase!
+        var authRepositoryMock: AuthRepositoryMock!
+        var userRepositoryMock: UserRepositoryMock!
+
+        beforeEach {
+            authRepositoryMock = AuthRepositoryMock()
+            userRepositoryMock = UserRepositoryMock()
+            signOutUseCase = SignOutUseCase(authRepository: authRepositoryMock, userRepository: userRepositoryMock)
+        }
+
         describe("execute") {
-            var signOutUseCase: SignOutUseCase!
-            var authRepositoryMock: AuthRepositoryMock!
-            var userRepositoryMock: UserRepositoryMock!
-
-            beforeEach {
-                authRepositoryMock = AuthRepositoryMock()
-                userRepositoryMock = UserRepositoryMock()
-                signOutUseCase = SignOutUseCase(authRepository: authRepositoryMock, userRepository: userRepositoryMock)
-            }
-
             context("auth repository signs out -> error") {
                 it("returns error") {
                     authRepositoryMock.settings.shouldReturnError = true
@@ -42,37 +42,39 @@ class SignOutUseCaseSpec: QuickSpec {
                 }
             }
 
-            context("auth repository signs out -> void, user repository deletes user -> error") {
-                it("returns error") {
-                    userRepositoryMock.settings.shouldReturnError = true
+            context("auth repository signs out -> void") {
+                context("user repository deletes user -> error") {
+                    it("returns error") {
+                        userRepositoryMock.settings.shouldReturnError = true
 
-                    waitUntil { done in
-                        signOutUseCase.execute { result in
-                            guard case .failure = result else {
-                                fail()
-                                return
+                        waitUntil { done in
+                            signOutUseCase.execute { result in
+                                guard case .failure = result else {
+                                    fail()
+                                    return
+                                }
+
+                                expect(authRepositoryMock.calls.signOut) == true
+                                expect(userRepositoryMock.calls.deleteUser) == true
+                                done()
                             }
-
-                            expect(authRepositoryMock.calls.signOut) == true
-                            expect(userRepositoryMock.calls.deleteUser) == true
-                            done()
                         }
                     }
                 }
-            }
 
-            context("auth repository signs out -> void, user repository deletes user -> void") {
-                it("returns void") {
-                    waitUntil { done in
-                        signOutUseCase.execute { result in
-                            guard case .success = result else {
-                                fail()
-                                return
+                context("user repository deletes user -> void") {
+                    it("returns void") {
+                        waitUntil { done in
+                            signOutUseCase.execute { result in
+                                guard case .success = result else {
+                                    fail()
+                                    return
+                                }
+
+                                expect(authRepositoryMock.calls.signOut) == true
+                                expect(userRepositoryMock.calls.deleteUser) == true
+                                done()
                             }
-
-                            expect(authRepositoryMock.calls.signOut) == true
-                            expect(userRepositoryMock.calls.deleteUser) == true
-                            done()
                         }
                     }
                 }

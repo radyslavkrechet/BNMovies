@@ -14,17 +14,17 @@ import Quick
 class GetUserUseCaseSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
     override func spec() {
+        var getUseUseCase: GetUserUseCase!
+        var authRepositoryMock: AuthRepositoryMock!
+        var userRepositoryMock: UserRepositoryMock!
+
+        beforeEach {
+            authRepositoryMock = AuthRepositoryMock()
+            userRepositoryMock = UserRepositoryMock()
+            getUseUseCase = GetUserUseCase(authRepository: authRepositoryMock, userRepository: userRepositoryMock)
+        }
+
         describe("execute") {
-            var getUseUseCase: GetUserUseCase!
-            var authRepositoryMock: AuthRepositoryMock!
-            var userRepositoryMock: UserRepositoryMock!
-
-            beforeEach {
-                authRepositoryMock = AuthRepositoryMock()
-                userRepositoryMock = UserRepositoryMock()
-                getUseUseCase = GetUserUseCase(authRepository: authRepositoryMock, userRepository: userRepositoryMock)
-            }
-
             context("auth repository gets session -> error") {
                 it("returns error") {
                     authRepositoryMock.settings.shouldReturnError = true
@@ -61,37 +61,39 @@ class GetUserUseCaseSpec: QuickSpec {
                 }
             }
 
-            context("auth repository gets session -> session, user repository gets user -> error") {
-                it("returns error") {
-                    userRepositoryMock.settings.shouldReturnError = true
+            context("auth repository gets session -> session") {
+                context("user repository gets user -> error") {
+                    it("returns error") {
+                        userRepositoryMock.settings.shouldReturnError = true
 
-                    waitUntil { done in
-                        getUseUseCase.execute { result in
-                            guard case .failure = result else {
-                                fail()
-                                return
+                        waitUntil { done in
+                            getUseUseCase.execute { result in
+                                guard case .failure = result else {
+                                    fail()
+                                    return
+                                }
+
+                                expect(authRepositoryMock.calls.getSession) == true
+                                expect(userRepositoryMock.calls.getUser) == true
+                                done()
                             }
-
-                            expect(authRepositoryMock.calls.getSession) == true
-                            expect(userRepositoryMock.calls.getUser) == true
-                            done()
                         }
                     }
                 }
-            }
 
-            context("auth repository gets session -> session, user repository gets user -> user") {
-                it("returns user") {
-                    waitUntil { done in
-                        getUseUseCase.execute { result in
-                            guard case .success = result else {
-                                fail()
-                                return
+                context("user repository gets user -> user") {
+                    it("returns user") {
+                        waitUntil { done in
+                            getUseUseCase.execute { result in
+                                guard case .success = result else {
+                                    fail()
+                                    return
+                                }
+
+                                expect(authRepositoryMock.calls.getSession) == true
+                                expect(userRepositoryMock.calls.getUser) == true
+                                done()
                             }
-
-                            expect(authRepositoryMock.calls.getSession) == true
-                            expect(userRepositoryMock.calls.getUser) == true
-                            done()
                         }
                     }
                 }

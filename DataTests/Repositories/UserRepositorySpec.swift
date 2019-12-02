@@ -42,80 +42,33 @@ class UserRepositorySpec: QuickSpec {
                 }
             }
 
-            context("user dao gets user -> nil, user api gets user -> error") {
-                it("returns error") {
-                    userDAOMock.settings.shouldReturnNil = true
-                    userAPIMock.settings.shouldReturnError = true
+            context("user dao gets user -> nil") {
+                context("user api gets user -> error") {
+                    it("returns error") {
+                        userDAOMock.settings.shouldReturnNil = true
+                        userAPIMock.settings.shouldReturnError = true
 
-                    userRepository.getUser(with: token) { result in
-                        guard case .failure = result else {
-                            fail()
-                            return
-                        }
-
-                        expect(userDAOMock.calls.getUser) == true
-                        expect(userAPIMock.calls.getUser) == true
-                        expect(userAPIMock.arguments.token) == token
-                    }
-                }
-            }
-
-            context("user dao gets user -> nil, user api gets user -> user, user dao sets user -> error") {
-                it("returns error") {
-                    userDAOMock.settings.shouldReturnError = true
-                    userDAOMock.settings.errorIndex = 1
-                    userDAOMock.settings.shouldReturnNil = true
-
-                    userRepository.getUser(with: token) { result in
-                        guard case .failure = result else {
-                            fail()
-                            return
-                        }
-
-                        expect(userDAOMock.calls.getUser) == true
-                        expect(userAPIMock.calls.getUser) == true
-                        expect(userAPIMock.arguments.token) == token
-                        expect(userDAOMock.calls.set) == true
-                        expect(userDAOMock.arguments.user).toNot(beNil())
-                    }
-                }
-            }
-
-            context("user dao gets user -> nil, user api gets user -> user, user dao sets user -> user") {
-                it("returns user") {
-                    userDAOMock.settings.shouldReturnNil = true
-
-                    userRepository.getUser(with: token) { result in
-                        guard case .success = result else {
-                            fail()
-                            return
-                        }
-
-                        expect(userDAOMock.calls.getUser) == true
-                        expect(userAPIMock.calls.getUser) == true
-                        expect(userAPIMock.arguments.token) == token
-                        expect(userDAOMock.calls.set) == true
-                        expect(userDAOMock.arguments.user).toNot(beNil())
-                    }
-                }
-            }
-
-            context("user dao gets user -> user, user api gets user -> error") {
-                it("returns user, returns error") {
-                    userAPIMock.settings.shouldReturnError = true
-
-                    waitUntil { done in
-                        var returnIndex = 0
                         userRepository.getUser(with: token) { result in
-                            if returnIndex == 0 {
-                                guard case .success = result else {
-                                    fail()
-                                    return
-                                }
+                            guard case .failure = result else {
+                                fail()
+                                return
+                            }
 
-                                expect(userDAOMock.calls.getUser) == true
-                                returnIndex += 1
-                            } else {
+                            expect(userDAOMock.calls.getUser) == true
+                            expect(userAPIMock.calls.getUser) == true
+                            expect(userAPIMock.arguments.token) == token
+                        }
+                    }
+                }
+
+                context("user api gets user -> user") {
+                    context("user dao sets user -> error") {
+                        it("returns error") {
+                            userDAOMock.settings.shouldReturnError = true
+                            userDAOMock.settings.errorIndex = 1
+                            userDAOMock.settings.shouldReturnNil = true
+
+                            userRepository.getUser(with: token) { result in
                                 guard case .failure = result else {
                                     fail()
                                     return
@@ -123,62 +76,18 @@ class UserRepositorySpec: QuickSpec {
 
                                 expect(userDAOMock.calls.getUser) == true
                                 expect(userAPIMock.calls.getUser) == true
-                                expect(userAPIMock.arguments.token).toNot(beNil())
-                                done()
-                            }
-                        }
-                    }
-                }
-            }
-
-            context("user dao gets user -> user, user api gets user -> user, user dao sets user -> error") {
-                it("returns user, returns error") {
-                    userDAOMock.settings.shouldReturnError = true
-                    userDAOMock.settings.errorIndex = 1
-
-                    waitUntil { done in
-                        var returnIndex = 0
-                        userRepository.getUser(with: token) { result in
-                            if returnIndex == 0 {
-                                guard case .success = result else {
-                                    fail()
-                                    return
-                                }
-
-                                expect(userDAOMock.calls.getUser) == true
-                                returnIndex += 1
-                            } else {
-                                guard case .failure = result else {
-                                    fail()
-                                    return
-                                }
-
-                                expect(userDAOMock.calls.getUser) == true
-                                expect(userAPIMock.calls.getUser) == true
-                                expect(userAPIMock.arguments.token).toNot(beNil())
+                                expect(userAPIMock.arguments.token) == token
                                 expect(userDAOMock.calls.set) == true
                                 expect(userDAOMock.arguments.user).toNot(beNil())
-                                done()
                             }
                         }
                     }
-                }
-            }
 
-            context("user dao gets user -> user, user api gets user -> user, user dao sets user -> user") {
-                it("returns user, returns user") {
-                    waitUntil { done in
-                        var returnIndex = 0
-                        userRepository.getUser(with: token) { result in
-                            if returnIndex == 0 {
-                                guard case .success = result else {
-                                    fail()
-                                    return
-                                }
+                    context("user dao sets user -> user") {
+                        it("returns user") {
+                            userDAOMock.settings.shouldReturnNil = true
 
-                                expect(userDAOMock.calls.getUser) == true
-                                returnIndex += 1
-                            } else {
+                            userRepository.getUser(with: token) { result in
                                 guard case .success = result else {
                                     fail()
                                     return
@@ -186,10 +95,109 @@ class UserRepositorySpec: QuickSpec {
 
                                 expect(userDAOMock.calls.getUser) == true
                                 expect(userAPIMock.calls.getUser) == true
-                                expect(userAPIMock.arguments.token).toNot(beNil())
+                                expect(userAPIMock.arguments.token) == token
                                 expect(userDAOMock.calls.set) == true
                                 expect(userDAOMock.arguments.user).toNot(beNil())
-                                done()
+                            }
+                        }
+                    }
+                }
+            }
+
+            context("user dao gets user -> user") {
+                context("user api gets user -> error") {
+                    it("returns user, returns error") {
+                        userAPIMock.settings.shouldReturnError = true
+
+                        waitUntil { done in
+                            var returnIndex = 0
+                            userRepository.getUser(with: token) { result in
+                                if returnIndex == 0 {
+                                    guard case .success = result else {
+                                        fail()
+                                        return
+                                    }
+
+                                    expect(userDAOMock.calls.getUser) == true
+                                    returnIndex += 1
+                                } else {
+                                    guard case .failure = result else {
+                                        fail()
+                                        return
+                                    }
+
+                                    expect(userDAOMock.calls.getUser) == true
+                                    expect(userAPIMock.calls.getUser) == true
+                                    expect(userAPIMock.arguments.token).toNot(beNil())
+                                    done()
+                                }
+                            }
+                        }
+                    }
+                }
+
+                context("user api gets user -> user") {
+                    context("user dao sets user -> error") {
+                        it("returns user, returns error") {
+                            userDAOMock.settings.shouldReturnError = true
+                            userDAOMock.settings.errorIndex = 1
+
+                            waitUntil { done in
+                                var returnIndex = 0
+                                userRepository.getUser(with: token) { result in
+                                    if returnIndex == 0 {
+                                        guard case .success = result else {
+                                            fail()
+                                            return
+                                        }
+
+                                        expect(userDAOMock.calls.getUser) == true
+                                        returnIndex += 1
+                                    } else {
+                                        guard case .failure = result else {
+                                            fail()
+                                            return
+                                        }
+
+                                        expect(userDAOMock.calls.getUser) == true
+                                        expect(userAPIMock.calls.getUser) == true
+                                        expect(userAPIMock.arguments.token).toNot(beNil())
+                                        expect(userDAOMock.calls.set) == true
+                                        expect(userDAOMock.arguments.user).toNot(beNil())
+                                        done()
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    context("user dao sets user -> user") {
+                        it("returns user, returns user") {
+                            waitUntil { done in
+                                var returnIndex = 0
+                                userRepository.getUser(with: token) { result in
+                                    if returnIndex == 0 {
+                                        guard case .success = result else {
+                                            fail()
+                                            return
+                                        }
+
+                                        expect(userDAOMock.calls.getUser) == true
+                                        returnIndex += 1
+                                    } else {
+                                        guard case .success = result else {
+                                            fail()
+                                            return
+                                        }
+
+                                        expect(userDAOMock.calls.getUser) == true
+                                        expect(userAPIMock.calls.getUser) == true
+                                        expect(userAPIMock.arguments.token).toNot(beNil())
+                                        expect(userDAOMock.calls.set) == true
+                                        expect(userDAOMock.arguments.user).toNot(beNil())
+                                        done()
+                                    }
+                                }
                             }
                         }
                     }

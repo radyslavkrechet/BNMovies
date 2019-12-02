@@ -8,8 +8,13 @@
 
 import Alamofire
 
-enum CoderService {
-    static func encode<Body: Encodable>(_ body: Body) throws -> Parameters {
+protocol CoderServiceProtocol {
+    func encode<Body: Encodable>(_ body: Body) throws -> Parameters
+    func decode<Response: Decodable>(_ json: Any) throws -> Response
+}
+
+struct CoderService: CoderServiceProtocol {
+    func encode<Body: Encodable>(_ body: Body) throws -> Parameters {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
 
@@ -21,7 +26,7 @@ enum CoderService {
         }
     }
 
-    static func decode<Response: Decodable>(_ json: Any) throws -> Response {
+    func decode<Response: Decodable>(_ json: Any) throws -> Response {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
 

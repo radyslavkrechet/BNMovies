@@ -13,11 +13,14 @@ import Quick
 
 class AuthRouterSpec: QuickSpec {
     override func spec() {
-        describe("as url request") {
-            let baseURL = "http://api.com"
-            let apiKey = "apiKey"
-            AuthRouter.serverSettings = ServerSettings(baseURL: baseURL, apiKey: apiKey)
+        let baseURL = "http://api.com"
+        let apiKey = "apiKey"
 
+        beforeEach {
+            AuthRouter.serverSettings = ServerSettings(baseURL: baseURL, apiKey: apiKey)
+        }
+
+        describe("as url request") {
             context("case is create token") {
                 it("returns url request") {
                     let request = AuthRouter.createToken

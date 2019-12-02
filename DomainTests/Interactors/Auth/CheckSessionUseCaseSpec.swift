@@ -13,15 +13,15 @@ import Quick
 
 class CheckSessionUseCaseSpec: QuickSpec {
     override func spec() {
+        var checkSessionUseCase: CheckSessionUseCase!
+        var authRepositoryMock: AuthRepositoryMock!
+
+        beforeEach {
+            authRepositoryMock = AuthRepositoryMock()
+            checkSessionUseCase = CheckSessionUseCase(authRepository: authRepositoryMock)
+        }
+
         describe("execute") {
-            var checkSessionUseCase: CheckSessionUseCase!
-            var authRepositoryMock: AuthRepositoryMock!
-
-            beforeEach {
-                authRepositoryMock = AuthRepositoryMock()
-                checkSessionUseCase = CheckSessionUseCase(authRepository: authRepositoryMock)
-            }
-
             context("auth repository checks session -> error") {
                 it("returns error") {
                     authRepositoryMock.settings.shouldReturnError = true

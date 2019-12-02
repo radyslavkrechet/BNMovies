@@ -13,15 +13,15 @@ import Quick
 
 class GetFavouritesUseCaseSpec: QuickSpec {
     override func spec() {
+        var getFavouritesUseCase: GetFavouritesUseCase!
+        var movieRepositoryMock: MovieRepositoryMock!
+
+        beforeEach {
+            movieRepositoryMock = MovieRepositoryMock()
+            getFavouritesUseCase = GetFavouritesUseCase(movieRepository: movieRepositoryMock)
+        }
+
         describe("execute") {
-            var getFavouritesUseCase: GetFavouritesUseCase!
-            var movieRepositoryMock: MovieRepositoryMock!
-
-            beforeEach {
-                movieRepositoryMock = MovieRepositoryMock()
-                getFavouritesUseCase = GetFavouritesUseCase(movieRepository: movieRepositoryMock)
-            }
-
             context("movie repository gets favourites -> error") {
                 it("returns error") {
                     movieRepositoryMock.settings.shouldReturnError = true

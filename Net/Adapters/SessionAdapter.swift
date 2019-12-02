@@ -8,8 +8,12 @@
 
 import Domain
 
-enum SessionAdapter {
-    static func toEntity(_ response: CreateSessionResponse) -> Session {
+protocol SessionAdapterProtocol {
+    func toEntity(_ response: CreateSessionResponse) -> Session
+}
+
+struct SessionAdapter: SessionAdapterProtocol {
+    func toEntity(_ response: CreateSessionResponse) -> Session {
         return Session(token: response.sessionId)
     }
 }

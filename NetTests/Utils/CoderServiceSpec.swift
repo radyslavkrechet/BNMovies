@@ -13,24 +13,30 @@ import Quick
 
 class CoderServiceSpec: QuickSpec {
     override func spec() {
+        var coderService: CoderService!
+
+        beforeEach {
+            coderService = CoderService()
+        }
+
         describe("encode") {
             context("encode is valid") {
                 it("returns parameters") {
                     let body = Container(storedValue: 2.3)
 
                     expect {
-                        let parameters = try CoderService.encode(body) as? [String: Double]
+                        let parameters = try coderService.encode(body) as? [String: Double]
                         return parameters
                     } == ["stored_value": 2.3]
                 }
             }
 
-            context("encode is valid") {
+            context("encode is invalid") {
                 it("throws error") {
                     let body = Container(storedValue: Double.infinity)
 
                     expect {
-                        let parameters = try CoderService.encode(body)
+                        let parameters = try coderService.encode(body)
                         return parameters
                     }.to(throwError())
                 }
@@ -43,7 +49,7 @@ class CoderServiceSpec: QuickSpec {
                     let json = ["stored_value": 2.3]
 
                     expect {
-                        let response: Container = try CoderService.decode(json)
+                        let response: Container = try coderService.decode(json)
                         return response.storedValue
                     } == json["stored_value"]
                 }
@@ -54,7 +60,7 @@ class CoderServiceSpec: QuickSpec {
                     let json = ["key": "value"]
 
                     expect {
-                        let response: Container = try CoderService.decode(json)
+                        let response: Container = try coderService.decode(json)
                         return response
                     }.to(throwError())
                 }

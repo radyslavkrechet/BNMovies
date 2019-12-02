@@ -8,7 +8,16 @@
 
 import Data
 import Domain
-import Mock
+
+private enum Mock {
+    enum Error: Swift.Error {
+        case force
+    }
+
+    static var session: Session {
+        Session(token: "token")
+    }
+}
 
 class AuthAPIMock: AuthAPIProtocol {
     struct Settings {

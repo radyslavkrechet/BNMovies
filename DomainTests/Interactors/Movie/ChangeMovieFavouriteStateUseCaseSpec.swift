@@ -14,16 +14,16 @@ import Quick
 class ChangeMovieFavouriteStateUseCaseSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
     override func spec() {
+        var changeMovieFavouriteStateUseCase: ChangeMovieFavouriteStateUseCase!
+        var movieRepositoryMock: MovieRepositoryMock!
+
+        beforeEach {
+            movieRepositoryMock = MovieRepositoryMock()
+            changeMovieFavouriteStateUseCase = ChangeMovieFavouriteStateUseCase(movieRepository:
+                movieRepositoryMock)
+        }
+
         describe("execute") {
-            var changeMovieFavouriteStateUseCase: ChangeMovieFavouriteStateUseCase!
-            var movieRepositoryMock: MovieRepositoryMock!
-
-            beforeEach {
-                movieRepositoryMock = MovieRepositoryMock()
-                changeMovieFavouriteStateUseCase = ChangeMovieFavouriteStateUseCase(movieRepository:
-                    movieRepositoryMock)
-            }
-
             context("movie is favourite") {
                 let movie = self.movie(isFavourite: true)
 

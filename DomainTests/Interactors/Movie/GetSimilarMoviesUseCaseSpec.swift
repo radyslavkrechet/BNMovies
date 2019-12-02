@@ -13,16 +13,16 @@ import Quick
 
 class GetSimilarMoviesUseCaseSpec: QuickSpec {
     override func spec() {
+        let id = "id"
+        var getSimilarMoviesUseCase: GetSimilarMoviesUseCase!
+        var movieRepositoryMock: MovieRepositoryMock!
+
+        beforeEach {
+            movieRepositoryMock = MovieRepositoryMock()
+            getSimilarMoviesUseCase = GetSimilarMoviesUseCase(movieRepository: movieRepositoryMock)
+        }
+
         describe("execute") {
-            let id = "id"
-            var getSimilarMoviesUseCase: GetSimilarMoviesUseCase!
-            var movieRepositoryMock: MovieRepositoryMock!
-
-            beforeEach {
-                movieRepositoryMock = MovieRepositoryMock()
-                getSimilarMoviesUseCase = GetSimilarMoviesUseCase(movieRepository: movieRepositoryMock)
-            }
-
             context("movie repository gets similar movies -> error") {
                 it("returns error") {
                     movieRepositoryMock.settings.shouldReturnError = true

@@ -36,13 +36,12 @@ target 'Domain' do
 
   swinject
   swift_lint
-end
 
-target 'DomainTests' do
-  use_frameworks!
+  target 'DomainTests' do
+    use_frameworks!
 
-  swift_lint
-  tests
+    tests
+  end
 end
 
 target 'Data' do
@@ -50,13 +49,12 @@ target 'Data' do
 
   swinject
   swift_lint
-end
 
-target 'DataTests' do
-  use_frameworks!
+  target 'DataTests' do
+    use_frameworks!
 
-  swift_lint
-  tests
+    tests
+  end
 end
 
 target 'Net' do
@@ -66,13 +64,12 @@ target 'Net' do
 
   swinject
   swift_lint
-end
 
-target 'NetTests' do
-  use_frameworks!
+  target 'NetTests' do
+    use_frameworks!
 
-  swift_lint
-  tests
+    tests
+  end
 end
 
 target 'Database' do

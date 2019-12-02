@@ -13,11 +13,14 @@ import Quick
 
 class MovieRouterSpec: QuickSpec {
     override func spec() {
-        describe("as url request") {
-            let baseURL = "http://api.com"
-            let apiKey = "apiKey"
-            MovieRouter.serverSettings = ServerSettings(baseURL: baseURL, apiKey: apiKey)
+        let baseURL = "http://api.com"
+        let apiKey = "apiKey"
 
+        beforeEach {
+            MovieRouter.serverSettings = ServerSettings(baseURL: baseURL, apiKey: apiKey)
+        }
+
+        describe("as url request") {
             context("case is get movies") {
                 it("returns url request") {
                     let page = 0

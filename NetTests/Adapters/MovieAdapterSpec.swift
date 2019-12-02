@@ -15,6 +15,14 @@ import Domain
 class MovieAdapterSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
     override func spec() {
+        var movieAdapter: MovieAdapter!
+        var genreAdapterMock: GenreAdapterMock!
+
+        beforeEach {
+            genreAdapterMock = GenreAdapterMock()
+            movieAdapter = MovieAdapter(genreAdapter: genreAdapterMock)
+        }
+
         describe("to entities") {
             it("returns movies") {
                 let results = [GetMovieResponse(id: 0,
@@ -28,7 +36,7 @@ class MovieAdapterSpec: QuickSpec {
                                                 genres: nil)]
 
                 let response = GetMoviesResponse(results: results)
-                let movies = MovieAdapter.toEntities(response)
+                let movies = movieAdapter.toEntities(response)
 
                 expect(movies.count) == response.results.count
             }
@@ -47,7 +55,7 @@ class MovieAdapterSpec: QuickSpec {
                                                     voteAverage: 7.5,
                                                     genres: nil)
 
-                    let movie = MovieAdapter.toEntity(response)
+                    let movie = movieAdapter.toEntity(response)
 
                     expect(movie.id) == String(response.id)
                     expect(movie.title) == response.title
@@ -59,6 +67,8 @@ class MovieAdapterSpec: QuickSpec {
                     expect(movie.userScore) == 75
                     expect(movie.genres).to(beEmpty())
                     expect(movie.isFavourite) == false
+
+                    expect(genreAdapterMock.calls.toEntity) == false
                 }
             }
 
@@ -75,7 +85,7 @@ class MovieAdapterSpec: QuickSpec {
                                                     voteAverage: 7.5,
                                                     genres: [GenreResponse(id: 0, name: "name")])
 
-                    let movie = MovieAdapter.toEntity(response)
+                    let movie = movieAdapter.toEntity(response)
 
                     let formatter = DateFormatter()
                     formatter.dateFormat = "yyyy-MM-dd"
@@ -91,6 +101,8 @@ class MovieAdapterSpec: QuickSpec {
                     expect(movie.userScore) == 75
                     expect(movie.genres.count) == response.genres!.count
                     expect(movie.isFavourite) == false
+
+                    expect(genreAdapterMock.calls.toEntity) == true
                 }
             }
         }

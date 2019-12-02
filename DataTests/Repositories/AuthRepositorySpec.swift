@@ -45,38 +45,40 @@ class AuthRepositorySpec: QuickSpec {
                 }
             }
 
-            context("auth api signs in -> session, session dao sets session -> error") {
-                it("returns error") {
-                    sessionDAOMock.settings.shouldReturnError = true
+            context("auth api signs in -> session") {
+                context("session dao sets session -> error") {
+                    it("returns error") {
+                        sessionDAOMock.settings.shouldReturnError = true
 
-                    authRepository.signIn(with: username, password: password) { result in
-                        guard case .failure = result else {
-                            fail()
-                            return
+                        authRepository.signIn(with: username, password: password) { result in
+                            guard case .failure = result else {
+                                fail()
+                                return
+                            }
+
+                            expect(authAPIMock.calls.signIn) == true
+                            expect(authAPIMock.arguments.username) == username
+                            expect(authAPIMock.arguments.password) == password
+                            expect(sessionDAOMock.calls.set) == true
+                            expect(sessionDAOMock.arguments.session).toNot(beNil())
                         }
-
-                        expect(authAPIMock.calls.signIn) == true
-                        expect(authAPIMock.arguments.username) == username
-                        expect(authAPIMock.arguments.password) == password
-                        expect(sessionDAOMock.calls.set) == true
-                        expect(sessionDAOMock.arguments.session).toNot(beNil())
                     }
                 }
-            }
 
-            context("auth api signs in -> session, session dao sets session -> session") {
-                it("returns session") {
-                    authRepository.signIn(with: username, password: password) { result in
-                        guard case .success = result else {
-                            fail()
-                            return
+                context("session dao sets session -> session") {
+                    it("returns session") {
+                        authRepository.signIn(with: username, password: password) { result in
+                            guard case .success = result else {
+                                fail()
+                                return
+                            }
+
+                            expect(authAPIMock.calls.signIn) == true
+                            expect(authAPIMock.arguments.username) == username
+                            expect(authAPIMock.arguments.password) == password
+                            expect(sessionDAOMock.calls.set) == true
+                            expect(sessionDAOMock.arguments.session).toNot(beNil())
                         }
-
-                        expect(authAPIMock.calls.signIn) == true
-                        expect(authAPIMock.arguments.username) == username
-                        expect(authAPIMock.arguments.password) == password
-                        expect(sessionDAOMock.calls.set) == true
-                        expect(sessionDAOMock.arguments.session).toNot(beNil())
                     }
                 }
             }

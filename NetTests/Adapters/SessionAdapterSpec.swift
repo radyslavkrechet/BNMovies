@@ -17,7 +17,7 @@ class SessionAdapterSpec: QuickSpec {
         describe("to entity") {
             it("returns session") {
                 let response = CreateSessionResponse(sessionId: "id")
-                let session = SessionAdapter.toEntity(response)
+                let session = SessionAdapter().toEntity(response)
 
                 expect(session.token) == response.sessionId
             }

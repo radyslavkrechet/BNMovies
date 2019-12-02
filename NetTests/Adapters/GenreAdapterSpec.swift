@@ -17,7 +17,7 @@ class GenreAdapterSpec: QuickSpec {
         describe("to entity") {
             it("returns genre") {
                 let response = GenreResponse(id: 0, name: "name")
-                let genre = GenreAdapter.toEntity(response)
+                let genre = GenreAdapter().toEntity(response)
 
                 expect(genre.id) == String(response.id)
                 expect(genre.name) == response.name

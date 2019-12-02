@@ -13,16 +13,16 @@ import Quick
 
 class GetMoviesUseCaseSpec: QuickSpec {
     override func spec() {
+        let page = 0
+        var getMoviesUseCase: GetMoviesUseCase!
+        var movieRepositoryMock: MovieRepositoryMock!
+
+        beforeEach {
+            movieRepositoryMock = MovieRepositoryMock()
+            getMoviesUseCase = GetMoviesUseCase(movieRepository: movieRepositoryMock)
+        }
+
         describe("execute") {
-            let page = 0
-            var getMoviesUseCase: GetMoviesUseCase!
-            var movieRepositoryMock: MovieRepositoryMock!
-
-            beforeEach {
-                movieRepositoryMock = MovieRepositoryMock()
-                getMoviesUseCase = GetMoviesUseCase(movieRepository: movieRepositoryMock)
-            }
-
             context("movie repository gets movies -> error") {
                 it("returns error") {
                     movieRepositoryMock.settings.shouldReturnError = true

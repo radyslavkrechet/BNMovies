@@ -7,7 +7,33 @@
 //
 
 import Domain
-import Mock
+
+private enum Mock {
+    enum Error: Swift.Error {
+        case force
+    }
+
+    static var movies: [Movie] {
+        []
+    }
+
+    static var movie: Movie {
+        Movie(id: "id",
+              title: "title",
+              overview: "overview",
+              posterSource: "posterSource",
+              backdropSource: "backdropSource",
+              runtime: 0,
+              releaseDate: Date(),
+              userScore: 0,
+              genres: [genre],
+              isFavourite: false)
+    }
+
+    static var genre: Genre {
+        Genre(id: "id", name: "name")
+    }
+}
 
 class MovieRepositoryMock: MovieRepositoryProtocol {
     struct Settings {
@@ -69,7 +95,7 @@ class MovieRepositoryMock: MovieRepositoryProtocol {
     }
 
     private func movies(handler: @escaping Handler<[Movie]>) {
-        handler(settings.shouldReturnError ? .failure(Mock.Error.force) : .success([]))
+        handler(settings.shouldReturnError ? .failure(Mock.Error.force) : .success(Mock.movies))
     }
 
     private func movie(handler: @escaping Handler<Movie>) {

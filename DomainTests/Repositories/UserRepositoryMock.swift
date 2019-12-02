@@ -7,7 +7,16 @@
 //
 
 import Domain
-import Mock
+
+private enum Mock {
+    enum Error: Swift.Error {
+        case force
+    }
+
+    static var user: User {
+        User(id: "id", username: "username", name: "name", avatarSource: "avatarSource")
+    }
+}
 
 class UserRepositoryMock: UserRepositoryProtocol {
     struct Settings {
@@ -19,17 +28,11 @@ class UserRepositoryMock: UserRepositoryProtocol {
         var deleteUser = false
     }
 
-    struct Arguments {
-        var token: String?
-    }
-
     var settings = Settings()
     var calls = Calls()
-    var arguments = Arguments()
 
     func getUser(with token: String, handler: @escaping Handler<User>) {
         calls.getUser = true
-        arguments.token = token
         handler(settings.shouldReturnError ? .failure(Mock.Error.force) : .success(Mock.user))
     }
 
