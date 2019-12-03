@@ -8,18 +8,24 @@
 
 import Domain
 
-enum UserAdapter {
-    static func fromStorage(_ entity: UserEntity) -> User {
+protocol UserAdapterProtocol {
+    func fromStorage(_ entity: UserEntity) -> User
+    func toStorage(_ user: User, _ entity: UserEntity) -> UserEntity
+}
+
+struct UserAdapter: UserAdapterProtocol {
+    func fromStorage(_ entity: UserEntity) -> User {
         return User(id: entity.id.value,
                     username: entity.username.value,
                     name: entity.name.value,
                     avatarSource: entity.avatarSource.value)
     }
 
-    static func toStorage(_ user: User, _ entity: UserEntity) {
-        entity.id.value = user.id
-        entity.username.value = user.username
-        entity.name.value = user.name
-        entity.avatarSource.value = user.avatarSource
+    func toStorage(_ object: User, _ entity: UserEntity) -> UserEntity {
+        entity.id.value = object.id
+        entity.username.value = object.username
+        entity.name.value = object.name
+        entity.avatarSource.value = object.avatarSource
+        return entity
     }
 }

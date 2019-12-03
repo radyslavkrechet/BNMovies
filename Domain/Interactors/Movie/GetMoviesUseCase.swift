@@ -13,7 +13,8 @@ public protocol GetMoviesUseCaseProtocol {
 }
 
 public class GetMoviesUseCase: GetMoviesUseCaseProtocol, Executable {
-    lazy var work = {
+    lazy var work = { [weak self] in
+        guard let self = self else { return }
         self.movieRepository.getMovies(with: self.page, handler: self.handler)
     }
 

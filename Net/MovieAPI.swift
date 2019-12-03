@@ -15,9 +15,9 @@ class MovieAPI: MovieAPIProtocol {
     private let coderService: CoderServiceProtocol
     private let movieAdapter: MovieAdapterProtocol
 
-    init(networkManager: NetworkManagerProtocol = NetworkManager(),
-         coderService: CoderServiceProtocol = CoderService(),
-         movieAdapter: MovieAdapterProtocol = MovieAdapter()) {
+    init(networkManager: NetworkManagerProtocol,
+         coderService: CoderServiceProtocol,
+         movieAdapter: MovieAdapterProtocol) {
 
         self.networkManager = networkManager
         self.coderService = coderService

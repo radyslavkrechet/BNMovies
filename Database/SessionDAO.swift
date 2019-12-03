@@ -10,54 +10,44 @@ import Domain
 import Data
 import CoreStore
 
-class SessionDAO: SessionDAOProtocol {
-    private let dataStack: DataStack
+class SessionDAO<DatabaseManager: DatabaseManagerProtocol>: SessionDAOProtocol
+    where DatabaseManager.Entity == SessionEntity, DatabaseManager.Object == Session {
 
-    init(dataStack: DataStack = CoreStoreDefaults.dataStack) {
-        self.dataStack = dataStack
+    private let databaseManager: DatabaseManager
+    private let sessionAdapter: SessionAdapterProtocol
+
+    init(databaseManager: DatabaseManager, sessionAdapter: SessionAdapterProtocol) {
+        self.databaseManager = databaseManager
+        self.sessionAdapter = sessionAdapter
     }
 
     func set(_ session: Session, handler: @escaping Handler<Session>) {
-        dataStack.perform(asynchronous: { transaction in
-            let from = From<SessionEntity>()
-            let into = Into<SessionEntity>()
-            let entity = try transaction.fetchOne(from) ?? transaction.create(into)
-            SessionAdapter.toStorage(session, entity)
-        }, completionOnGlobal: { result in
+        let adapter: (Session, SessionEntity) -> SessionEntity = { object, entity in
+            return self.sessionAdapter.toStorage(object, entity)
+        }
+
+        databaseManager.set(object: session, adapter: adapter) { result in
             switch result {
             case .failure(let error): handler(.failure(error))
-            case .success: handler(.success(session))
+            case .success: handler(.success((session)))
             }
-        })
+        }
     }
 
     func getSession(handler: @escaping Handler<Session?>) {
-        dataStack.perform(asynchronous: { transaction -> Session? in
-            let from = From<SessionEntity>()
-            let entity = try transaction.fetchOne(from)
+        let adapter: (SessionEntity) -> Session = { entity in
+            return self.sessionAdapter.fromStorage(entity)
+        }
 
-            var session: Session?
-            if let entity = entity {
-                session = SessionAdapter.fromStorage(entity)
-            }
-            return session
-        }, completionOnGlobal: { result in
-            switch result {
-            case .failure(let error): handler(.failure(error))
-            case .success(let session): handler(.success(session))
-            }
-        })
+        databaseManager.getFirst(adapter: adapter, handler: handler)
     }
 
     func deleteSession(handler: @escaping Handler<Void>) {
-        dataStack.perform(asynchronous: { transaction in
-            let from = From<SessionEntity>()
-            try transaction.deleteAll(from)
-        }, completionOnGlobal: { result in
+        databaseManager.deleteAll { result in
             switch result {
             case .failure(let error): handler(.failure(error))
             case .success: handler(.success(()))
             }
-        })
+        }
     }
 }

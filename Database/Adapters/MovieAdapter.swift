@@ -8,8 +8,19 @@
 
 import Domain
 
-enum MovieAdapter {
-    static func fromStorage(_ entity: MovieEntity) -> Movie {
+protocol MovieAdapterProtocol {
+    func fromStorage(_ entity: MovieEntity) -> Movie
+    func toStorage(_ movie: Movie, _ entity: MovieEntity, _ genreEntities: [GenreEntity]) -> MovieEntity
+}
+
+struct MovieAdapter: MovieAdapterProtocol {
+    private let genreAdapter: GenreAdapterProtocol
+
+    init(genreAdapter: GenreAdapterProtocol = GenreAdapter()) {
+        self.genreAdapter = genreAdapter
+    }
+
+    func fromStorage(_ entity: MovieEntity) -> Movie {
         return Movie(id: entity.id.value,
                      title: entity.title.value,
                      overview: entity.overview.value,
@@ -18,20 +29,21 @@ enum MovieAdapter {
                      runtime: entity.runtime.value,
                      releaseDate: entity.releaseDate.value,
                      userScore: entity.userScore.value,
-                     genres: entity.genres.map { GenreAdapter.fromStorage($0) },
+                     genres: entity.genres.map { genreAdapter.fromStorage($0) },
                      isFavourite: entity.isFavourite.value)
     }
 
-    static func toStorage(_ movie: Movie, _ genreEntities: [GenreEntity], _ entity: MovieEntity) {
-        entity.id.value = movie.id
-        entity.title.value = movie.title
-        entity.overview.value = movie.overview
-        entity.posterSource.value = movie.posterSource
-        entity.backdropSource.value = movie.backdropSource
-        entity.runtime.value = movie.runtime
-        entity.releaseDate.value = movie.releaseDate
-        entity.userScore.value = movie.userScore
+    func toStorage(_ object: Movie, _ entity: MovieEntity, _ genreEntities: [GenreEntity]) -> MovieEntity {
+        entity.id.value = object.id
+        entity.title.value = object.title
+        entity.overview.value = object.overview
+        entity.posterSource.value = object.posterSource
+        entity.backdropSource.value = object.backdropSource
+        entity.runtime.value = object.runtime
+        entity.releaseDate.value = object.releaseDate
+        entity.userScore.value = object.userScore
         entity.genres.value = genreEntities
-        entity.isFavourite.value = movie.isFavourite
+        entity.isFavourite.value = object.isFavourite
+        return entity
     }
 }

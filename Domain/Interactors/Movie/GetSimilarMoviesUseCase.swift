@@ -13,7 +13,8 @@ public protocol GetSimilarMoviesUseCaseProtocol {
 }
 
 public class GetSimilarMoviesUseCase: GetSimilarMoviesUseCaseProtocol, Executable {
-    lazy var work = {
+    lazy var work = { [weak self] in
+        guard let self = self else { return }
         self.movieRepository.getSimilarMovies(self.id, handler: self.handler)
     }
 

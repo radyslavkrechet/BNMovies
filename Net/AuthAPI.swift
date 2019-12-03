@@ -12,7 +12,7 @@ import Data
 class AuthAPI: AuthAPIProtocol {
     private let signInAPI: SignInAPIProtocol
 
-    init(signInAPI: SignInAPIProtocol = SignInAPI()) {
+    init(signInAPI: SignInAPIProtocol) {
         self.signInAPI = signInAPI
     }
 

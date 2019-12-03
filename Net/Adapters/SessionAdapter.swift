@@ -14,6 +14,6 @@ protocol SessionAdapterProtocol {
 
 struct SessionAdapter: SessionAdapterProtocol {
     func toEntity(_ response: CreateSessionResponse) -> Session {
-        return Session(token: response.sessionId)
+        return Session(id: response.sessionId, token: response.sessionId)
     }
 }

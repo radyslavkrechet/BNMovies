@@ -8,14 +8,16 @@
 
 import Foundation
 
-public struct Session {
+public struct Session: Identifiable {
     enum Error: Swift.Error {
         case noValue
     }
 
+    public let id: String
     public let token: String
 
-    public init(token: String) {
+    public init(id: String, token: String) {
+        self.id = id
         self.token = token
     }
 }

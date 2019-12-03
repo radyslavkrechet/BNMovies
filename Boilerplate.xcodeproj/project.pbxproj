@@ -139,6 +139,8 @@
 		0B8C5037239512880056CF0D /* SignInAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C5036239512880056CF0D /* SignInAPI.swift */; };
 		0B8C50392395147A0056CF0D /* SignInAPIMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C50382395147A0056CF0D /* SignInAPIMock.swift */; };
 		0B8C503B239515C30056CF0D /* AuthAPISpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C503A239515C30056CF0D /* AuthAPISpec.swift */; };
+		0B8C503D239544720056CF0D /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C503C239544720056CF0D /* DatabaseManager.swift */; };
+		0B8C503F23964DCA0056CF0D /* GenreDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C503E23964DCA0056CF0D /* GenreDAO.swift */; };
 		0B977272238BC7C400B73BAE /* ServerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B977271238BC7C400B73BAE /* ServerSettings.swift */; };
 		0B977274238BCB9700B73BAE /* RouterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B977273238BCB9700B73BAE /* RouterService.swift */; };
 		0BA8308E232A470000D81840 /* UIWindow+Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA8308D232A470000D81840 /* UIWindow+Motion.swift */; };
@@ -475,6 +477,8 @@
 		0B8C5036239512880056CF0D /* SignInAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAPI.swift; sourceTree = "<group>"; };
 		0B8C50382395147A0056CF0D /* SignInAPIMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInAPIMock.swift; sourceTree = "<group>"; };
 		0B8C503A239515C30056CF0D /* AuthAPISpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPISpec.swift; sourceTree = "<group>"; };
+		0B8C503C239544720056CF0D /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		0B8C503E23964DCA0056CF0D /* GenreDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreDAO.swift; sourceTree = "<group>"; };
 		0B977271238BC7C400B73BAE /* ServerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSettings.swift; sourceTree = "<group>"; };
 		0B977273238BCB9700B73BAE /* RouterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterService.swift; sourceTree = "<group>"; };
 		0BA8308D232A470000D81840 /* UIWindow+Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Motion.swift"; sourceTree = "<group>"; };
@@ -804,7 +808,7 @@
 			isa = PBXGroup;
 			children = (
 				0BE7D83B230ACA510003A02E /* Adapters */,
-				0BE7D8BA230AD6850003A02E /* Entities */,
+				0BE7D8BA230AD6850003A02E /* Models */,
 				0B6326E5231D132E00B08D6F /* Routers */,
 				0B6326E2231D0DED00B08D6F /* Utils */,
 				0B52EEDE232B83AF004939FE /* Net.h */,
@@ -1033,6 +1037,7 @@
 			isa = PBXGroup;
 			children = (
 				0B632709231E33FE00B08D6F /* DatabaseService.swift */,
+				0B8C503C239544720056CF0D /* DatabaseManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1201,7 +1206,7 @@
 		0BA8310F232A664700D81840 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				0BE7D835230AC9EB0003A02E /* Entities */,
+				0BE7D835230AC9EB0003A02E /* DTOs */,
 				0BE7D836230AC9F60003A02E /* Interactors */,
 				0BE7D837230ACA070003A02E /* Repositories */,
 				0BA83110232A664700D81840 /* Domain.h */,
@@ -1235,6 +1240,7 @@
 				0B6326852315B40100B08D6F /* SessionDAO.swift */,
 				0B6326872315B41A00B08D6F /* UserDAO.swift */,
 				0B6326892315B42F00B08D6F /* MovieDAO.swift */,
+				0B8C503E23964DCA0056CF0D /* GenreDAO.swift */,
 				0BB1B196232A688A00CB8FCD /* Info.plist */,
 			);
 			path = Database;
@@ -1275,7 +1281,7 @@
 			path = Foundation;
 			sourceTree = "<group>";
 		};
-		0BE7D835230AC9EB0003A02E /* Entities */ = {
+		0BE7D835230AC9EB0003A02E /* DTOs */ = {
 			isa = PBXGroup;
 			children = (
 				0B63262D230EB92400B08D6F /* Handler.swift */,
@@ -1285,7 +1291,7 @@
 				0B632631230EBB9A00B08D6F /* Movie.swift */,
 				0B204A672321200600CE54BB /* Genre.swift */,
 			);
-			path = Entities;
+			path = DTOs;
 			sourceTree = "<group>";
 		};
 		0BE7D836230AC9F60003A02E /* Interactors */ = {
@@ -1410,14 +1416,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		0BE7D8BA230AD6850003A02E /* Entities */ = {
+		0BE7D8BA230AD6850003A02E /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				0BE7D8CA230BC0110003A02E /* Requests */,
 				0BE7D8CB230BC0180003A02E /* Responses */,
 				0B977271238BC7C400B73BAE /* ServerSettings.swift */,
 			);
-			path = Entities;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		0BE7D8CA230BC0110003A02E /* Requests */ = {
@@ -2348,6 +2354,7 @@
 			files = (
 				0BB1B1B1232A6BED00CB8FCD /* UserEntity.swift in Sources */,
 				0BB1B1A3232A6AE000CB8FCD /* SessionDAO.swift in Sources */,
+				0B8C503D239544720056CF0D /* DatabaseManager.swift in Sources */,
 				0BB1B1B3232A6BED00CB8FCD /* GenreEntity.swift in Sources */,
 				0BB1B1A5232A6AE000CB8FCD /* UserDAO.swift in Sources */,
 				0BB1B1AD232A6BE900CB8FCD /* UserAdapter.swift in Sources */,
@@ -2359,6 +2366,7 @@
 				0BB1B1B0232A6BED00CB8FCD /* SessionEntity.swift in Sources */,
 				0BB1B1B2232A6BED00CB8FCD /* MovieEntity.swift in Sources */,
 				0BB1B1A4232A6AE000CB8FCD /* MovieDAO.swift in Sources */,
+				0B8C503F23964DCA0056CF0D /* GenreDAO.swift in Sources */,
 				0BB1B1AC232A6BE900CB8FCD /* SessionAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

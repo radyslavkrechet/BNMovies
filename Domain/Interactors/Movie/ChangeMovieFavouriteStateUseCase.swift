@@ -13,7 +13,9 @@ public protocol ChangeMovieFavouriteStateUseCaseProtocol {
 }
 
 public class ChangeMovieFavouriteStateUseCase: ChangeMovieFavouriteStateUseCaseProtocol, Executable {
-    lazy var work = {
+    lazy var work = { [weak self] in
+        guard let self = self else { return }
+
         let action = self.movie.isFavourite
             ? self.movieRepository.deleteFromFavourites
             : self.movieRepository.addToFavourites

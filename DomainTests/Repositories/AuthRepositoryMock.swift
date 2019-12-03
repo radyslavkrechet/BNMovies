@@ -14,7 +14,7 @@ private enum Mock {
     }
 
     static var session: Session {
-        Session(token: "token")
+        Session(id: "id", token: "token")
     }
 }
 

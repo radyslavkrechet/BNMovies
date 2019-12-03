@@ -21,9 +21,9 @@ class SignInAPI: SignInAPIProtocol {
     private let coderService: CoderServiceProtocol
     private let sessionAdapter: SessionAdapterProtocol
 
-    init(networkManager: NetworkManagerProtocol = NetworkManager(),
-         coderService: CoderServiceProtocol = CoderService(),
-         sessionAdapter: SessionAdapterProtocol = SessionAdapter()) {
+    init(networkManager: NetworkManagerProtocol,
+         coderService: CoderServiceProtocol,
+         sessionAdapter: SessionAdapterProtocol) {
 
         self.networkManager = networkManager
         self.coderService = coderService

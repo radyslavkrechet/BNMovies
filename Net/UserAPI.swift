@@ -15,9 +15,9 @@ class UserAPI: UserAPIProtocol {
     private let coderService: CoderServiceProtocol
     private let userAdapter: UserAdapterProtocol
 
-    init(networkManager: NetworkManagerProtocol = NetworkManager(),
-         coderService: CoderServiceProtocol = CoderService(),
-         userAdapter: UserAdapterProtocol = UserAdapter()) {
+    init(networkManager: NetworkManagerProtocol,
+         coderService: CoderServiceProtocol,
+         userAdapter: UserAdapterProtocol) {
 
         self.networkManager = networkManager
         self.coderService = coderService

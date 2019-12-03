@@ -8,12 +8,19 @@
 
 import Domain
 
-enum SessionAdapter {
-    static func fromStorage(_ entity: SessionEntity) -> Session {
-        return Session(token: entity.token.value)
+protocol SessionAdapterProtocol {
+    func fromStorage(_ entity: SessionEntity) -> Session
+    func toStorage(_ session: Session, _ entity: SessionEntity) -> SessionEntity
+}
+
+struct SessionAdapter: SessionAdapterProtocol {
+    func fromStorage(_ entity: SessionEntity) -> Session {
+        return Session(id: entity.id.value, token: entity.token.value)
     }
 
-    static func toStorage(_ session: Session, _ entity: SessionEntity) {
-        entity.token.value = session.token
+    func toStorage(_ object: Session, _ entity: SessionEntity) -> SessionEntity {
+        entity.id.value = object.id
+        entity.token.value = object.token
+        return entity
     }
 }

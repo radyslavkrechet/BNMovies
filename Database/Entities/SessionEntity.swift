@@ -9,5 +9,6 @@
 import CoreStore
 
 class SessionEntity: CoreStoreObject {
+    let id = Value.Required<String>("id", initial: "")
     let token = Value.Required<String>("token", initial: "")
 }

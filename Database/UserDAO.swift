@@ -8,56 +8,45 @@
 
 import Domain
 import Data
-import CoreStore
 
-class UserDAO: UserDAOProtocol {
-    private let dataStack: DataStack
+class UserDAO<DatabaseManager: DatabaseManagerProtocol>: UserDAOProtocol
+    where DatabaseManager.Entity == UserEntity, DatabaseManager.Object == User {
 
-    init(dataStack: DataStack = CoreStoreDefaults.dataStack) {
-        self.dataStack = dataStack
+    private let databaseManager: DatabaseManager
+    private let userAdapter: UserAdapterProtocol
+
+    init(databaseManager: DatabaseManager, userAdapter: UserAdapterProtocol) {
+        self.databaseManager = databaseManager
+        self.userAdapter = userAdapter
     }
 
     func set(_ user: User, handler: @escaping Handler<User>) {
-        dataStack.perform(asynchronous: { transaction in
-            let from = From<UserEntity>()
-            let into = Into<UserEntity>()
-            let entity = try transaction.fetchOne(from) ?? transaction.create(into)
-            UserAdapter.toStorage(user, entity)
-        }, completionOnGlobal: { result in
+        let adapter: (User, UserEntity) -> UserEntity = { object, entity in
+            return self.userAdapter.toStorage(object, entity)
+        }
+
+        databaseManager.set(object: user, adapter: adapter) { result in
             switch result {
             case .failure(let error): handler(.failure(error))
-            case .success: handler(.success(user))
+            case .success: handler(.success((user)))
             }
-        })
+        }
     }
 
     func getUser(handler: @escaping Handler<User?>) {
-        dataStack.perform(asynchronous: { transaction -> User? in
-            let from = From<UserEntity>()
-            let entity = try transaction.fetchOne(from)
+        let adapter: (UserEntity) -> User = { entity in
+            return self.userAdapter.fromStorage(entity)
+        }
 
-            var user: User?
-            if let entity = entity {
-                user = UserAdapter.fromStorage(entity)
-            }
-            return user
-        }, completionOnGlobal: { result in
-            switch result {
-            case .failure(let error): handler(.failure(error))
-            case .success(let user): handler(.success(user))
-            }
-        })
+        databaseManager.getFirst(adapter: adapter, handler: handler)
     }
 
     func deleteUser(handler: @escaping Handler<Void>) {
-        dataStack.perform(asynchronous: { transaction in
-            let from = From<UserEntity>()
-            try transaction.deleteAll(from)
-        }, completionOnGlobal: { result in
+        databaseManager.deleteAll { result in
             switch result {
             case .failure(let error): handler(.failure(error))
             case .success: handler(.success(()))
             }
-        })
+        }
     }
 }

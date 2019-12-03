@@ -13,7 +13,8 @@ public protocol SignOutUseCaseProtocol {
 }
 
 public class SignOutUseCase: SignOutUseCaseProtocol, Executable {
-    lazy var work = {
+    lazy var work = { [weak self] in
+        guard let self = self else { return }
         self.authRepository.signOut { [weak self] result in
             guard let self = self else { return }
             switch result {

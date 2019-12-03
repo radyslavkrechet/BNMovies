@@ -13,7 +13,8 @@ public protocol GetFavouritesUseCaseProtocol {
 }
 
 public class GetFavouritesUseCase: GetFavouritesUseCaseProtocol, Executable {
-    lazy var work = {
+    lazy var work = { [weak self] in
+        guard let self = self else { return }
         self.movieRepository.getFavourites(handler: self.handler)
     }
 

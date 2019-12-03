@@ -13,7 +13,8 @@ public protocol SignInUseCaseProtocol {
 }
 
 public class SignInUseCase: SignInUseCaseProtocol, Executable {
-    lazy var work = {
+    lazy var work = { [weak self] in
+        guard let self = self else { return }
         self.authRepository.signIn(with: self.username, password: self.password) { [weak self] result in
             guard let self = self else { return }
             switch result {

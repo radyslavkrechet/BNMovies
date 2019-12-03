@@ -8,65 +8,55 @@
 
 import Domain
 import Data
-import CoreStore
 
-class MovieDAO: MovieDAOProtocol {
-    private let dataStack: DataStack
+class MovieDAO<DatabaseManager: RelationshipDatabaseManagerProtocol>: MovieDAOProtocol
+    where DatabaseManager.Entity == MovieEntity, DatabaseManager.Object == Movie,
+    DatabaseManager.Relationship == GenreEntity {
 
-    init(dataStack: DataStack = CoreStoreDefaults.dataStack) {
-        self.dataStack = dataStack
+    private let databaseManager: DatabaseManager
+    private let movieAdapter: MovieAdapterProtocol
+    private let genreDAO: GenreDAOProtocol
+
+    init(databaseManager: DatabaseManager, movieAdapter: MovieAdapterProtocol, genreDAO: GenreDAOProtocol) {
+        self.databaseManager = databaseManager
+        self.movieAdapter = movieAdapter
+        self.genreDAO = genreDAO
     }
 
     func set(_ movie: Movie, handler: @escaping Handler<Movie>) {
-        dataStack.perform(asynchronous: { transaction in
-            let genreEntities = try movie.genres.map { genre -> GenreEntity in
-                let builder = From<GenreEntity>().where(\.id == genre.id)
-                let into = Into<GenreEntity>()
-                let entity = try transaction.fetchOne(builder) ?? transaction.create(into)
-                GenreAdapter.toStorage(genre, entity)
-                return entity
-            }
-
-            let builder = From<MovieEntity>().where(\.id == movie.id)
-            let into = Into<MovieEntity>()
-            let entity = try transaction.fetchOne(builder) ?? transaction.create(into)
-            MovieAdapter.toStorage(movie, genreEntities, entity)
-        }, completionOnGlobal: { result in
+        genreDAO.set(movie.genres) { result in
             switch result {
             case .failure(let error): handler(.failure(error))
-            case .success: handler(.success(movie))
+            case .success(let genreEntities):
+                let adapter: (Movie, MovieEntity, [GenreEntity]) -> MovieEntity = { object, entity, relationship in
+                    return self.movieAdapter.toStorage(object, entity, relationship)
+                }
+
+                self.databaseManager.set(object: movie, relationship: genreEntities, adapter: adapter) { result in
+                    switch result {
+                    case .failure(let error): handler(.failure(error))
+                    case .success: handler(.success(movie))
+                    }
+                }
             }
-        })
+        }
     }
 
     func getFavourites(handler: @escaping Handler<[Movie]>) {
-        dataStack.perform(asynchronous: { transaction -> [Movie] in
-            let builder = From<MovieEntity>().where(\.isFavourite == true)
-            let entities = try transaction.fetchAll(builder)
-            return entities.map { MovieAdapter.fromStorage($0) }.reversed()
-        }, completionOnGlobal: { result in
-            switch result {
-            case .failure(let error): handler(.failure(error))
-            case .success(let movies): handler(.success(movies))
-            }
-        })
+        let predicate: Predicate = ("isFavourite == true", nil)
+        let adapter: (MovieEntity) -> Movie = { entity in
+            return self.movieAdapter.fromStorage(entity)
+        }
+
+        databaseManager.getAll(predicate: predicate, adapter: adapter, handler: handler)
     }
 
     func getMovie(with id: String, handler: @escaping Handler<Movie?>) {
-        dataStack.perform(asynchronous: { transaction -> Movie? in
-            let builder = From<MovieEntity>().where(\.id == id)
-            let entity = try transaction.fetchOne(builder)
+        let predicate = ("id == %@", [id])
+        let adapter: (MovieEntity) -> Movie = { entity in
+            return self.movieAdapter.fromStorage(entity)
+        }
 
-            var movie: Movie?
-            if let entity = entity {
-                movie = MovieAdapter.fromStorage(entity)
-            }
-            return movie
-        }, completionOnGlobal: { result in
-            switch result {
-            case .failure(let error): handler(.failure(error))
-            case .success(let movie): handler(.success(movie))
-            }
-        })
+        databaseManager.getFirst(predicate: predicate, adapter: adapter, handler: handler)
     }
 }

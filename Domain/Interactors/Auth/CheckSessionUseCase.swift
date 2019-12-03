@@ -13,7 +13,8 @@ public protocol CheckSessionUseCaseProtocol {
 }
 
 public class CheckSessionUseCase: CheckSessionUseCaseProtocol, Executable {
-    lazy var work = {
+    lazy var work = { [weak self] in
+        guard let self = self else { return }
         self.authRepository.isSignedIn(handler: self.handler)
     }
 

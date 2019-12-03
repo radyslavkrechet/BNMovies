@@ -13,7 +13,8 @@ public protocol GetUserUseCaseProtocol {
 }
 
 public class GetUserUseCase: GetUserUseCaseProtocol, Executable {
-    lazy var work = {
+    lazy var work = { [weak self] in
+        guard let self = self else { return }
         self.authRepository.getSession { [weak self] result in
             guard let self = self else { return }
             switch result {
