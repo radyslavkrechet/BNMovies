@@ -12,7 +12,7 @@ protocol ViewProtocol: class {}
 
 class ViewController<Presenter: PresenterProtocol>: UIViewController, ViewProtocol {
     var presenter: Presenter!
-    var analyticsManager: AnalyticsManagerProtocol?
+    var analyticsService: AnalyticsServiceProtocol?
 
     // MARK: - Lifecycle
 
@@ -25,7 +25,7 @@ class ViewController<Presenter: PresenterProtocol>: UIViewController, ViewProtoc
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        analyticsManager?.logPresentation(of: self.nameOfClass)
+        analyticsService?.logPresentation(of: self.nameOfClass)
     }
 
     // MARK: - Setup

@@ -1,5 +1,5 @@
 //
-//  UICollectionView+RegisterNib.swift
+//  UICollectionView+Cell.swift
 //  Boilerplate
 //
 //  Created by Radyslav Krechet on 9/5/19.
@@ -14,8 +14,7 @@ extension UICollectionView {
         register(cellNib, forCellWithReuseIdentifier: Cell.nameOfClass)
     }
 
-    func registerNibForSupplementaryView<View: UICollectionReusableView>(_ cell: View.Type, of kind: String) {
-        let viewNib = UINib(nibName: View.nameOfClass, bundle: nil)
-        register(viewNib, forSupplementaryViewOfKind: kind, withReuseIdentifier: View.nameOfClass)
+    func dequeueReusableCellForIndexPath<Cell: UICollectionViewCell>(_ indexPath: IndexPath) -> Cell {
+        return dequeueReusableCell(withReuseIdentifier: Cell.nameOfClass, for: indexPath) as? Cell ?? Cell()
     }
 }

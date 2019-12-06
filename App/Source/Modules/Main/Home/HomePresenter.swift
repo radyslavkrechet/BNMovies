@@ -45,13 +45,13 @@ class HomePresenter: HomePresenterProtocol {
 
     private func getMovies() {
         guard paginationService.canGetMore else { return }
-        paginationManager.startLoading()
+        paginationService.startLoading()
 
         if movies == nil {
             view?.populate(with: .loading)
         }
 
-        getMoviesUseCase.execute(with: paginationService.value) { [weak self] result in
+        getMoviesUseCase.execute(with: paginationService.page) { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.populate(with: .error(error))
             case .success(let movies): self?.process(movies)

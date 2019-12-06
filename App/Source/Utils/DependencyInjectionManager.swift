@@ -12,6 +12,7 @@ import Net
 import Database
 import Swinject
 
+private let file = (name: "Info", type: "plist")
 private let keys = (baseURL: "Base URL", apiKey: "API Key")
 
 struct DependencyInjectionManager {
@@ -21,9 +22,11 @@ struct DependencyInjectionManager {
 
     private let assembler = Assembler()
 
-    init(serverSource: [String: Any]) {
-        guard let baseURL = serverSource[keys.baseURL] as? String,
-            let apiKey = serverSource[keys.apiKey] as? String else {
+    init() {
+        guard let path = Bundle.main.path(forResource: file.name, ofType: file.type),
+            let properties = NSDictionary(contentsOfFile: path) as? [String: Any],
+            let baseURL = properties[keys.baseURL] as? String,
+            let apiKey = properties[keys.apiKey] as? String else {
 
                 preconditionFailure("Failed to load server configs")
         }
@@ -39,13 +42,9 @@ struct DependencyInjectionManager {
     }
 
     private func applyAssemblies(with baseURL: String, apiKey: String) {
-        #if RELEASE
-            // Setup Firebase for Crashlytics only
-            let analytics = AnalyticsAssembly()
-            #if PRODUCTION
-                // Inject AnalyticsManager into the app
-                assembler.apply(assembly: analytics)
-            #endif
+        #if RELEASE && PRODUCTION
+        let analytics = AnalyticsAssembly()
+        assembler.apply(assembly: analytics)
         #endif
 
         let net = NetAssembly(baseURL: baseURL, apiKey: apiKey)

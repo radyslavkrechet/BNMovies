@@ -45,7 +45,7 @@ class DetailsViewController: ContentViewController<DetailsPresenter>, DetailsVie
         presenter.markMovieAsFavourite()
 
         if let title = navigationItem.rightBarButtonItem?.title {
-            analyticsManager?.logClick(in: self.nameOfClass, senderTitle: title)
+            analyticsService?.logClick(in: self.nameOfClass, senderTitle: title)
         }
     }
 

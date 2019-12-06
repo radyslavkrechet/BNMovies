@@ -11,61 +11,27 @@ import Firebase
 private let keys = (eventCategory: "eventCategory", eventLabel: "eventLabel")
 
 protocol AnalyticsManagerProtocol {
-    func logPresentation(of responder: String)
-    func logClick(in responder: String, senderTitle: String)
-    func logPagination(in responder: String)
-    func logPullToRefresh(in responder: String)
-    func logItemSelection(in responder: String, itemId: String)
-    func logSignIn()
-    func logSignOut()
+    func logEvent(_ event: AnalyticsEvent)
+    func logEvent(_ event: AnalyticsEvent, responder: String)
+    func logEvent(_ event: AnalyticsEvent, responder: String, label: String)
 }
 
 struct AnalyticsManager: AnalyticsManagerProtocol {
-    private enum Event: String {
-        case presentation, click, pagination, pullToRefresh, itemSelection, signIn, signOut
-    }
-
-    static func setup() {
+    init() {
         FirebaseApp.configure()
     }
 
-    func logPresentation(of responder: String) {
-        logEvent(.presentation, responder: responder)
+    func logEvent(_ event: AnalyticsEvent) {
+        Analytics.logEvent(event.rawValue, parameters: nil)
     }
 
-    func logClick(in responder: String, senderTitle: String) {
-        logEvent(.click, responder: responder, label: senderTitle)
+    func logEvent(_ event: AnalyticsEvent, responder: String) {
+        let parameters = [keys.eventCategory: responder]
+        Analytics.logEvent(event.rawValue, parameters: parameters)
     }
 
-    func logPagination(in responder: String) {
-        logEvent(.pagination, responder: responder)
-    }
-
-    func logPullToRefresh(in responder: String) {
-        logEvent(.pullToRefresh, responder: responder)
-    }
-
-    func logItemSelection(in responder: String, itemId: String) {
-        logEvent(.itemSelection, responder: responder, label: itemId)
-    }
-
-    func logSignIn() {
-        logEvent(.signIn)
-    }
-
-    func logSignOut() {
-        logEvent(.signOut)
-    }
-
-    private func logEvent(_ event: Event, responder: String? = nil, label: String? = nil) {
-        var parameters = [String: String]()
-        if let responder = responder {
-            parameters[keys.eventCategory] = responder
-        }
-        if let label = label {
-            parameters[keys.eventLabel] = label
-        }
-
-        Analytics.logEvent(event.rawValue, parameters: parameters.isEmpty ? nil : parameters)
+    func logEvent(_ event: AnalyticsEvent, responder: String, label: String) {
+        let parameters = [keys.eventCategory: responder, keys.eventLabel: label]
+        Analytics.logEvent(event.rawValue, parameters: parameters)
     }
 }

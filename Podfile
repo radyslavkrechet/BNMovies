@@ -29,6 +29,12 @@ target 'Boilerplate' do
 
   swinject
   swift_lint
+
+  target 'BoilerplateTests' do
+    use_frameworks!
+
+    tests
+  end
 end
 
 target 'Domain' do

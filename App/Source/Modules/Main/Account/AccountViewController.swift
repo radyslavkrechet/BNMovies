@@ -38,7 +38,7 @@ class AccountViewController: ContentViewController<AccountPresenter>, AccountVie
     }
 
     func userDidSignOut() {
-        analyticsManager?.logSignOut()
+        analyticsService?.logSignOut()
         UIStoryboard.set(.SignIn)
     }
 }

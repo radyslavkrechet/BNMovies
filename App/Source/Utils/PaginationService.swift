@@ -12,7 +12,7 @@ private let onePageValue = 1
 private let itemsPerPage = 20
 
 protocol PaginationServiceProtocol {
-    var value: Int { get }
+    var page: Int { get }
     var canGetMore: Bool { get }
     var isFirstPage: Bool { get }
 
@@ -22,13 +22,13 @@ protocol PaginationServiceProtocol {
 }
 
 struct PaginationService: PaginationServiceProtocol {
-    private(set) var value = onePageValue
+    private(set) var page = onePageValue
 
     var canGetMore: Bool {
         return !isLoading && lastPageItemsCount == itemsPerPage
     }
     var isFirstPage: Bool {
-        return value == onePageValue
+        return page == onePageValue
     }
 
     private var isLoading = false
@@ -40,13 +40,13 @@ struct PaginationService: PaginationServiceProtocol {
 
     mutating func stopLoading(with itemsCount: Int) {
         isLoading = false
-        value += onePageValue
+        page += onePageValue
         lastPageItemsCount = itemsCount
     }
 
     mutating func reset() {
         isLoading = false
         lastPageItemsCount = itemsPerPage
-        value = onePageValue
+        page = onePageValue
     }
 }

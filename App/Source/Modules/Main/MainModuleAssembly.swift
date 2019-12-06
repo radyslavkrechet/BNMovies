@@ -61,33 +61,33 @@ struct MainModuleAssembly: Assembly {
             controller.presenter = resolver.resolve(HomePresenter.self)!
             controller.presenter.view = controller
             controller.dataSource = resolver.resolve(MoviesDataSource.self)!
-            controller.analyticsManager = resolver.resolve(AnalyticsManagerProtocol.self)
+            controller.analyticsService = resolver.resolve(AnalyticsServiceProtocol.self)
         }
 
         container.storyboardInitCompleted(FavouritesViewController.self) { resolver, controller in
             controller.presenter = resolver.resolve(FavouritesPresenter.self)!
             controller.presenter.view = controller
             controller.dataSource = resolver.resolve(MoviesDataSource.self)!
-            controller.analyticsManager = resolver.resolve(AnalyticsManagerProtocol.self)
+            controller.analyticsService = resolver.resolve(AnalyticsServiceProtocol.self)
         }
 
         container.storyboardInitCompleted(AccountViewController.self) { resolver, controller in
             controller.presenter = resolver.resolve(AccountPresenter.self)!
             controller.presenter.view = controller
-            controller.analyticsManager = resolver.resolve(AnalyticsManagerProtocol.self)
+            controller.analyticsService = resolver.resolve(AnalyticsServiceProtocol.self)
         }
 
         container.storyboardInitCompleted(DetailsViewController.self) { resolver, controller in
             controller.presenter = resolver.resolve(DetailsPresenter.self)!
             controller.presenter.view = controller
-            controller.analyticsManager = resolver.resolve(AnalyticsManagerProtocol.self)
+            controller.analyticsService = resolver.resolve(AnalyticsServiceProtocol.self)
         }
 
         container.storyboardInitCompleted(SimilarMoviesViewController.self) { resolver, controller in
             controller.presenter = resolver.resolve(SimilarMoviesPresenter.self)!
             controller.presenter.view = controller
             controller.dataSource = resolver.resolve(SimilarMoviesDataSource.self)!
-            controller.analyticsManager = resolver.resolve(AnalyticsManagerProtocol.self)
+            controller.analyticsService = resolver.resolve(AnalyticsServiceProtocol.self)
         }
     }
 }

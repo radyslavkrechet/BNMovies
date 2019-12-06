@@ -24,7 +24,7 @@ class PaginationViewController<Presenter: PaginationPresenterProtocol,
     }
 
     @objc private func refreshControlDidPull() {
-        analyticsManager?.logPullToRefresh(in: self.nameOfClass)
+        analyticsService?.logPullToRefresh(in: self.nameOfClass)
         presenter.refreshContent()
     }
 
@@ -39,7 +39,7 @@ class PaginationViewController<Presenter: PaginationPresenterProtocol,
     // MARK: - DataSource
 
     func lastItemWillDisplay() {
-        analyticsManager?.logPagination(in: self.nameOfClass)
+        analyticsService?.logPagination(in: self.nameOfClass)
         presenter.getMoreContent()
     }
 }

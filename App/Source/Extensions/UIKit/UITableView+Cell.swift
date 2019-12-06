@@ -1,5 +1,5 @@
 //
-//  UITableView+RegisterNib.swift
+//  UITableView+Cell.swift
 //  Boilerplate
 //
 //  Created by Radyslav Krechet on 9/5/19.
@@ -14,8 +14,7 @@ extension UITableView {
         register(cellNib, forCellReuseIdentifier: Cell.nameOfClass)
     }
 
-    func registerNibForHeaderFooterView<View: UITableViewHeaderFooterView>(_ view: View.Type) {
-        let viewNib = UINib(nibName: View.nameOfClass, bundle: nil)
-        register(viewNib, forHeaderFooterViewReuseIdentifier: View.nameOfClass)
+    func dequeueReusableCellForIndexPath<Cell: UITableViewCell>(_ indexPath: IndexPath) -> Cell {
+        return dequeueReusableCell(withIdentifier: Cell.nameOfClass, for: indexPath) as? Cell ?? Cell()
     }
 }

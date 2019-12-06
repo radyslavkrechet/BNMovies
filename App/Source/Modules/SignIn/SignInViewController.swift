@@ -97,7 +97,7 @@ class SignInViewController: ViewController<SignInPresenter>, SignInViewProtocol,
     }
 
     func userDidSignIn() {
-        analyticsManager?.logSignIn()
+        analyticsService?.logSignIn()
         UIStoryboard.set(.Main)
     }
 

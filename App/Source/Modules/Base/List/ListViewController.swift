@@ -34,6 +34,6 @@ class ListViewController<Presenter: ListPresenterProtocol,
     // MARK: - DataSource
 
     func userDidSelectItem(_ item: DataSource.Item) {
-        analyticsManager?.logItemSelection(in: self.nameOfClass, itemId: item.id)
+        analyticsService?.logItemSelection(in: self.nameOfClass, itemId: item.id)
     }
 }

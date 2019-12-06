@@ -10,11 +10,13 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    let dependencyInjectionManager: DependencyInjectionManager
+    var dependencyInjectionManager: DependencyInjectionManager!
     var window: UIWindow?
 
     override init() {
-        dependencyInjectionManager = DependencyInjectionManager(serverSource: PropertyListService.properties)
+        if ProcessInfo.shouldLaunchApp {
+            dependencyInjectionManager = DependencyInjectionManager()
+        }
 
         super.init()
     }
@@ -23,6 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+        guard ProcessInfo.shouldLaunchApp else {
+            return false
+        }
 
         #if DEBUG
         DebuggingManager.setup()
