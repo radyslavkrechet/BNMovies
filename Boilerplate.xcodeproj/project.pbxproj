@@ -90,7 +90,7 @@
 		0B6326AE2316775900B08D6F /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6326AD2316775900B08D6F /* DetailsPresenter.swift */; };
 		0B6326B02316776900B08D6F /* MainModuleAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6326AF2316776900B08D6F /* MainModuleAssembly.swift */; };
 		0B6326B22316B78A00B08D6F /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6326B12316B78A00B08D6F /* UIViewController+Navigation.swift */; };
-		0B6326B52316BB5F00B08D6F /* PaginationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6326B42316BB5F00B08D6F /* PaginationManager.swift */; };
+		0B6326B52316BB5F00B08D6F /* PaginationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6326B42316BB5F00B08D6F /* PaginationService.swift */; };
 		0B6326B92317AE3100B08D6F /* MoviesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6326B82317AE3100B08D6F /* MoviesDataSource.swift */; };
 		0B6326BD2317AEBE00B08D6F /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6326BB2317AEBE00B08D6F /* MovieTableViewCell.swift */; };
 		0B6326BE2317AEBE00B08D6F /* MovieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B6326BC2317AEBE00B08D6F /* MovieTableViewCell.xib */; };
@@ -163,7 +163,7 @@
 		0B977272238BC7C400B73BAE /* ServerSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B977271238BC7C400B73BAE /* ServerSettings.swift */; };
 		0B977274238BCB9700B73BAE /* RouterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B977273238BCB9700B73BAE /* RouterService.swift */; };
 		0BA8308E232A470000D81840 /* UIWindow+Motion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA8308D232A470000D81840 /* UIWindow+Motion.swift */; };
-		0BA83094232A4AA000D81840 /* DebuggingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA83093232A4AA000D81840 /* DebuggingService.swift */; };
+		0BA83094232A4AA000D81840 /* DebuggingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA83093232A4AA000D81840 /* DebuggingManager.swift */; };
 		0BA83112232A664700D81840 /* Domain.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BA83110232A664700D81840 /* Domain.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0BA83127232A664E00D81840 /* Data.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BA83125232A664E00D81840 /* Data.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0BB1B197232A688A00CB8FCD /* Database.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BB1B195232A688A00CB8FCD /* Database.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -433,7 +433,7 @@
 		0B6326AD2316775900B08D6F /* DetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
 		0B6326AF2316776900B08D6F /* MainModuleAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModuleAssembly.swift; sourceTree = "<group>"; };
 		0B6326B12316B78A00B08D6F /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
-		0B6326B42316BB5F00B08D6F /* PaginationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationManager.swift; sourceTree = "<group>"; };
+		0B6326B42316BB5F00B08D6F /* PaginationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationService.swift; sourceTree = "<group>"; };
 		0B6326B82317AE3100B08D6F /* MoviesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesDataSource.swift; sourceTree = "<group>"; };
 		0B6326BB2317AEBE00B08D6F /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		0B6326BC2317AEBE00B08D6F /* MovieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieTableViewCell.xib; sourceTree = "<group>"; };
@@ -530,7 +530,7 @@
 		0B977271238BC7C400B73BAE /* ServerSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerSettings.swift; sourceTree = "<group>"; };
 		0B977273238BCB9700B73BAE /* RouterService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterService.swift; sourceTree = "<group>"; };
 		0BA8308D232A470000D81840 /* UIWindow+Motion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+Motion.swift"; sourceTree = "<group>"; };
-		0BA83093232A4AA000D81840 /* DebuggingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuggingService.swift; sourceTree = "<group>"; };
+		0BA83093232A4AA000D81840 /* DebuggingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebuggingManager.swift; sourceTree = "<group>"; };
 		0BA83095232A4BED00D81840 /* AnalyticsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsAssembly.swift; sourceTree = "<group>"; };
 		0BA8310E232A664700D81840 /* Domain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Domain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BA83110232A664700D81840 /* Domain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Domain.h; sourceTree = "<group>"; };
@@ -1012,9 +1012,9 @@
 			children = (
 				0B6326D72319055C00B08D6F /* DependencyInjectionManager.swift */,
 				0B632712231F8CF000B08D6F /* PropertyListService.swift */,
-				0BA83093232A4AA000D81840 /* DebuggingService.swift */,
+				0BA83093232A4AA000D81840 /* DebuggingManager.swift */,
 				0B204A5F231FEF4E00CE54BB /* AppearanceService.swift */,
-				0B6326B42316BB5F00B08D6F /* PaginationManager.swift */,
+				0B6326B42316BB5F00B08D6F /* PaginationService.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2336,7 +2336,7 @@
 				0BE7D89B230AD5280003A02E /* UIView+LoadFromNib.swift in Sources */,
 				0B6326AE2316775900B08D6F /* DetailsPresenter.swift in Sources */,
 				0B204A7623215CF000CE54BB /* UIView+CornerRadius.swift in Sources */,
-				0B6326B52316BB5F00B08D6F /* PaginationManager.swift in Sources */,
+				0B6326B52316BB5F00B08D6F /* PaginationService.swift in Sources */,
 				0B632697231664E800B08D6F /* SplashModuleAssembly.swift in Sources */,
 				0BD660822381DAE400E6EFA7 /* ContentState.swift in Sources */,
 				0B6326BD2317AEBE00B08D6F /* MovieTableViewCell.swift in Sources */,
@@ -2360,7 +2360,7 @@
 				0B204A8F232248D300CE54BB /* SimilarMovieCollectionViewCell.swift in Sources */,
 				0B6326A4231676C400B08D6F /* HomeViewController.swift in Sources */,
 				0B5D154D232BB008008C9F30 /* AnalyticsManager.swift in Sources */,
-				0BA83094232A4AA000D81840 /* DebuggingService.swift in Sources */,
+				0BA83094232A4AA000D81840 /* DebuggingManager.swift in Sources */,
 				0BD6609723828DC000E6EFA7 /* SignInState.swift in Sources */,
 				0B204A7A23215E2B00CE54BB /* UITableView+RegisterNib.swift in Sources */,
 				0BE7D85D230AD29E0003A02E /* EmptyView.swift in Sources */,

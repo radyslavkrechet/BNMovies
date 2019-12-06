@@ -1,5 +1,5 @@
 //
-//  PaginationManager.swift
+//  PaginationService.swift
 //  Boilerplate
 //
 //  Created by Radyslav Krechet on 8/28/19.
@@ -11,7 +11,7 @@ import Foundation
 private let onePageValue = 1
 private let itemsPerPage = 20
 
-protocol PaginationManagerProtocol {
+protocol PaginationServiceProtocol {
     var value: Int { get }
     var canGetMore: Bool { get }
     var isFirstPage: Bool { get }
@@ -21,7 +21,7 @@ protocol PaginationManagerProtocol {
     mutating func reset()
 }
 
-struct PaginationManager: PaginationManagerProtocol {
+struct PaginationService: PaginationServiceProtocol {
     private(set) var value = onePageValue
 
     var canGetMore: Bool {

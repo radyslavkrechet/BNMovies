@@ -1,5 +1,5 @@
 //
-//  DebuggingService.swift
+//  DebuggingManager.swift
 //  Boilerplate
 //
 //  Created by Radyslav Krechet on 9/11/19.
@@ -8,7 +8,7 @@
 
 import FLEX
 
-enum DebuggingService {
+enum DebuggingManager {
     static func setup() {
         FLEXManager.shared()?.isNetworkDebuggingEnabled = true
     }

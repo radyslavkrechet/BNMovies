@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         #if DEBUG
-        DebuggingService.setup()
+        DebuggingManager.setup()
         #endif
 
         AppearanceService.setup()

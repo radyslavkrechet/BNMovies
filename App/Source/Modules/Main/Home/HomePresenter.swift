@@ -14,14 +14,14 @@ class HomePresenter: HomePresenterProtocol {
     weak var view: HomeViewProtocol?
 
     private let getMoviesUseCase: GetMoviesUseCaseProtocol
-    private var paginationManager: PaginationManagerProtocol
+    private var paginationService: PaginationServiceProtocol
     private var movies: [Movie]!
 
     init(getMoviesUseCase: GetMoviesUseCaseProtocol,
-         paginationManager: PaginationManagerProtocol = PaginationManager()) {
+         paginationService: PaginationServiceProtocol = PaginationService()) {
 
         self.getMoviesUseCase = getMoviesUseCase
-        self.paginationManager = paginationManager
+        self.paginationService = paginationService
     }
 
     func getContent() {
@@ -29,7 +29,7 @@ class HomePresenter: HomePresenterProtocol {
     }
 
     func refreshContent() {
-        paginationManager.reset()
+        paginationService.reset()
         getMovies()
     }
 
@@ -39,19 +39,19 @@ class HomePresenter: HomePresenterProtocol {
 
     func tryAgain() {
         movies = nil
-        paginationManager.reset()
+        paginationService.reset()
         getMovies()
     }
 
     private func getMovies() {
-        guard paginationManager.canGetMore else { return }
+        guard paginationService.canGetMore else { return }
         paginationManager.startLoading()
 
         if movies == nil {
             view?.populate(with: .loading)
         }
 
-        getMoviesUseCase.execute(with: paginationManager.value) { [weak self] result in
+        getMoviesUseCase.execute(with: paginationService.value) { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.populate(with: .error(error))
             case .success(let movies): self?.process(movies)
@@ -60,7 +60,7 @@ class HomePresenter: HomePresenterProtocol {
     }
 
     private func process(_ movies: [Movie]) {
-        if paginationManager.isFirstPage {
+        if paginationService.isFirstPage {
             self.movies = movies
         } else {
             self.movies += movies
@@ -69,6 +69,6 @@ class HomePresenter: HomePresenterProtocol {
         view?.populate(with: self.movies)
         view?.populate(with: self.movies.isEmpty ? .empty : .content)
 
-        paginationManager.stopLoading(with: movies.count)
+        paginationService.stopLoading(with: movies.count)
     }
 }

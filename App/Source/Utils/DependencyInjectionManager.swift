@@ -43,8 +43,8 @@ struct DependencyInjectionManager {
             // Setup Firebase for Crashlytics only
             let analytics = AnalyticsAssembly()
             #if PRODUCTION
-            // Inject AnalyticsManager into the app
-            assembler.apply(assembly: analytics)
+                // Inject AnalyticsManager into the app
+                assembler.apply(assembly: analytics)
             #endif
         #endif
 
