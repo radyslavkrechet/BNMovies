@@ -16,6 +16,11 @@ public struct DatabaseAssembly: Assembly {
     }
 
     public func assemble(container: Container) {
+        registerAdapter(in: container)
+        registerDAO(in: container)
+    }
+
+    private func registerAdapter(in container: Container) {
         container.register(SessionAdapterProtocol.self) { _ in
             SessionAdapter()
         }
@@ -32,7 +37,9 @@ public struct DatabaseAssembly: Assembly {
         container.register(GenreAdapterProtocol.self) { _ in
             GenreAdapter()
         }
+    }
 
+    private func registerDAO(in container: Container) {
         container.register(SessionDAOProtocol.self) { resolver in
             let databaseManager = DatabaseManager<Session, SessionEntity>()
             let sessioAdapter = resolver.resolve(SessionAdapterProtocol.self)!
@@ -46,7 +53,7 @@ public struct DatabaseAssembly: Assembly {
         }.inObjectScope(.container)
 
         container.register(MovieDAOProtocol.self) { resolver in
-            let databaseManager = RelationshipDatabaseManager<Movie, MovieEntity, GenreEntity>()
+            let databaseManager = DatabaseManager<Movie, MovieEntity>()
             let movieAdapter = resolver.resolve(MovieAdapterProtocol.self)!
             let genreDAO = resolver.resolve(GenreDAOProtocol.self)!
             return MovieDAO(databaseManager: databaseManager, movieAdapter: movieAdapter, genreDAO: genreDAO)

@@ -14,8 +14,6 @@ import Quick
 class SignInUseCaseSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
     override func spec() {
-        let username = "username"
-        let password = "password"
         var signInUseCase: SignInUseCase!
         var authRepositoryMock: AuthRepositoryMock!
         var userRepositoryMock: UserRepositoryMock!
@@ -27,6 +25,9 @@ class SignInUseCaseSpec: QuickSpec {
         }
 
         describe("execute") {
+            let username = "username"
+            let password = "password"
+
             context("auth repository signs in -> error") {
                 it("returns error") {
                     authRepositoryMock.settings.shouldReturnError = true

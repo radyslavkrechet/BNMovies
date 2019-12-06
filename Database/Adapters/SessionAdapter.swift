@@ -10,7 +10,7 @@ import Domain
 
 protocol SessionAdapterProtocol {
     func fromStorage(_ entity: SessionEntity) -> Session
-    func toStorage(_ session: Session, _ entity: SessionEntity) -> SessionEntity
+    func toStorage(_ object: Session, _ entity: SessionEntity) -> SessionEntity
 }
 
 struct SessionAdapter: SessionAdapterProtocol {

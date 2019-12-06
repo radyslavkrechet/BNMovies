@@ -14,12 +14,10 @@ import Domain
 
 class UserAdapterSpec: QuickSpec {
     override func spec() {
-        describe("to entity") {
+        describe("to object") {
             it("returns user") {
-                let gravatar = GravatarResponse(hash: "hash")
-                let avatar = AvatarResponse(gravatar: gravatar)
-                let response = GetUserResponse(id: 0, username: "username", name: "name", avatar: avatar)
-                let user = UserAdapter().toEntity(response)
+                let response = Mock.getUserResponse
+                let user = UserAdapter().toObject(response)
 
                 expect(user.id) == String(response.id)
                 expect(user.username) == response.username

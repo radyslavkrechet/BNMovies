@@ -14,11 +14,12 @@ import Domain
 
 class SessionAdapterSpec: QuickSpec {
     override func spec() {
-        describe("to entity") {
+        describe("to object") {
             it("returns session") {
-                let response = CreateSessionResponse(sessionId: "id")
-                let session = SessionAdapter().toEntity(response)
+                let response = Mock.createSessionResponse
+                let session = SessionAdapter().toObject(response)
 
+                expect(session.id) == response.sessionId
                 expect(session.token) == response.sessionId
             }
         }

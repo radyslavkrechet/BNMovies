@@ -9,16 +9,6 @@
 import Data
 import Domain
 
-private enum Mock {
-    enum Error: Swift.Error {
-        case force
-    }
-
-    static var user: User {
-        User(id: "id", username: "username", name: "name", avatarSource: "avatarSource")
-    }
-}
-
 class UserAPIMock: UserAPIProtocol {
     struct Settings {
         var shouldReturnError = false

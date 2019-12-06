@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Genre: Identifiable {
+public struct Genre: Identifiable, Equatable {
     public let id: String
     public let name: String
 

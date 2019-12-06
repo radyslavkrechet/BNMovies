@@ -10,20 +10,6 @@ import Domain
 
 @testable import Net
 
-private enum Mock {
-    enum Error: Swift.Error {
-        case force
-    }
-
-    static var token: String {
-        "token"
-    }
-
-    static var session: Session {
-        Session(id: "id", token: token)
-    }
-}
-
 class SignInAPIMock: SignInAPIProtocol {
     struct Settings {
         var shouldReturnError = false

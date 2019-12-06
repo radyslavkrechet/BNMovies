@@ -9,9 +9,8 @@
 import Domain
 import Data
 
-class MovieDAO<DatabaseManager: RelationshipDatabaseManagerProtocol>: MovieDAOProtocol
-    where DatabaseManager.Entity == MovieEntity, DatabaseManager.Object == Movie,
-    DatabaseManager.Relationship == GenreEntity {
+class MovieDAO<DatabaseManager: DatabaseManagerProtocol>: MovieDAOProtocol
+    where DatabaseManager.Object == Movie, DatabaseManager.Entity == MovieEntity {
 
     private let databaseManager: DatabaseManager
     private let movieAdapter: MovieAdapterProtocol
@@ -43,20 +42,18 @@ class MovieDAO<DatabaseManager: RelationshipDatabaseManagerProtocol>: MovieDAOPr
     }
 
     func getFavourites(handler: @escaping Handler<[Movie]>) {
-        let predicate: Predicate = ("isFavourite == true", nil)
         let adapter: (MovieEntity) -> Movie = { entity in
             return self.movieAdapter.fromStorage(entity)
         }
 
-        databaseManager.getAll(predicate: predicate, adapter: adapter, handler: handler)
+        databaseManager.getAll(predicate: "isFavourite == true", adapter: adapter, handler: handler)
     }
 
     func getMovie(with id: String, handler: @escaping Handler<Movie?>) {
-        let predicate = ("id == %@", [id])
         let adapter: (MovieEntity) -> Movie = { entity in
             return self.movieAdapter.fromStorage(entity)
         }
 
-        databaseManager.getFirst(predicate: predicate, adapter: adapter, handler: handler)
+        databaseManager.getFirst(predicate: "id == \(id)", adapter: adapter, handler: handler)
     }
 }

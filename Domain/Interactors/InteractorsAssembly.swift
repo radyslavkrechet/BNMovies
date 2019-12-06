@@ -12,6 +12,12 @@ public struct InteractorsAssembly: Assembly {
     public init() {}
 
     public func assemble(container: Container) {
+        registerAuthInteractors(in: container)
+        registerUserInteractors(in: container)
+        registerMovieInteractors(in: container)
+    }
+
+    private func registerAuthInteractors(in container: Container) {
         container.register(SignInUseCaseProtocol.self) { resolver in
             let authRepository = resolver.resolve(AuthRepositoryProtocol.self)!
             let userRepository = resolver.resolve(UserRepositoryProtocol.self)!
@@ -28,13 +34,17 @@ public struct InteractorsAssembly: Assembly {
             let userRepository = resolver.resolve(UserRepositoryProtocol.self)!
             return SignOutUseCase(authRepository: authRepository, userRepository: userRepository)
         }
+    }
 
+    private func registerUserInteractors(in container: Container) {
         container.register(GetUserUseCaseProtocol.self) { resolver in
             let authRepository = resolver.resolve(AuthRepositoryProtocol.self)!
             let userRepository = resolver.resolve(UserRepositoryProtocol.self)!
             return GetUserUseCase(authRepository: authRepository, userRepository: userRepository)
         }
+    }
 
+    private func registerMovieInteractors(in container: Container) {
         container.register(GetMoviesUseCaseProtocol.self) { resolver in
             let movieRepository = resolver.resolve(MovieRepositoryProtocol.self)!
             return GetMoviesUseCase(movieRepository: movieRepository)

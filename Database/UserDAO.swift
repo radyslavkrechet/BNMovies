@@ -10,7 +10,7 @@ import Domain
 import Data
 
 class UserDAO<DatabaseManager: DatabaseManagerProtocol>: UserDAOProtocol
-    where DatabaseManager.Entity == UserEntity, DatabaseManager.Object == User {
+    where DatabaseManager.Object == User, DatabaseManager.Entity == UserEntity {
 
     private let databaseManager: DatabaseManager
     private let userAdapter: UserAdapterProtocol

@@ -9,33 +9,6 @@
 import Data
 import Domain
 
-private enum Mock {
-    enum Error: Swift.Error {
-        case force
-    }
-
-    static var movies: [Movie] {
-        []
-    }
-
-    static var movie: Movie {
-        Movie(id: "id",
-              title: "title",
-              overview: "overview",
-              posterSource: "posterSource",
-              backdropSource: "backdropSource",
-              runtime: 0,
-              releaseDate: Date(),
-              userScore: 0,
-              genres: [genre],
-              isFavourite: false)
-    }
-
-    static var genre: Genre {
-        Genre(id: "id", name: "name")
-    }
-}
-
 class MovieDAOMock: MovieDAOProtocol {
     struct Settings {
         var shouldReturnError = false
@@ -52,6 +25,7 @@ class MovieDAOMock: MovieDAOProtocol {
 
     struct Arguments {
         var movie: Movie?
+        var id: String?
     }
 
     var settings = Settings()
@@ -71,12 +45,13 @@ class MovieDAOMock: MovieDAOProtocol {
     func getFavourites(handler: @escaping Handler<[Movie]>) {
         run()
         calls.getFavourites = true
-        handler(shouldReturnError ? .failure(Mock.Error.force) : .success(Mock.movies))
+        handler(shouldReturnError ? .failure(Mock.Error.force) : .success([]))
     }
 
     func getMovie(with id: String, handler: @escaping Handler<Movie?>) {
         run()
         calls.getMovie = true
+        arguments.id = id
         handler(shouldReturnError
             ? .failure(Mock.Error.force)
             : .success(settings.shouldReturnNil ? nil : settings.movie))

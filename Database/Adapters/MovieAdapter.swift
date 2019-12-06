@@ -10,7 +10,7 @@ import Domain
 
 protocol MovieAdapterProtocol {
     func fromStorage(_ entity: MovieEntity) -> Movie
-    func toStorage(_ movie: Movie, _ entity: MovieEntity, _ genreEntities: [GenreEntity]) -> MovieEntity
+    func toStorage(_ object: Movie, _ entity: MovieEntity, _ relationship: [GenreEntity]) -> MovieEntity
 }
 
 struct MovieAdapter: MovieAdapterProtocol {
@@ -33,7 +33,7 @@ struct MovieAdapter: MovieAdapterProtocol {
                      isFavourite: entity.isFavourite.value)
     }
 
-    func toStorage(_ object: Movie, _ entity: MovieEntity, _ genreEntities: [GenreEntity]) -> MovieEntity {
+    func toStorage(_ object: Movie, _ entity: MovieEntity, _ relationship: [GenreEntity]) -> MovieEntity {
         entity.id.value = object.id
         entity.title.value = object.title
         entity.overview.value = object.overview
@@ -42,7 +42,7 @@ struct MovieAdapter: MovieAdapterProtocol {
         entity.runtime.value = object.runtime
         entity.releaseDate.value = object.releaseDate
         entity.userScore.value = object.userScore
-        entity.genres.value = genreEntities
+        entity.genres.value = relationship
         entity.isFavourite.value = object.isFavourite
         return entity
     }

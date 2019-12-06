@@ -26,8 +26,11 @@ class CoderServiceSpec: QuickSpec {
 
                     expect {
                         let parameters = try coderService.encode(body) as? [String: Double]
+
+                        expect(parameters) == ["stored_value": 2.3]
+
                         return parameters
-                    } == ["stored_value": 2.3]
+                    }.toNot(throwError())
                 }
             }
 
@@ -50,8 +53,11 @@ class CoderServiceSpec: QuickSpec {
 
                     expect {
                         let response: Container = try coderService.decode(json)
+
+                        expect(response.storedValue) == json["stored_value"]
+
                         return response.storedValue
-                    } == json["stored_value"]
+                    }.toNot(throwError())
                 }
             }
 

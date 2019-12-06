@@ -11,16 +11,6 @@ import Alamofire
 
 @testable import Net
 
-private enum Mock {
-    enum Error: Swift.Error {
-        case force
-    }
-
-    static var successValue: [String: Any] {
-        [:]
-    }
-}
-
 class NetworkManagerMock: NetworkManagerProtocol {
     struct Settings {
         var shouldReturnError = false
@@ -35,6 +25,6 @@ class NetworkManagerMock: NetworkManagerProtocol {
 
     func execute(_ request: URLRequestConvertible, handler: @escaping Handler<Any>) {
         calls.execute = true
-        handler(settings.shouldReturnError ? .failure(Mock.Error.force) : .success(Mock.successValue))
+        handler(settings.shouldReturnError ? .failure(Mock.Error.force) : .success([:]))
     }
 }

@@ -15,8 +15,8 @@ private enum TmdbImageSize: String {
 }
 
 protocol MovieAdapterProtocol {
-    func toEntities(_ response: GetMoviesResponse) -> [Movie]
-    func toEntity(_ response: GetMovieResponse) -> Movie
+    func toObjects(_ response: GetMoviesResponse) -> [Movie]
+    func toObject(_ response: GetMovieResponse) -> Movie
 }
 
 struct MovieAdapter: MovieAdapterProtocol {
@@ -26,11 +26,11 @@ struct MovieAdapter: MovieAdapterProtocol {
         self.genreAdapter = genreAdapter
     }
 
-    func toEntities(_ response: GetMoviesResponse) -> [Movie] {
-        return response.results.map { toEntity($0) }
+    func toObjects(_ response: GetMoviesResponse) -> [Movie] {
+        return response.results.map { toObject($0) }
     }
 
-    func toEntity(_ response: GetMovieResponse) -> Movie {
+    func toObject(_ response: GetMovieResponse) -> Movie {
         var releaseDate: Date?
         if let responseReleaseDate = response.releaseDate {
             let formatter = DateFormatter()
@@ -56,7 +56,7 @@ struct MovieAdapter: MovieAdapterProtocol {
                      runtime: response.runtime,
                      releaseDate: releaseDate,
                      userScore: Int(response.voteAverage * 10),
-                     genres: response.genres?.map { genreAdapter.toEntity($0) } ?? [],
+                     genres: response.genres?.map { genreAdapter.toObject($0) } ?? [],
                      isFavourite: false)
     }
 }

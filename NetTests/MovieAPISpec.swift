@@ -77,7 +77,7 @@ class MovieAPISpec: QuickSpec {
 
                             expect(networkManagerMock.calls.execute) == true
                             expect(coderServiceMock.calls.decode) == true
-                            expect(movieAdapterMock.calls.toEntities) == true
+                            expect(movieAdapterMock.calls.toObjects) == true
                         }
                     }
                 }
@@ -108,9 +108,9 @@ class MovieAPISpec: QuickSpec {
                                                  overview: "overview",
                                                  posterPath: "posterPath",
                                                  backdropPath: "backdropPath",
-                                                 runtime: 0,
+                                                 runtime: 1,
                                                  releaseDate: "releaseDate",
-                                                 voteAverage: 0,
+                                                 voteAverage: 2,
                                                  genres: [])
 
                     coderServiceMock.settings.response = movie
@@ -142,7 +142,7 @@ class MovieAPISpec: QuickSpec {
 
                             expect(networkManagerMock.calls.execute) == true
                             expect(coderServiceMock.calls.decode) == true
-                            expect(movieAdapterMock.calls.toEntity) == true
+                            expect(movieAdapterMock.calls.toObject) == true
                         }
                     }
                 }
@@ -197,7 +197,7 @@ class MovieAPISpec: QuickSpec {
 
                             expect(networkManagerMock.calls.execute) == true
                             expect(coderServiceMock.calls.decode) == true
-                            expect(movieAdapterMock.calls.toEntities) == true
+                            expect(movieAdapterMock.calls.toObjects) == true
                         }
                     }
                 }

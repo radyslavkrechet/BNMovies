@@ -10,7 +10,7 @@ import Domain
 
 protocol GenreAdapterProtocol {
     func fromStorage(_ entity: GenreEntity) -> Genre
-    func toStorage(_ genre: Genre, _ entity: GenreEntity) -> GenreEntity
+    func toStorage(_ object: Genre, _ entity: GenreEntity) -> GenreEntity
 }
 
 struct GenreAdapter: GenreAdapterProtocol {

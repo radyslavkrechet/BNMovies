@@ -10,21 +10,15 @@ import Domain
 
 @testable import Net
 
-private enum Mock {
-    static var session: Session {
-        Session(id: "id", token: "token")
-    }
-}
-
 class SessionAdapterMock: SessionAdapterProtocol {
     struct Calls {
-        var toEntity = false
+        var toObject = false
     }
 
     var calls = Calls()
 
-    func toEntity(_ response: CreateSessionResponse) -> Session {
-        calls.toEntity = true
+    func toObject(_ response: CreateSessionResponse) -> Session {
+        calls.toObject = true
         return Mock.session
     }
 }

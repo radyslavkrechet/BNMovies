@@ -60,7 +60,6 @@ class AuthRepositorySpec: QuickSpec {
                             expect(authAPIMock.arguments.username) == username
                             expect(authAPIMock.arguments.password) == password
                             expect(sessionDAOMock.calls.set) == true
-                            expect(sessionDAOMock.arguments.session).toNot(beNil())
                         }
                     }
                 }
@@ -77,7 +76,6 @@ class AuthRepositorySpec: QuickSpec {
                             expect(authAPIMock.arguments.username) == username
                             expect(authAPIMock.arguments.password) == password
                             expect(sessionDAOMock.calls.set) == true
-                            expect(sessionDAOMock.arguments.session).toNot(beNil())
                         }
                     }
                 }

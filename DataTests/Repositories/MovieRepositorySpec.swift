@@ -104,6 +104,7 @@ class MovieRepositorySpec: QuickSpec {
                         }
 
                         expect(movieDAOMock.calls.getMovie) == true
+                        expect(movieDAOMock.arguments.id) == id
                     }
                 }
             }
@@ -121,6 +122,7 @@ class MovieRepositorySpec: QuickSpec {
                             }
 
                             expect(movieDAOMock.calls.getMovie) == true
+                            expect(movieDAOMock.arguments.id) == id
                             expect(movieAPIMock.calls.getMovie) == true
                             expect(movieAPIMock.arguments.id) == id
                         }
@@ -141,10 +143,10 @@ class MovieRepositorySpec: QuickSpec {
                                 }
 
                                 expect(movieDAOMock.calls.getMovie) == true
+                                expect(movieDAOMock.arguments.id) == id
                                 expect(movieAPIMock.calls.getMovie) == true
                                 expect(movieAPIMock.arguments.id) == id
                                 expect(movieDAOMock.calls.set) == true
-                                expect(movieDAOMock.arguments.movie).toNot(beNil())
                             }
                         }
                     }
@@ -160,10 +162,10 @@ class MovieRepositorySpec: QuickSpec {
                                 }
 
                                 expect(movieDAOMock.calls.getMovie) == true
+                                expect(movieDAOMock.arguments.id) == id
                                 expect(movieAPIMock.calls.getMovie) == true
                                 expect(movieAPIMock.arguments.id) == id
                                 expect(movieDAOMock.calls.set) == true
-                                expect(movieDAOMock.arguments.movie).toNot(beNil())
                             }
                         }
                     }
@@ -185,6 +187,7 @@ class MovieRepositorySpec: QuickSpec {
                                     }
 
                                     expect(movieDAOMock.calls.getMovie) == true
+                                    expect(movieDAOMock.arguments.id) == id
                                     returnIndex += 1
                                 } else {
                                     guard case .failure = result else {
@@ -192,7 +195,6 @@ class MovieRepositorySpec: QuickSpec {
                                         return
                                     }
 
-                                    expect(movieDAOMock.calls.getMovie) == true
                                     expect(movieAPIMock.calls.getMovie) == true
                                     expect(movieAPIMock.arguments.id) == id
                                     done()
@@ -218,6 +220,7 @@ class MovieRepositorySpec: QuickSpec {
                                         }
 
                                         expect(movieDAOMock.calls.getMovie) == true
+                                        expect(movieDAOMock.arguments.id) == id
                                         returnIndex += 1
                                     } else {
                                         guard case .failure = result else {
@@ -225,11 +228,9 @@ class MovieRepositorySpec: QuickSpec {
                                             return
                                         }
 
-                                        expect(movieDAOMock.calls.getMovie) == true
                                         expect(movieAPIMock.calls.getMovie) == true
                                         expect(movieAPIMock.arguments.id) == id
                                         expect(movieDAOMock.calls.set) == true
-                                        expect(movieDAOMock.arguments.movie).toNot(beNil())
                                         done()
                                     }
                                 }
@@ -239,8 +240,8 @@ class MovieRepositorySpec: QuickSpec {
 
                     context("movie dao sets movie -> movie") {
                         it("returns movie, returns movie") {
-                            movieDAOMock.settings.movie = self.movie(isFavourite: true)
-                            movieAPIMock.settings.movie = self.movie(isFavourite: false)
+                            movieDAOMock.settings.movie = Mock.movie(isFavourite: true)
+                            movieAPIMock.settings.movie = Mock.movie(isFavourite: false)
 
                             waitUntil { done in
                                 var returnIndex = 0
@@ -252,6 +253,7 @@ class MovieRepositorySpec: QuickSpec {
                                         }
 
                                         expect(movieDAOMock.calls.getMovie) == true
+                                        expect(movieDAOMock.arguments.id) == id
                                         returnIndex += 1
                                     } else {
                                         guard case .success = result else {
@@ -259,7 +261,6 @@ class MovieRepositorySpec: QuickSpec {
                                             return
                                         }
 
-                                        expect(movieDAOMock.calls.getMovie) == true
                                         expect(movieAPIMock.calls.getMovie) == true
                                         expect(movieAPIMock.arguments.id) == id
                                         expect(movieDAOMock.calls.set) == true
@@ -309,7 +310,7 @@ class MovieRepositorySpec: QuickSpec {
         }
 
         describe("add to favourites") {
-            let movie = self.movie(isFavourite: false)
+            let movie = Mock.movie(isFavourite: false)
 
             context("movie dao adds to favourites -> error") {
                 it("returns error") {
@@ -343,7 +344,7 @@ class MovieRepositorySpec: QuickSpec {
         }
 
         describe("delete from favourites") {
-            let movie = self.movie(isFavourite: true)
+            let movie = Mock.movie(isFavourite: true)
 
             context("movie dao deletes from favourites -> error") {
                 it("returns error") {
@@ -375,15 +376,5 @@ class MovieRepositorySpec: QuickSpec {
                 }
             }
         }
-    }
-
-    private func movie(isFavourite: Bool) -> Movie {
-        return Movie(id: "id",
-                     title: "title",
-                     overview: "overview",
-                     posterSource: "posterSource",
-                     backdropSource: "backdropSource",
-                     userScore: 0,
-                     isFavourite: isFavourite)
     }
 }

@@ -11,7 +11,7 @@ import Data
 import CoreStore
 
 class SessionDAO<DatabaseManager: DatabaseManagerProtocol>: SessionDAOProtocol
-    where DatabaseManager.Entity == SessionEntity, DatabaseManager.Object == Session {
+    where DatabaseManager.Object == Session, DatabaseManager.Entity == SessionEntity {
 
     private let databaseManager: DatabaseManager
     private let sessionAdapter: SessionAdapterProtocol

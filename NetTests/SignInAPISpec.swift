@@ -237,7 +237,7 @@ class SignInAPISpec: QuickSpec {
                                 expect(coderServiceMock.calls.encode) == true
                                 expect(networkManagerMock.calls.execute) == true
                                 expect(coderServiceMock.calls.decode) == true
-                                expect(sessionAdapterMock.calls.toEntity) == true
+                                expect(sessionAdapterMock.calls.toObject) == true
                             }
                         }
                     }

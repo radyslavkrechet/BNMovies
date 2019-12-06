@@ -10,7 +10,7 @@ import Domain
 
 protocol UserAdapterProtocol {
     func fromStorage(_ entity: UserEntity) -> User
-    func toStorage(_ user: User, _ entity: UserEntity) -> UserEntity
+    func toStorage(_ object: User, _ entity: UserEntity) -> UserEntity
 }
 
 struct UserAdapter: UserAdapterProtocol {

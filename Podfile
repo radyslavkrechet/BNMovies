@@ -79,4 +79,10 @@ target 'Database' do
 
   swinject
   swift_lint
+
+  target 'DatabaseTests' do
+    use_frameworks!
+
+    tests
+  end
 end

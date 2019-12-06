@@ -78,7 +78,6 @@ class UserRepositorySpec: QuickSpec {
                                 expect(userAPIMock.calls.getUser) == true
                                 expect(userAPIMock.arguments.token) == token
                                 expect(userDAOMock.calls.set) == true
-                                expect(userDAOMock.arguments.user).toNot(beNil())
                             }
                         }
                     }
@@ -97,7 +96,6 @@ class UserRepositorySpec: QuickSpec {
                                 expect(userAPIMock.calls.getUser) == true
                                 expect(userAPIMock.arguments.token) == token
                                 expect(userDAOMock.calls.set) == true
-                                expect(userDAOMock.arguments.user).toNot(beNil())
                             }
                         }
                     }
@@ -128,7 +126,6 @@ class UserRepositorySpec: QuickSpec {
 
                                     expect(userDAOMock.calls.getUser) == true
                                     expect(userAPIMock.calls.getUser) == true
-                                    expect(userAPIMock.arguments.token).toNot(beNil())
                                     done()
                                 }
                             }
@@ -161,9 +158,7 @@ class UserRepositorySpec: QuickSpec {
 
                                         expect(userDAOMock.calls.getUser) == true
                                         expect(userAPIMock.calls.getUser) == true
-                                        expect(userAPIMock.arguments.token).toNot(beNil())
                                         expect(userDAOMock.calls.set) == true
-                                        expect(userDAOMock.arguments.user).toNot(beNil())
                                         done()
                                     }
                                 }
@@ -192,9 +187,7 @@ class UserRepositorySpec: QuickSpec {
 
                                         expect(userDAOMock.calls.getUser) == true
                                         expect(userAPIMock.calls.getUser) == true
-                                        expect(userAPIMock.arguments.token).toNot(beNil())
                                         expect(userDAOMock.calls.set) == true
-                                        expect(userDAOMock.arguments.user).toNot(beNil())
                                         done()
                                     }
                                 }

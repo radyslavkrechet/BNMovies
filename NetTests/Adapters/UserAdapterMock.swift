@@ -10,21 +10,15 @@ import Domain
 
 @testable import Net
 
-private enum Mock {
-    static var user: User {
-        User(id: "id", username: "username", name: "name", avatarSource: "avatarSource")
-    }
-}
-
 class UserAdapterMock: UserAdapterProtocol {
     struct Calls {
-        var toEntity = false
+        var toObject = false
     }
 
     var calls = Calls()
 
-    func toEntity(_ response: GetUserResponse) -> User {
-        calls.toEntity = true
+    func toObject(_ response: GetUserResponse) -> User {
+        calls.toObject = true
         return Mock.user
     }
 }

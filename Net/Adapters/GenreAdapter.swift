@@ -9,11 +9,11 @@
 import Domain
 
 protocol GenreAdapterProtocol {
-    func toEntity(_ response: GenreResponse) -> Genre
+    func toObject(_ response: GenreResponse) -> Genre
 }
 
 struct GenreAdapter: GenreAdapterProtocol {
-    func toEntity(_ response: GenreResponse) -> Genre {
+    func toObject(_ response: GenreResponse) -> Genre {
         return Genre(id: String(response.id), name: response.name)
     }
 }

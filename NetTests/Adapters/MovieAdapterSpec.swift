@@ -23,39 +23,20 @@ class MovieAdapterSpec: QuickSpec {
             movieAdapter = MovieAdapter(genreAdapter: genreAdapterMock)
         }
 
-        describe("to entities") {
+        describe("to objects") {
             it("returns movies") {
-                let results = [GetMovieResponse(id: 0,
-                                                title: "titme",
-                                                overview: "overview",
-                                                posterPath: nil,
-                                                backdropPath: nil,
-                                                runtime: nil,
-                                                releaseDate: nil,
-                                                voteAverage: 7.5,
-                                                genres: nil)]
-
-                let response = GetMoviesResponse(results: results)
-                let movies = movieAdapter.toEntities(response)
+                let response = Mock.getMoviesResponse
+                let movies = movieAdapter.toObjects(response)
 
                 expect(movies.count) == response.results.count
             }
         }
 
-        describe("to entity") {
+        describe("to object") {
             context("response has no optional values") {
                 it("returns movie without optional values") {
-                    let response = GetMovieResponse(id: 0,
-                                                    title: "titme",
-                                                    overview: "overview",
-                                                    posterPath: nil,
-                                                    backdropPath: nil,
-                                                    runtime: nil,
-                                                    releaseDate: nil,
-                                                    voteAverage: 7.5,
-                                                    genres: nil)
-
-                    let movie = movieAdapter.toEntity(response)
+                    let response = Mock.getMovieResponse(hasOptionalValues: false)
+                    let movie = movieAdapter.toObject(response)
 
                     expect(movie.id) == String(response.id)
                     expect(movie.title) == response.title
@@ -68,28 +49,18 @@ class MovieAdapterSpec: QuickSpec {
                     expect(movie.genres).to(beEmpty())
                     expect(movie.isFavourite) == false
 
-                    expect(genreAdapterMock.calls.toEntity) == false
+                    expect(genreAdapterMock.calls.toObject) == false
                 }
             }
 
             context("response has optional values") {
                 it("returns movie with optional values") {
-                    let releaseDateString = "1994-09-27"
-                    let response = GetMovieResponse(id: 0,
-                                                    title: "titme",
-                                                    overview: "overview",
-                                                    posterPath: "posterPath",
-                                                    backdropPath: "backdropPath",
-                                                    runtime: 95,
-                                                    releaseDate: releaseDateString,
-                                                    voteAverage: 7.5,
-                                                    genres: [GenreResponse(id: 0, name: "name")])
-
-                    let movie = movieAdapter.toEntity(response)
+                    let response = Mock.getMovieResponse(hasOptionalValues: true)
+                    let movie = movieAdapter.toObject(response)
 
                     let formatter = DateFormatter()
                     formatter.dateFormat = "yyyy-MM-dd"
-                    let releaseDate = formatter.date(from: releaseDateString)
+                    let releaseDate = formatter.date(from: response.releaseDate!)
 
                     expect(movie.id) == String(response.id)
                     expect(movie.title) == response.title
@@ -102,7 +73,7 @@ class MovieAdapterSpec: QuickSpec {
                     expect(movie.genres.count) == response.genres!.count
                     expect(movie.isFavourite) == false
 
-                    expect(genreAdapterMock.calls.toEntity) == true
+                    expect(genreAdapterMock.calls.toObject) == true
                 }
             }
         }

@@ -32,7 +32,7 @@ class UserAPI: UserAPIProtocol {
             case .success(let json):
                 do {
                     let response: GetUserResponse = try self.coderService.decode(json)
-                    let user = self.userAdapter.toEntity(response)
+                    let user = self.userAdapter.toObject(response)
                     handler(.success(user))
                 } catch {
                     handler(.failure(error))

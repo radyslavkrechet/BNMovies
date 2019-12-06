@@ -11,12 +11,6 @@ import Alamofire
 
 @testable import Net
 
-private enum Mock {
-    enum Error: Swift.Error {
-        case force
-    }
-}
-
 class CoderServiceMock: CoderServiceProtocol {
     struct Settings {
         var shouldReturnError = false
@@ -38,22 +32,22 @@ class CoderServiceMock: CoderServiceProtocol {
     func encode<Body: Encodable>(_ body: Body) throws -> Parameters {
         run()
         calls.encode = true
-        if shouldReturnError {
-            throw Mock.Error.force
-        } else {
+        guard shouldReturnError else {
             return [:]
         }
+
+        throw Mock.Error.force
     }
 
     func decode<Response: Decodable>(_ json: Any) throws -> Response {
         run()
         calls.decode = true
-        if shouldReturnError {
-            throw Mock.Error.force
-        } else {
-             // swiftlint:disable:next force_cast
+        guard shouldReturnError else {
+            // swiftlint:disable:next force_cast
             return settings.response as! Response
         }
+
+        throw Mock.Error.force
     }
 
     private func run() {

@@ -10,44 +10,21 @@ import Domain
 
 @testable import Net
 
-private enum Mock {
-    static var movies: [Movie] {
-        []
-    }
-
-    static var movie: Movie {
-        Movie(id: "id",
-              title: "title",
-              overview: "overview",
-              posterSource: "posterSource",
-              backdropSource: "backdropSource",
-              runtime: 0,
-              releaseDate: Date(),
-              userScore: 0,
-              genres: [genre],
-              isFavourite: false)
-    }
-
-    static var genre: Genre {
-        Genre(id: "id", name: "name")
-    }
-}
-
 class MovieAdapterMock: MovieAdapterProtocol {
     struct Calls {
-        var toEntities = false
-        var toEntity = false
+        var toObjects = false
+        var toObject = false
     }
 
     var calls = Calls()
 
-    func toEntities(_ response: GetMoviesResponse) -> [Movie] {
-        calls.toEntities = true
-        return Mock.movies
+    func toObjects(_ response: GetMoviesResponse) -> [Movie] {
+        calls.toObjects = true
+        return []
     }
 
-    func toEntity(_ response: GetMovieResponse) -> Movie {
-        calls.toEntity = true
+    func toObject(_ response: GetMovieResponse) -> Movie {
+        calls.toObject = true
         return Mock.movie
     }
 }

@@ -8,16 +8,6 @@
 
 import Domain
 
-private enum Mock {
-    enum Error: Swift.Error {
-        case force
-    }
-
-    static var session: Session {
-        Session(id: "id", token: "token")
-    }
-}
-
 class AuthRepositoryMock: AuthRepositoryProtocol {
     struct Settings {
         var shouldReturnError = false

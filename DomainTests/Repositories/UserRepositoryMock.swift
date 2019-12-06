@@ -8,16 +8,6 @@
 
 import Domain
 
-private enum Mock {
-    enum Error: Swift.Error {
-        case force
-    }
-
-    static var user: User {
-        User(id: "id", username: "username", name: "name", avatarSource: "avatarSource")
-    }
-}
-
 class UserRepositoryMock: UserRepositoryProtocol {
     struct Settings {
         var shouldReturnError = false

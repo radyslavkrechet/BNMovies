@@ -90,7 +90,7 @@ class SignInAPI: SignInAPIProtocol {
             case .success(let json):
                 do {
                     let response: CreateSessionResponse = try self.coderService.decode(json)
-                    let session = self.sessionAdapter.toEntity(response)
+                    let session = self.sessionAdapter.toObject(response)
                     handler(.success(session))
                 } catch {
                     handler(.failure(error))

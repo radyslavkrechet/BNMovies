@@ -25,7 +25,7 @@ class ChangeMovieFavouriteStateUseCaseSpec: QuickSpec {
 
         describe("execute") {
             context("movie is favourite") {
-                let movie = self.movie(isFavourite: true)
+                let movie = Mock.movie(isFavourite: true)
 
                 context("movie repository deletes from favourites -> error") {
                     it("returns error") {
@@ -39,7 +39,7 @@ class ChangeMovieFavouriteStateUseCaseSpec: QuickSpec {
                                 }
 
                                 expect(movieRepositoryMock.calls.deleteFromFavourites) == true
-                                expect(movieRepositoryMock.arguments.movie).toNot(beNil())
+                                expect(movieRepositoryMock.arguments.movie) == movie
                                 done()
                             }
                         }
@@ -56,7 +56,7 @@ class ChangeMovieFavouriteStateUseCaseSpec: QuickSpec {
                                 }
 
                                 expect(movieRepositoryMock.calls.deleteFromFavourites) == true
-                                expect(movieRepositoryMock.arguments.movie).toNot(beNil())
+                                expect(movieRepositoryMock.arguments.movie) == movie
                                 done()
                             }
                         }
@@ -65,7 +65,7 @@ class ChangeMovieFavouriteStateUseCaseSpec: QuickSpec {
             }
 
             context("movie is not favourite") {
-                let movie = self.movie(isFavourite: false)
+                let movie = Mock.movie(isFavourite: false)
 
                 context("movie repository adds to favourites -> error") {
                     it("returns error") {
@@ -79,7 +79,7 @@ class ChangeMovieFavouriteStateUseCaseSpec: QuickSpec {
                                 }
 
                                 expect(movieRepositoryMock.calls.addToFavourites) == true
-                                expect(movieRepositoryMock.arguments.movie).toNot(beNil())
+                                expect(movieRepositoryMock.arguments.movie) == movie
                                 done()
                             }
                         }
@@ -96,7 +96,7 @@ class ChangeMovieFavouriteStateUseCaseSpec: QuickSpec {
                                 }
 
                                 expect(movieRepositoryMock.calls.addToFavourites) == true
-                                expect(movieRepositoryMock.arguments.movie).toNot(beNil())
+                                expect(movieRepositoryMock.arguments.movie) == movie
                                 done()
                             }
                         }
@@ -104,15 +104,5 @@ class ChangeMovieFavouriteStateUseCaseSpec: QuickSpec {
                 }
             }
         }
-    }
-
-    private func movie(isFavourite: Bool) -> Movie {
-        return Movie(id: "id",
-                     title: "title",
-                     overview: "overview",
-                     posterSource: "posterSource",
-                     backdropSource: "backdropSource",
-                     userScore: 0,
-                     isFavourite: isFavourite)
     }
 }

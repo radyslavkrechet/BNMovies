@@ -18,9 +18,9 @@ class UserRouterSpec: QuickSpec {
                 it("returns url request") {
                     let baseURL = "http://api.com"
                     let apiKey = "apiKey"
-                    let token = "token"
-
                     UserRouter.serverSettings = ServerSettings(baseURL: baseURL, apiKey: apiKey)
+
+                    let token = "token"
                     let request = UserRouter.getUser(token: token)
                     let urlRequest = try? request.asURLRequest()
 

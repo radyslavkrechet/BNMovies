@@ -14,10 +14,10 @@ import Domain
 
 class GenreAdapterSpec: QuickSpec {
     override func spec() {
-        describe("to entity") {
+        describe("to object") {
             it("returns genre") {
-                let response = GenreResponse(id: 0, name: "name")
-                let genre = GenreAdapter().toEntity(response)
+                let response = Mock.genreResponse
+                let genre = GenreAdapter().toObject(response)
 
                 expect(genre.id) == String(response.id)
                 expect(genre.name) == response.name

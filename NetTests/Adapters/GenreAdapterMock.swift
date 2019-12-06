@@ -10,21 +10,15 @@ import Domain
 
 @testable import Net
 
-private enum Mock {
-    static var genre: Genre {
-        Genre(id: "id", name: "name")
-    }
-}
-
 class GenreAdapterMock: GenreAdapterProtocol {
     struct Calls {
-        var toEntity = false
+        var toObject = false
     }
 
     var calls = Calls()
 
-    func toEntity(_ response: GenreResponse) -> Genre {
-        calls.toEntity = true
+    func toObject(_ response: GenreResponse) -> Genre {
+        calls.toObject = true
         return Mock.genre
     }
 }

@@ -15,26 +15,32 @@ protocol CoderServiceProtocol {
 
 struct CoderService: CoderServiceProtocol {
     func encode<Body: Encodable>(_ body: Body) throws -> Parameters {
+        var parameters: Parameters!
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
 
         do {
             let data = try encoder.encode(body)
-            return try JSONSerialization.jsonObject(with: data) as? Parameters ?? Parameters()
+            parameters = try JSONSerialization.jsonObject(with: data) as? Parameters ?? Parameters()
         } catch {
             throw error
         }
+
+        return parameters
     }
 
     func decode<Response: Decodable>(_ json: Any) throws -> Response {
+        var response: Response!
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
 
         do {
             let data = try JSONSerialization.data(withJSONObject: json)
-            return try decoder.decode(Response.self, from: data)
+            response = try decoder.decode(Response.self, from: data)
         } catch {
             throw error
         }
+
+        return response
     }
 }

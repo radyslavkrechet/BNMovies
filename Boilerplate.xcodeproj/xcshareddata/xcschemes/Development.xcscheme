@@ -60,6 +60,13 @@
             BlueprintName = "Net"
             ReferencedContainer = "container:Boilerplate.xcodeproj">
          </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0BB1B192232A688A00CB8FCD"
+            BuildableName = "Database.framework"
+            BlueprintName = "Database"
+            ReferencedContainer = "container:Boilerplate.xcodeproj">
+         </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
          <TestableReference
@@ -92,6 +99,17 @@
                BlueprintIdentifier = "0B71A3012391147500C3E4A0"
                BuildableName = "NetTests.xctest"
                BlueprintName = "NetTests"
+               ReferencedContainer = "container:Boilerplate.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0B8C5043239686450056CF0D"
+               BuildableName = "DatabaseTests.xctest"
+               BlueprintName = "DatabaseTests"
                ReferencedContainer = "container:Boilerplate.xcodeproj">
             </BuildableReference>
          </TestableReference>

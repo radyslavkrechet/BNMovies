@@ -14,7 +14,7 @@ protocol GenreDAOProtocol: class {
 }
 
 class GenreDAO<DatabaseManager: DatabaseManagerProtocol>: GenreDAOProtocol
-    where DatabaseManager.Entity == GenreEntity, DatabaseManager.Object == Genre {
+    where DatabaseManager.Object == Genre, DatabaseManager.Entity == GenreEntity {
 
     private let databaseManager: DatabaseManager
     private let genreAdapter: GenreAdapterProtocol

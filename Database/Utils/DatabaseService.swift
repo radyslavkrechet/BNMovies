@@ -9,7 +9,7 @@
 import CoreStore
 
 enum DatabaseService {
-    static func setup() {
+    static func setup(isInMemoryStore: Bool = false) {
         let entities: [DynamicEntity] = [
             Entity<SessionEntity>("SessionEntity"),
             Entity<UserEntity>("UserEntity"),
@@ -21,7 +21,12 @@ enum DatabaseService {
         CoreStoreDefaults.dataStack = DataStack(schema)
 
         do {
-            try CoreStoreDefaults.dataStack.addStorageAndWait()
+            if isInMemoryStore {
+                let stotage = InMemoryStore()
+                try CoreStoreDefaults.dataStack.addStorageAndWait(stotage)
+            } else {
+                try CoreStoreDefaults.dataStack.addStorageAndWait()
+            }
         } catch {
             preconditionFailure(error.localizedDescription)
         }

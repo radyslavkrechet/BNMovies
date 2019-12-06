@@ -9,16 +9,6 @@
 import Data
 import Domain
 
-private enum Mock {
-    enum Error: Swift.Error {
-        case force
-    }
-
-    static var user: User {
-        User(id: "id", username: "username", name: "name", avatarSource: "avatarSource")
-    }
-}
-
 class UserDAOMock: UserDAOProtocol {
     struct Settings {
         var shouldReturnError = false
@@ -32,13 +22,8 @@ class UserDAOMock: UserDAOProtocol {
         var deleteUser = false
     }
 
-    struct Arguments {
-        var user: User?
-    }
-
     var settings = Settings()
     var calls = Calls()
-    var arguments = Arguments()
 
     private var runIndex = -1
     private var shouldReturnError: Bool { settings.shouldReturnError && settings.errorIndex == runIndex }
@@ -46,7 +31,6 @@ class UserDAOMock: UserDAOProtocol {
     func set(_ user: User, handler: @escaping Handler<User>) {
         run()
         calls.set = true
-        arguments.user = user
         handler(shouldReturnError ? .failure(Mock.Error.force) : .success(Mock.user))
     }
 

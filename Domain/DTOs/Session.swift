@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Session: Identifiable {
+public struct Session: Identifiable, Equatable {
     enum Error: Swift.Error {
         case noValue
     }

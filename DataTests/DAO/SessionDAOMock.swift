@@ -9,16 +9,6 @@
 import Data
 import Domain
 
-private enum Mock {
-    enum Error: Swift.Error {
-        case force
-    }
-
-    static var session: Session {
-        Session(id: "id", token: "token")
-    }
-}
-
 class SessionDAOMock: SessionDAOProtocol {
     struct Settings {
         var shouldReturnError = false
@@ -31,17 +21,11 @@ class SessionDAOMock: SessionDAOProtocol {
         var deleteSession = false
     }
 
-    struct Arguments {
-        var session: Session?
-    }
-
     var settings = Settings()
     var calls = Calls()
-    var arguments = Arguments()
 
     func set(_ session: Session, handler: @escaping Handler<Session>) {
         calls.set = true
-        arguments.session = session
         handler(settings.shouldReturnError ? .failure(Mock.Error.force) : .success(Mock.session))
     }
 

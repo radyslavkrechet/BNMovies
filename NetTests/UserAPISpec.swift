@@ -80,7 +80,7 @@ class UserAPISpec: QuickSpec {
 
                             expect(networkManagerMock.calls.execute) == true
                             expect(coderServiceMock.calls.decode) == true
-                            expect(userAdapterMock.calls.toEntity) == true
+                            expect(userAdapterMock.calls.toObject) == true
                         }
                     }
                 }

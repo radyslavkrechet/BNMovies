@@ -32,7 +32,7 @@ class MovieAPI: MovieAPIProtocol {
             case .success(let json):
                 do {
                     let response: GetMoviesResponse = try self.coderService.decode(json)
-                    let movies = self.movieAdapter.toEntities(response)
+                    let movies = self.movieAdapter.toObjects(response)
                     handler(.success(movies))
                 } catch {
                     handler(.failure(error))
@@ -49,7 +49,7 @@ class MovieAPI: MovieAPIProtocol {
             case .success(let json):
                 do {
                     let response: GetMovieResponse = try self.coderService.decode(json)
-                    let movie = self.movieAdapter.toEntity(response)
+                    let movie = self.movieAdapter.toObject(response)
                     handler(.success(movie))
                 } catch {
                     handler(.failure(error))
@@ -66,7 +66,7 @@ class MovieAPI: MovieAPIProtocol {
             case .success(let json):
                 do {
                     let response: GetMoviesResponse = try self.coderService.decode(json)
-                    let movies = self.movieAdapter.toEntities(response)
+                    let movies = self.movieAdapter.toObjects(response)
                     handler(.success(movies))
                 } catch {
                     handler(.failure(error))

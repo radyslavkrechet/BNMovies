@@ -9,11 +9,11 @@
 import Domain
 
 protocol SessionAdapterProtocol {
-    func toEntity(_ response: CreateSessionResponse) -> Session
+    func toObject(_ response: CreateSessionResponse) -> Session
 }
 
 struct SessionAdapter: SessionAdapterProtocol {
-    func toEntity(_ response: CreateSessionResponse) -> Session {
+    func toObject(_ response: CreateSessionResponse) -> Session {
         return Session(id: response.sessionId, token: response.sessionId)
     }
 }
