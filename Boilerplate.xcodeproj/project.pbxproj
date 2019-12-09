@@ -792,6 +792,67 @@
 			path = Analytics;
 			sourceTree = "<group>";
 		};
+		0B0FFDFB239A9C1D00B2882E /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Splash;
+			sourceTree = "<group>";
+		};
+		0B0FFDFC239A9C2700B2882E /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		0B0FFDFD239A9C2C00B2882E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				0B0FFE01239A9C4F00B2882E /* Details */,
+				0B0FFE00239A9C4900B2882E /* Account */,
+				0B0FFDFF239A9C4100B2882E /* Favourites */,
+				0B0FFDFE239A9C3B00B2882E /* Home */,
+				0B0FFE02239A9C5500B2882E /* SimilarMovies */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		0B0FFDFE239A9C3B00B2882E /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		0B0FFDFF239A9C4100B2882E /* Favourites */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Favourites;
+			sourceTree = "<group>";
+		};
+		0B0FFE00239A9C4900B2882E /* Account */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		0B0FFE01239A9C4F00B2882E /* Details */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		0B0FFE02239A9C5500B2882E /* SimilarMovies */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SimilarMovies;
+			sourceTree = "<group>";
+		};
 		0B1EE8F32306ABFE00380A29 = {
 			isa = PBXGroup;
 			children = (
@@ -805,7 +866,6 @@
 				0B71A3032391147500C3E4A0 /* NetTests */,
 				0BB1B194232A688A00CB8FCD /* Database */,
 				0B8C5045239686450056CF0D /* DatabaseTests */,
-				0B52EF1B232B97CD004939FE /* Analytics */,
 				0B1EE8FD2306ABFE00380A29 /* Products */,
 				E1BE4FFDB5E9407691138716 /* Pods */,
 				AAA0E22D0C3616740B05264F /* Frameworks */,
@@ -856,6 +916,7 @@
 				0BE7D83E230ACA8A0003A02E /* Extensions */,
 				0BE7D83F230ACA8F0003A02E /* Modules */,
 				0B6326B32316BB5200B08D6F /* Utils */,
+				0B52EF1B232B97CD004939FE /* Analytics */,
 				0B1EE9892306D6BC00380A29 /* AppDelegate.swift */,
 			);
 			path = Source;
@@ -923,7 +984,6 @@
 			isa = PBXGroup;
 			children = (
 				0B32B2B8239A4D6400523402 /* Source */,
-				0B0FFDF1239A8DAE00B2882E /* Analytics */,
 				0B32B2A8239A4B8D00523402 /* Info.plist */,
 			);
 			path = AppTests;
@@ -942,6 +1002,9 @@
 		0B32B2B3239A4C7C00523402 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				0B0FFDFB239A9C1D00B2882E /* Splash */,
+				0B0FFDFC239A9C2700B2882E /* SignIn */,
+				0B0FFDFD239A9C2C00B2882E /* Main */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -979,6 +1042,7 @@
 				0B32B2B4239A4C8100523402 /* Extensions */,
 				0B32B2B3239A4C7C00523402 /* Modules */,
 				0B32B2B2239A4C7600523402 /* Utils */,
+				0B0FFDF1239A8DAE00B2882E /* Analytics */,
 				0B0FFDEE239A83C900B2882E /* Mock.swift */,
 			);
 			path = Source;
@@ -1001,7 +1065,7 @@
 			isa = PBXGroup;
 			children = (
 				0BE7D83B230ACA510003A02E /* Adapters */,
-				0BE7D8BA230AD6850003A02E /* Entities */,
+				0BE7D8BA230AD6850003A02E /* Models */,
 				0B6326E5231D132E00B08D6F /* Routers */,
 				0B6326E2231D0DED00B08D6F /* Utils */,
 				0B52EEDE232B83AF004939FE /* Net.h */,
@@ -1650,14 +1714,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		0BE7D8BA230AD6850003A02E /* Entities */ = {
+		0BE7D8BA230AD6850003A02E /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				0BE7D8CA230BC0110003A02E /* Requests */,
 				0BE7D8CB230BC0180003A02E /* Responses */,
 				0B977271238BC7C400B73BAE /* ServerSettings.swift */,
 			);
-			path = Entities;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		0BE7D8CA230BC0110003A02E /* Requests */ = {
