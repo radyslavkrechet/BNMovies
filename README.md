@@ -10,6 +10,8 @@
 
 ### Workflow ###
 
+<img src="https://habrastorage.org/web/531/04c/89d/53104c89d9cf44a59c95e351b7485574.png">
+
 **App**
 * There are base modules that implemented base logic and inherited from each other. They contain protocols of presenters, implementations of view controllers and protocols of data sources (optional).
 * Here is a list of base modules: `Root` logs presentation; `Content` gets content by the presenter and displays different states (loading, empty, content, error); `List` logs item selection from data source; `Pagination` logs pull to refresh and refreshes content by the presenter, logs last item presentation by the data source and gets more content by the presenter.
@@ -51,5 +53,5 @@
 
 * Create an account on TMDb https://www.themoviedb.org/
 * Create API Key https://www.themoviedb.org/settings/api/
-* Modify `App/Resources/Configurations/Common.xcconfig` by adding `BASE_URL = https:/$()/api.themoviedb.org/3` and `API_KEY = <your_api_key_v3>`
+* Modify `App/Resources/Configurations/Common.xcconfig` by adding `BASE_URL = https:/$()/api.themoviedb.org/3` and `API_KEY = <api_key_v3>`
 * Install pods, build and run the application, sign in with TMDb accout credentials
