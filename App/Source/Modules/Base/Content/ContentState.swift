@@ -8,6 +8,15 @@
 
 import Foundation
 
-enum ContentState {
+enum ContentState: Equatable {
     case loading, empty, content, error(_ error: Error)
+
+    static func == (lhs: ContentState, rhs: ContentState) -> Bool {
+        switch (lhs, rhs) {
+        case (.loading, .loading), (.empty, .empty), (.content, .content), (.error, .error):
+            return true
+        default:
+            return false
+        }
+    }
 }

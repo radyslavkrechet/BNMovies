@@ -6,8 +6,6 @@
 //  Copyright © 2019 Radyslav Krechet. All rights reserved.
 //
 
-import Foundation
-
 @testable import Boilerplate
 
 class AnalyticsManagerMock: AnalyticsManagerProtocol {

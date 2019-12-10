@@ -9,6 +9,10 @@
 import Domain
 
 enum Mock {
+    enum Error: Swift.Error {
+        case force
+    }
+
     static var user: User {
         user(hasName: false)
     }
@@ -21,7 +25,11 @@ enum Mock {
         return User(id: "id", username: "username", name: hasName ? "name" : nil, avatarSource: "avatarSource")
     }
 
-    static func movie(runtime: Int? = nil, hasReleaeDate: Bool = false, genres: [Genre] = []) -> Movie {
+    static func movie(runtime: Int? = nil,
+                      hasReleaeDate: Bool = false,
+                      genres: [Genre] = [],
+                      isFavourite: Bool = false) -> Movie {
+
         return Movie(id: "id",
                      title: "title",
                      overview: "overview",
@@ -31,7 +39,7 @@ enum Mock {
                      releaseDate: hasReleaeDate ? Date() : nil,
                      userScore: 1,
                      genres: genres,
-                     isFavourite: false)
+                     isFavourite: isFavourite)
     }
 
     static func genre(name: String) -> Genre {

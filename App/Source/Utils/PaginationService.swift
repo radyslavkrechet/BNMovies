@@ -16,12 +16,12 @@ protocol PaginationServiceProtocol {
     var canGetMore: Bool { get }
     var isFirstPage: Bool { get }
 
-    mutating func startLoading()
-    mutating func stopLoading(with itemsCount: Int)
-    mutating func reset()
+    func startLoading()
+    func stopLoading(with itemsCount: Int)
+    func reset()
 }
 
-struct PaginationService: PaginationServiceProtocol {
+class PaginationService: PaginationServiceProtocol {
     private(set) var page = onePageValue
 
     var canGetMore: Bool {
@@ -34,17 +34,17 @@ struct PaginationService: PaginationServiceProtocol {
     private var isLoading = false
     private var lastPageItemsCount = itemsPerPage
 
-    mutating func startLoading() {
+    func startLoading() {
         isLoading = true
     }
 
-    mutating func stopLoading(with itemsCount: Int) {
+    func stopLoading(with itemsCount: Int) {
         isLoading = false
         page += onePageValue
         lastPageItemsCount = itemsCount
     }
 
-    mutating func reset() {
+    func reset() {
         isLoading = false
         lastPageItemsCount = itemsPerPage
         page = onePageValue
