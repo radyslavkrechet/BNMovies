@@ -25,7 +25,7 @@ target 'Boilerplate' do
   pod 'Fabric'
   pod 'Crashlytics'
 
-  pod 'FLEX'
+  pod 'FLEX', :configurations => ['Debug (Development)']
 
   swinject
   swift_lint

@@ -23,9 +23,10 @@ public class ChangeMovieFavouriteStateUseCase: ChangeMovieFavouriteStateUseCaseP
         action(self.movie, self.handler)
     }
 
+    @AsyncOnMain var handler: Handler<Movie>!
+
     private let movieRepository: MovieRepositoryProtocol
     private var movie: Movie!
-    private var handler: Handler<Movie>!
 
     init(movieRepository: MovieRepositoryProtocol) {
         self.movieRepository = movieRepository
@@ -33,7 +34,7 @@ public class ChangeMovieFavouriteStateUseCase: ChangeMovieFavouriteStateUseCaseP
 
     public func execute(with movie: Movie, handler: @escaping Handler<Movie>) {
         self.movie = movie
-        self.handler = { result in DispatchQueue.main.async { handler(result) } }
+        self.handler = handler
         execute()
     }
 }

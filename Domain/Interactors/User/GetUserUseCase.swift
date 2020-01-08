@@ -30,9 +30,10 @@ public class GetUserUseCase: GetUserUseCaseProtocol, Executable {
         }
     }
 
+    @AsyncOnMain var handler: Handler<User>!
+
     private let authRepository: AuthRepositoryProtocol
     private let userRepository: UserRepositoryProtocol
-    private var handler: Handler<User>!
 
     init(authRepository: AuthRepositoryProtocol, userRepository: UserRepositoryProtocol) {
         self.authRepository = authRepository
@@ -40,7 +41,7 @@ public class GetUserUseCase: GetUserUseCaseProtocol, Executable {
     }
 
     public func execute(_ handler: @escaping Handler<User>) {
-        self.handler = { result in DispatchQueue.main.async { handler(result) } }
+        self.handler = handler
         execute()
     }
 }

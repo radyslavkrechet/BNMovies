@@ -18,14 +18,14 @@ class MovieDisplayingSpec: QuickSpec {
         describe("poster placeholder") {
             it("returns poster placeholder") {
                 let movie = Mock.movie
-                expect(movie.posterPlaceholder) == UIImage(named: "Poster")
+                expect(movie.posterPlaceholder) == "Poster".image
             }
         }
 
         describe("backdrop placeholder") {
             it("returns backdrop placeholder") {
                 let movie = Mock.movie
-                expect(movie.backdropPlaceholder) == UIImage(named: "Backdrop")
+                expect(movie.backdropPlaceholder) == "Backdrop".image
             }
         }
 

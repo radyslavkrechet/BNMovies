@@ -13,10 +13,10 @@ private let noValue = "-"
 
 extension Movie {
     var posterPlaceholder: UIImage? {
-        return UIImage(named: "Poster")
+        return "Poster".image
     }
     var backdropPlaceholder: UIImage? {
-        return UIImage(named: "Backdrop")
+        return "Backdrop".image
     }
     var genresToDisplay: String {
         return genres.isEmpty ? noValue : genres.map { $0.name }.joined(separator: ", ")

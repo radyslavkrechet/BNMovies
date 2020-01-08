@@ -16,6 +16,12 @@ public struct NetAssembly: Assembly {
     }
 
     public func assemble(container: Container) {
+        registerAdapter(in: container)
+        registerUtils(in: container)
+        registerAPI(in: container)
+    }
+
+    private func registerAdapter(in container: Container) {
         container.register(SessionAdapterProtocol.self) { _ in
             SessionAdapter()
         }
@@ -32,7 +38,9 @@ public struct NetAssembly: Assembly {
         container.register(GenreAdapterProtocol.self) { _ in
             GenreAdapter()
         }
+    }
 
+    private func registerUtils(in container: Container) {
         container.register(CoderServiceProtocol.self) { _ in
             CoderService()
         }
@@ -40,7 +48,9 @@ public struct NetAssembly: Assembly {
         container.register(NetworkManagerProtocol.self) { _ in
             NetworkManager()
         }
+    }
 
+    private func registerAPI(in container: Container) {
         container.register(AuthAPIProtocol.self) { resolver in
             let signInAPI = resolver.resolve(SignInAPIProtocol.self)!
             return AuthAPI(signInAPI: signInAPI)

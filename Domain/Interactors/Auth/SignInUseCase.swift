@@ -24,11 +24,12 @@ public class SignInUseCase: SignInUseCaseProtocol, Executable {
         }
     }
 
+    @AsyncOnMain var handler: Handler<User>!
+
     private let authRepository: AuthRepositoryProtocol
     private let userRepository: UserRepositoryProtocol
     private var username: String!
     private var password: String!
-    private var handler: Handler<User>!
 
     init(authRepository: AuthRepositoryProtocol, userRepository: UserRepositoryProtocol) {
         self.authRepository = authRepository
@@ -38,7 +39,7 @@ public class SignInUseCase: SignInUseCaseProtocol, Executable {
     public func execute(with username: String, password: String, handler: @escaping Handler<User>) {
         self.username = username
         self.password = password
-        self.handler = { result in DispatchQueue.main.async { handler(result) } }
+        self.handler = handler
         execute()
     }
 }

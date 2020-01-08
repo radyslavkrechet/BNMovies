@@ -33,7 +33,7 @@ class UserDisplayingSpec: QuickSpec {
         describe("avatar placeholder") {
             it("returns avatar placeholder") {
                 let user = Mock.user
-                expect(user.avatarPlaceholder) == UIImage(named: "Avatar")
+                expect(user.avatarPlaceholder) == "Avatar".image
             }
         }
     }

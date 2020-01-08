@@ -24,9 +24,10 @@ public class SignOutUseCase: SignOutUseCaseProtocol, Executable {
         }
     }
 
+    @AsyncOnMain var handler: Handler<Void>!
+
     private let authRepository: AuthRepositoryProtocol
     private let userRepository: UserRepositoryProtocol
-    private var handler: Handler<Void>!
 
     init(authRepository: AuthRepositoryProtocol, userRepository: UserRepositoryProtocol) {
         self.authRepository = authRepository
@@ -34,7 +35,7 @@ public class SignOutUseCase: SignOutUseCaseProtocol, Executable {
     }
 
     public func execute(_ handler: @escaping Handler<Void>) {
-        self.handler = { result in DispatchQueue.main.async { handler(result) } }
+        self.handler = handler
         execute()
     }
 }

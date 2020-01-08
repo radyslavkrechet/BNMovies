@@ -18,9 +18,10 @@ public class GetMovieUseCase: GetMovieUseCaseProtocol, Executable {
         self.movieRepository.getMovie(with: self.id, handler: self.handler)
     }
 
+    @AsyncOnMain var handler: Handler<Movie>!
+
     private let movieRepository: MovieRepositoryProtocol
     private var id: String!
-    private var handler: Handler<Movie>!
 
     init(movieRepository: MovieRepositoryProtocol) {
         self.movieRepository = movieRepository
@@ -28,7 +29,7 @@ public class GetMovieUseCase: GetMovieUseCaseProtocol, Executable {
 
     public func execute(with id: String, handler: @escaping Handler<Movie>) {
         self.id = id
-        self.handler = { result in DispatchQueue.main.async { handler(result) } }
+        self.handler = handler
         execute()
     }
 }

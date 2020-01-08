@@ -18,15 +18,16 @@ public class GetFavouritesUseCase: GetFavouritesUseCaseProtocol, Executable {
         self.movieRepository.getFavourites(handler: self.handler)
     }
 
+    @AsyncOnMain var handler: Handler<[Movie]>!
+
     private let movieRepository: MovieRepositoryProtocol
-    private var handler: Handler<[Movie]>!
 
     init(movieRepository: MovieRepositoryProtocol) {
         self.movieRepository = movieRepository
     }
 
     public func execute(_ handler: @escaping Handler<[Movie]>) {
-        self.handler = { result in DispatchQueue.main.async { handler(result) } }
+        self.handler = handler
         execute()
     }
 }

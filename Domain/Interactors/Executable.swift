@@ -15,8 +15,8 @@ protocol Executable: class {
 
 extension Executable {
     func execute() {
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.work()
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self?.work()
         }
     }
 }

@@ -19,7 +19,7 @@ class AppearanceServiceSpec: QuickSpec {
                 AppearanceService.setup()
 
                 let tintColor = UIView.appearance().tintColor
-                expect(tintColor) == UIColor(named: "Brand")
+                expect(tintColor) == "Brand".color
             }
         }
     }

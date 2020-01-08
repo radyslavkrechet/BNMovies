@@ -8,10 +8,8 @@
 
 import UIKit
 
-private let tintColorName = "Brand"
-
 enum AppearanceService {
     static func setup() {
-        UIView.appearance().tintColor = UIColor(named: tintColorName)
+        UIView.appearance().tintColor = "Brand".color
     }
 }

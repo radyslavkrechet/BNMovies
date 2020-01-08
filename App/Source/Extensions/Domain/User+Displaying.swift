@@ -14,6 +14,6 @@ extension User {
         return name ?? username
     }
     var avatarPlaceholder: UIImage? {
-        return UIImage(named: "Avatar")
+        return "Avatar".image
     }
 }

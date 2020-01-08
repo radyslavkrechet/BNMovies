@@ -140,6 +140,7 @@
 		0B78F529239147500088D803 /* NetworkManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B78F528239147500088D803 /* NetworkManagerMock.swift */; };
 		0B78F52B23914DDC0088D803 /* UserAPISpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B78F52A23914DDC0088D803 /* UserAPISpec.swift */; };
 		0B78F52D239199470088D803 /* GenreAdapterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B78F52C239199470088D803 /* GenreAdapterMock.swift */; };
+		0B8056DA23C5F4BA00A1765D /* AsyncOnMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8056D923C5F4BA00A1765D /* AsyncOnMain.swift */; };
 		0B8409ED238D583C00084669 /* Domain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BA8310E232A664700D81840 /* Domain.framework */; };
 		0B840A03238D59A300084669 /* AuthRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B840A02238D59A300084669 /* AuthRepositoryMock.swift */; };
 		0B8C502B2394FCE80056CF0D /* CoderServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8C502A2394FCE80056CF0D /* CoderServiceMock.swift */; };
@@ -235,7 +236,7 @@
 		0BE7D85F230AD29E0003A02E /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE7D859230AD29E0003A02E /* LoadingView.swift */; };
 		0BE7D860230AD29E0003A02E /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BE7D85A230AD29E0003A02E /* LoadingView.xib */; };
 		0BE7D861230AD29E0003A02E /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BE7D85B230AD29E0003A02E /* EmptyView.xib */; };
-		0BE7D897230AD5280003A02E /* String+Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE7D88C230AD5280003A02E /* String+Localization.swift */; };
+		0BE7D897230AD5280003A02E /* String+Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE7D88C230AD5280003A02E /* String+Resources.swift */; };
 		0BE7D899230AD5280003A02E /* NSObject+NameOfClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE7D88E230AD5280003A02E /* NSObject+NameOfClass.swift */; };
 		0BE7D89B230AD5280003A02E /* UIView+LoadFromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE7D890230AD5280003A02E /* UIView+LoadFromNib.swift */; };
 		0BE7D8AB230AD55A0003A02E /* PaginationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE7D8A2230AD55A0003A02E /* PaginationViewController.swift */; };
@@ -549,6 +550,7 @@
 		0B78F528239147500088D803 /* NetworkManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerMock.swift; sourceTree = "<group>"; };
 		0B78F52A23914DDC0088D803 /* UserAPISpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAPISpec.swift; sourceTree = "<group>"; };
 		0B78F52C239199470088D803 /* GenreAdapterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreAdapterMock.swift; sourceTree = "<group>"; };
+		0B8056D923C5F4BA00A1765D /* AsyncOnMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncOnMain.swift; sourceTree = "<group>"; };
 		0B8409E8238D583C00084669 /* DomainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DomainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B8409F8238D584D00084669 /* GetUserUseCaseSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetUserUseCaseSpec.swift; sourceTree = "<group>"; };
 		0B8409F9238D584D00084669 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -610,7 +612,7 @@
 		0BE7D859230AD29E0003A02E /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		0BE7D85A230AD29E0003A02E /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
 		0BE7D85B230AD29E0003A02E /* EmptyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyView.xib; sourceTree = "<group>"; };
-		0BE7D88C230AD5280003A02E /* String+Localization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Localization.swift"; sourceTree = "<group>"; };
+		0BE7D88C230AD5280003A02E /* String+Resources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Resources.swift"; sourceTree = "<group>"; };
 		0BE7D88E230AD5280003A02E /* NSObject+NameOfClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSObject+NameOfClass.swift"; sourceTree = "<group>"; };
 		0BE7D890230AD5280003A02E /* UIView+LoadFromNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+LoadFromNib.swift"; sourceTree = "<group>"; };
 		0BE7D8A2230AD55A0003A02E /* PaginationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaginationViewController.swift; sourceTree = "<group>"; };
@@ -1045,7 +1047,6 @@
 		0B32B2A5239A4B8D00523402 /* AppTests */ = {
 			isa = PBXGroup;
 			children = (
-				0BF84699239E586B00081897 /* Interactors */,
 				0B32B2B8239A4D6400523402 /* Source */,
 				0B32B2A8239A4B8D00523402 /* Info.plist */,
 			);
@@ -1645,7 +1646,7 @@
 		0BD6607B237EEB0F00E6EFA7 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
-				0BE7D88C230AD5280003A02E /* String+Localization.swift */,
+				0BE7D88C230AD5280003A02E /* String+Resources.swift */,
 				0BE7D88E230AD5280003A02E /* NSObject+NameOfClass.swift */,
 				0B32B2BF239A60F600523402 /* ProcessInfo+Tests.swift */,
 			);
@@ -1673,6 +1674,7 @@
 				0B632650230FAF9F00B08D6F /* Movie */,
 				0B63267B2315AF6B00B08D6F /* InteractorsAssembly.swift */,
 				0B204A98232782FC00CE54BB /* Executable.swift */,
+				0B8056D923C5F4BA00A1765D /* AsyncOnMain.swift */,
 			);
 			path = Interactors;
 			sourceTree = "<group>";
@@ -1816,37 +1818,6 @@
 				0B6326FE231D45F700B08D6F /* GetMovieResponse.swift */,
 			);
 			path = Responses;
-			sourceTree = "<group>";
-		};
-		0BF84699239E586B00081897 /* Interactors */ = {
-			isa = PBXGroup;
-			children = (
-				0BF8469A239E587600081897 /* Auth */,
-				0BF8469B239E587A00081897 /* User */,
-				0BF8469C239E587E00081897 /* Movie */,
-			);
-			path = Interactors;
-			sourceTree = "<group>";
-		};
-		0BF8469A239E587600081897 /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Auth;
-			sourceTree = "<group>";
-		};
-		0BF8469B239E587A00081897 /* User */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = User;
-			sourceTree = "<group>";
-		};
-		0BF8469C239E587E00081897 /* Movie */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Movie;
 			sourceTree = "<group>";
 		};
 		AAA0E22D0C3616740B05264F /* Frameworks */ = {
@@ -2768,7 +2739,7 @@
 				0B63267E2315AF8F00B08D6F /* SignInModuleAssembly.swift in Sources */,
 				0BE7D85F230AD29E0003A02E /* LoadingView.swift in Sources */,
 				0BE7D85C230AD29E0003A02E /* ErrorView.swift in Sources */,
-				0BE7D897230AD5280003A02E /* String+Localization.swift in Sources */,
+				0BE7D897230AD5280003A02E /* String+Resources.swift in Sources */,
 				0B6326B22316B78A00B08D6F /* UIViewController+Navigation.swift in Sources */,
 				0B204A60231FEF4E00CE54BB /* AppearanceService.swift in Sources */,
 			);
@@ -2952,6 +2923,7 @@
 				0BB1B1CE232A6E0300CB8FCD /* MovieRepositoryProtocol.swift in Sources */,
 				0BB1B1C1232A6DF500CB8FCD /* SignOutUseCase.swift in Sources */,
 				0BB1B1BE232A6DF500CB8FCD /* InteractorsAssembly.swift in Sources */,
+				0B8056DA23C5F4BA00A1765D /* AsyncOnMain.swift in Sources */,
 				0BB1B1C6232A6DFC00CB8FCD /* GetFavouritesUseCase.swift in Sources */,
 				0BB1B1C5232A6DFC00CB8FCD /* GetMoviesUseCase.swift in Sources */,
 				0BB1B1C8232A6DFC00CB8FCD /* GetSimilarMoviesUseCase.swift in Sources */,
@@ -3136,7 +3108,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -3194,7 +3166,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -3217,6 +3189,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = BM3ZT94MUH;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Lists/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3241,6 +3214,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = BM3ZT94MUH;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Lists/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3307,7 +3281,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -3328,6 +3302,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = BM3ZT94MUH;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Lists/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3394,7 +3369,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -3415,6 +3390,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = BM3ZT94MUH;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Lists/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3475,7 +3451,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				OTHER_SWIFT_FLAGS = "-D RELEASE -D STAGING";
@@ -3497,6 +3473,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = BM3ZT94MUH;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Lists/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -3557,7 +3534,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				OTHER_SWIFT_FLAGS = "-D RELEASE -D PRODUCTION";
@@ -3579,6 +3556,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = BM3ZT94MUH;
 				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Lists/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4506,7 +4484,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Net/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4590,7 +4568,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Net/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4674,7 +4652,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Net/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4752,7 +4730,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Net/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4830,7 +4808,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Net/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -4908,7 +4886,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Net/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -6252,7 +6230,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Domain/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -6336,7 +6314,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Domain/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -6420,7 +6398,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Domain/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -6498,7 +6476,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Domain/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -6576,7 +6554,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Domain/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -6654,7 +6632,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Domain/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -6738,7 +6716,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Data/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -6822,7 +6800,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Data/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -6906,7 +6884,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Data/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -6984,7 +6962,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Data/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -7062,7 +7040,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Data/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -7140,7 +7118,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Data/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -7224,7 +7202,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Database/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -7309,7 +7287,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Database/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -7394,7 +7372,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Database/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -7473,7 +7451,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Database/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -7552,7 +7530,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Database/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -7631,7 +7609,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = Database/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

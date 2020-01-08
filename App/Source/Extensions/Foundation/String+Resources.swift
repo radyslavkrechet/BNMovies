@@ -1,15 +1,21 @@
 //
-//  String+Localization.swift
+//  String+Resources.swift
 //  Boilerplate
 //
 //  Created by Radyslav Krechet on 8/16/19.
 //  Copyright © 2019 Radyslav Krechet. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension String {
     var localized: String {
         return NSLocalizedString(self, comment: "")
+    }
+    var image: UIImage? {
+        return UIImage(named: self)
+    }
+    var color: UIColor? {
+        return UIColor(named: self)
     }
 }

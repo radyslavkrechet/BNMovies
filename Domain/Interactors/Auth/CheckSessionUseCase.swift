@@ -18,15 +18,16 @@ public class CheckSessionUseCase: CheckSessionUseCaseProtocol, Executable {
         self.authRepository.isSignedIn(handler: self.handler)
     }
 
+    @AsyncOnMain var handler: Handler<Bool>!
+
     private let authRepository: AuthRepositoryProtocol
-    private var handler: Handler<Bool>!
 
     init(authRepository: AuthRepositoryProtocol) {
         self.authRepository = authRepository
     }
 
     public func execute(_ handler: @escaping Handler<Bool>) {
-        self.handler = { result in DispatchQueue.main.async { handler(result) } }
+        self.handler = handler
         execute()
     }
 }

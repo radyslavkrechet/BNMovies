@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dhz-7F-aXw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dhz-7F-aXw">
     <device id="retina5_9" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -303,7 +303,7 @@ Genres</string>
         <scene sceneID="V8d-l1-PeW">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="JTf-IQ-CNJ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Home" id="WzD-Ct-Qyj"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" id="WzD-Ct-Qyj"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Uzq-uY-GdG">
                         <rect key="frame" x="0.0" y="44" width="375" height="96"/>
@@ -322,7 +322,7 @@ Genres</string>
         <scene sceneID="hjo-tN-fx7">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aKt-fG-VcJ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favourites" id="8xu-OI-xxb"/>
+                    <tabBarItem key="tabBarItem" title="Favourites" image="star.fill" catalog="system" id="8xu-OI-xxb"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="EXJ-9W-UEb">
                         <rect key="frame" x="0.0" y="44" width="375" height="96"/>
@@ -341,7 +341,7 @@ Genres</string>
         <scene sceneID="1cg-bc-WyI">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="nVH-P1-KXu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Account" id="EIU-xL-6Fc"/>
+                    <tabBarItem key="tabBarItem" title="Account" image="person.fill" catalog="system" id="EIU-xL-6Fc"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="lvL-jQ-tuf">
                         <rect key="frame" x="0.0" y="44" width="375" height="96"/>
@@ -395,6 +395,11 @@ Genres</string>
             <point key="canvasLocation" x="1238" y="-139"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="house.fill" catalog="system" width="64" height="52"/>
+        <image name="person.fill" catalog="system" width="64" height="60"/>
+        <image name="star.fill" catalog="system" width="64" height="58"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ZEJ-zt-PiC"/>
     </inferredMetricsTieBreakers>

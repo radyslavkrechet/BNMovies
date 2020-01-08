@@ -22,6 +22,7 @@
 
 **Domain**
 * There is an `Executable` protocol that should be implemented by all use cases.
+* There is a `AsyncOnMain` property wrapper that should be used for handlers in all use cases.
 * A use case should own repositories and use them for creating, reading, updating and deleting data (by protocols only).
 
 **Data**
