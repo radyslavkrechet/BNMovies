@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B089D9223C89A3200D1A353 /* AccountDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B089D9023C8903B00D1A353 /* AccountDataSource.swift */; };
 		0B0FFDF0239A843F00B2882E /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0FFDEE239A83C900B2882E /* Mock.swift */; };
 		0B0FFDF3239A8F7300B2882E /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0FFDF2239A8F7300B2882E /* AnalyticsEvent.swift */; };
 		0B0FFDF5239A8F8000B2882E /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0FFDF4239A8F8000B2882E /* AnalyticsService.swift */; };
@@ -47,6 +48,8 @@
 		0B339C07238E8C90009819B9 /* GetSimilarMoviesUseCaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B339C06238E8C90009819B9 /* GetSimilarMoviesUseCaseSpec.swift */; };
 		0B339C09238E8C9C009819B9 /* ChangeMovieFavouriteStateUseCaseSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B339C08238E8C9C009819B9 /* ChangeMovieFavouriteStateUseCaseSpec.swift */; };
 		0B339C13238E96F5009819B9 /* Data.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BA83123232A664E00D81840 /* Data.framework */; };
+		0B4FD6B523C8A43D0000D19E /* UserDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4FD6B423C8A43D0000D19E /* UserDetailsTableViewCell.swift */; };
+		0B4FD6B723C8A44E0000D19E /* UserDetailsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B4FD6B623C8A44E0000D19E /* UserDetailsTableViewCell.xib */; };
 		0B52EEBF232B6D8F004939FE /* Domain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BA8310E232A664700D81840 /* Domain.framework */; };
 		0B52EEC2232B6D9D004939FE /* Data.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BA83123232A664E00D81840 /* Data.framework */; };
 		0B52EEC3232B6D9D004939FE /* Domain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BA8310E232A664700D81840 /* Domain.framework */; };
@@ -374,6 +377,7 @@
 		05CB097FD51D504F3626B481 /* Pods-BoilerplateTests.release (production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoilerplateTests.release (production).xcconfig"; path = "Target Support Files/Pods-BoilerplateTests/Pods-BoilerplateTests.release (production).xcconfig"; sourceTree = "<group>"; };
 		05D6F0D2FD5E445DCB630456 /* Pods-Domain-DomainTests.debug (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Domain-DomainTests.debug (staging).xcconfig"; path = "Target Support Files/Pods-Domain-DomainTests/Pods-Domain-DomainTests.debug (staging).xcconfig"; sourceTree = "<group>"; };
 		08E0C897A7CB5FE800522F0C /* Pods-Database-DatabaseTests.debug (staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Database-DatabaseTests.debug (staging).xcconfig"; path = "Target Support Files/Pods-Database-DatabaseTests/Pods-Database-DatabaseTests.debug (staging).xcconfig"; sourceTree = "<group>"; };
+		0B089D9023C8903B00D1A353 /* AccountDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDataSource.swift; sourceTree = "<group>"; };
 		0B0FFDEE239A83C900B2882E /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		0B0FFDF2239A8F7300B2882E /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
 		0B0FFDF4239A8F8000B2882E /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
@@ -432,6 +436,8 @@
 		0B339C08238E8C9C009819B9 /* ChangeMovieFavouriteStateUseCaseSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeMovieFavouriteStateUseCaseSpec.swift; sourceTree = "<group>"; };
 		0B339C0E238E96F5009819B9 /* DataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B339C12238E96F5009819B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0B4FD6B423C8A43D0000D19E /* UserDetailsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		0B4FD6B623C8A44E0000D19E /* UserDetailsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserDetailsTableViewCell.xib; sourceTree = "<group>"; };
 		0B52EEC4232B70D8004939FE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0B52EEDC232B83AF004939FE /* Net.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Net.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B52EEDE232B83AF004939FE /* Net.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Net.h; sourceTree = "<group>"; };
@@ -1126,6 +1132,15 @@
 			path = DataTests;
 			sourceTree = "<group>";
 		};
+		0B4FD6B323C8A4190000D19E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0B4FD6B423C8A43D0000D19E /* UserDetailsTableViewCell.swift */,
+				0B4FD6B623C8A44E0000D19E /* UserDetailsTableViewCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		0B52EEDD232B83AF004939FE /* Net */ = {
 			isa = PBXGroup;
 			children = (
@@ -1235,8 +1250,10 @@
 		0B63265F230FFE4100B08D6F /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				0B4FD6B323C8A4190000D19E /* Views */,
 				0B6326912316632D00B08D6F /* AccountPresenter.swift */,
 				0B63268F2316630400B08D6F /* AccountViewController.swift */,
+				0B089D9023C8903B00D1A353 /* AccountDataSource.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -2261,6 +2278,7 @@
 				0B6326CC23182BA800B08D6F /* Splash.storyboard in Resources */,
 				0B6326CF23182BB100B08D6F /* SignIn.storyboard in Resources */,
 				0B63266C2315310500B08D6F /* Localizable.strings in Resources */,
+				0B4FD6B723C8A44E0000D19E /* UserDetailsTableViewCell.xib in Resources */,
 				0BE7D860230AD29E0003A02E /* LoadingView.xib in Resources */,
 				0B632623230D06D300B08D6F /* GoogleService-Info.plist in Resources */,
 				0B204A90232248D300CE54BB /* SimilarMovieCollectionViewCell.xib in Resources */,
@@ -2713,11 +2731,13 @@
 				0BA83094232A4AA000D81840 /* DebuggingManager.swift in Sources */,
 				0BD6609723828DC000E6EFA7 /* SignInState.swift in Sources */,
 				0B204A7A23215E2B00CE54BB /* UITableView+Cell.swift in Sources */,
+				0B4FD6B523C8A43D0000D19E /* UserDetailsTableViewCell.swift in Sources */,
 				0BE7D85D230AD29E0003A02E /* EmptyView.swift in Sources */,
 				0BE7D8CF230BDBEB0003A02E /* PaginationPresenter.swift in Sources */,
 				0B204A7C23215E5600CE54BB /* UICollectionView+Cell.swift in Sources */,
 				0B6326C92317D33900B08D6F /* ListPresenter.swift in Sources */,
 				0B32B2C0239A60F600523402 /* ProcessInfo+Tests.swift in Sources */,
+				0B089D9223C89A3200D1A353 /* AccountDataSource.swift in Sources */,
 				0B6326AC2316774F00B08D6F /* DetailsViewController.swift in Sources */,
 				0B632661230FFEC100B08D6F /* SignInViewController.swift in Sources */,
 				0B1EE9922306D6BC00380A29 /* AppDelegate.swift in Sources */,

@@ -16,21 +16,43 @@ protocol AccountViewProtocol: ContentViewProtocol {
 }
 
 class AccountViewController: ContentViewController<AccountPresenter>, AccountViewProtocol {
-    @IBOutlet private(set) weak var avatarImageView: UIImageView!
-    @IBOutlet private(set) weak var usernameLabel: UILabel!
+    @IBOutlet private(set) weak var tableView: UITableView!
 
-    // MARK: - Actions
+    var dataSource: AccountDataSourceProtocol! = AccountDataSource()
 
-    @IBAction private func signOutButtonDidTap(_ sender: UIBarButtonItem) {
-        presenter.signOut()
+    // MARK: - Lifecycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        setupDataSource()
+    }
+
+    // MARK: - Setup
+
+    override func setupViews() {
+        super.setupViews()
+
+        tableView.registerNibForCell(UserDetailsTableViewCell.self)
+        tableView.dataSource = dataSource
+        tableView.delegate = dataSource
+    }
+
+    func setupDataSource() {
+        dataSource.navigateToFavourites = { [weak self] in
+            self?.present(.Favourites)
+        }
+
+        dataSource.userDidSignOut = { [weak self] in
+            self?.presenter.signOut()
+        }
     }
 
     // MARK: - AccountViewProtocol
 
     func populate(with user: User) {
-        let avatarUrl = URL(string: user.avatarSource)
-        avatarImageView.kf.setImage(with: avatarUrl, placeholder: user.avatarPlaceholder)
-        usernameLabel.text = user.nameToDisplay
+        dataSource.populate(with: user)
+        tableView.reloadData()
     }
 
     func presentSignOutError(_ error: Error) {

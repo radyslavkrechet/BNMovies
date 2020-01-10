@@ -9,6 +9,10 @@
 "UIViewController.alert.title" = "Error";
 "UIViewController.alert.ok" = "OK";
 
+"AccountViewController.favourites" = "Favourites";
+"AccountViewController.watchlist" = "Watchlist (Coming Soon)";
+"AccountViewController.signOut" = "Sign Out";
+
 "FavouritesViewController.emptyStateText" = "There are no favourite movies";
 
 "DetailsViewController.favouriteTitle.add" = "Add";

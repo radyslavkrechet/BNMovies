@@ -48,50 +48,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hyt-4o-Ws1">
-                                <rect key="frame" x="8" y="148" width="359" height="70.333333333333314"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4vb-p8-VfF">
-                                        <rect key="frame" x="0.0" y="0.0" width="70.333333333333329" height="70.333333333333329"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="4vb-p8-VfF" secondAttribute="height" multiplier="1:1" priority="999" id="96z-Zh-7bE"/>
-                                        </constraints>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ppz-u9-Z6C">
-                                        <rect key="frame" x="78.333333333333343" y="0.0" width="280.66666666666663" height="70.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="4vb-p8-VfF" firstAttribute="width" secondItem="ppz-u9-Z6C" secondAttribute="width" multiplier="1:4" id="6aZ-zH-E7q"/>
-                                </constraints>
-                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="noc-Rk-GAu">
+                                <rect key="frame" x="0.0" y="140" width="375" height="589"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <sections/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Hyt-4o-Ws1" firstAttribute="leading" secondItem="goJ-l6-Q9t" secondAttribute="leading" constant="8" id="3sw-Zx-PoK"/>
-                            <constraint firstItem="Hyt-4o-Ws1" firstAttribute="top" secondItem="goJ-l6-Q9t" secondAttribute="top" constant="8" id="ATO-bc-Rvo"/>
-                            <constraint firstItem="goJ-l6-Q9t" firstAttribute="trailing" secondItem="Hyt-4o-Ws1" secondAttribute="trailing" constant="8" id="ql2-XA-owu"/>
+                            <constraint firstItem="goJ-l6-Q9t" firstAttribute="trailing" secondItem="noc-Rk-GAu" secondAttribute="trailing" id="9pX-uM-kUv"/>
+                            <constraint firstItem="goJ-l6-Q9t" firstAttribute="bottom" secondItem="noc-Rk-GAu" secondAttribute="bottom" id="D7c-vS-Fcq"/>
+                            <constraint firstItem="noc-Rk-GAu" firstAttribute="top" secondItem="goJ-l6-Q9t" secondAttribute="top" id="JAy-9b-W8y"/>
+                            <constraint firstItem="noc-Rk-GAu" firstAttribute="leading" secondItem="goJ-l6-Q9t" secondAttribute="leading" id="MNn-iD-e54"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="goJ-l6-Q9t"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Account" id="Qmc-Pt-Pzg">
-                        <barButtonItem key="rightBarButtonItem" title="Sign Out" id="fV6-sb-t8H">
-                            <connections>
-                                <action selector="signOutButtonDidTap:" destination="VJ5-3A-qHn" id="eDx-wA-Fq0"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Account" id="Qmc-Pt-Pzg"/>
                     <connections>
-                        <outlet property="avatarImageView" destination="4vb-p8-VfF" id="9fa-if-0A0"/>
-                        <outlet property="usernameLabel" destination="ppz-u9-Z6C" id="COZ-6z-CKh"/>
+                        <outlet property="tableView" destination="noc-Rk-GAu" id="yzg-Nt-ZXA"/>
+                        <segue destination="Uoa-3Z-eRc" kind="show" identifier="Favourites" id="QeH-Ne-Gfn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BIl-CX-i4m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-281" y="984"/>
+            <point key="canvasLocation" x="-1042" y="252"/>
         </scene>
         <!--Home-->
         <scene sceneID="B6l-5e-C6E">
@@ -297,7 +277,7 @@ Genres</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ylO-6p-rTJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="490" y="-139"/>
+            <point key="canvasLocation" x="510" y="-140"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="81d-x5-Vz2">
@@ -310,13 +290,12 @@ Genres</string>
                     </tabBar>
                     <connections>
                         <segue destination="JTf-IQ-CNJ" kind="relationship" relationship="viewControllers" id="EyX-Um-Yyr"/>
-                        <segue destination="aKt-fG-VcJ" kind="relationship" relationship="viewControllers" id="inJ-Fc-Mpg"/>
                         <segue destination="nVH-P1-KXu" kind="relationship" relationship="viewControllers" id="abK-jq-t59"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jZ7-uP-UTE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1813" y="252"/>
+            <point key="canvasLocation" x="-2599" y="-140"/>
         </scene>
         <!--Home-->
         <scene sceneID="V8d-l1-PeW">
@@ -335,26 +314,7 @@ Genres</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1c5-YV-IIe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1055.072463768116" y="-504.24107142857139"/>
-        </scene>
-        <!--Favourites-->
-        <scene sceneID="hjo-tN-fx7">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aKt-fG-VcJ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favourites" image="star.fill" catalog="system" id="8xu-OI-xxb"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="EXJ-9W-UEb">
-                        <rect key="frame" x="0.0" y="44" width="375" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Uoa-3Z-eRc" kind="relationship" relationship="rootViewController" id="zXH-lj-CFf"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Gve-oh-1ZI" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1055.072463768116" y="252.45535714285714"/>
+            <point key="canvasLocation" x="-1815" y="-505"/>
         </scene>
         <!--Account-->
         <scene sceneID="1cg-bc-WyI">
@@ -373,7 +333,7 @@ Genres</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VnE-11-ze3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1055.072463768116" y="983.70535714285711"/>
+            <point key="canvasLocation" x="-1814" y="252"/>
         </scene>
         <!--Similar Movies View Controller-->
         <scene sceneID="6L7-Hn-cs8">
@@ -411,15 +371,14 @@ Genres</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dmj-4q-AJb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1238" y="-139"/>
+            <point key="canvasLocation" x="1286" y="-140"/>
         </scene>
     </scenes>
     <resources>
         <image name="house.fill" catalog="system" width="64" height="52"/>
         <image name="person.fill" catalog="system" width="64" height="60"/>
-        <image name="star.fill" catalog="system" width="64" height="58"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZEJ-zt-PiC"/>
+        <segue reference="Ob5-oz-gKw"/>
     </inferredMetricsTieBreakers>
 </document>

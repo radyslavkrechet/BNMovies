@@ -19,8 +19,6 @@ enum MovieRouter: URLRequestConvertible {
     }
     private var path: String {
         switch self {
-        case .getMovie(let id): return "/movie/\(id)"
-        case .getSimilarMovies(let id): return "/movie/\(id)/similar"
         case .getMovies(let category, _):
             var path = ""
             switch category {
@@ -28,6 +26,8 @@ enum MovieRouter: URLRequestConvertible {
             case .topRated: path = "top_rated"
             }
             return "/movie/\(path)"
+        case .getMovie(let id): return "/movie/\(id)"
+        case .getSimilarMovies(let id): return "/movie/\(id)/similar"
         }
     }
     private var urlParameters: Parameters {
