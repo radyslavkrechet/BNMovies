@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dhz-7F-aXw">
     <device id="retina5_9" orientation="portrait" appearance="dark"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -117,15 +116,35 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yMI-8s-mZB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="gN6-wC-Dh9"/>
+                    <navigationItem key="navigationItem" title="Home" id="gN6-wC-Dh9">
+                        <segmentedControl key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="ZzW-nO-Jt0">
+                            <rect key="frame" x="106" y="6" width="163" height="32"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segments>
+                                <segment title="Popular"/>
+                                <segment title="Top Rated"/>
+                            </segments>
+                            <connections>
+                                <action selector="movieCategorySegmentedControlValueDidChange:" destination="fZ0-0W-5kR" eventType="valueChanged" id="RSJ-Dn-vnK"/>
+                            </connections>
+                        </segmentedControl>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="ApP-qc-ANG" id="djy-eM-oIu"/>
                         <segue destination="qZu-Gt-At7" kind="show" identifier="Details" id="ZEJ-zt-PiC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="az1-dC-X0m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="Iao-Ub-j70">
+                    <rect key="frame" x="0.0" y="-1" width="131" height="31"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <segments>
+                        <segment title="First"/>
+                        <segment title="Second"/>
+                    </segments>
+                </segmentedControl>
             </objects>
-            <point key="canvasLocation" x="-280" y="-504"/>
+            <point key="canvasLocation" x="-280.80000000000001" y="-504.67980295566502"/>
         </scene>
         <!--Details-->
         <scene sceneID="lgr-xe-5GA">

@@ -28,12 +28,25 @@ class SignInViewController: ViewController<SignInPresenter>, SignInViewProtocol,
         registerNotifications()
     }
 
+    // MARK: - Setup
+
     override func setupViews() {
         super.setupViews()
 
-        if #available(iOS 13.0, *) {
-            activityIndicatorView.style = .medium
-        }
+        navigationController?.overrideUserInterfaceStyle = .dark
+
+        setupGradient()
+    }
+
+    private func setupGradient() {
+        guard let startColor = "GradientStart".color, let endColor = "GradientEnd".color else { return }
+
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.view.bounds
+        gradientLayer.colors = [startColor.cgColor, endColor.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 1)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0)
+        view.layer.insertSublayer(gradientLayer, at: 0)
     }
 
     // MARK: - Notifications

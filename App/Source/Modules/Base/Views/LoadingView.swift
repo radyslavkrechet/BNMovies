@@ -12,16 +12,6 @@ class LoadingView: View {
     @IBOutlet private(set) weak var textLabel: UILabel!
     @IBOutlet private(set) weak var activityIndicatorView: UIActivityIndicatorView!
 
-    // MARK: - Lifecycle
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        if #available(iOS 13.0, *) {
-            activityIndicatorView.style = .medium
-        }
-    }
-
     // MARK: - Setup
 
     func populate(with text: String? = nil) {

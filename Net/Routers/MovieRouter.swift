@@ -6,10 +6,11 @@
 //  Copyright © 2019 Radyslav Krechet. All rights reserved.
 //
 
+import Domain
 import Alamofire
 
 enum MovieRouter: URLRequestConvertible {
-    case getMovies(page: Int), getMovie(id: String), getSimilarMovies(id: String)
+    case getMovies(category: Movie.Category, page: Int), getMovie(id: String), getSimilarMovies(id: String)
 
     static var serverSettings: ServerSettings!
 
@@ -18,17 +19,20 @@ enum MovieRouter: URLRequestConvertible {
     }
     private var path: String {
         switch self {
-        case .getMovies:
-            return "/movie/popular"
-        case .getMovie(let id):
-            return "/movie/\(id)"
-        case .getSimilarMovies(let id):
-            return "/movie/\(id)/similar"
+        case .getMovie(let id): return "/movie/\(id)"
+        case .getSimilarMovies(let id): return "/movie/\(id)/similar"
+        case .getMovies(let category, _):
+            var path = ""
+            switch category {
+            case .popular: path = "popular"
+            case .topRated: path = "top_rated"
+            }
+            return "/movie/\(path)"
         }
     }
     private var urlParameters: Parameters {
         var parameters: Parameters = ["api_key": MovieRouter.serverSettings.apiKey]
-        if case .getMovies(let page) = self {
+        if case .getMovies(_, let page) = self {
             parameters["page"] = page
         }
         return parameters

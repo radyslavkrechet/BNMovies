@@ -19,6 +19,7 @@ class GetMoviesUseCaseMock: GetMoviesUseCaseProtocol {
     }
 
     struct Arguments {
+        var category: Movie.Category?
         var page: Int?
     }
 
@@ -26,8 +27,9 @@ class GetMoviesUseCaseMock: GetMoviesUseCaseProtocol {
     var calls = Calls()
     var arguments = Arguments()
 
-    func execute(with page: Int, handler: @escaping Handler<[Movie]>) {
+    func execute(with category: Movie.Category, page: Int, handler: @escaping Handler<[Movie]>) {
         calls.execute = true
+        arguments.category = category
         arguments.page = page
         handler(settings.shouldReturnError
             ? .failure(Mock.Error.force)

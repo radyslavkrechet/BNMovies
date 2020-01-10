@@ -27,19 +27,21 @@ class MovieRepositorySpec: QuickSpec {
         }
 
         describe("get movies") {
+            let category = Movie.Category.popular
             let page = 0
 
             context("movie api gets movies -> error") {
                 it("returns error") {
                     movieAPIMock.settings.shouldReturnError = true
 
-                    movieRepository.getMovies(with: page) { result in
+                    movieRepository.getMovies(with: category, page: page) { result in
                         guard case .failure = result else {
                             fail()
                             return
                         }
 
                         expect(movieAPIMock.calls.getMovies) == true
+                        expect(movieAPIMock.arguments.category) == category
                         expect(movieAPIMock.arguments.page) == page
                     }
                 }
@@ -47,13 +49,14 @@ class MovieRepositorySpec: QuickSpec {
 
             context("movie api gets movies -> movies") {
                 it("returns movies") {
-                    movieRepository.getMovies(with: page) { result in
+                    movieRepository.getMovies(with: category, page: page) { result in
                         guard case .success = result else {
                             fail()
                             return
                         }
 
                         expect(movieAPIMock.calls.getMovies) == true
+                        expect(movieAPIMock.arguments.category) == category
                         expect(movieAPIMock.arguments.page) == page
                     }
                 }

@@ -15,20 +15,15 @@ enum AuthRouter: URLRequestConvertible {
 
     private var method: HTTPMethod {
         switch self {
-        case .createToken:
-            return .get
-        default:
-            return .post
+        case .createToken: return .get
+        default: return .post
         }
     }
     private var path: String {
         switch self {
-        case .createToken:
-            return "/authentication/token/new"
-        case .validateToken:
-            return "/authentication/token/validate_with_login"
-        case .createSession:
-            return "/authentication/session/new"
+        case .createToken: return "/authentication/token/new"
+        case .validateToken: return "/authentication/token/validate_with_login"
+        case .createSession: return "/authentication/session/new"
         }
     }
     private var urlParameters: Parameters {
@@ -36,10 +31,8 @@ enum AuthRouter: URLRequestConvertible {
     }
     private var jsonParameters: Parameters? {
         switch self {
-        case .validateToken(let parameters), .createSession(let parameters):
-            return parameters
-        default:
-            return nil
+        case .validateToken(let parameters), .createSession(let parameters): return parameters
+        default: return nil
         }
     }
 

@@ -22,13 +22,30 @@ class MovieRouterSpec: QuickSpec {
 
         describe("as url request") {
             context("case is get movies") {
-                it("returns url request") {
-                    let page = 0
-                    let request = MovieRouter.getMovies(page: page)
-                    let urlRequest = try? request.asURLRequest()
+                context("category is popular") {
+                    it("returns url request") {
+                        let page = 0
+                        let request = MovieRouter.getMovies(category: .popular, page: page)
+                        let urlRequest = try? request.asURLRequest()
 
-                    expect(urlRequest!.url!.absoluteString) == "\(baseURL)/movie/popular?api_key=\(apiKey)&page=\(page)"
-                    expect(urlRequest!.httpMethod) == "GET"
+                        expect(urlRequest!.url!.absoluteString) ==
+                            "\(baseURL)/movie/popular?api_key=\(apiKey)&page=\(page)"
+
+                        expect(urlRequest!.httpMethod) == "GET"
+                    }
+                }
+
+                context("category is top rated") {
+                    it("returns url request") {
+                        let page = 0
+                        let request = MovieRouter.getMovies(category: .topRated, page: page)
+                        let urlRequest = try? request.asURLRequest()
+
+                        expect(urlRequest!.url!.absoluteString) ==
+                            "\(baseURL)/movie/top_rated?api_key=\(apiKey)&page=\(page)"
+
+                        expect(urlRequest!.httpMethod) == "GET"
+                    }
                 }
             }
 

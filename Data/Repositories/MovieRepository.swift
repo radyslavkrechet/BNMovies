@@ -17,8 +17,8 @@ class MovieRepository: MovieRepositoryProtocol {
         self.movieDAO = movieDAO
     }
 
-    func getMovies(with page: Int, handler: @escaping Handler<[Movie]>) {
-        movieAPI.getMovies(with: page, handler: handler)
+    func getMovies(with category: Movie.Category, page: Int, handler: @escaping Handler<[Movie]>) {
+        movieAPI.getMovies(with: category, page: page, handler: handler)
     }
 
     func getFavourites(handler: @escaping Handler<[Movie]>) {

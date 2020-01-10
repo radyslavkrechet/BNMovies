@@ -29,15 +29,11 @@ class UserScoreLabel: TagLabel {
 
         var name = ""
         switch score {
-        case 0:
-            name = ScoreColor.None.rawValue
-        case 1..<40:
-            name = ScoreColor.Bad.rawValue
-        case 40..<70:
-            name = ScoreColor.Good.rawValue
-        default:
-            name = ScoreColor.Great.rawValue
+        case 0: name = ScoreColor.None.rawValue
+        case 1..<40: name = ScoreColor.Bad.rawValue
+        case 40..<70: name = ScoreColor.Good.rawValue
+        default: name = ScoreColor.Great.rawValue
         }
-        backgroundColor = UIColor(named: name)
+        backgroundColor = name.color
     }
 }

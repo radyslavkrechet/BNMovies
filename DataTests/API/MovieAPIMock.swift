@@ -22,6 +22,7 @@ class MovieAPIMock: MovieAPIProtocol {
     }
 
     struct Arguments {
+        var category: Movie.Category?
         var page: Int?
         var id: String?
     }
@@ -30,8 +31,9 @@ class MovieAPIMock: MovieAPIProtocol {
     var calls = Calls()
     var arguments = Arguments()
 
-    func getMovies(with page: Int, handler: @escaping Handler<[Movie]>) {
+    func getMovies(with category: Movie.Category, page: Int, handler: @escaping Handler<[Movie]>) {
         calls.getMovies = true
+        arguments.category = category
         arguments.page = page
         handler(settings.shouldReturnError ? .failure(Mock.Error.force) : .success([]))
     }

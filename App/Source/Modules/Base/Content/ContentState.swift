@@ -13,10 +13,8 @@ enum ContentState: Equatable {
 
     static func == (lhs: ContentState, rhs: ContentState) -> Bool {
         switch (lhs, rhs) {
-        case (.loading, .loading), (.empty, .empty), (.content, .content), (.error, .error):
-            return true
-        default:
-            return false
+        case (.loading, .loading), (.empty, .empty), (.content, .content), (.error, .error): return true
+        default: return false
         }
     }
 }

@@ -23,6 +23,7 @@ class MovieRepositoryMock: MovieRepositoryProtocol {
     }
 
     struct Arguments {
+        var category: Movie.Category?
         var page: Int?
         var id: String?
         var movie: Movie?
@@ -32,8 +33,9 @@ class MovieRepositoryMock: MovieRepositoryProtocol {
     var calls = Calls()
     var arguments = Arguments()
 
-    func getMovies(with page: Int, handler: @escaping Handler<[Movie]>) {
+    func getMovies(with category: Movie.Category, page: Int, handler: @escaping Handler<[Movie]>) {
         calls.getMovies = true
+        arguments.category = category
         arguments.page = page
         movies(handler: handler)
     }

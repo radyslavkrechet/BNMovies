@@ -13,10 +13,8 @@ enum SignInState: Equatable {
 
     static func == (lhs: SignInState, rhs: SignInState) -> Bool {
         switch (lhs, rhs) {
-        case (.loading, .loading), (.error, .error):
-            return true
-        default:
-            return false
+        case (.loading, .loading), (.error, .error): return true
+        default: return false
         }
     }
 }

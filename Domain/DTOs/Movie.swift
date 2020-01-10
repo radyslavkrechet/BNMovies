@@ -9,6 +9,10 @@
 import Foundation
 
 public struct Movie: Identifiable, Equatable {
+    public enum Category: Int, Equatable {
+        case popular, topRated
+    }
+
     public let id: String
     public let title: String
     public let overview: String

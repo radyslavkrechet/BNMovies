@@ -15,6 +15,8 @@ protocol HomeViewProtocol: PaginationViewProtocol {
 class HomeViewController: PaginationViewController<HomePresenter, MoviesDataSource>, HomeViewProtocol {
     @IBOutlet private(set) weak var tableView: UITableView!
 
+    private var isNeedToScrollToTop = false
+
     // MARK: - Lifecycle
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -34,6 +36,13 @@ class HomeViewController: PaginationViewController<HomePresenter, MoviesDataSour
         tableView.delegate = dataSource
     }
 
+    @IBAction func movieCategorySegmentedControlValueDidChange(_ sender: UISegmentedControl) {
+        if let category = Movie.Category(rawValue: sender.selectedSegmentIndex) {
+            isNeedToScrollToTop = true
+            presenter.changeMovieCategory(category)
+        }
+    }
+
     // MARK: - DataSource
 
     override func userDidSelectItem(_ item: Movie) {
@@ -48,5 +57,12 @@ class HomeViewController: PaginationViewController<HomePresenter, MoviesDataSour
         refreshControl.endRefreshing()
         dataSource.populate(with: movies)
         tableView.reloadData()
+
+        if isNeedToScrollToTop {
+            isNeedToScrollToTop.toggle()
+
+            let indexPath = IndexPath(row: 0, section: 0)
+            tableView.scrollToRow(at: indexPath, at: .top, animated: false)
+        }
     }
 }
