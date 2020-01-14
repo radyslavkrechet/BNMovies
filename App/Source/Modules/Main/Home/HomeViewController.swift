@@ -20,8 +20,8 @@ class HomeViewController: PaginationViewController<HomePresenter, MoviesDataSour
     // MARK: - Lifecycle
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let deailsViewController = segue.destination as? DetailsViewController, let movie = sender as? Movie {
-            deailsViewController.presenter.id = movie.id
+        if let deailsViewController = segue.destination as? DetailsViewController, let id = sender as? String {
+            deailsViewController.presenter.id = id
         }
     }
 
@@ -36,10 +36,10 @@ class HomeViewController: PaginationViewController<HomePresenter, MoviesDataSour
         tableView.delegate = dataSource
     }
 
-    @IBAction func movieCategorySegmentedControlValueDidChange(_ sender: UISegmentedControl) {
-        if let category = Movie.Category(rawValue: sender.selectedSegmentIndex) {
+    @IBAction func chartSegmentedControlValueDidChange(_ sender: UISegmentedControl) {
+        if let chart = Movie.Chart(rawValue: sender.selectedSegmentIndex) {
             isNeedToScrollToTop = true
-            presenter.changeMovieCategory(category)
+            presenter.changeChart(chart)
         }
     }
 
@@ -48,7 +48,7 @@ class HomeViewController: PaginationViewController<HomePresenter, MoviesDataSour
     override func userDidSelectItem(_ item: Movie) {
         super.userDidSelectItem(item)
 
-        present(.Details, with: item)
+        present(.Details, with: item.id)
     }
 
     // MARK: - HomeViewProtocol

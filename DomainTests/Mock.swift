@@ -22,16 +22,17 @@ enum Mock {
     }
 
     static var movie: Movie {
-        movie(isFavourite: false)
+        movie(isFavourite: false, isInWatchlist: false)
     }
 
-    static func movie(isFavourite: Bool) -> Movie {
+    static func movie(isFavourite: Bool, isInWatchlist: Bool) -> Movie {
         return Movie(id: "id",
                      title: "title",
                      overview: "overview",
                      posterSource: "posterSource",
                      backdropSource: "backdropSource",
                      userScore: 0,
-                     isFavourite: isFavourite)
+                     isFavourite: isFavourite,
+                     isInWatchlist: isInWatchlist)
     }
 }

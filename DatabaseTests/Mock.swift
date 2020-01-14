@@ -30,7 +30,8 @@ enum Mock {
               posterSource: "posterSource",
               backdropSource: "backdropSource",
               userScore: 0,
-              isFavourite: false)
+              isFavourite: false,
+              isInWatchlist: false)
     }
 
     static var genreObject: Genre {

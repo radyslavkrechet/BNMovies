@@ -35,7 +35,7 @@ class MovieAPISpec: QuickSpec {
                 it("returns error") {
                     networkManagerMock.settings.shouldReturnError = true
 
-                    movieAPI.getMovies(with: .popular, page: page) { result in
+                    movieAPI.getMovies(.popular, page: page) { result in
                         guard case .failure = result else {
                             fail()
                             return
@@ -55,7 +55,7 @@ class MovieAPISpec: QuickSpec {
                     it("returns error") {
                         coderServiceMock.settings.shouldReturnError = true
 
-                        movieAPI.getMovies(with: .popular, page: page) { result in
+                        movieAPI.getMovies(.popular, page: page) { result in
                             guard case .failure = result else {
                                 fail()
                                 return
@@ -69,7 +69,7 @@ class MovieAPISpec: QuickSpec {
 
                 context("json is valid") {
                     it("returns movies") {
-                        movieAPI.getMovies(with: .popular, page: page) { result in
+                        movieAPI.getMovies(.popular, page: page) { result in
                             guard case .success = result else {
                                 fail()
                                 return

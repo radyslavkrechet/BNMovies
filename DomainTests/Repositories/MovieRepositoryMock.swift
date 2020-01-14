@@ -16,14 +16,17 @@ class MovieRepositoryMock: MovieRepositoryProtocol {
     struct Calls {
         var getMovies = false
         var getFavourites = false
+        var getWatchlist = false
         var getMovie = false
         var getSimilarMovies = false
         var addToFavourites = false
         var deleteFromFavourites = false
+        var addToWatchlist = false
+        var deleteFromWatchlist = false
     }
 
     struct Arguments {
-        var category: Movie.Category?
+        var chart: Movie.Chart?
         var page: Int?
         var id: String?
         var movie: Movie?
@@ -33,15 +36,20 @@ class MovieRepositoryMock: MovieRepositoryProtocol {
     var calls = Calls()
     var arguments = Arguments()
 
-    func getMovies(with category: Movie.Category, page: Int, handler: @escaping Handler<[Movie]>) {
+    func getMovies(_ chart: Movie.Chart, page: Int, handler: @escaping Handler<[Movie]>) {
         calls.getMovies = true
-        arguments.category = category
+        arguments.chart = chart
         arguments.page = page
         movies(handler: handler)
     }
 
     func getFavourites(handler: @escaping Handler<[Movie]>) {
         calls.getFavourites = true
+        movies(handler: handler)
+    }
+
+    func getWatchlist(handler: @escaping Handler<[Movie]>) {
+        calls.getWatchlist = true
         movies(handler: handler)
     }
 
@@ -65,6 +73,18 @@ class MovieRepositoryMock: MovieRepositoryProtocol {
 
     func deleteFromFavourites(_ movie: Movie, handler: @escaping Handler<Movie>) {
         calls.deleteFromFavourites = true
+        arguments.movie = movie
+        self.movie(handler: handler)
+    }
+
+    func addToWatchlist(_ movie: Movie, handler: @escaping Handler<Movie>) {
+        calls.addToWatchlist = true
+        arguments.movie = movie
+        self.movie(handler: handler)
+    }
+
+    func deleteFromWatchlist(_ movie: Movie, handler: @escaping Handler<Movie>) {
+        calls.deleteFromWatchlist = true
         arguments.movie = movie
         self.movie(handler: handler)
     }

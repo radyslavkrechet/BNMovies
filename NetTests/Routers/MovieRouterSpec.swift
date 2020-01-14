@@ -25,7 +25,7 @@ class MovieRouterSpec: QuickSpec {
                 context("category is popular") {
                     it("returns url request") {
                         let page = 0
-                        let request = MovieRouter.getMovies(category: .popular, page: page)
+                        let request = MovieRouter.getMovies(chart: .popular, page: page)
                         let urlRequest = try? request.asURLRequest()
 
                         expect(urlRequest!.url!.absoluteString) ==
@@ -38,7 +38,7 @@ class MovieRouterSpec: QuickSpec {
                 context("category is top rated") {
                     it("returns url request") {
                         let page = 0
-                        let request = MovieRouter.getMovies(category: .topRated, page: page)
+                        let request = MovieRouter.getMovies(chart: .topRated, page: page)
                         let urlRequest = try? request.asURLRequest()
 
                         expect(urlRequest!.url!.absoluteString) ==

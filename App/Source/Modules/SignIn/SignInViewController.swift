@@ -39,7 +39,7 @@ class SignInViewController: ViewController<SignInPresenter>, SignInViewProtocol,
     }
 
     private func setupGradient() {
-        guard let startColor = "GradientStart".color, let endColor = "GradientEnd".color else { return }
+        guard let startColor = "Blue".color, let endColor = "Green".color else { return }
 
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.view.bounds

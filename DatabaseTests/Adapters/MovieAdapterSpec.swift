@@ -41,6 +41,7 @@ class MovieAdapterSpec: QuickSpec {
                         entity.userScore.value = 1
                         entity.genres.value = [genre]
                         entity.isFavourite.value = false
+                        entity.isInWatchlist.value = false
 
                         let object = movieAdapter.fromStorage(entity)
 
@@ -54,6 +55,7 @@ class MovieAdapterSpec: QuickSpec {
                         expect(object.userScore) == entity.userScore.value
                         expect(object.genres.count) == entity.genres.value.count
                         expect(object.isFavourite) == entity.isFavourite.value
+                        expect(object.isInWatchlist) == entity.isInWatchlist.value
 
                         expect(genreAdapter.calls.fromStorage) == true
 
@@ -74,7 +76,8 @@ class MovieAdapterSpec: QuickSpec {
                     releaseDate: Date(),
                     userScore: 1,
                     genres: [],
-                    isFavourite: false)
+                    isFavourite: false,
+                    isInWatchlist: false)
 
                 expect {
                     return try CoreStoreDefaults.dataStack.perform(synchronous: { transaction -> MovieEntity in
@@ -93,6 +96,7 @@ class MovieAdapterSpec: QuickSpec {
                         expect(entity.userScore.value) == object.userScore
                         expect(entity.genres.value) == relationship
                         expect(entity.isFavourite.value) == object.isFavourite
+                        expect(entity.isInWatchlist.value) == object.isInWatchlist
 
                         return entity
                     })

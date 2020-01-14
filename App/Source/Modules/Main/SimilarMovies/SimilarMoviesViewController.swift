@@ -24,8 +24,8 @@ class SimilarMoviesViewController: ListViewController<SimilarMoviesPresenter, Si
     // MARK: - Lifecycle
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let deailsViewController = segue.destination as? DetailsViewController, let movie = sender as? Movie {
-            deailsViewController.presenter.id = movie.id
+        if let deailsViewController = segue.destination as? DetailsViewController, let id = sender as? String {
+            deailsViewController.presenter.id = id
         }
     }
 
@@ -44,7 +44,7 @@ class SimilarMoviesViewController: ListViewController<SimilarMoviesPresenter, Si
     override func userDidSelectItem(_ item: Movie) {
         super.userDidSelectItem(item)
 
-        present(.Details, with: item)
+        present(.Details, with: item.id)
     }
 
     // MARK: - SimilarMoviesViewProtocol

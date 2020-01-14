@@ -9,10 +9,13 @@
 import Foundation
 
 public protocol MovieRepositoryProtocol: class {
-    func getMovies(with category: Movie.Category, page: Int, handler: @escaping Handler<[Movie]>)
+    func getMovies(_ chart: Movie.Chart, page: Int, handler: @escaping Handler<[Movie]>)
     func getFavourites(handler: @escaping Handler<[Movie]>)
+    func getWatchlist(handler: @escaping Handler<[Movie]>)
     func getMovie(with id: String, handler: @escaping Handler<Movie>)
     func getSimilarMovies(_ id: String, handler: @escaping Handler<[Movie]>)
     func addToFavourites(_ movie: Movie, handler: @escaping Handler<Movie>)
     func deleteFromFavourites(_ movie: Movie, handler: @escaping Handler<Movie>)
+    func addToWatchlist(_ movie: Movie, handler: @escaping Handler<Movie>)
+    func deleteFromWatchlist(_ movie: Movie, handler: @escaping Handler<Movie>)
 }

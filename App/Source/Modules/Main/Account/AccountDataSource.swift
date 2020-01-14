@@ -10,7 +10,7 @@ import Domain
 import UIKit
 
 protocol AccountDataSourceProtocol: UITableViewDataSource, UITableViewDelegate {
-    var navigateToFavourites: (() -> Void)? { get set }
+    var navigate: ((Movie.List) -> Void)? { get set }
     var userDidSignOut: (() -> Void)? { get set }
 
     func populate(with user: User)
@@ -25,10 +25,6 @@ class AccountDataSource: NSObject, AccountDataSourceProtocol {
         case details
     }
 
-    private enum ListsRow: Int, CaseIterable {
-        case favourites, watchlist
-    }
-
     private enum ActionsRow: Int, CaseIterable {
         case signOut
     }
@@ -38,7 +34,7 @@ class AccountDataSource: NSObject, AccountDataSourceProtocol {
         case extra = 70
     }
 
-    var navigateToFavourites: (() -> Void)?
+    var navigate: ((Movie.List) -> Void)?
     var userDidSignOut: (() -> Void)?
 
     private var user: User?
@@ -56,7 +52,7 @@ class AccountDataSource: NSObject, AccountDataSourceProtocol {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch Section(rawValue: section)! {
         case .user: return UserRow.allCases.count
-        case .lists: return ListsRow.allCases.count
+        case .lists: return Movie.List.allCases.count
         case .actions: return ActionsRow.allCases.count
         }
     }
@@ -77,18 +73,19 @@ class AccountDataSource: NSObject, AccountDataSourceProtocol {
         case .lists:
             cell.accessoryType = .disclosureIndicator
 
-            switch ListsRow(rawValue: indexPath.row)! {
+            switch Movie.List(rawValue: indexPath.row)! {
             case .favourites:
+                cell.imageView?.image = "heart.fill".systemImage
                 cell.textLabel?.text = "AccountViewController.favourites".localized
             case .watchlist:
-                cell.selectionStyle = .none
+                cell.imageView?.image = "bookmark.fill".systemImage
                 cell.textLabel?.text = "AccountViewController.watchlist".localized
             }
         case .actions:
             switch ActionsRow(rawValue: indexPath.row)! {
             case .signOut:
                 cell.textLabel?.text = "AccountViewController.signOut".localized
-                cell.textLabel?.textColor = tableView.tintColor
+                cell.textLabel?.textColor = "Red".color
             }
         }
 
@@ -110,10 +107,8 @@ class AccountDataSource: NSObject, AccountDataSourceProtocol {
 
         switch Section(rawValue: indexPath.section)! {
         case .lists:
-            switch ListsRow(rawValue: indexPath.row)! {
-            case .favourites: navigateToFavourites?()
-            default: return
-            }
+            let list = Movie.List(rawValue: indexPath.row)!
+            navigate?(list)
         case .actions:
             switch ActionsRow(rawValue: indexPath.row)! {
             case .signOut: userDidSignOut?()

@@ -121,6 +121,39 @@ class MovieDAOSpec: QuickSpec {
             }
         }
 
+        describe("get watchlist") {
+            context("database manager gets watchlist -> error") {
+                it("returns error") {
+                    databaseManagerMock.settings.shouldReturnError = true
+
+                    movieDAO.getWatchlist { result in
+                        guard case .failure = result else {
+                            fail()
+                            return
+                        }
+
+                        expect(databaseManagerMock.calls.getAll) == true
+                        expect(databaseManagerMock.arguments.predicate) == "isInWatchlist == true"
+                    }
+                }
+            }
+
+            context("database manager gets watchlist -> movies") {
+                it("returns movies") {
+                    movieDAO.getWatchlist { result in
+                        guard case .success = result else {
+                            fail()
+                            return
+                        }
+
+                        expect(databaseManagerMock.calls.getAll) == true
+                        expect(databaseManagerMock.arguments.predicate) == "isInWatchlist == true"
+                        expect(movieAdapterMock.calls.fromStorage) == true
+                    }
+                }
+            }
+        }
+
         describe("get movie") {
             let id = "id"
 

@@ -9,8 +9,11 @@
 import Foundation
 
 public struct Movie: Identifiable, Equatable {
-    public enum Category: Int, Equatable {
+    public enum Chart: Int, Equatable {
         case popular, topRated
+    }
+    public enum List: Int, Equatable, CaseIterable {
+        case favourites, watchlist
     }
 
     public let id: String
@@ -23,6 +26,7 @@ public struct Movie: Identifiable, Equatable {
     public let userScore: Int
     public let genres: [Genre]
     public let isFavourite: Bool
+    public let isInWatchlist: Bool
 
     public init(id: String,
                 title: String,
@@ -33,7 +37,8 @@ public struct Movie: Identifiable, Equatable {
                 releaseDate: Date? = nil,
                 userScore: Int,
                 genres: [Genre] = [],
-                isFavourite: Bool) {
+                isFavourite: Bool,
+                isInWatchlist: Bool) {
 
         self.id = id
         self.title = title
@@ -45,5 +50,6 @@ public struct Movie: Identifiable, Equatable {
         self.userScore = userScore
         self.genres = genres
         self.isFavourite = isFavourite
+        self.isInWatchlist = isInWatchlist
     }
 }

@@ -49,6 +49,14 @@ class MovieDAO<DatabaseManager: DatabaseManagerProtocol>: MovieDAOProtocol
         databaseManager.getAll(predicate: "isFavourite == true", adapter: adapter, handler: handler)
     }
 
+    func getWatchlist(handler: @escaping Handler<[Movie]>) {
+        let adapter: (MovieEntity) -> Movie = { entity in
+            return self.movieAdapter.fromStorage(entity)
+        }
+
+        databaseManager.getAll(predicate: "isInWatchlist == true", adapter: adapter, handler: handler)
+    }
+
     func getMovie(with id: String, handler: @escaping Handler<Movie?>) {
         let adapter: (MovieEntity) -> Movie = { entity in
             return self.movieAdapter.fromStorage(entity)

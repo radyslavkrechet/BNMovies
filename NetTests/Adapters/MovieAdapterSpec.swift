@@ -48,6 +48,7 @@ class MovieAdapterSpec: QuickSpec {
                     expect(movie.userScore) == 75
                     expect(movie.genres).to(beEmpty())
                     expect(movie.isFavourite) == false
+                    expect(movie.isInWatchlist) == false
 
                     expect(genreAdapterMock.calls.toObject) == false
                 }
@@ -72,6 +73,7 @@ class MovieAdapterSpec: QuickSpec {
                     expect(movie.userScore) == 75
                     expect(movie.genres.count) == response.genres!.count
                     expect(movie.isFavourite) == false
+                    expect(movie.isInWatchlist) == false
 
                     expect(genreAdapterMock.calls.toObject) == true
                 }

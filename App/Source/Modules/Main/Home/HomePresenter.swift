@@ -9,7 +9,7 @@
 import Domain
 
 protocol HomePresenterProtocol: PaginationPresenterProtocol {
-    func changeMovieCategory(_ category: Movie.Category)
+    func changeChart(_ chart: Movie.Chart)
 }
 
 class HomePresenter: HomePresenterProtocol {
@@ -17,7 +17,7 @@ class HomePresenter: HomePresenterProtocol {
 
     private let getMoviesUseCase: GetMoviesUseCaseProtocol
     private var paginationService: PaginationServiceProtocol
-    private var category = Movie.Category.popular
+    private var chart = Movie.Chart.popular
     private var movies: [Movie]!
 
     init(getMoviesUseCase: GetMoviesUseCaseProtocol,
@@ -46,9 +46,9 @@ class HomePresenter: HomePresenterProtocol {
         getMovies()
     }
 
-    func changeMovieCategory(_ category: Movie.Category) {
-        self.category = category
-        refreshContent()
+    func changeChart(_ chart: Movie.Chart) {
+        self.chart = chart
+        tryAgain()
     }
 
     private func getMovies() {
@@ -59,7 +59,7 @@ class HomePresenter: HomePresenterProtocol {
             view?.populate(with: .loading)
         }
 
-        getMoviesUseCase.execute(with: category, page: paginationService.page) { [weak self] result in
+        getMoviesUseCase.execute(with: chart, page: paginationService.page) { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.populate(with: .error(error))
             case .success(let movies): self?.process(movies)

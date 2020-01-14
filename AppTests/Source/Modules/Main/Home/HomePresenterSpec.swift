@@ -54,7 +54,7 @@ class HomePresenterSpec: QuickSpec {
 
                     expect(paginationServiceMock.calls.startLoading) == true
                     expect(getMoviesUseCaseMock.calls.execute) == true
-                    expect(getMoviesUseCaseMock.arguments.category) == .popular
+                    expect(getMoviesUseCaseMock.arguments.chart) == .popular
                     expect(getMoviesUseCaseMock.arguments.page) == paginationServiceMock.page
 
                     expect(homeViewMock.calls.populateWithState) == true
@@ -72,7 +72,7 @@ class HomePresenterSpec: QuickSpec {
 
                     expect(paginationServiceMock.calls.startLoading) == true
                     expect(getMoviesUseCaseMock.calls.execute) == true
-                    expect(getMoviesUseCaseMock.arguments.category) == .popular
+                    expect(getMoviesUseCaseMock.arguments.chart) == .popular
                     expect(getMoviesUseCaseMock.arguments.page) == paginationServiceMock.page
 
                     expect(homeViewMock.calls.populateWithState) == true
@@ -99,7 +99,7 @@ class HomePresenterSpec: QuickSpec {
 
                         expect(paginationServiceMock.calls.startLoading) == true
                         expect(getMoviesUseCaseMock.calls.execute) == true
-                        expect(getMoviesUseCaseMock.arguments.category) == .popular
+                        expect(getMoviesUseCaseMock.arguments.chart) == .popular
                         expect(getMoviesUseCaseMock.arguments.page) == paginationServiceMock.page
 
                         expect(homeViewMock.calls.populateWithState) == true
@@ -115,7 +115,7 @@ class HomePresenterSpec: QuickSpec {
 
                         expect(paginationServiceMock.calls.startLoading) == true
                         expect(getMoviesUseCaseMock.calls.execute) == true
-                        expect(getMoviesUseCaseMock.arguments.category) == .popular
+                        expect(getMoviesUseCaseMock.arguments.chart) == .popular
                         expect(getMoviesUseCaseMock.arguments.page) == paginationServiceMock.page
 
                         expect(homeViewMock.calls.populateWithState) == true
@@ -133,7 +133,7 @@ class HomePresenterSpec: QuickSpec {
 
                         expect(paginationServiceMock.calls.startLoading) == true
                         expect(getMoviesUseCaseMock.calls.execute) == true
-                        expect(getMoviesUseCaseMock.arguments.category) == .popular
+                        expect(getMoviesUseCaseMock.arguments.chart) == .popular
                         expect(getMoviesUseCaseMock.arguments.page) == paginationServiceMock.page
 
                         expect(homeViewMock.calls.populateWithState) == true
@@ -174,7 +174,7 @@ class HomePresenterSpec: QuickSpec {
                     expect(paginationServiceMock.calls.reset) == true
                     expect(paginationServiceMock.calls.startLoading) == true
                     expect(getMoviesUseCaseMock.calls.execute) == true
-                    expect(getMoviesUseCaseMock.arguments.category) == .popular
+                    expect(getMoviesUseCaseMock.arguments.chart) == .popular
                     expect(getMoviesUseCaseMock.arguments.page) == paginationServiceMock.page
 
                     expect(homeViewMock.calls.populateWithState) == true
@@ -189,7 +189,7 @@ class HomePresenterSpec: QuickSpec {
                     expect(paginationServiceMock.calls.reset) == true
                     expect(paginationServiceMock.calls.startLoading) == true
                     expect(getMoviesUseCaseMock.calls.execute) == true
-                    expect(getMoviesUseCaseMock.arguments.category) == .popular
+                    expect(getMoviesUseCaseMock.arguments.chart) == .popular
                     expect(getMoviesUseCaseMock.arguments.page) == paginationServiceMock.page
 
                     expect(homeViewMock.calls.populateWithState) == true
@@ -218,7 +218,7 @@ class HomePresenterSpec: QuickSpec {
                     expect(paginationServiceMock.calls.reset) == true
                     expect(paginationServiceMock.calls.startLoading) == true
                     expect(getMoviesUseCaseMock.calls.execute) == true
-                    expect(getMoviesUseCaseMock.arguments.category) == .popular
+                    expect(getMoviesUseCaseMock.arguments.chart) == .popular
                     expect(getMoviesUseCaseMock.arguments.page) == paginationServiceMock.page
 
                     expect(homeViewMock.calls.populateWithState) == true
@@ -238,7 +238,7 @@ class HomePresenterSpec: QuickSpec {
                     expect(paginationServiceMock.calls.reset) == true
                     expect(paginationServiceMock.calls.startLoading) == true
                     expect(getMoviesUseCaseMock.calls.execute) == true
-                    expect(getMoviesUseCaseMock.arguments.category) == .popular
+                    expect(getMoviesUseCaseMock.arguments.chart) == .popular
                     expect(getMoviesUseCaseMock.arguments.page) == paginationServiceMock.page
 
                     expect(homeViewMock.calls.populateWithState) == true
@@ -257,7 +257,7 @@ class HomePresenterSpec: QuickSpec {
                     expect(paginationServiceMock.calls.reset) == true
                     expect(paginationServiceMock.calls.startLoading) == true
                     expect(getMoviesUseCaseMock.calls.execute) == true
-                    expect(getMoviesUseCaseMock.arguments.category) == .popular
+                    expect(getMoviesUseCaseMock.arguments.chart) == .popular
                     expect(getMoviesUseCaseMock.arguments.page) == paginationServiceMock.page
 
                     expect(homeViewMock.calls.populateWithState) == true
@@ -270,8 +270,8 @@ class HomePresenterSpec: QuickSpec {
             }
         }
 
-        describe("change movie category") {
-            let category = Movie.Category.topRated
+        describe("change chart") {
+            let chart = Movie.Chart.topRated
 
             beforeEach {
                 homePresenter.getContent()
@@ -281,31 +281,31 @@ class HomePresenterSpec: QuickSpec {
                 it("populates view with error state") {
                     getMoviesUseCaseMock.settings.shouldReturnError = true
 
-                    homePresenter.changeMovieCategory(category)
+                    homePresenter.changeChart(chart)
 
                     expect(paginationServiceMock.calls.reset) == true
                     expect(paginationServiceMock.calls.startLoading) == true
                     expect(getMoviesUseCaseMock.calls.execute) == true
-                    expect(getMoviesUseCaseMock.arguments.category) == category
+                    expect(getMoviesUseCaseMock.arguments.chart) == chart
                     expect(getMoviesUseCaseMock.arguments.page) == paginationServiceMock.page
 
                     expect(homeViewMock.calls.populateWithState) == true
-                    expect(homeViewMock.arguments.states) == [.loading, .content, .error(Mock.Error.force)]
+                    expect(homeViewMock.arguments.states) == [.loading, .content, .loading, .error(Mock.Error.force)]
                 }
             }
 
             context("get movies use case executes -> movies") {
                 it("populates view with content state and movies") {
-                    homePresenter.changeMovieCategory(category)
+                    homePresenter.changeChart(chart)
 
                     expect(paginationServiceMock.calls.reset) == true
                     expect(paginationServiceMock.calls.startLoading) == true
                     expect(getMoviesUseCaseMock.calls.execute) == true
-                    expect(getMoviesUseCaseMock.arguments.category) == category
+                    expect(getMoviesUseCaseMock.arguments.chart) == chart
                     expect(getMoviesUseCaseMock.arguments.page) == paginationServiceMock.page
 
                     expect(homeViewMock.calls.populateWithState) == true
-                    expect(homeViewMock.arguments.states) == [.loading, .content, .content]
+                    expect(homeViewMock.arguments.states) == [.loading, .content, .loading, .content]
                     expect(homeViewMock.calls.populateWithMovies) == true
 
                     expect(paginationServiceMock.calls.stopLoading) == true

@@ -11,8 +11,7 @@ import Kingfisher
 
 protocol DetailsViewProtocol: ContentViewProtocol {
     func populate(with movie: Movie)
-    func populate(with favouriteTitle: String)
-    func presentFavouriteError(_ error: Error)
+    func presentMarkError(_ error: Error)
 }
 
 class DetailsViewController: ContentViewController<DetailsPresenter>, DetailsViewProtocol {
@@ -24,6 +23,8 @@ class DetailsViewController: ContentViewController<DetailsPresenter>, DetailsVie
     @IBOutlet private(set) weak var releaseDateLabel: UILabel!
     @IBOutlet private(set) weak var userScoreLabel: UserScoreLabel!
     @IBOutlet private(set) weak var overviewLabel: UILabel!
+    @IBOutlet private(set) weak var favouriteButton: UIBarButtonItem!
+    @IBOutlet private(set) weak var watchlistButton: UIBarButtonItem!
 
     // MARK: - Lifecycle
 
@@ -41,10 +42,21 @@ class DetailsViewController: ContentViewController<DetailsPresenter>, DetailsVie
 
     // MARK: - Actions
 
-    @IBAction private func favouriteButtonDidTap(_ sender: UIBarButtonItem) {
-        presenter.markMovieAsFavourite()
+    @IBAction private func shareButtonDidTap(_ sender: UIBarButtonItem) {
+        let activityItems = [presenter.shareURL]
+        let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        present(activityViewController, animated: true)
 
-        if let title = navigationItem.rightBarButtonItem?.title {
+        if let title = sender.title {
+            analyticsService?.logClick(in: self.nameOfClass, senderTitle: title)
+        }
+    }
+
+    @IBAction private func markButtonDidTap(_ sender: UIBarButtonItem) {
+        let state = Movie.List(rawValue: sender.tag)!
+        presenter.markMovie(state: state)
+
+        if let title = sender.title {
             analyticsService?.logClick(in: self.nameOfClass, senderTitle: title)
         }
     }
@@ -64,14 +76,12 @@ class DetailsViewController: ContentViewController<DetailsPresenter>, DetailsVie
         releaseDateLabel.text = movie.releaseDateToDisplay
         userScoreLabel.populate(with: movie.userScore)
         overviewLabel.text = movie.overview
+
+        favouriteButton.image = "heart\(movie.isFavourite ? ".fill" : "")".systemImage
+        watchlistButton.image = "bookmark\(movie.isInWatchlist ? ".fill" : "")".systemImage
     }
 
-    func populate(with favouriteTitle: String) {
-        guard let button = navigationItem.rightBarButtonItem else { return }
-        button.title = favouriteTitle
-    }
-
-    func presentFavouriteError(_ error: Error) {
+    func presentMarkError(_ error: Error) {
         presentErrorAlert(with: error.localizedDescription)
     }
 }

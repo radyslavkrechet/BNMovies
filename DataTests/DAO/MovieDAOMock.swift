@@ -20,6 +20,7 @@ class MovieDAOMock: MovieDAOProtocol {
     struct Calls {
         var set = false
         var getFavourites = false
+        var getWatchlist = false
         var getMovie = false
     }
 
@@ -45,6 +46,12 @@ class MovieDAOMock: MovieDAOProtocol {
     func getFavourites(handler: @escaping Handler<[Movie]>) {
         run()
         calls.getFavourites = true
+        handler(shouldReturnError ? .failure(Mock.Error.force) : .success([]))
+    }
+
+    func getWatchlist(handler: @escaping Handler<[Movie]>) {
+        run()
+        calls.getWatchlist = true
         handler(shouldReturnError ? .failure(Mock.Error.force) : .success([]))
     }
 

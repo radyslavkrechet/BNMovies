@@ -22,22 +22,25 @@ struct MainModuleAssembly: Assembly {
             return HomePresenter(getMoviesUseCase: getMoviesUseCase)
         }
 
-        container.register(FavouritesPresenter.self) { resolver in
-            let getFavouritesUseCase = resolver.resolve(GetFavouritesUseCaseProtocol.self)!
-            return FavouritesPresenter(getFavouritesUseCase: getFavouritesUseCase)
-        }
-
         container.register(AccountPresenter.self) { resolver in
             let getUserUseCase = resolver.resolve(GetUserUseCaseProtocol.self)!
             let signOutUseCase = resolver.resolve(SignOutUseCaseProtocol.self)!
             return AccountPresenter(getUserUseCase: getUserUseCase, signOutUseCase: signOutUseCase)
         }
 
+        container.register(MoviesPresenter.self) { resolver in
+            let getFavouritesUseCase = resolver.resolve(GetFavouritesUseCaseProtocol.self)!
+            let getWatchlistUseCase = resolver.resolve(GetWatchlistUseCaseProtocol.self)!
+            return MoviesPresenter(getFavouritesUseCase: getFavouritesUseCase, getWatchlistUseCase: getWatchlistUseCase)
+        }
+
         container.register(DetailsPresenter.self) { resolver in
             let getMovieUseCase = resolver.resolve(GetMovieUseCaseProtocol.self)!
             let changeMovieFavouriteStateUseCase = resolver.resolve(ChangeMovieFavouriteStateUseCaseProtocol.self)!
+            let changeMovieInWatchlistStateUseCase = resolver.resolve(ChangeMovieInWatchlistStateUseCaseProtocol.self)!
             return DetailsPresenter(getMovieUseCase: getMovieUseCase,
-                                    changeMovieFavouriteStateUseCase: changeMovieFavouriteStateUseCase)
+                                    changeMovieFavouriteStateUseCase: changeMovieFavouriteStateUseCase,
+                                    changeMovieInWatchlistStateUseCase: changeMovieInWatchlistStateUseCase)
         }
 
         container.register(SimilarMoviesPresenter.self) { resolver in
@@ -47,6 +50,10 @@ struct MainModuleAssembly: Assembly {
     }
 
     private func registerDataSources(in container: Container) {
+        container.register(AccountDataSource.self) { _ in
+            AccountDataSource()
+        }
+
         container.register(MoviesDataSource.self) { _ in
             MoviesDataSource()
         }
@@ -64,16 +71,17 @@ struct MainModuleAssembly: Assembly {
             controller.analyticsService = resolver.resolve(AnalyticsServiceProtocol.self)
         }
 
-        container.storyboardInitCompleted(FavouritesViewController.self) { resolver, controller in
-            controller.presenter = resolver.resolve(FavouritesPresenter.self)!
-            controller.presenter.view = controller
-            controller.dataSource = resolver.resolve(MoviesDataSource.self)!
-            controller.analyticsService = resolver.resolve(AnalyticsServiceProtocol.self)
-        }
-
         container.storyboardInitCompleted(AccountViewController.self) { resolver, controller in
             controller.presenter = resolver.resolve(AccountPresenter.self)!
             controller.presenter.view = controller
+            controller.dataSource = resolver.resolve(AccountDataSource.self)!
+            controller.analyticsService = resolver.resolve(AnalyticsServiceProtocol.self)
+        }
+
+        container.storyboardInitCompleted(MoviesViewController.self) { resolver, controller in
+            controller.presenter = resolver.resolve(MoviesPresenter.self)!
+            controller.presenter.view = controller
+            controller.dataSource = resolver.resolve(MoviesDataSource.self)!
             controller.analyticsService = resolver.resolve(AnalyticsServiceProtocol.self)
         }
 

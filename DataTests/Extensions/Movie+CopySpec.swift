@@ -17,7 +17,7 @@ class MovieCopySpec: QuickSpec {
         describe("copy") {
             context("without argument") {
                 it("returns copy") {
-                    let movie = Mock.movie(isFavourite: false)
+                    let movie = Mock.movie
                     let copy = movie.copy()
 
                     expect(copy) == movie
@@ -26,8 +26,8 @@ class MovieCopySpec: QuickSpec {
 
             context("with argument") {
                 it("returns copy with modified property") {
-                    let movie = Mock.movie(isFavourite: false)
-                    let copy = movie.copy(isFavourite: true)
+                    let movie = Mock.movie(isFavourite: false, isInWatchlist: false)
+                    let copy = movie.copy(isFavourite: true, isInWatchlist: true)
 
                     expect(copy.id) == movie.id
                     expect(copy.title) == movie.title
@@ -39,6 +39,7 @@ class MovieCopySpec: QuickSpec {
                     expect(copy.userScore) == movie.userScore
                     expect(copy.genres) == movie.genres
                     expect(copy.isFavourite) == true
+                    expect(copy.isInWatchlist) == true
                 }
             }
         }

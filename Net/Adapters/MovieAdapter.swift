@@ -57,6 +57,7 @@ struct MovieAdapter: MovieAdapterProtocol {
                      releaseDate: releaseDate,
                      userScore: Int(response.voteAverage * 10),
                      genres: response.genres?.map { genreAdapter.toObject($0) } ?? [],
-                     isFavourite: false)
+                     isFavourite: false,
+                     isInWatchlist: false)
     }
 }

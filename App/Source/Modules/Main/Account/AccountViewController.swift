@@ -18,7 +18,7 @@ protocol AccountViewProtocol: ContentViewProtocol {
 class AccountViewController: ContentViewController<AccountPresenter>, AccountViewProtocol {
     @IBOutlet private(set) weak var tableView: UITableView!
 
-    var dataSource: AccountDataSourceProtocol! = AccountDataSource()
+    var dataSource: AccountDataSourceProtocol!
 
     // MARK: - Lifecycle
 
@@ -26,6 +26,12 @@ class AccountViewController: ContentViewController<AccountPresenter>, AccountVie
         super.viewDidLoad()
 
         setupDataSource()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let moviesViewController = segue.destination as? MoviesViewController, let source = sender as? Movie.List {
+            moviesViewController.presenter.source = source
+        }
     }
 
     // MARK: - Setup
@@ -39,8 +45,8 @@ class AccountViewController: ContentViewController<AccountPresenter>, AccountVie
     }
 
     func setupDataSource() {
-        dataSource.navigateToFavourites = { [weak self] in
-            self?.present(.Favourites)
+        dataSource.navigate = { [weak self] source in
+            self?.present(.Movies, with: source)
         }
 
         dataSource.userDidSignOut = { [weak self] in

@@ -10,6 +10,6 @@ import UIKit
 
 enum AppearanceService {
     static func setup() {
-        UIView.appearance().tintColor = "Brand".color
+        UIView.appearance().tintColor = "Green".color
     }
 }

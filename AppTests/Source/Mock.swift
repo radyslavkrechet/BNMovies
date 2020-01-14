@@ -39,7 +39,8 @@ enum Mock {
                      releaseDate: hasReleaeDate ? Date() : nil,
                      userScore: 1,
                      genres: genres,
-                     isFavourite: isFavourite)
+                     isFavourite: isFavourite,
+                     isInWatchlist: false)
     }
 
     static func genre(name: String) -> Genre {

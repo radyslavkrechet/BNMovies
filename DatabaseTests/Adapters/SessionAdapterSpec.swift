@@ -43,7 +43,7 @@ class SessionAdapterSpec: QuickSpec {
 
         describe("to storage") {
             it("returns session entity") {
-                let object = Session(id: "id", token: "token")
+                let object = Mock.sessionObject
 
                 expect {
                     return try CoreStoreDefaults.dataStack.perform(synchronous: { transaction -> SessionEntity in

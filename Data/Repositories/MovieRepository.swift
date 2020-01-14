@@ -17,12 +17,16 @@ class MovieRepository: MovieRepositoryProtocol {
         self.movieDAO = movieDAO
     }
 
-    func getMovies(with category: Movie.Category, page: Int, handler: @escaping Handler<[Movie]>) {
-        movieAPI.getMovies(with: category, page: page, handler: handler)
+    func getMovies(_ chart: Movie.Chart, page: Int, handler: @escaping Handler<[Movie]>) {
+        movieAPI.getMovies(chart, page: page, handler: handler)
     }
 
     func getFavourites(handler: @escaping Handler<[Movie]>) {
         movieDAO.getFavourites(handler: handler)
+    }
+
+    func getWatchlist(handler: @escaping Handler<[Movie]>) {
+        movieDAO.getWatchlist(handler: handler)
     }
 
     func getMovie(with id: String, handler: @escaping Handler<Movie>) {
@@ -38,7 +42,8 @@ class MovieRepository: MovieRepositoryProtocol {
                     case .failure: handler(result)
                     case .success(let apiMovie):
                         let isFavourite = daoMovie?.isFavourite ?? apiMovie.isFavourite
-                        let movie = apiMovie.copy(isFavourite: isFavourite)
+                        let isInWatchlist = daoMovie?.isInWatchlist ?? apiMovie.isInWatchlist
+                        let movie = apiMovie.copy(isFavourite: isFavourite, isInWatchlist: isInWatchlist)
                         self.movieDAO.set(movie, handler: handler)
                     }
                 }
@@ -57,6 +62,16 @@ class MovieRepository: MovieRepositoryProtocol {
 
     func deleteFromFavourites(_ movie: Movie, handler: @escaping Handler<Movie>) {
         let movie = movie.copy(isFavourite: false)
+        movieDAO.set(movie, handler: handler)
+    }
+
+    func addToWatchlist(_ movie: Movie, handler: @escaping Handler<Movie>) {
+        let movie = movie.copy(isInWatchlist: true)
+        movieDAO.set(movie, handler: handler)
+    }
+
+    func deleteFromWatchlist(_ movie: Movie, handler: @escaping Handler<Movie>) {
+        let movie = movie.copy(isInWatchlist: false)
         movieDAO.set(movie, handler: handler)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  FavouritesViewMock.swift
+//  MoviesViewMock.swift
 //  BoilerplateTests
 //
 //  Created by Radyslav Krechet on 09.12.2019.
@@ -10,7 +10,7 @@ import Domain
 
 @testable import Boilerplate
 
-class FavouritesViewMock: FavouritesViewProtocol {
+class MoviesViewMock: MoviesViewProtocol {
     struct Calls {
         var populateWithState = false
         var populateWithMovies = false

@@ -11,5 +11,6 @@ import Domain
 public protocol MovieDAOProtocol: class {
     func set(_ movie: Movie, handler: @escaping Handler<Movie>)
     func getFavourites(handler: @escaping Handler<[Movie]>)
+    func getWatchlist(handler: @escaping Handler<[Movie]>)
     func getMovie(with id: String, handler: @escaping Handler<Movie?>)
 }

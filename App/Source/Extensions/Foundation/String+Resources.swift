@@ -15,6 +15,9 @@ extension String {
     var image: UIImage? {
         return UIImage(named: self)
     }
+    var systemImage: UIImage? {
+        return UIImage(systemName: self)
+    }
     var color: UIColor? {
         return UIColor(named: self)
     }

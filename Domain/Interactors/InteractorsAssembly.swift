@@ -55,6 +55,11 @@ public struct InteractorsAssembly: Assembly {
             return GetFavouritesUseCase(movieRepository: movieRepository)
         }
 
+        container.register(GetWatchlistUseCaseProtocol.self) { resolver in
+            let movieRepository = resolver.resolve(MovieRepositoryProtocol.self)!
+            return GetWatchlistUseCase(movieRepository: movieRepository)
+        }
+
         container.register(GetMovieUseCaseProtocol.self) { resolver in
             let movieRepository = resolver.resolve(MovieRepositoryProtocol.self)!
             return GetMovieUseCase(movieRepository: movieRepository)
@@ -68,6 +73,11 @@ public struct InteractorsAssembly: Assembly {
         container.register(ChangeMovieFavouriteStateUseCaseProtocol.self) { resolver in
             let movieRepository = resolver.resolve(MovieRepositoryProtocol.self)!
             return ChangeMovieFavouriteStateUseCase(movieRepository: movieRepository)
+        }
+
+        container.register(ChangeMovieInWatchlistStateUseCaseProtocol.self) { resolver in
+            let movieRepository = resolver.resolve(MovieRepositoryProtocol.self)!
+            return ChangeMovieInWatchlistStateUseCase(movieRepository: movieRepository)
         }
     }
 }

@@ -14,13 +14,11 @@ class DetailsViewMock: DetailsViewProtocol {
     struct Calls {
         var populateWithState = false
         var populateWithMovie = false
-        var populateWithFavouriteTitle = false
-        var presentFavouriteError = false
+        var presentMarkError = false
     }
 
     struct Arguments {
         var states = [ContentState]()
-        var favouriteTitle: String?
     }
 
     var calls = Calls()
@@ -35,12 +33,7 @@ class DetailsViewMock: DetailsViewProtocol {
         calls.populateWithMovie = true
     }
 
-    func populate(with favouriteTitle: String) {
-        calls.populateWithFavouriteTitle = true
-        arguments.favouriteTitle = favouriteTitle
-    }
-
-    func presentFavouriteError(_ error: Error) {
-        calls.presentFavouriteError = true
+    func presentMarkError(_ error: Error) {
+        calls.presentMarkError = true
     }
 }

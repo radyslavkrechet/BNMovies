@@ -30,7 +30,8 @@ struct MovieAdapter: MovieAdapterProtocol {
                      releaseDate: entity.releaseDate.value,
                      userScore: entity.userScore.value,
                      genres: entity.genres.map { genreAdapter.fromStorage($0) },
-                     isFavourite: entity.isFavourite.value)
+                     isFavourite: entity.isFavourite.value,
+                     isInWatchlist: entity.isInWatchlist.value)
     }
 
     func toStorage(_ object: Movie, _ entity: MovieEntity, _ relationship: [GenreEntity]) -> MovieEntity {
@@ -44,6 +45,7 @@ struct MovieAdapter: MovieAdapterProtocol {
         entity.userScore.value = object.userScore
         entity.genres.value = relationship
         entity.isFavourite.value = object.isFavourite
+        entity.isInWatchlist.value = object.isInWatchlist
         return entity
     }
 }

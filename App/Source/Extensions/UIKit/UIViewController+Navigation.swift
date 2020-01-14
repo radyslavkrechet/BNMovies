@@ -9,7 +9,7 @@
 import UIKit
 
 enum Segue: String {
-    case Details, Favourites
+    case Details, Movies
 }
 
 extension UIViewController {

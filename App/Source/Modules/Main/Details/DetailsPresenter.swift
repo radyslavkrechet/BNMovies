@@ -8,10 +8,13 @@
 
 import Domain
 
+private let baseURL = "https://www.themoviedb.org/movie/"
+
 protocol DetailsPresenterProtocol: ContentPresenterProtocol {
     var id: String! { get set }
+    var shareURL: String { get }
 
-    func markMovieAsFavourite()
+    func markMovie(state: Movie.List)
 }
 
 class DetailsPresenter: DetailsPresenterProtocol {
@@ -19,15 +22,22 @@ class DetailsPresenter: DetailsPresenterProtocol {
 
     var id: String!
 
+    var shareURL: String {
+        return "\(baseURL)\(id!)"
+    }
+
     private let getMovieUseCase: GetMovieUseCaseProtocol
     private let changeMovieFavouriteStateUseCase: ChangeMovieFavouriteStateUseCaseProtocol
+    private let changeMovieInWatchlistStateUseCase: ChangeMovieInWatchlistStateUseCaseProtocol
     private var movie: Movie?
 
     init(getMovieUseCase: GetMovieUseCaseProtocol,
-         changeMovieFavouriteStateUseCase: ChangeMovieFavouriteStateUseCaseProtocol) {
+         changeMovieFavouriteStateUseCase: ChangeMovieFavouriteStateUseCaseProtocol,
+         changeMovieInWatchlistStateUseCase: ChangeMovieInWatchlistStateUseCaseProtocol) {
 
         self.getMovieUseCase = getMovieUseCase
         self.changeMovieFavouriteStateUseCase = changeMovieFavouriteStateUseCase
+        self.changeMovieInWatchlistStateUseCase = changeMovieInWatchlistStateUseCase
     }
 
     func getContent() {
@@ -39,14 +49,21 @@ class DetailsPresenter: DetailsPresenterProtocol {
         getMovie()
     }
 
-    func markMovieAsFavourite() {
+    func markMovie(state: Movie.List) {
         guard let movie = movie else { return }
-        changeMovieFavouriteStateUseCase.execute(with: movie) { [weak self] result in
+
+        let handler: Handler<Movie> = { [weak self] result in
             switch result {
-            case .failure(let error): self?.view?.presentFavouriteError(error)
+            case .failure(let error): self?.view?.presentMarkError(error)
             case .success(let movie): self?.process(movie)
             }
         }
+
+        let action = state == .favourites
+            ? changeMovieFavouriteStateUseCase.execute
+            : changeMovieInWatchlistStateUseCase.execute
+
+        action(movie, handler)
     }
 
     private func getMovie() {
@@ -65,12 +82,6 @@ class DetailsPresenter: DetailsPresenterProtocol {
     private func process(_ movie: Movie) {
         self.movie = movie
         view?.populate(with: movie)
-
-        let favouriteTitle = movie.isFavourite
-            ? "DetailsViewController.favouriteTitle.remove".localized
-            : "DetailsViewController.favouriteTitle.add".localized
-
-        view?.populate(with: favouriteTitle)
         view?.populate(with: .content)
     }
 }

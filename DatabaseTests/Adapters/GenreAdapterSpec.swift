@@ -43,7 +43,7 @@ class GenreAdapterSpec: QuickSpec {
 
         describe("to storage") {
             it("returns genre entity") {
-                let object = Genre(id: "id", name: "name")
+                let object = Mock.genreObject
 
                 expect {
                     return try CoreStoreDefaults.dataStack.perform(synchronous: { transaction -> GenreEntity in

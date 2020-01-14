@@ -19,17 +19,27 @@ class DetailsPresenterSpec: QuickSpec {
         var detailsPresenter: DetailsPresenter!
         var getMovieUseCaseMock: GetMovieUseCaseMock!
         var changeMovieFavouriteStateUseCaseMock: ChangeMovieFavouriteStateUseCaseMock!
+        var changeMovieInWatchlistStateUseCaseMock: ChangeMovieInWatchlistStateUseCaseMock!
         var detailsViewMock: DetailsViewMock!
 
         beforeEach {
             getMovieUseCaseMock = GetMovieUseCaseMock()
             changeMovieFavouriteStateUseCaseMock = ChangeMovieFavouriteStateUseCaseMock()
+            changeMovieInWatchlistStateUseCaseMock = ChangeMovieInWatchlistStateUseCaseMock()
             detailsPresenter = DetailsPresenter(getMovieUseCase: getMovieUseCaseMock,
-                                                changeMovieFavouriteStateUseCase: changeMovieFavouriteStateUseCaseMock)
+                                                changeMovieFavouriteStateUseCase: changeMovieFavouriteStateUseCaseMock,
+                                                changeMovieInWatchlistStateUseCase:
+                                                    changeMovieInWatchlistStateUseCaseMock)
 
             detailsViewMock = DetailsViewMock()
             detailsPresenter.view = detailsViewMock
             detailsPresenter.id = id
+        }
+
+        describe("share url") {
+            it("returns correct value") {
+                expect(detailsPresenter.shareURL) == "https://www.themoviedb.org/movie/\(id)"
+            }
         }
 
         describe("get content") {
@@ -59,9 +69,6 @@ class DetailsPresenterSpec: QuickSpec {
                             expect(detailsViewMock.calls.populateWithState) == true
                             expect(detailsViewMock.arguments.states) == [.loading, .content]
                             expect(detailsViewMock.calls.populateWithMovie) == true
-                            expect(detailsViewMock.calls.populateWithFavouriteTitle) == true
-                            expect(detailsViewMock.arguments.favouriteTitle)
-                                == "DetailsViewController.favouriteTitle.add".localized
                         }
                     }
 
@@ -77,9 +84,6 @@ class DetailsPresenterSpec: QuickSpec {
                             expect(detailsViewMock.calls.populateWithState) == true
                             expect(detailsViewMock.arguments.states) == [.loading, .content]
                             expect(detailsViewMock.calls.populateWithMovie) == true
-                            expect(detailsViewMock.calls.populateWithFavouriteTitle) == true
-                            expect(detailsViewMock.arguments.favouriteTitle)
-                                == "DetailsViewController.favouriteTitle.remove".localized
                         }
                     }
                 }
@@ -100,9 +104,6 @@ class DetailsPresenterSpec: QuickSpec {
                         expect(detailsViewMock.calls.populateWithState) == true
                         expect(detailsViewMock.arguments.states) == [.loading, .content, .content]
                         expect(detailsViewMock.calls.populateWithMovie) == true
-                        expect(detailsViewMock.calls.populateWithFavouriteTitle) == true
-                        expect(detailsViewMock.arguments.favouriteTitle)
-                            == "DetailsViewController.favouriteTitle.add".localized
                     }
                 }
             }
@@ -134,18 +135,15 @@ class DetailsPresenterSpec: QuickSpec {
                         expect(detailsViewMock.calls.populateWithState) == true
                         expect(detailsViewMock.arguments.states) == [.loading, .content]
                         expect(detailsViewMock.calls.populateWithMovie) == true
-                        expect(detailsViewMock.calls.populateWithFavouriteTitle) == true
-                        expect(detailsViewMock.arguments.favouriteTitle)
-                            == "DetailsViewController.favouriteTitle.add".localized
                     }
                 }
             }
         }
 
-        describe("mark movie as favourite") {
+        describe("mark movie") {
             context("content was not got") {
                 it("ignores execution") {
-                    detailsPresenter.markMovieAsFavourite()
+                    detailsPresenter.markMovie(state: .favourites)
 
                     expect(changeMovieFavouriteStateUseCaseMock.calls.execute) == false
                 }
@@ -160,20 +158,19 @@ class DetailsPresenterSpec: QuickSpec {
                     it("present favourite error in view") {
                         changeMovieFavouriteStateUseCaseMock.settings.shouldReturnError = true
 
-                        detailsPresenter.markMovieAsFavourite()
+                        detailsPresenter.markMovie(state: .favourites)
 
                         expect(changeMovieFavouriteStateUseCaseMock.calls.execute) == true
-                        expect(detailsViewMock.calls.presentFavouriteError) == true
+                        expect(detailsViewMock.calls.presentMarkError) == true
                     }
                 }
 
                 context("change movie favourite state use case executes -> movie") {
                     it("populates view with content state, movie and title") {
-                        detailsPresenter.markMovieAsFavourite()
+                        detailsPresenter.markMovie(state: .watchlist)
 
-                        expect(changeMovieFavouriteStateUseCaseMock.calls.execute) == true
+                        expect(changeMovieInWatchlistStateUseCaseMock.calls.execute) == true
                         expect(detailsViewMock.calls.populateWithMovie) == true
-                        expect(detailsViewMock.calls.populateWithFavouriteTitle) == true
                     }
                 }
             }

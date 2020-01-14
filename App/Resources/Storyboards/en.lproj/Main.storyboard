@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Favourites-->
+        <!--Movies-->
         <scene sceneID="ZeH-uw-HJE">
             <objects>
-                <viewController id="Uoa-3Z-eRc" customClass="FavouritesViewController" customModule="Boilerplate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Uoa-3Z-eRc" customClass="MoviesViewController" customModule="Boilerplate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qz3-Ux-TtU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,7 +30,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Rmo-IL-Gnb"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Favourites" id="gTe-SR-HcJ"/>
+                    <navigationItem key="navigationItem" title="Movies" id="gTe-SR-HcJ"/>
                     <connections>
                         <outlet property="tableView" destination="S7P-E0-YGU" id="Mhd-eN-rZ3"/>
                         <segue destination="qZu-Gt-At7" kind="show" identifier="Details" id="Ob5-oz-gKw"/>
@@ -66,7 +66,7 @@
                     <navigationItem key="navigationItem" title="Account" id="Qmc-Pt-Pzg"/>
                     <connections>
                         <outlet property="tableView" destination="noc-Rk-GAu" id="yzg-Nt-ZXA"/>
-                        <segue destination="Uoa-3Z-eRc" kind="show" identifier="Favourites" id="QeH-Ne-Gfn"/>
+                        <segue destination="Uoa-3Z-eRc" kind="show" identifier="Movies" id="QeH-Ne-Gfn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BIl-CX-i4m" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -105,7 +105,7 @@
                                 <segment title="Top Rated"/>
                             </segments>
                             <connections>
-                                <action selector="movieCategorySegmentedControlValueDidChange:" destination="fZ0-0W-5kR" eventType="valueChanged" id="RSJ-Dn-vnK"/>
+                                <action selector="chartSegmentedControlValueDidChange:" destination="fZ0-0W-5kR" eventType="valueChanged" id="CeD-5d-261"/>
                             </connections>
                         </segmentedControl>
                     </navigationItem>
@@ -129,13 +129,13 @@
         <!--Details-->
         <scene sceneID="lgr-xe-5GA">
             <objects>
-                <viewController id="qZu-Gt-At7" customClass="DetailsViewController" customModule="Boilerplate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="qZu-Gt-At7" customClass="DetailsViewController" customModule="Boilerplate" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fCe-Ys-CCd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d5x-ao-6um">
-                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="640"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iTk-zk-CHA">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="542.66666666666663"/>
@@ -247,25 +247,47 @@ Genres</string>
                                     <constraint firstItem="iTk-zk-CHA" firstAttribute="width" secondItem="d5x-ao-6um" secondAttribute="width" id="wlZ-Bu-SmF"/>
                                 </constraints>
                             </scrollView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wwy-sG-xrs">
+                                <rect key="frame" x="0.0" y="729" width="375" height="49"/>
+                                <items>
+                                    <barButtonItem title="Share" image="square.and.arrow.up" catalog="system" id="qBP-OR-Ijc">
+                                        <connections>
+                                            <action selector="shareButtonDidTap:" destination="qZu-Gt-At7" id="aUK-5o-Fra"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="HZ6-dT-awU"/>
+                                    <barButtonItem title="Favourite" image="heart" catalog="system" id="8bX-pI-rkg">
+                                        <connections>
+                                            <action selector="markButtonDidTap:" destination="qZu-Gt-At7" id="Gzf-dA-atr"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="BuJ-yB-w4l"/>
+                                    <barButtonItem tag="1" title="Watchlist" image="bookmark" catalog="system" id="uo4-kP-lLZ">
+                                        <connections>
+                                            <action selector="markButtonDidTap:" destination="qZu-Gt-At7" id="bZT-iN-dgt"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="Wwy-sG-xrs" firstAttribute="trailing" secondItem="pzg-Fy-vvP" secondAttribute="trailing" id="28D-Bx-HfM"/>
                             <constraint firstItem="pzg-Fy-vvP" firstAttribute="trailing" secondItem="d5x-ao-6um" secondAttribute="trailing" id="DSq-CE-xhe"/>
-                            <constraint firstItem="pzg-Fy-vvP" firstAttribute="bottom" secondItem="d5x-ao-6um" secondAttribute="bottom" id="OL8-Rr-RnO"/>
+                            <constraint firstItem="pzg-Fy-vvP" firstAttribute="bottom" secondItem="d5x-ao-6um" secondAttribute="bottom" constant="50" id="OL8-Rr-RnO"/>
                             <constraint firstItem="d5x-ao-6um" firstAttribute="leading" secondItem="pzg-Fy-vvP" secondAttribute="leading" id="P9R-rQ-Zjd"/>
+                            <constraint firstItem="pzg-Fy-vvP" firstAttribute="bottom" secondItem="Wwy-sG-xrs" secondAttribute="bottom" id="neK-6d-Kvd"/>
                             <constraint firstItem="d5x-ao-6um" firstAttribute="top" secondItem="pzg-Fy-vvP" secondAttribute="top" id="xJM-9X-mcp"/>
+                            <constraint firstItem="Wwy-sG-xrs" firstAttribute="leading" secondItem="pzg-Fy-vvP" secondAttribute="leading" id="xfm-fy-4m4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pzg-Fy-vvP"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Details" largeTitleDisplayMode="never" id="2Jo-HT-5Xo">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="xys-gz-YFG">
-                            <connections>
-                                <action selector="favouriteButtonDidTap:" destination="qZu-Gt-At7" id="iK2-Ro-LCh"/>
-                            </connections>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" title="Details" largeTitleDisplayMode="never" id="e0Y-z9-5y5">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="aCP-29-rbf"/>
                     </navigationItem>
                     <connections>
                         <outlet property="backdropImageView" destination="fnM-Bp-Ukc" id="XrC-ku-2ay"/>
+                        <outlet property="favouriteButton" destination="8bX-pI-rkg" id="vgr-2s-nUz"/>
                         <outlet property="genresLabel" destination="Aje-IF-kzv" id="YmR-mJ-kMc"/>
                         <outlet property="overviewLabel" destination="0oO-On-sSB" id="Ajv-MO-8sV"/>
                         <outlet property="posterImageView" destination="Yn2-y5-IuA" id="qvL-re-hEI"/>
@@ -273,6 +295,7 @@ Genres</string>
                         <outlet property="runtimeLabel" destination="PtM-HW-4uL" id="oQS-ad-LnY"/>
                         <outlet property="titleLabel" destination="8Bu-rf-VLd" id="kX5-xM-z4A"/>
                         <outlet property="userScoreLabel" destination="ovo-OU-HlW" id="ipD-gE-WXs"/>
+                        <outlet property="watchlistButton" destination="uo4-kP-lLZ" id="zpA-wy-btO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ylO-6p-rTJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -366,7 +389,7 @@ Genres</string>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="0Ad-H0-Ts5" id="HiZ-jw-vDe"/>
-                        <segue destination="qZu-Gt-At7" kind="show" identifier="Details" id="M1a-Bc-4sV"/>
+                        <segue destination="qZu-Gt-At7" kind="show" identifier="Details" id="CCn-ew-wNp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dmj-4q-AJb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -375,10 +398,13 @@ Genres</string>
         </scene>
     </scenes>
     <resources>
+        <image name="bookmark" catalog="system" width="56" height="64"/>
+        <image name="heart" catalog="system" width="64" height="54"/>
         <image name="house.fill" catalog="system" width="64" height="52"/>
         <image name="person.fill" catalog="system" width="64" height="60"/>
+        <image name="square.and.arrow.up" catalog="system" width="56" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ob5-oz-gKw"/>
+        <segue reference="ZEJ-zt-PiC"/>
     </inferredMetricsTieBreakers>
 </document>

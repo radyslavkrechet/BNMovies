@@ -1,9 +1,9 @@
 //
-//  ChangeMovieFavouriteStateUseCaseSpec.swift
+//  ChangeMovieInWatchlistStateUseCaseSpec.swift
 //  DomainTests
 //
-//  Created by Radyslav Krechet on 27.11.2019.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Created by Radyslav Krechet on 14.01.2020.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Nimble
@@ -11,34 +11,34 @@ import Quick
 
 @testable import Domain
 
-class ChangeMovieFavouriteStateUseCaseSpec: QuickSpec {
+class ChangeMovieInWatchlistStateUseCaseSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
     override func spec() {
-        var changeMovieFavouriteStateUseCase: ChangeMovieFavouriteStateUseCase!
+        var changeMovieInWatchlistStateUseCase: ChangeMovieInWatchlistStateUseCase!
         var movieRepositoryMock: MovieRepositoryMock!
 
         beforeEach {
             movieRepositoryMock = MovieRepositoryMock()
-            changeMovieFavouriteStateUseCase = ChangeMovieFavouriteStateUseCase(movieRepository:
+            changeMovieInWatchlistStateUseCase = ChangeMovieInWatchlistStateUseCase(movieRepository:
                 movieRepositoryMock)
         }
 
         describe("execute") {
-            context("movie is favourite") {
-                let movie = Mock.movie(isFavourite: true, isInWatchlist: false)
+            context("movie is in watchlist") {
+                let movie = Mock.movie(isFavourite: false, isInWatchlist: true)
 
-                context("movie repository deletes from favourites -> error") {
+                context("movie repository deletes from watchlist -> error") {
                     it("returns error") {
                         movieRepositoryMock.settings.shouldReturnError = true
 
                         waitUntil { done in
-                            changeMovieFavouriteStateUseCase.execute(with: movie) { result in
+                            changeMovieInWatchlistStateUseCase.execute(with: movie) { result in
                                 guard case .failure = result else {
                                     fail()
                                     return
                                 }
 
-                                expect(movieRepositoryMock.calls.deleteFromFavourites) == true
+                                expect(movieRepositoryMock.calls.deleteFromWatchlist) == true
                                 expect(movieRepositoryMock.arguments.movie) == movie
                                 done()
                             }
@@ -46,16 +46,16 @@ class ChangeMovieFavouriteStateUseCaseSpec: QuickSpec {
                     }
                 }
 
-                context("movie repository deletes from favourites -> movie") {
+                context("movie repository deletes from watchlist -> movie") {
                     it("returns movie") {
                         waitUntil { done in
-                            changeMovieFavouriteStateUseCase.execute(with: movie) { result in
+                            changeMovieInWatchlistStateUseCase.execute(with: movie) { result in
                                 guard case .success = result else {
                                     fail()
                                     return
                                 }
 
-                                expect(movieRepositoryMock.calls.deleteFromFavourites) == true
+                                expect(movieRepositoryMock.calls.deleteFromWatchlist) == true
                                 expect(movieRepositoryMock.arguments.movie) == movie
                                 done()
                             }
@@ -64,21 +64,21 @@ class ChangeMovieFavouriteStateUseCaseSpec: QuickSpec {
                 }
             }
 
-            context("movie is not favourite") {
+            context("movie is not in watchlist") {
                 let movie = Mock.movie(isFavourite: false, isInWatchlist: false)
 
-                context("movie repository adds to favourites -> error") {
+                context("movie repository adds to watchlist -> error") {
                     it("returns error") {
                         movieRepositoryMock.settings.shouldReturnError = true
 
                         waitUntil { done in
-                            changeMovieFavouriteStateUseCase.execute(with: movie) { result in
+                            changeMovieInWatchlistStateUseCase.execute(with: movie) { result in
                                 guard case .failure = result else {
                                     fail()
                                     return
                                 }
 
-                                expect(movieRepositoryMock.calls.addToFavourites) == true
+                                expect(movieRepositoryMock.calls.addToWatchlist) == true
                                 expect(movieRepositoryMock.arguments.movie) == movie
                                 done()
                             }
@@ -86,16 +86,16 @@ class ChangeMovieFavouriteStateUseCaseSpec: QuickSpec {
                     }
                 }
 
-                context("movie repository adds to favourites -> movie") {
+                context("movie repository adds to watchlist -> movie") {
                     it("returns movie") {
                         waitUntil { done in
-                            changeMovieFavouriteStateUseCase.execute(with: movie) { result in
+                            changeMovieInWatchlistStateUseCase.execute(with: movie) { result in
                                 guard case .success = result else {
                                     fail()
                                     return
                                 }
 
-                                expect(movieRepositoryMock.calls.addToFavourites) == true
+                                expect(movieRepositoryMock.calls.addToWatchlist) == true
                                 expect(movieRepositoryMock.arguments.movie) == movie
                                 done()
                             }

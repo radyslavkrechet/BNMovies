@@ -1,5 +1,5 @@
 //
-//  FavouritesViewController.swift
+//  MoviesViewController.swift
 //  Boilerplate
 //
 //  Created by Radyslav Krechet on 8/28/19.
@@ -8,15 +8,19 @@
 
 import Domain
 
-protocol FavouritesViewProtocol: ListViewProtocol {
+protocol MoviesViewProtocol: ListViewProtocol {
     func populate(with movies: [Movie])
 }
 
-class FavouritesViewController: ListViewController<FavouritesPresenter, MoviesDataSource>, FavouritesViewProtocol {
+class MoviesViewController: ListViewController<MoviesPresenter, MoviesDataSource>, MoviesViewProtocol {
     @IBOutlet private(set) weak var tableView: UITableView!
 
     override var emptyStateText: String {
-        return "FavouritesViewController.emptyStateText".localized
+        return "MoviesViewController.\(source).emptyStateText".localized
+    }
+
+    private var source: String {
+        return presenter.source == .favourites ? "favourites" : "watchlist"
     }
 
     // MARK: - Lifecycle
@@ -28,8 +32,8 @@ class FavouritesViewController: ListViewController<FavouritesPresenter, MoviesDa
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let deailsViewController = segue.destination as? DetailsViewController, let movie = sender as? Movie {
-            deailsViewController.presenter.id = movie.id
+        if let deailsViewController = segue.destination as? DetailsViewController, let id = sender as? String {
+            deailsViewController.presenter.id = id
         }
     }
 
@@ -37,6 +41,8 @@ class FavouritesViewController: ListViewController<FavouritesPresenter, MoviesDa
 
     override func setupViews() {
         super.setupViews()
+
+        title = "MoviesViewController.\(source).title".localized
 
         tableView.registerNibForCell(MovieTableViewCell.self)
         tableView.dataSource = dataSource
@@ -48,10 +54,10 @@ class FavouritesViewController: ListViewController<FavouritesPresenter, MoviesDa
     override func userDidSelectItem(_ item: Movie) {
         super.userDidSelectItem(item)
 
-        present(.Details, with: item)
+        present(.Details, with: item.id)
     }
 
-    // MARK: - FavouritesViewProtocol
+    // MARK: - MoviesViewProtocol
 
     func populate(with movies: [Movie]) {
         dataSource.populate(with: movies)

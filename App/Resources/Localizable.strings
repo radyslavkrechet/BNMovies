@@ -10,12 +10,12 @@
 "UIViewController.alert.ok" = "OK";
 
 "AccountViewController.favourites" = "Favourites";
-"AccountViewController.watchlist" = "Watchlist (Coming Soon)";
+"AccountViewController.watchlist" = "Watchlist";
 "AccountViewController.signOut" = "Sign Out";
 
-"FavouritesViewController.emptyStateText" = "There are no favourite movies";
-
-"DetailsViewController.favouriteTitle.add" = "Add";
-"DetailsViewController.favouriteTitle.remove" = "Remove";
+"MoviesViewController.favourites.title" = "Favourites";
+"MoviesViewController.favourites.emptyStateText" = "There are no favourite movies";
+"MoviesViewController.watchlist.title" = "Watchlist";
+"MoviesViewController.watchlist.emptyStateText" = "There are no movies in your watchlist";
 
 "SimilarMoviesViewController.emptyStateText" = "There are no similar movies";

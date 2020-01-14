@@ -22,7 +22,7 @@ class GetMoviesUseCaseSpec: QuickSpec {
         }
 
         describe("execute") {
-            let category = Movie.Category.popular
+            let chart = Movie.Chart.popular
             let page = 0
 
             context("movie repository gets movies -> error") {
@@ -30,14 +30,14 @@ class GetMoviesUseCaseSpec: QuickSpec {
                     movieRepositoryMock.settings.shouldReturnError = true
 
                     waitUntil { done in
-                        getMoviesUseCase.execute(with: category, page: page) { result in
+                        getMoviesUseCase.execute(with: chart, page: page) { result in
                             guard case .failure = result else {
                                 fail()
                                 return
                             }
 
                             expect(movieRepositoryMock.calls.getMovies) == true
-                            expect(movieRepositoryMock.arguments.category) == category
+                            expect(movieRepositoryMock.arguments.chart) == chart
                             expect(movieRepositoryMock.arguments.page) == page
                             done()
                         }
@@ -48,14 +48,14 @@ class GetMoviesUseCaseSpec: QuickSpec {
             context("movie repository gets movies -> movies") {
                 it("returns movies") {
                     waitUntil { done in
-                        getMoviesUseCase.execute(with: category, page: page) { result in
+                        getMoviesUseCase.execute(with: chart, page: page) { result in
                             guard case .success = result else {
                                 fail()
                                 return
                             }
 
                             expect(movieRepositoryMock.calls.getMovies) == true
-                            expect(movieRepositoryMock.arguments.category) == category
+                            expect(movieRepositoryMock.arguments.chart) == chart
                             expect(movieRepositoryMock.arguments.page) == page
                             done()
                         }

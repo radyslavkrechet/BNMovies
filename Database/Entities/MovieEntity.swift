@@ -19,4 +19,5 @@ class MovieEntity: CoreStoreObject {
     let userScore = Value.Required<Int>("userScore", initial: 0)
     let genres = Relationship.ToManyOrdered<GenreEntity>("genres")
     let isFavourite = Value.Required<Bool>("isFavourite", initial: false)
+    let isInWatchlist = Value.Required<Bool>("isInWatchlist", initial: false)
 }

@@ -10,7 +10,7 @@ import Domain
 import Alamofire
 
 enum MovieRouter: URLRequestConvertible {
-    case getMovies(category: Movie.Category, page: Int), getMovie(id: String), getSimilarMovies(id: String)
+    case getMovies(chart: Movie.Chart, page: Int), getMovie(id: String), getSimilarMovies(id: String)
 
     static var serverSettings: ServerSettings!
 
@@ -19,9 +19,9 @@ enum MovieRouter: URLRequestConvertible {
     }
     private var path: String {
         switch self {
-        case .getMovies(let category, _):
+        case .getMovies(let chart, _):
             var path = ""
-            switch category {
+            switch chart {
             case .popular: path = "popular"
             case .topRated: path = "top_rated"
             }

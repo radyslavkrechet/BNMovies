@@ -24,8 +24,8 @@ class MovieAPI: MovieAPIProtocol {
         self.movieAdapter = movieAdapter
     }
 
-    func getMovies(with category: Movie.Category, page: Int, handler: @escaping Handler<[Movie]>) {
-        let request = MovieRouter.getMovies(category: category, page: page)
+    func getMovies(_ chart: Movie.Chart, page: Int, handler: @escaping Handler<[Movie]>) {
+        let request = MovieRouter.getMovies(chart: chart, page: page)
         networkManager.execute(request) { result in
             switch result {
             case .failure(let error): handler(.failure(error))
