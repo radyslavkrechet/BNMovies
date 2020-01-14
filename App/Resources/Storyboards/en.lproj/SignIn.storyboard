@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Boilerplate-->
+        <!--Movies-->
         <scene sceneID="wq5-yF-zGh">
             <objects>
                 <viewController id="Cuh-cO-bcM" customClass="SignInViewController" customModule="Boilerplate" customModuleProvider="target" sceneMemberID="viewController">
@@ -71,7 +71,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Wyg-S2-0Wx"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Boilerplate" id="36R-Pp-PlO"/>
+                    <navigationItem key="navigationItem" title="Movies" id="36R-Pp-PlO"/>
                     <connections>
                         <outlet property="activityIndicatorView" destination="3Bs-tQ-EVq" id="PI1-Gz-hQn"/>
                         <outlet property="bottomLayoutConstraint" destination="pln-sV-48E" id="oc4-AZ-jwU"/>
@@ -87,7 +87,6 @@
         <!--Navigation Controller-->
         <scene sceneID="lJq-77-MiB">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="S1n-pD-Rec" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pNg-Qt-2Dq" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="GnX-rD-DXx">
@@ -99,6 +98,7 @@
                         <segue destination="Cuh-cO-bcM" kind="relationship" relationship="rootViewController" id="UTy-0I-eVZ"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S1n-pD-Rec" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-375.36231884057975" y="29.464285714285712"/>
         </scene>

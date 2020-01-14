@@ -1,6 +1,6 @@
 //
 //  DetailsViewMock.swift
-//  Boilerplate
+//  Movies
 //
 //  Created by Radyslav Krechet on 10.12.2019.
 //  Copyright © 2019 Radyslav Krechet. All rights reserved.
@@ -8,7 +8,7 @@
 
 import Domain
 
-@testable import Boilerplate
+@testable import Movies
 
 class DetailsViewMock: DetailsViewProtocol {
     struct Calls {

@@ -14,7 +14,7 @@ def tests
   pod 'Nimble'
 end
 
-target 'Boilerplate' do
+target 'Movies' do
   use_frameworks!
 
   pod 'Kingfisher'
@@ -30,7 +30,7 @@ target 'Boilerplate' do
   swinject
   swift_lint
 
-  target 'BoilerplateTests' do
+  target 'MoviesTests' do
     use_frameworks!
 
     tests

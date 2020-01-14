@@ -1,6 +1,6 @@
 //
 //  UIWindow+Motion.swift
-//  Boilerplate
+//  Movies
 //
 //  Created by Radyslav Krechet on 9/12/19.
 //  Copyright © 2019 Radyslav Krechet. All rights reserved.

@@ -1,6 +1,6 @@
 //
 //  Movie+Displaying.swift
-//  Boilerplate
+//  Movies
 //
 //  Created by Radyslav Krechet on 9/4/19.
 //  Copyright © 2019 Radyslav Krechet. All rights reserved.

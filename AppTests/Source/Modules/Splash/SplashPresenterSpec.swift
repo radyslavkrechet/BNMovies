@@ -9,7 +9,7 @@
 import Nimble
 import Quick
 
-@testable import Boilerplate
+@testable import Movies
 
 class SplashPresenterSpec: QuickSpec {
     override func spec() {

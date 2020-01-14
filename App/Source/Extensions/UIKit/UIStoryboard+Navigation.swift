@@ -1,6 +1,6 @@
 //
 //  UIStoryboard+Navigation.swift
-//  Boilerplate
+//  Movies
 //
 //  Created by Radyslav Krechet on 8/30/19.
 //  Copyright © 2019 Radyslav Krechet. All rights reserved.

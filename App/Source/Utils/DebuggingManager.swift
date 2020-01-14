@@ -1,6 +1,6 @@
 //
 //  DebuggingManager.swift
-//  Boilerplate
+//  Movies
 //
 //  Created by Radyslav Krechet on 9/11/19.
 //  Copyright © 2019 Radyslav Krechet. All rights reserved.

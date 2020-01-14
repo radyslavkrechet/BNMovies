@@ -1,6 +1,6 @@
 //
 //  SimilarMoviesPresenterSpec.swift
-//  BoilerplateTests
+//  MoviesTests
 //
 //  Created by Radyslav Krechet on 09.12.2019.
 //  Copyright © 2019 Radyslav Krechet. All rights reserved.
@@ -9,7 +9,7 @@
 import Nimble
 import Quick
 
-@testable import Boilerplate
+@testable import Movies
 
 class SimilarMoviesPresenterSpec: QuickSpec {
     // swiftlint:disable:next function_body_length

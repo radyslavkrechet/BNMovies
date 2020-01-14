@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Boilerplate
+//  Movies
 //
 //  Created by Radyslav Krechet on 8/16/19.
 //  Copyright © 2019 Radyslav Krechet. All rights reserved.

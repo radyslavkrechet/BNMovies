@@ -1,6 +1,6 @@
 //
 //  HomeViewController.swift
-//  Boilerplate
+//  Movies
 //
 //  Created by Radyslav Krechet on 8/28/19.
 //  Copyright © 2019 Radyslav Krechet. All rights reserved.

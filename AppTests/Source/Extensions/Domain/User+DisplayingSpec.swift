@@ -1,6 +1,6 @@
 //
 //  User+DisplayingSpec.swift
-//  Boilerplate
+//  Movies
 //
 //  Created by Radyslav Krechet on 06.12.2019.
 //  Copyright © 2019 Radyslav Krechet. All rights reserved.
@@ -10,7 +10,7 @@ import Nimble
 import Quick
 import UIKit
 
-@testable import Boilerplate
+@testable import Movies
 
 class UserDisplayingSpec: QuickSpec {
     override func spec() {

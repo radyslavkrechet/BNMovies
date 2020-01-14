@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0B1EE8FB2306ABFE00380A29"
-               BuildableName = "Boilerplate.app"
-               BlueprintName = "Boilerplate"
-               ReferencedContainer = "container:Boilerplate.xcodeproj">
+               BuildableName = "Movies.app"
+               BlueprintName = "Movies"
+               ReferencedContainer = "container:Movies.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0B1EE8FB2306ABFE00380A29"
-            BuildableName = "Boilerplate.app"
-            BlueprintName = "Boilerplate"
-            ReferencedContainer = "container:Boilerplate.xcodeproj">
+            BuildableName = "Movies.app"
+            BlueprintName = "Movies"
+            ReferencedContainer = "container:Movies.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <CodeCoverageTargets>
@@ -44,35 +44,35 @@
             BlueprintIdentifier = "0BA8310D232A664700D81840"
             BuildableName = "Domain.framework"
             BlueprintName = "Domain"
-            ReferencedContainer = "container:Boilerplate.xcodeproj">
+            ReferencedContainer = "container:Movies.xcodeproj">
          </BuildableReference>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0BA83122232A664E00D81840"
             BuildableName = "Data.framework"
             BlueprintName = "Data"
-            ReferencedContainer = "container:Boilerplate.xcodeproj">
+            ReferencedContainer = "container:Movies.xcodeproj">
          </BuildableReference>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0B52EEDB232B83AF004939FE"
             BuildableName = "Net.framework"
             BlueprintName = "Net"
-            ReferencedContainer = "container:Boilerplate.xcodeproj">
+            ReferencedContainer = "container:Movies.xcodeproj">
          </BuildableReference>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0BB1B192232A688A00CB8FCD"
             BuildableName = "Database.framework"
             BlueprintName = "Database"
-            ReferencedContainer = "container:Boilerplate.xcodeproj">
+            ReferencedContainer = "container:Movies.xcodeproj">
          </BuildableReference>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0B1EE8FB2306ABFE00380A29"
-            BuildableName = "Boilerplate.app"
-            BlueprintName = "Boilerplate"
-            ReferencedContainer = "container:Boilerplate.xcodeproj">
+            BuildableName = "Movies.app"
+            BlueprintName = "Movies"
+            ReferencedContainer = "container:Movies.xcodeproj">
          </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
@@ -84,7 +84,7 @@
                BlueprintIdentifier = "0B8409E7238D583C00084669"
                BuildableName = "DomainTests.xctest"
                BlueprintName = "DomainTests"
-               ReferencedContainer = "container:Boilerplate.xcodeproj">
+               ReferencedContainer = "container:Movies.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -95,7 +95,7 @@
                BlueprintIdentifier = "0B339C0D238E96F4009819B9"
                BuildableName = "DataTests.xctest"
                BlueprintName = "DataTests"
-               ReferencedContainer = "container:Boilerplate.xcodeproj">
+               ReferencedContainer = "container:Movies.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -106,7 +106,7 @@
                BlueprintIdentifier = "0B71A3012391147500C3E4A0"
                BuildableName = "NetTests.xctest"
                BlueprintName = "NetTests"
-               ReferencedContainer = "container:Boilerplate.xcodeproj">
+               ReferencedContainer = "container:Movies.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -117,7 +117,7 @@
                BlueprintIdentifier = "0B8C5043239686450056CF0D"
                BuildableName = "DatabaseTests.xctest"
                BlueprintName = "DatabaseTests"
-               ReferencedContainer = "container:Boilerplate.xcodeproj">
+               ReferencedContainer = "container:Movies.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -126,9 +126,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0B32B2A3239A4B8D00523402"
-               BuildableName = "BoilerplateTests.xctest"
-               BlueprintName = "BoilerplateTests"
-               ReferencedContainer = "container:Boilerplate.xcodeproj">
+               BuildableName = "MoviesTests.xctest"
+               BlueprintName = "MoviesTests"
+               ReferencedContainer = "container:Movies.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -148,9 +148,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0B1EE8FB2306ABFE00380A29"
-            BuildableName = "Boilerplate.app"
-            BlueprintName = "Boilerplate"
-            ReferencedContainer = "container:Boilerplate.xcodeproj">
+            BuildableName = "Movies.app"
+            BlueprintName = "Movies"
+            ReferencedContainer = "container:Movies.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -165,9 +165,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0B1EE8FB2306ABFE00380A29"
-            BuildableName = "Boilerplate.app"
-            BlueprintName = "Boilerplate"
-            ReferencedContainer = "container:Boilerplate.xcodeproj">
+            BuildableName = "Movies.app"
+            BlueprintName = "Movies"
+            ReferencedContainer = "container:Movies.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

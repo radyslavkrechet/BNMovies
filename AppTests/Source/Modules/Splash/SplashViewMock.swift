@@ -6,7 +6,7 @@
 //  Copyright © 2019 Radyslav Krechet. All rights reserved.
 //
 
-@testable import Boilerplate
+@testable import Movies
 
 class SplashViewMock: SplashViewProtocol {
     struct Calls {

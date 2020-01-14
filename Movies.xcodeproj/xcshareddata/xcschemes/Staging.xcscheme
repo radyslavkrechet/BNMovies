@@ -15,15 +15,15 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0B1EE8FB2306ABFE00380A29"
-               BuildableName = "Boilerplate.app"
-               BlueprintName = "Boilerplate"
-               ReferencedContainer = "container:Boilerplate.xcodeproj">
+               BuildableName = "Movies.app"
+               BlueprintName = "Movies"
+               ReferencedContainer = "container:Movies.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Debug (Production)"
+      buildConfiguration = "Debug (Staging)"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
@@ -31,9 +31,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0B1EE8FB2306ABFE00380A29"
-            BuildableName = "Boilerplate.app"
-            BlueprintName = "Boilerplate"
-            ReferencedContainer = "container:Boilerplate.xcodeproj">
+            BuildableName = "Movies.app"
+            BlueprintName = "Movies"
+            ReferencedContainer = "container:Movies.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -42,15 +42,15 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0B32B2A3239A4B8D00523402"
-               BuildableName = "BoilerplateTests.xctest"
-               BlueprintName = "BoilerplateTests"
-               ReferencedContainer = "container:Boilerplate.xcodeproj">
+               BuildableName = "MoviesTests.xctest"
+               BlueprintName = "MoviesTests"
+               ReferencedContainer = "container:Movies.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug (Production)"
+      buildConfiguration = "Debug (Staging)"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -64,14 +64,14 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0B1EE8FB2306ABFE00380A29"
-            BuildableName = "Boilerplate.app"
-            BlueprintName = "Boilerplate"
-            ReferencedContainer = "container:Boilerplate.xcodeproj">
+            BuildableName = "Movies.app"
+            BlueprintName = "Movies"
+            ReferencedContainer = "container:Movies.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release (Production)"
+      buildConfiguration = "Release (Staging)"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
@@ -81,17 +81,17 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0B1EE8FB2306ABFE00380A29"
-            BuildableName = "Boilerplate.app"
-            BlueprintName = "Boilerplate"
-            ReferencedContainer = "container:Boilerplate.xcodeproj">
+            BuildableName = "Movies.app"
+            BlueprintName = "Movies"
+            ReferencedContainer = "container:Movies.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
-      buildConfiguration = "Debug (Production)">
+      buildConfiguration = "Debug (Staging)">
    </AnalyzeAction>
    <ArchiveAction
-      buildConfiguration = "Release (Production)"
+      buildConfiguration = "Release (Staging)"
       revealArchiveInOrganizer = "YES">
    </ArchiveAction>
 </Scheme>
