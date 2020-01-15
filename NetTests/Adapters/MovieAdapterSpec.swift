@@ -3,7 +3,7 @@
 //  NetTests
 //
 //  Created by Radyslav Krechet on 29.11.2019.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Nimble
@@ -47,7 +47,7 @@ class MovieAdapterSpec: QuickSpec {
                     expect(movie.releaseDate).to(beNil())
                     expect(movie.userScore) == 75
                     expect(movie.genres).to(beEmpty())
-                    expect(movie.isFavourite) == false
+                    expect(movie.isInFavourites) == false
                     expect(movie.isInWatchlist) == false
 
                     expect(genreAdapterMock.calls.toObject) == false
@@ -72,7 +72,7 @@ class MovieAdapterSpec: QuickSpec {
                     expect(movie.releaseDate) == releaseDate
                     expect(movie.userScore) == 75
                     expect(movie.genres.count) == response.genres!.count
-                    expect(movie.isFavourite) == false
+                    expect(movie.isInFavourites) == false
                     expect(movie.isInWatchlist) == false
 
                     expect(genreAdapterMock.calls.toObject) == true

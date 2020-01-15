@@ -3,7 +3,7 @@
 //  DatabaseTests
 //
 //  Created by Radyslav Krechet on 05.12.2019.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Domain
@@ -30,7 +30,7 @@ enum Mock {
               posterSource: "posterSource",
               backdropSource: "backdropSource",
               userScore: 0,
-              isFavourite: false,
+              isInFavourites: false,
               isInWatchlist: false)
     }
 

@@ -3,7 +3,7 @@
   Movies
 
   Created by Radyslav Krechet on 8/27/19.
-  Copyright © 2019 Radyslav Krechet. All rights reserved.
+  Copyright © 2020 Radyslav Krechet. All rights reserved.
 */
 
 "UIViewController.alert.title" = "Error";
@@ -13,9 +13,9 @@
 "AccountViewController.watchlist" = "Watchlist";
 "AccountViewController.signOut" = "Sign Out";
 
-"MoviesViewController.favourites.title" = "Favourites";
-"MoviesViewController.favourites.emptyStateText" = "There are no favourite movies";
-"MoviesViewController.watchlist.title" = "Watchlist";
-"MoviesViewController.watchlist.emptyStateText" = "There are no movies in your watchlist";
+"CollectionViewController.favourites.title" = "Favourites";
+"CollectionViewController.favourites.emptyStateText" = "There are no favourite movies";
+"CollectionViewController.watchlist.title" = "Watchlist";
+"CollectionViewController.watchlist.emptyStateText" = "There are no movies in your watchlist";
 
 "SimilarMoviesViewController.emptyStateText" = "There are no similar movies";

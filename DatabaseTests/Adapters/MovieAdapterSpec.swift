@@ -3,7 +3,7 @@
 //  DatabaseTests
 //
 //  Created by Radyslav Krechet on 04.12.2019.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Nimble
@@ -40,7 +40,7 @@ class MovieAdapterSpec: QuickSpec {
                         entity.releaseDate.value = Date()
                         entity.userScore.value = 1
                         entity.genres.value = [genre]
-                        entity.isFavourite.value = false
+                        entity.isInFavourites.value = false
                         entity.isInWatchlist.value = false
 
                         let object = movieAdapter.fromStorage(entity)
@@ -54,7 +54,7 @@ class MovieAdapterSpec: QuickSpec {
                         expect(object.releaseDate) == entity.releaseDate.value
                         expect(object.userScore) == entity.userScore.value
                         expect(object.genres.count) == entity.genres.value.count
-                        expect(object.isFavourite) == entity.isFavourite.value
+                        expect(object.isInFavourites) == entity.isInFavourites.value
                         expect(object.isInWatchlist) == entity.isInWatchlist.value
 
                         expect(genreAdapter.calls.fromStorage) == true
@@ -76,7 +76,7 @@ class MovieAdapterSpec: QuickSpec {
                     releaseDate: Date(),
                     userScore: 1,
                     genres: [],
-                    isFavourite: false,
+                    isInFavourites: false,
                     isInWatchlist: false)
 
                 expect {
@@ -95,7 +95,7 @@ class MovieAdapterSpec: QuickSpec {
                         expect(entity.releaseDate.value) == object.releaseDate
                         expect(entity.userScore.value) == object.userScore
                         expect(entity.genres.value) == relationship
-                        expect(entity.isFavourite.value) == object.isFavourite
+                        expect(entity.isInFavourites.value) == object.isInFavourites
                         expect(entity.isInWatchlist.value) == object.isInWatchlist
 
                         return entity

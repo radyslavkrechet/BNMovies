@@ -1,4 +1,4 @@
-<h1><img src="https://github.com/radyslavkrechet/PRBoilerplate/blob/master/App/Resources/Assets.xcassets/AppIcon.appiconset/180.png" width="23" height="23">Boilerplate</h1>
+<h1><img src="https://github.com/radyslavkrechet/PRBoilerplate/blob/master/App/Resources/Assets.xcassets/AppIcon.appiconset/180.png" width="23" height="23">Movies</h1>
 
 <p float="center">
   <img src="/Screenshots/1.png" width="200px" />

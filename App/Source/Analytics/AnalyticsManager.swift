@@ -3,7 +3,7 @@
 //  Analytics
 //
 //  Created by Radyslav Krechet on 9/12/19.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Firebase

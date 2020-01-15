@@ -3,19 +3,15 @@
 //  Domain
 //
 //  Created by Radyslav Krechet on 8/22/19.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Foundation
 
 public protocol MovieRepositoryProtocol: class {
-    func getMovies(_ chart: Movie.Chart, page: Int, handler: @escaping Handler<[Movie]>)
-    func getFavourites(handler: @escaping Handler<[Movie]>)
-    func getWatchlist(handler: @escaping Handler<[Movie]>)
+    func getChart(_ chart: Movie.Chart, page: Int, handler: @escaping Handler<[Movie]>)
+    func getCollection(_ collection: Movie.Collection, handler: @escaping Handler<[Movie]>)
     func getMovie(with id: String, handler: @escaping Handler<Movie>)
     func getSimilarMovies(_ id: String, handler: @escaping Handler<[Movie]>)
-    func addToFavourites(_ movie: Movie, handler: @escaping Handler<Movie>)
-    func deleteFromFavourites(_ movie: Movie, handler: @escaping Handler<Movie>)
-    func addToWatchlist(_ movie: Movie, handler: @escaping Handler<Movie>)
-    func deleteFromWatchlist(_ movie: Movie, handler: @escaping Handler<Movie>)
+    func toggleMovieCollection(_ movie: Movie, collection: Movie.Collection, handler: @escaping Handler<Movie>)
 }

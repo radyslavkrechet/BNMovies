@@ -3,7 +3,7 @@
 //  DataTests
 //
 //  Created by Radyslav Krechet on 28.11.2019.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Data
@@ -19,13 +19,13 @@ class MovieDAOMock: MovieDAOProtocol {
 
     struct Calls {
         var set = false
-        var getFavourites = false
-        var getWatchlist = false
+        var getMovies = false
         var getMovie = false
     }
 
     struct Arguments {
         var movie: Movie?
+        var collection: Movie.Collection?
         var id: String?
     }
 
@@ -43,15 +43,10 @@ class MovieDAOMock: MovieDAOProtocol {
         handler(shouldReturnError ? .failure(Mock.Error.force) : .success(settings.movie))
     }
 
-    func getFavourites(handler: @escaping Handler<[Movie]>) {
+    func getMovies(_ collection: Movie.Collection, handler: @escaping Handler<[Movie]>) {
         run()
-        calls.getFavourites = true
-        handler(shouldReturnError ? .failure(Mock.Error.force) : .success([]))
-    }
-
-    func getWatchlist(handler: @escaping Handler<[Movie]>) {
-        run()
-        calls.getWatchlist = true
+        calls.getMovies = true
+        arguments.collection = collection
         handler(shouldReturnError ? .failure(Mock.Error.force) : .success([]))
     }
 

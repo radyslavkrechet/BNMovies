@@ -3,7 +3,7 @@
 //  Domain
 //
 //  Created by Radyslav Krechet on 8/22/19.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Foundation
@@ -12,7 +12,7 @@ public struct Movie: Identifiable, Equatable {
     public enum Chart: Int, Equatable {
         case popular, topRated
     }
-    public enum List: Int, Equatable, CaseIterable {
+    public enum Collection: Int, Equatable, CaseIterable {
         case favourites, watchlist
     }
 
@@ -25,7 +25,7 @@ public struct Movie: Identifiable, Equatable {
     public let releaseDate: Date?
     public let userScore: Int
     public let genres: [Genre]
-    public let isFavourite: Bool
+    public let isInFavourites: Bool
     public let isInWatchlist: Bool
 
     public init(id: String,
@@ -37,7 +37,7 @@ public struct Movie: Identifiable, Equatable {
                 releaseDate: Date? = nil,
                 userScore: Int,
                 genres: [Genre] = [],
-                isFavourite: Bool,
+                isInFavourites: Bool,
                 isInWatchlist: Bool) {
 
         self.id = id
@@ -49,7 +49,7 @@ public struct Movie: Identifiable, Equatable {
         self.releaseDate = releaseDate
         self.userScore = userScore
         self.genres = genres
-        self.isFavourite = isFavourite
+        self.isInFavourites = isInFavourites
         self.isInWatchlist = isInWatchlist
     }
 }

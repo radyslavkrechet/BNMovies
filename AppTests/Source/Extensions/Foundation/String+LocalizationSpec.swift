@@ -3,7 +3,7 @@
 //  Movies
 //
 //  Created by Radyslav Krechet on 06.12.2019.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Nimble
@@ -15,7 +15,7 @@ class StringLocalizationSpec: QuickSpec {
     override func spec() {
         describe("localized") {
             it("returns localized string") {
-                let localizedString = "MoviesViewController.favourites.emptyStateText".localized
+                let localizedString = "CollectionViewController.favourites.emptyStateText".localized
                 expect(localizedString) == "There are no favourite movies"
             }
         }

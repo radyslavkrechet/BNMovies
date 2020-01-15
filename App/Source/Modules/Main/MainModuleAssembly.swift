@@ -3,7 +3,7 @@
 //  Movies
 //
 //  Created by Radyslav Krechet on 8/28/19.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Domain
@@ -18,7 +18,7 @@ struct MainModuleAssembly: Assembly {
 
     private func registerPresenters(in container: Container) {
         container.register(HomePresenter.self) { resolver in
-            let getMoviesUseCase = resolver.resolve(GetMoviesUseCaseProtocol.self)!
+            let getMoviesUseCase = resolver.resolve(GetChartUseCaseProtocol.self)!
             return HomePresenter(getMoviesUseCase: getMoviesUseCase)
         }
 
@@ -28,19 +28,16 @@ struct MainModuleAssembly: Assembly {
             return AccountPresenter(getUserUseCase: getUserUseCase, signOutUseCase: signOutUseCase)
         }
 
-        container.register(MoviesPresenter.self) { resolver in
-            let getFavouritesUseCase = resolver.resolve(GetFavouritesUseCaseProtocol.self)!
-            let getWatchlistUseCase = resolver.resolve(GetWatchlistUseCaseProtocol.self)!
-            return MoviesPresenter(getFavouritesUseCase: getFavouritesUseCase, getWatchlistUseCase: getWatchlistUseCase)
+        container.register(CollectionPresenter.self) { resolver in
+            let getCollectionUseCase = resolver.resolve(GetCollectionUseCaseProtocol.self)!
+            return CollectionPresenter(getCollectionUseCase: getCollectionUseCase)
         }
 
         container.register(DetailsPresenter.self) { resolver in
             let getMovieUseCase = resolver.resolve(GetMovieUseCaseProtocol.self)!
-            let changeMovieFavouriteStateUseCase = resolver.resolve(ChangeMovieFavouriteStateUseCaseProtocol.self)!
-            let changeMovieInWatchlistStateUseCase = resolver.resolve(ChangeMovieInWatchlistStateUseCaseProtocol.self)!
+            let toggleMovieCollectionUseCase = resolver.resolve(ToggleMovieCollectionUseCaseProtocol.self)!
             return DetailsPresenter(getMovieUseCase: getMovieUseCase,
-                                    changeMovieFavouriteStateUseCase: changeMovieFavouriteStateUseCase,
-                                    changeMovieInWatchlistStateUseCase: changeMovieInWatchlistStateUseCase)
+                                    toggleMovieCollectionUseCase: toggleMovieCollectionUseCase)
         }
 
         container.register(SimilarMoviesPresenter.self) { resolver in
@@ -78,8 +75,8 @@ struct MainModuleAssembly: Assembly {
             controller.analyticsService = resolver.resolve(AnalyticsServiceProtocol.self)
         }
 
-        container.storyboardInitCompleted(MoviesViewController.self) { resolver, controller in
-            controller.presenter = resolver.resolve(MoviesPresenter.self)!
+        container.storyboardInitCompleted(CollectionViewController.self) { resolver, controller in
+            controller.presenter = resolver.resolve(CollectionPresenter.self)!
             controller.presenter.view = controller
             controller.dataSource = resolver.resolve(MoviesDataSource.self)!
             controller.analyticsService = resolver.resolve(AnalyticsServiceProtocol.self)

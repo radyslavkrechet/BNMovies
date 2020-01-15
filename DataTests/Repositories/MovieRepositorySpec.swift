@@ -3,7 +3,7 @@
 //  DataTests
 //
 //  Created by Radyslav Krechet on 28.11.2019.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Nimble
@@ -26,7 +26,7 @@ class MovieRepositorySpec: QuickSpec {
             movieRepository = MovieRepository(movieAPI: movieAPIMock, movieDAO: movieDAOMock)
         }
 
-        describe("get movies") {
+        describe("get chart") {
             let chart = Movie.Chart.popular
             let page = 0
 
@@ -34,7 +34,7 @@ class MovieRepositorySpec: QuickSpec {
                 it("returns error") {
                     movieAPIMock.settings.shouldReturnError = true
 
-                    movieRepository.getMovies(chart, page: page) { result in
+                    movieRepository.getChart(chart, page: page) { result in
                         guard case .failure = result else {
                             fail()
                             return
@@ -49,7 +49,7 @@ class MovieRepositorySpec: QuickSpec {
 
             context("movie api gets movies -> movies") {
                 it("returns movies") {
-                    movieRepository.getMovies(chart, page: page) { result in
+                    movieRepository.getChart(chart, page: page) { result in
                         guard case .success = result else {
                             fail()
                             return
@@ -63,61 +63,35 @@ class MovieRepositorySpec: QuickSpec {
             }
         }
 
-        describe("get favourites") {
-            context("movie dao gets favourites -> error") {
+        describe("get collection") {
+            let collection = Movie.Collection.favourites
+
+            context("movie dao gets movies -> error") {
                 it("returns error") {
                     movieDAOMock.settings.shouldReturnError = true
 
-                    movieRepository.getFavourites { result in
+                    movieRepository.getCollection(collection) { result in
                         guard case .failure = result else {
                             fail()
                             return
                         }
 
-                        expect(movieDAOMock.calls.getFavourites) == true
+                        expect(movieDAOMock.calls.getMovies) == true
+                        expect(movieDAOMock.arguments.collection) == collection
                     }
                 }
             }
 
-            context("movie dao gets favourites -> movies") {
+            context("movie dao gets movies -> movies") {
                 it("returns movies") {
-                    movieRepository.getFavourites { result in
+                    movieRepository.getCollection(collection) { result in
                         guard case .success = result else {
                             fail()
                             return
                         }
 
-                        expect(movieDAOMock.calls.getFavourites) == true
-                    }
-                }
-            }
-        }
-
-        describe("get watchlist") {
-            context("movie dao gets watchlist -> error") {
-                it("returns error") {
-                    movieDAOMock.settings.shouldReturnError = true
-
-                    movieRepository.getWatchlist { result in
-                        guard case .failure = result else {
-                            fail()
-                            return
-                        }
-
-                        expect(movieDAOMock.calls.getWatchlist) == true
-                    }
-                }
-            }
-
-            context("movie dao gets watchlist -> movies") {
-                it("returns movies") {
-                    movieRepository.getWatchlist { result in
-                        guard case .success = result else {
-                            fail()
-                            return
-                        }
-
-                        expect(movieDAOMock.calls.getWatchlist) == true
+                        expect(movieDAOMock.calls.getMovies) == true
+                        expect(movieDAOMock.arguments.collection) == collection
                     }
                 }
             }
@@ -273,8 +247,8 @@ class MovieRepositorySpec: QuickSpec {
 
                     context("movie dao sets movie -> movie") {
                         it("returns movie, returns movie") {
-                            movieDAOMock.settings.movie = Mock.movie(isFavourite: true, isInWatchlist: true)
-                            movieAPIMock.settings.movie = Mock.movie(isFavourite: false, isInWatchlist: false)
+                            movieDAOMock.settings.movie = Mock.movie(isInFavourites: true, isInWatchlist: true)
+                            movieAPIMock.settings.movie = Mock.movie(isInFavourites: false, isInWatchlist: false)
 
                             waitUntil { done in
                                 var returnIndex = 0
@@ -297,7 +271,7 @@ class MovieRepositorySpec: QuickSpec {
                                         expect(movieAPIMock.calls.getMovie) == true
                                         expect(movieAPIMock.arguments.id) == id
                                         expect(movieDAOMock.calls.set) == true
-                                        expect(movieDAOMock.arguments.movie!.isFavourite) == true
+                                        expect(movieDAOMock.arguments.movie!.isInFavourites) == true
                                         expect(movieDAOMock.arguments.movie!.isInWatchlist) == true
                                         done()
                                     }
@@ -343,140 +317,76 @@ class MovieRepositorySpec: QuickSpec {
             }
         }
 
-        describe("add to favourites") {
-            let movie = Mock.movie(isFavourite: false, isInWatchlist: false)
+        describe("toggle movie collection") {
+            let movie = Mock.movie
 
-            context("movie dao adds to favourites -> error") {
-                it("returns error") {
-                    movieDAOMock.settings.shouldReturnError = true
+            context("collection is favourites") {
+                let collection = Movie.Collection.favourites
 
-                    movieRepository.addToFavourites(movie) { result in
-                        guard case .failure = result else {
-                            fail()
-                            return
+                context("movie dao sets modified clone -> error") {
+                    it("returns error") {
+                        movieDAOMock.settings.shouldReturnError = true
+
+                        movieRepository.toggleMovieCollection(movie, collection: collection) { result in
+                            guard case .failure = result else {
+                                fail()
+                                return
+                            }
+
+                            expect(movieDAOMock.calls.set) == true
+                            expect(movieDAOMock.arguments.movie!.isInFavourites) == !movie.isInFavourites
                         }
+                    }
+                }
 
-                        expect(movieDAOMock.calls.set) == true
-                        expect(movieDAOMock.arguments.movie!.isFavourite) == true
+                context("movie dao sets modified clone -> movie") {
+                    it("returns movie") {
+                        movieRepository.toggleMovieCollection(movie, collection: collection) { result in
+                            guard case .success = result else {
+                                fail()
+                                return
+                            }
+
+                            expect(movieDAOMock.calls.set) == true
+                            expect(movieDAOMock.arguments.movie!.isInFavourites) == !movie.isInFavourites
+                        }
                     }
                 }
             }
 
-            context("movie dao adds to favourites -> movie") {
-                it("returns movie") {
-                    movieRepository.addToFavourites(movie) { result in
-                        guard case .success = result else {
-                            fail()
-                            return
-                        }
+            context("collection is watchlist") {
+                let collection = Movie.Collection.watchlist
 
-                        expect(movieDAOMock.calls.set) == true
-                        expect(movieDAOMock.arguments.movie!.isFavourite) == true
+                context("movie dao sets modified clone -> error") {
+                    it("returns error") {
+                        movieDAOMock.settings.shouldReturnError = true
+
+                        movieRepository.toggleMovieCollection(movie, collection: collection) { result in
+                            guard case .failure = result else {
+                                fail()
+                                return
+                            }
+
+                            expect(movieDAOMock.calls.set) == true
+                            expect(movieDAOMock.arguments.movie!.isInWatchlist) == !movie.isInWatchlist
+                        }
                     }
                 }
-            }
-        }
 
-        describe("delete from favourites") {
-            let movie = Mock.movie(isFavourite: true, isInWatchlist: false)
+                context("movie dao sets modified clone -> movie") {
+                    it("returns movie") {
+                        movieRepository.toggleMovieCollection(movie, collection: collection) { result in
+                            guard case .success = result else {
+                                fail()
+                                return
+                            }
 
-            context("movie dao deletes from favourites -> error") {
-                it("returns error") {
-                    movieDAOMock.settings.shouldReturnError = true
-
-                    movieRepository.deleteFromFavourites(movie) { result in
-                        guard case .failure = result else {
-                            fail()
-                            return
+                            expect(movieDAOMock.calls.set) == true
+                            expect(movieDAOMock.arguments.movie!.isInWatchlist) == !movie.isInWatchlist
                         }
-
-                        expect(movieDAOMock.calls.set) == true
-                        expect(movieDAOMock.arguments.movie!.isFavourite) == false
-                    }
-                }
-            }
-
-            context("movie dao deletes from favourites -> movie") {
-                it("returns movie") {
-                    movieRepository.deleteFromFavourites(movie) { result in
-                        guard case .success = result else {
-                            fail()
-                            return
-                        }
-
-                        expect(movieDAOMock.calls.set) == true
-                        expect(movieDAOMock.arguments.movie!.isFavourite) == false
-                    }
-                }
-            }
-        }
-
-        describe("add to watchlist") {
-            let movie = Mock.movie(isFavourite: false, isInWatchlist: false)
-
-            context("movie dao adds to watchlist -> error") {
-                it("returns error") {
-                    movieDAOMock.settings.shouldReturnError = true
-
-                    movieRepository.addToWatchlist(movie) { result in
-                        guard case .failure = result else {
-                            fail()
-                            return
-                        }
-
-                        expect(movieDAOMock.calls.set) == true
-                        expect(movieDAOMock.arguments.movie!.isInWatchlist) == true
-                    }
-                }
-            }
-
-            context("movie dao adds to watchlist -> movie") {
-                it("returns movie") {
-                    movieRepository.addToWatchlist(movie) { result in
-                        guard case .success = result else {
-                            fail()
-                            return
-                        }
-
-                        expect(movieDAOMock.calls.set) == true
-                        expect(movieDAOMock.arguments.movie!.isInWatchlist) == true
-                    }
-                }
-            }
-        }
-
-        describe("delete from watchlist") {
-            let movie = Mock.movie(isFavourite: false, isInWatchlist: true)
-
-            context("movie dao deletes from watchlist -> error") {
-                it("returns error") {
-                    movieDAOMock.settings.shouldReturnError = true
-
-                    movieRepository.deleteFromWatchlist(movie) { result in
-                        guard case .failure = result else {
-                            fail()
-                            return
-                        }
-
-                        expect(movieDAOMock.calls.set) == true
-                        expect(movieDAOMock.arguments.movie!.isInWatchlist) == false
-                    }
-                }
-            }
-
-            context("movie dao deletes from watchlist -> movie") {
-                it("returns movie") {
-                    movieRepository.deleteFromWatchlist(movie) { result in
-                        guard case .success = result else {
-                            fail()
-                            return
-                        }
-
-                        expect(movieDAOMock.calls.set) == true
-                        expect(movieDAOMock.arguments.movie!.isInWatchlist) == false
                     }
                 }
             }
         }
     }
-} // swiftlint:disable:this file_length
+}

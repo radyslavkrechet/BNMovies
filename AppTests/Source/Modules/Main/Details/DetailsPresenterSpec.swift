@@ -3,11 +3,12 @@
 //  Movies
 //
 //  Created by Radyslav Krechet on 10.12.2019.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Nimble
 import Quick
+import Domain
 
 @testable import Movies
 
@@ -18,18 +19,14 @@ class DetailsPresenterSpec: QuickSpec {
 
         var detailsPresenter: DetailsPresenter!
         var getMovieUseCaseMock: GetMovieUseCaseMock!
-        var changeMovieFavouriteStateUseCaseMock: ChangeMovieFavouriteStateUseCaseMock!
-        var changeMovieInWatchlistStateUseCaseMock: ChangeMovieInWatchlistStateUseCaseMock!
+        var toggleMovieCollectionUseCaseMock: ToggleMovieCollectionUseCaseMock!
         var detailsViewMock: DetailsViewMock!
 
         beforeEach {
             getMovieUseCaseMock = GetMovieUseCaseMock()
-            changeMovieFavouriteStateUseCaseMock = ChangeMovieFavouriteStateUseCaseMock()
-            changeMovieInWatchlistStateUseCaseMock = ChangeMovieInWatchlistStateUseCaseMock()
+            toggleMovieCollectionUseCaseMock = ToggleMovieCollectionUseCaseMock()
             detailsPresenter = DetailsPresenter(getMovieUseCase: getMovieUseCaseMock,
-                                                changeMovieFavouriteStateUseCase: changeMovieFavouriteStateUseCaseMock,
-                                                changeMovieInWatchlistStateUseCase:
-                                                    changeMovieInWatchlistStateUseCaseMock)
+                                                toggleMovieCollectionUseCase: toggleMovieCollectionUseCaseMock)
 
             detailsViewMock = DetailsViewMock()
             detailsPresenter.view = detailsViewMock
@@ -59,32 +56,15 @@ class DetailsPresenterSpec: QuickSpec {
                 }
 
                 context("get movie use case executes -> movie") {
-                    context("movie is not favourite") {
-                        it("populates view with loading state, populates view with content state, movie and title") {
-                            detailsPresenter.getContent()
+                    it("populates view with loading state, populates view with content state and movie") {
+                        detailsPresenter.getContent()
 
-                            expect(getMovieUseCaseMock.calls.execute) == true
-                            expect(getMovieUseCaseMock.arguments.id) == id
+                        expect(getMovieUseCaseMock.calls.execute) == true
+                        expect(getMovieUseCaseMock.arguments.id) == id
 
-                            expect(detailsViewMock.calls.populateWithState) == true
-                            expect(detailsViewMock.arguments.states) == [.loading, .content]
-                            expect(detailsViewMock.calls.populateWithMovie) == true
-                        }
-                    }
-
-                    context("movie is favourite") {
-                        it("populates view with loading state, populates view with content state, movie and title") {
-                            getMovieUseCaseMock.settings.movie = Mock.movie(isFavourite: true)
-
-                            detailsPresenter.getContent()
-
-                            expect(getMovieUseCaseMock.calls.execute) == true
-                            expect(getMovieUseCaseMock.arguments.id) == id
-
-                            expect(detailsViewMock.calls.populateWithState) == true
-                            expect(detailsViewMock.arguments.states) == [.loading, .content]
-                            expect(detailsViewMock.calls.populateWithMovie) == true
-                        }
+                        expect(detailsViewMock.calls.populateWithState) == true
+                        expect(detailsViewMock.arguments.states) == [.loading, .content]
+                        expect(detailsViewMock.calls.populateWithMovie) == true
                     }
                 }
             }
@@ -95,7 +75,7 @@ class DetailsPresenterSpec: QuickSpec {
                 }
 
                 context("get movie use case executes -> movie") {
-                    it("populates view with loading state, populates view with content state, movie and title") {
+                    it("populates view with loading state, populates view with content state and movie") {
                         detailsPresenter.getContent()
 
                         expect(getMovieUseCaseMock.calls.execute) == true
@@ -125,27 +105,27 @@ class DetailsPresenterSpec: QuickSpec {
             }
 
             context("get movie use case executes -> movie") {
-                context("movie is not favourite") {
-                    it("populates view with loading state, populates view with content state, movie and title") {
-                        detailsPresenter.tryAgain()
+                it("populates view with loading state, populates view with content state and movie") {
+                    detailsPresenter.tryAgain()
 
-                        expect(getMovieUseCaseMock.calls.execute) == true
-                        expect(getMovieUseCaseMock.arguments.id) == id
+                    expect(getMovieUseCaseMock.calls.execute) == true
+                    expect(getMovieUseCaseMock.arguments.id) == id
 
-                        expect(detailsViewMock.calls.populateWithState) == true
-                        expect(detailsViewMock.arguments.states) == [.loading, .content]
-                        expect(detailsViewMock.calls.populateWithMovie) == true
-                    }
+                    expect(detailsViewMock.calls.populateWithState) == true
+                    expect(detailsViewMock.arguments.states) == [.loading, .content]
+                    expect(detailsViewMock.calls.populateWithMovie) == true
                 }
             }
         }
 
         describe("mark movie") {
+            let collection = Movie.Collection.favourites
+
             context("content was not got") {
                 it("ignores execution") {
-                    detailsPresenter.markMovie(state: .favourites)
+                    detailsPresenter.markMovie(collection)
 
-                    expect(changeMovieFavouriteStateUseCaseMock.calls.execute) == false
+                    expect(toggleMovieCollectionUseCaseMock.calls.execute) == false
                 }
             }
 
@@ -154,22 +134,22 @@ class DetailsPresenterSpec: QuickSpec {
                     detailsPresenter.getContent()
                 }
 
-                context("change movie favourite state use case executes -> error") {
-                    it("present favourite error in view") {
-                        changeMovieFavouriteStateUseCaseMock.settings.shouldReturnError = true
+                context("toggle movie collection use case executes -> error") {
+                    it("present mark error in view") {
+                        toggleMovieCollectionUseCaseMock.settings.shouldReturnError = true
 
-                        detailsPresenter.markMovie(state: .favourites)
+                        detailsPresenter.markMovie(collection)
 
-                        expect(changeMovieFavouriteStateUseCaseMock.calls.execute) == true
+                        expect(toggleMovieCollectionUseCaseMock.calls.execute) == true
                         expect(detailsViewMock.calls.presentMarkError) == true
                     }
                 }
 
-                context("change movie favourite state use case executes -> movie") {
-                    it("populates view with content state, movie and title") {
-                        detailsPresenter.markMovie(state: .watchlist)
+                context("toggle movie collection use case executes -> movie") {
+                    it("populates view with content state and movie") {
+                        detailsPresenter.markMovie(collection)
 
-                        expect(changeMovieInWatchlistStateUseCaseMock.calls.execute) == true
+                        expect(toggleMovieCollectionUseCaseMock.calls.execute) == true
                         expect(detailsViewMock.calls.populateWithMovie) == true
                     }
                 }

@@ -3,7 +3,7 @@
 //  Domain
 //
 //  Created by Radyslav Krechet on 8/27/19.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Swinject
@@ -45,19 +45,14 @@ public struct InteractorsAssembly: Assembly {
     }
 
     private func registerMovieInteractors(in container: Container) {
-        container.register(GetMoviesUseCaseProtocol.self) { resolver in
+        container.register(GetChartUseCaseProtocol.self) { resolver in
             let movieRepository = resolver.resolve(MovieRepositoryProtocol.self)!
-            return GetMoviesUseCase(movieRepository: movieRepository)
+            return GetChartUseCase(movieRepository: movieRepository)
         }
 
-        container.register(GetFavouritesUseCaseProtocol.self) { resolver in
+        container.register(GetCollectionUseCaseProtocol.self) { resolver in
             let movieRepository = resolver.resolve(MovieRepositoryProtocol.self)!
-            return GetFavouritesUseCase(movieRepository: movieRepository)
-        }
-
-        container.register(GetWatchlistUseCaseProtocol.self) { resolver in
-            let movieRepository = resolver.resolve(MovieRepositoryProtocol.self)!
-            return GetWatchlistUseCase(movieRepository: movieRepository)
+            return GetCollectionUseCase(movieRepository: movieRepository)
         }
 
         container.register(GetMovieUseCaseProtocol.self) { resolver in
@@ -70,14 +65,9 @@ public struct InteractorsAssembly: Assembly {
             return GetSimilarMoviesUseCase(movieRepository: movieRepository)
         }
 
-        container.register(ChangeMovieFavouriteStateUseCaseProtocol.self) { resolver in
+        container.register(ToggleMovieCollectionUseCaseProtocol.self) { resolver in
             let movieRepository = resolver.resolve(MovieRepositoryProtocol.self)!
-            return ChangeMovieFavouriteStateUseCase(movieRepository: movieRepository)
-        }
-
-        container.register(ChangeMovieInWatchlistStateUseCaseProtocol.self) { resolver in
-            let movieRepository = resolver.resolve(MovieRepositoryProtocol.self)!
-            return ChangeMovieInWatchlistStateUseCase(movieRepository: movieRepository)
+            return ToggleMovieCollectionUseCase(movieRepository: movieRepository)
         }
     }
 }

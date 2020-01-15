@@ -7,10 +7,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Movies-->
+        <!--Collection-->
         <scene sceneID="ZeH-uw-HJE">
             <objects>
-                <viewController id="Uoa-3Z-eRc" customClass="MoviesViewController" customModule="Boilerplate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Uoa-3Z-eRc" customClass="CollectionViewController" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qz3-Ux-TtU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,7 +30,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Rmo-IL-Gnb"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Movies" id="gTe-SR-HcJ"/>
+                    <navigationItem key="navigationItem" title="Collection" id="gTe-SR-HcJ"/>
                     <connections>
                         <outlet property="tableView" destination="S7P-E0-YGU" id="Mhd-eN-rZ3"/>
                         <segue destination="qZu-Gt-At7" kind="show" identifier="Details" id="Ob5-oz-gKw"/>
@@ -43,7 +43,7 @@
         <!--Account-->
         <scene sceneID="9f9-pN-QP4">
             <objects>
-                <viewController id="VJ5-3A-qHn" customClass="AccountViewController" customModule="Boilerplate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="VJ5-3A-qHn" customClass="AccountViewController" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tqd-fz-NmN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -66,7 +66,7 @@
                     <navigationItem key="navigationItem" title="Account" id="Qmc-Pt-Pzg"/>
                     <connections>
                         <outlet property="tableView" destination="noc-Rk-GAu" id="yzg-Nt-ZXA"/>
-                        <segue destination="Uoa-3Z-eRc" kind="show" identifier="Movies" id="QeH-Ne-Gfn"/>
+                        <segue destination="Uoa-3Z-eRc" kind="show" identifier="Collection" id="QeH-Ne-Gfn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BIl-CX-i4m" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -76,7 +76,7 @@
         <!--Home-->
         <scene sceneID="B6l-5e-C6E">
             <objects>
-                <viewController id="fZ0-0W-5kR" customClass="HomeViewController" customModule="Boilerplate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fZ0-0W-5kR" customClass="HomeViewController" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Kh2-uR-DIC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -129,7 +129,7 @@
         <!--Details-->
         <scene sceneID="lgr-xe-5GA">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="qZu-Gt-At7" customClass="DetailsViewController" customModule="Boilerplate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="qZu-Gt-At7" customClass="DetailsViewController" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fCe-Ys-CCd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -183,7 +183,7 @@ Genres</string>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ovo-OU-HlW" customClass="UserScoreLabel" customModule="Boilerplate" customModuleProvider="target">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ovo-OU-HlW" customClass="UserScoreLabel" customModule="Movies" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="118.33333333333331" width="61.333333333333336" height="14.333333333333343"/>
                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                                         <nil key="textColor"/>
@@ -361,7 +361,7 @@ Genres</string>
         <!--Similar Movies View Controller-->
         <scene sceneID="6L7-Hn-cs8">
             <objects>
-                <viewController id="1JD-i7-P30" customClass="SimilarMoviesViewController" customModule="Boilerplate" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1JD-i7-P30" customClass="SimilarMoviesViewController" customModule="Movies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sgM-L9-Pys">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -405,6 +405,6 @@ Genres</string>
         <image name="square.and.arrow.up" catalog="system" width="56" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZEJ-zt-PiC"/>
+        <segue reference="Ob5-oz-gKw"/>
     </inferredMetricsTieBreakers>
 </document>

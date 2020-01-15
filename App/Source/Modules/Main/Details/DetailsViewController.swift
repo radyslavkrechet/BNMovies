@@ -3,7 +3,7 @@
 //  Movies
 //
 //  Created by Radyslav Krechet on 8/28/19.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Domain
@@ -53,8 +53,8 @@ class DetailsViewController: ContentViewController<DetailsPresenter>, DetailsVie
     }
 
     @IBAction private func markButtonDidTap(_ sender: UIBarButtonItem) {
-        let state = Movie.List(rawValue: sender.tag)!
-        presenter.markMovie(state: state)
+        let collection = Movie.Collection(rawValue: sender.tag)!
+        presenter.markMovie(collection)
 
         if let title = sender.title {
             analyticsService?.logClick(in: self.nameOfClass, senderTitle: title)
@@ -77,7 +77,7 @@ class DetailsViewController: ContentViewController<DetailsPresenter>, DetailsVie
         userScoreLabel.populate(with: movie.userScore)
         overviewLabel.text = movie.overview
 
-        favouriteButton.image = "heart\(movie.isFavourite ? ".fill" : "")".systemImage
+        favouriteButton.image = "heart\(movie.isInFavourites ? ".fill" : "")".systemImage
         watchlistButton.image = "bookmark\(movie.isInWatchlist ? ".fill" : "")".systemImage
     }
 

@@ -3,7 +3,7 @@
 //  Movies
 //
 //  Created by Radyslav Krechet on 06.12.2019.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Domain
@@ -27,8 +27,7 @@ enum Mock {
 
     static func movie(runtime: Int? = nil,
                       hasReleaeDate: Bool = false,
-                      genres: [Genre] = [],
-                      isFavourite: Bool = false) -> Movie {
+                      genres: [Genre] = []) -> Movie {
 
         return Movie(id: "id",
                      title: "title",
@@ -39,7 +38,7 @@ enum Mock {
                      releaseDate: hasReleaeDate ? Date() : nil,
                      userScore: 1,
                      genres: genres,
-                     isFavourite: isFavourite,
+                     isInFavourites: false,
                      isInWatchlist: false)
     }
 

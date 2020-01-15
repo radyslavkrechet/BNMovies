@@ -3,7 +3,7 @@
 //  Database
 //
 //  Created by Radyslav Krechet on 9/3/19.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import CoreStore
@@ -18,6 +18,6 @@ class MovieEntity: CoreStoreObject {
     let releaseDate = Value.Optional<Date>("releaseDate")
     let userScore = Value.Required<Int>("userScore", initial: 0)
     let genres = Relationship.ToManyOrdered<GenreEntity>("genres")
-    let isFavourite = Value.Required<Bool>("isFavourite", initial: false)
+    let isInFavourites = Value.Required<Bool>("isInFavourites", initial: false)
     let isInWatchlist = Value.Required<Bool>("isInWatchlist", initial: false)
 }

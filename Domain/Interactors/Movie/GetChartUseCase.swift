@@ -1,21 +1,21 @@
 //
-//  GetMoviesUseCase.swift
+//  GetChartUseCase.swift
 //  Domain
 //
 //  Created by Radyslav Krechet on 8/22/19.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Foundation
 
-public protocol GetMoviesUseCaseProtocol {
+public protocol GetChartUseCaseProtocol {
     func execute(with chart: Movie.Chart, page: Int, handler: @escaping Handler<[Movie]>)
 }
 
-public class GetMoviesUseCase: GetMoviesUseCaseProtocol, Executable {
+public class GetChartUseCase: GetChartUseCaseProtocol, Executable {
     lazy var work = { [weak self] in
         guard let self = self else { return }
-        self.movieRepository.getMovies(self.chart, page: self.page, handler: self.handler)
+        self.movieRepository.getChart(self.chart, page: self.page, handler: self.handler)
     }
 
     @AsyncOnMain var handler: Handler<[Movie]>!

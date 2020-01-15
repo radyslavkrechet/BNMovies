@@ -3,7 +3,7 @@
 //  DataTests
 //
 //  Created by Radyslav Krechet on 28.11.2019.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Nimble
@@ -26,8 +26,8 @@ class MovieCopySpec: QuickSpec {
 
             context("with argument") {
                 it("returns copy with modified property") {
-                    let movie = Mock.movie(isFavourite: false, isInWatchlist: false)
-                    let copy = movie.copy(isFavourite: true, isInWatchlist: true)
+                    let movie = Mock.movie(isInFavourites: false, isInWatchlist: false)
+                    let copy = movie.copy(isInFavourites: true, isInWatchlist: true)
 
                     expect(copy.id) == movie.id
                     expect(copy.title) == movie.title
@@ -38,7 +38,7 @@ class MovieCopySpec: QuickSpec {
                     expect(copy.releaseDate) == movie.releaseDate
                     expect(copy.userScore) == movie.userScore
                     expect(copy.genres) == movie.genres
-                    expect(copy.isFavourite) == true
+                    expect(copy.isInFavourites) == true
                     expect(copy.isInWatchlist) == true
                 }
             }

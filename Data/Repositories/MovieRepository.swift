@@ -3,7 +3,7 @@
 //  Data
 //
 //  Created by Radyslav Krechet on 8/23/19.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Domain
@@ -17,16 +17,12 @@ class MovieRepository: MovieRepositoryProtocol {
         self.movieDAO = movieDAO
     }
 
-    func getMovies(_ chart: Movie.Chart, page: Int, handler: @escaping Handler<[Movie]>) {
+    func getChart(_ chart: Movie.Chart, page: Int, handler: @escaping Handler<[Movie]>) {
         movieAPI.getMovies(chart, page: page, handler: handler)
     }
 
-    func getFavourites(handler: @escaping Handler<[Movie]>) {
-        movieDAO.getFavourites(handler: handler)
-    }
-
-    func getWatchlist(handler: @escaping Handler<[Movie]>) {
-        movieDAO.getWatchlist(handler: handler)
+    func getCollection(_ collection: Movie.Collection, handler: @escaping Handler<[Movie]>) {
+        movieDAO.getMovies(collection, handler: handler)
     }
 
     func getMovie(with id: String, handler: @escaping Handler<Movie>) {
@@ -41,9 +37,9 @@ class MovieRepository: MovieRepositoryProtocol {
                     switch result {
                     case .failure: handler(result)
                     case .success(let apiMovie):
-                        let isFavourite = daoMovie?.isFavourite ?? apiMovie.isFavourite
+                        let isInFavourites = daoMovie?.isInFavourites ?? apiMovie.isInFavourites
                         let isInWatchlist = daoMovie?.isInWatchlist ?? apiMovie.isInWatchlist
-                        let movie = apiMovie.copy(isFavourite: isFavourite, isInWatchlist: isInWatchlist)
+                        let movie = apiMovie.copy(isInFavourites: isInFavourites, isInWatchlist: isInWatchlist)
                         self.movieDAO.set(movie, handler: handler)
                     }
                 }
@@ -55,23 +51,14 @@ class MovieRepository: MovieRepositoryProtocol {
         movieAPI.getSimilarMovies(id, handler: handler)
     }
 
-    func addToFavourites(_ movie: Movie, handler: @escaping Handler<Movie>) {
-        let movie = movie.copy(isFavourite: true)
-        movieDAO.set(movie, handler: handler)
-    }
+    func toggleMovieCollection(_ movie: Movie, collection: Movie.Collection, handler: @escaping Handler<Movie>) {
+        var clone: Movie!
 
-    func deleteFromFavourites(_ movie: Movie, handler: @escaping Handler<Movie>) {
-        let movie = movie.copy(isFavourite: false)
-        movieDAO.set(movie, handler: handler)
-    }
+        switch collection {
+        case .favourites: clone = movie.copy(isInFavourites: !movie.isInFavourites)
+        case .watchlist: clone = movie.copy(isInWatchlist: !movie.isInWatchlist)
+        }
 
-    func addToWatchlist(_ movie: Movie, handler: @escaping Handler<Movie>) {
-        let movie = movie.copy(isInWatchlist: true)
-        movieDAO.set(movie, handler: handler)
-    }
-
-    func deleteFromWatchlist(_ movie: Movie, handler: @escaping Handler<Movie>) {
-        let movie = movie.copy(isInWatchlist: false)
-        movieDAO.set(movie, handler: handler)
+        movieDAO.set(clone, handler: handler)
     }
 }

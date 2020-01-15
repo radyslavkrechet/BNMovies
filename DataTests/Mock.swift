@@ -3,7 +3,7 @@
 //  DataTests
 //
 //  Created by Radyslav Krechet on 05.12.2019.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Domain
@@ -22,10 +22,10 @@ enum Mock {
     }
 
     static var movie: Movie {
-        movie(isFavourite: false, isInWatchlist: false)
+        movie(isInFavourites: false, isInWatchlist: false)
     }
 
-    static func movie(isFavourite: Bool, isInWatchlist: Bool) -> Movie {
+    static func movie(isInFavourites: Bool, isInWatchlist: Bool) -> Movie {
         return Movie(id: "id",
                      title: "title",
                      overview: "overview",
@@ -35,7 +35,7 @@ enum Mock {
                      releaseDate: Date(),
                      userScore: 1,
                      genres: [Genre(id: "id", name: "name")],
-                     isFavourite: isFavourite,
+                     isInFavourites: isInFavourites,
                      isInWatchlist: isInWatchlist)
     }
 }

@@ -3,7 +3,7 @@
 //  Database
 //
 //  Created by Radyslav Krechet on 8/27/19.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Domain
@@ -41,20 +41,14 @@ class MovieDAO<DatabaseManager: DatabaseManagerProtocol>: MovieDAOProtocol
         }
     }
 
-    func getFavourites(handler: @escaping Handler<[Movie]>) {
+    func getMovies(_ collection: Movie.Collection, handler: @escaping Handler<[Movie]>) {
+        let predicateField = collection == .favourites ? "isInFavourites" : "isInWatchlist"
+
         let adapter: (MovieEntity) -> Movie = { entity in
             return self.movieAdapter.fromStorage(entity)
         }
 
-        databaseManager.getAll(predicate: "isFavourite == true", adapter: adapter, handler: handler)
-    }
-
-    func getWatchlist(handler: @escaping Handler<[Movie]>) {
-        let adapter: (MovieEntity) -> Movie = { entity in
-            return self.movieAdapter.fromStorage(entity)
-        }
-
-        databaseManager.getAll(predicate: "isInWatchlist == true", adapter: adapter, handler: handler)
+        databaseManager.getAll(predicate: "\(predicateField) == true", adapter: adapter, handler: handler)
     }
 
     func getMovie(with id: String, handler: @escaping Handler<Movie?>) {

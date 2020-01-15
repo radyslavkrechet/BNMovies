@@ -3,7 +3,7 @@
 //  Net
 //
 //  Created by Radyslav Krechet on 9/2/19.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Domain
@@ -57,7 +57,7 @@ struct MovieAdapter: MovieAdapterProtocol {
                      releaseDate: releaseDate,
                      userScore: Int(response.voteAverage * 10),
                      genres: response.genres?.map { genreAdapter.toObject($0) } ?? [],
-                     isFavourite: false,
+                     isInFavourites: false,
                      isInWatchlist: false)
     }
 }

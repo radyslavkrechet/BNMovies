@@ -3,7 +3,7 @@
 //  Movies
 //
 //  Created by Radyslav Krechet on 8/28/19.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Domain
@@ -29,8 +29,10 @@ class AccountViewController: ContentViewController<AccountPresenter>, AccountVie
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let moviesViewController = segue.destination as? MoviesViewController, let source = sender as? Movie.List {
-            moviesViewController.presenter.source = source
+        if let collectionViewController = segue.destination as? CollectionViewController,
+            let collection = sender as? Movie.Collection {
+
+            collectionViewController.presenter.collection = collection
         }
     }
 
@@ -45,8 +47,8 @@ class AccountViewController: ContentViewController<AccountPresenter>, AccountVie
     }
 
     func setupDataSource() {
-        dataSource.navigate = { [weak self] source in
-            self?.present(.Movies, with: source)
+        dataSource.navigate = { [weak self] collection in
+            self?.present(.Collection, with: collection)
         }
 
         dataSource.userDidSignOut = { [weak self] in

@@ -3,24 +3,24 @@
 //  Movies
 //
 //  Created by Radyslav Krechet on 8/28/19.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Domain
 
-protocol MoviesViewProtocol: ListViewProtocol {
+protocol CollectionViewProtocol: ListViewProtocol {
     func populate(with movies: [Movie])
 }
 
-class MoviesViewController: ListViewController<MoviesPresenter, MoviesDataSource>, MoviesViewProtocol {
+class CollectionViewController: ListViewController<CollectionPresenter, MoviesDataSource>, CollectionViewProtocol {
     @IBOutlet private(set) weak var tableView: UITableView!
 
     override var emptyStateText: String {
-        return "MoviesViewController.\(source).emptyStateText".localized
+        return "CollectionViewController.\(collection).emptyStateText".localized
     }
 
-    private var source: String {
-        return presenter.source == .favourites ? "favourites" : "watchlist"
+    private var collection: String {
+        return presenter.collection == .favourites ? "favourites" : "watchlist"
     }
 
     // MARK: - Lifecycle
@@ -42,7 +42,7 @@ class MoviesViewController: ListViewController<MoviesPresenter, MoviesDataSource
     override func setupViews() {
         super.setupViews()
 
-        title = "MoviesViewController.\(source).title".localized
+        title = "CollectionViewController.\(collection).title".localized
 
         tableView.registerNibForCell(MovieTableViewCell.self)
         tableView.dataSource = dataSource

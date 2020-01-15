@@ -3,7 +3,7 @@
 //  DatabaseTests
 //
 //  Created by Radyslav Krechet on 04.12.2019.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Nimble
@@ -88,59 +88,26 @@ class MovieDAOSpec: QuickSpec {
             }
         }
 
-        describe("get favourites") {
-            context("database manager gets favourites -> error") {
+        describe("get movies") {
+            context("database manager gets movies -> error") {
                 it("returns error") {
                     databaseManagerMock.settings.shouldReturnError = true
 
-                    movieDAO.getFavourites { result in
+                    movieDAO.getMovies(.favourites) { result in
                         guard case .failure = result else {
                             fail()
                             return
                         }
 
                         expect(databaseManagerMock.calls.getAll) == true
-                        expect(databaseManagerMock.arguments.predicate) == "isFavourite == true"
+                        expect(databaseManagerMock.arguments.predicate) == "isInFavourites == true"
                     }
                 }
             }
 
-            context("database manager gets favourites -> movies") {
+            context("database manager gets moviess -> movies") {
                 it("returns movies") {
-                    movieDAO.getFavourites { result in
-                        guard case .success = result else {
-                            fail()
-                            return
-                        }
-
-                        expect(databaseManagerMock.calls.getAll) == true
-                        expect(databaseManagerMock.arguments.predicate) == "isFavourite == true"
-                        expect(movieAdapterMock.calls.fromStorage) == true
-                    }
-                }
-            }
-        }
-
-        describe("get watchlist") {
-            context("database manager gets watchlist -> error") {
-                it("returns error") {
-                    databaseManagerMock.settings.shouldReturnError = true
-
-                    movieDAO.getWatchlist { result in
-                        guard case .failure = result else {
-                            fail()
-                            return
-                        }
-
-                        expect(databaseManagerMock.calls.getAll) == true
-                        expect(databaseManagerMock.arguments.predicate) == "isInWatchlist == true"
-                    }
-                }
-            }
-
-            context("database manager gets watchlist -> movies") {
-                it("returns movies") {
-                    movieDAO.getWatchlist { result in
+                    movieDAO.getMovies(.watchlist) { result in
                         guard case .success = result else {
                             fail()
                             return

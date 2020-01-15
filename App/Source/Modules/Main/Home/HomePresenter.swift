@@ -3,7 +3,7 @@
 //  Movies
 //
 //  Created by Radyslav Krechet on 8/28/19.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Domain
@@ -15,12 +15,12 @@ protocol HomePresenterProtocol: PaginationPresenterProtocol {
 class HomePresenter: HomePresenterProtocol {
     weak var view: HomeViewProtocol?
 
-    private let getMoviesUseCase: GetMoviesUseCaseProtocol
+    private let getMoviesUseCase: GetChartUseCaseProtocol
     private var paginationService: PaginationServiceProtocol
     private var chart = Movie.Chart.popular
     private var movies: [Movie]!
 
-    init(getMoviesUseCase: GetMoviesUseCaseProtocol,
+    init(getMoviesUseCase: GetChartUseCaseProtocol,
          paginationService: PaginationServiceProtocol = PaginationService()) {
 
         self.getMoviesUseCase = getMoviesUseCase

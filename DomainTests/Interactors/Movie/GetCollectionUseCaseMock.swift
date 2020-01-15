@@ -1,14 +1,14 @@
 //
-//  GetMoviesUseCaseMock.swift
+//  GetCollectionUseCaseMock.swift
 //  MoviesTests
 //
 //  Created by Radyslav Krechet on 09.12.2019.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 @testable import Domain
 
-class GetMoviesUseCaseMock: GetMoviesUseCaseProtocol {
+class GetCollectionUseCaseMock: GetCollectionUseCaseProtocol {
     struct Settings {
         var shouldReturnError = false
         var shouldReturnEmpty = false
@@ -19,18 +19,16 @@ class GetMoviesUseCaseMock: GetMoviesUseCaseProtocol {
     }
 
     struct Arguments {
-        var chart: Movie.Chart?
-        var page: Int?
+        var collection: Movie.Collection?
     }
 
     var settings = Settings()
     var calls = Calls()
     var arguments = Arguments()
 
-    func execute(with chart: Movie.Chart, page: Int, handler: @escaping Handler<[Movie]>) {
+    func execute(with collection: Movie.Collection, handler: @escaping Handler<[Movie]>) {
         calls.execute = true
-        arguments.chart = chart
-        arguments.page = page
+        arguments.collection = collection
         handler(settings.shouldReturnError
             ? .failure(Mock.Error.force)
             : .success(settings.shouldReturnEmpty ? [] : [Mock.movie]))

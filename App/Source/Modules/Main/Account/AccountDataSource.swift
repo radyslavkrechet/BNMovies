@@ -10,7 +10,7 @@ import Domain
 import UIKit
 
 protocol AccountDataSourceProtocol: UITableViewDataSource, UITableViewDelegate {
-    var navigate: ((Movie.List) -> Void)? { get set }
+    var navigate: ((Movie.Collection) -> Void)? { get set }
     var userDidSignOut: (() -> Void)? { get set }
 
     func populate(with user: User)
@@ -18,7 +18,7 @@ protocol AccountDataSourceProtocol: UITableViewDataSource, UITableViewDelegate {
 
 class AccountDataSource: NSObject, AccountDataSourceProtocol {
     private enum Section: Int, CaseIterable {
-        case user, lists, actions
+        case user, collections, actions
     }
 
     private enum UserRow: Int, CaseIterable {
@@ -34,7 +34,7 @@ class AccountDataSource: NSObject, AccountDataSourceProtocol {
         case extra = 70
     }
 
-    var navigate: ((Movie.List) -> Void)?
+    var navigate: ((Movie.Collection) -> Void)?
     var userDidSignOut: (() -> Void)?
 
     private var user: User?
@@ -52,7 +52,7 @@ class AccountDataSource: NSObject, AccountDataSourceProtocol {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch Section(rawValue: section)! {
         case .user: return UserRow.allCases.count
-        case .lists: return Movie.List.allCases.count
+        case .collections: return Movie.Collection.allCases.count
         case .actions: return ActionsRow.allCases.count
         }
     }
@@ -70,10 +70,10 @@ class AccountDataSource: NSObject, AccountDataSourceProtocol {
                 cell.populate(with: user)
                 return cell
             }
-        case .lists:
+        case .collections:
             cell.accessoryType = .disclosureIndicator
 
-            switch Movie.List(rawValue: indexPath.row)! {
+            switch Movie.Collection(rawValue: indexPath.row)! {
             case .favourites:
                 cell.imageView?.image = "heart.fill".systemImage
                 cell.textLabel?.text = "AccountViewController.favourites".localized
@@ -106,9 +106,9 @@ class AccountDataSource: NSObject, AccountDataSourceProtocol {
         tableView.deselectRow(at: indexPath, animated: true)
 
         switch Section(rawValue: indexPath.section)! {
-        case .lists:
-            let list = Movie.List(rawValue: indexPath.row)!
-            navigate?(list)
+        case .collections:
+            let collection = Movie.Collection(rawValue: indexPath.row)!
+            navigate?(collection)
         case .actions:
             switch ActionsRow(rawValue: indexPath.row)! {
             case .signOut: userDidSignOut?()

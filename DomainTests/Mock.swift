@@ -3,7 +3,7 @@
 //  DomainTests
 //
 //  Created by Radyslav Krechet on 05.12.2019.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Domain
@@ -22,17 +22,13 @@ enum Mock {
     }
 
     static var movie: Movie {
-        movie(isFavourite: false, isInWatchlist: false)
-    }
-
-    static func movie(isFavourite: Bool, isInWatchlist: Bool) -> Movie {
-        return Movie(id: "id",
-                     title: "title",
-                     overview: "overview",
-                     posterSource: "posterSource",
-                     backdropSource: "backdropSource",
-                     userScore: 0,
-                     isFavourite: isFavourite,
-                     isInWatchlist: isInWatchlist)
+        Movie(id: "id",
+              title: "title",
+              overview: "overview",
+              posterSource: "posterSource",
+              backdropSource: "backdropSource",
+              userScore: 0,
+              isInFavourites: false,
+              isInWatchlist: false)
     }
 }

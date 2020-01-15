@@ -3,7 +3,7 @@
 //  MoviesTests
 //
 //  Created by Radyslav Krechet on 09.12.2019.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Nimble
@@ -16,12 +16,12 @@ class HomePresenterSpec: QuickSpec {
     // swiftlint:disable:next function_body_length
     override func spec() {
         var homePresenter: HomePresenter!
-        var getMoviesUseCaseMock: GetMoviesUseCaseMock!
+        var getMoviesUseCaseMock: GetChartUseCaseMock!
         var paginationServiceMock: PaginationServiceMock!
         var homeViewMock: HomeViewMock!
 
         beforeEach {
-            getMoviesUseCaseMock = GetMoviesUseCaseMock()
+            getMoviesUseCaseMock = GetChartUseCaseMock()
             paginationServiceMock = PaginationServiceMock()
             homePresenter = HomePresenter(getMoviesUseCase: getMoviesUseCaseMock,
                                           paginationService: paginationServiceMock)

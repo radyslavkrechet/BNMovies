@@ -3,7 +3,7 @@
 //  Movies
 //
 //  Created by Radyslav Krechet on 8/28/19.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Domain
@@ -14,7 +14,7 @@ protocol DetailsPresenterProtocol: ContentPresenterProtocol {
     var id: String! { get set }
     var shareURL: String { get }
 
-    func markMovie(state: Movie.List)
+    func markMovie(_ collection: Movie.Collection)
 }
 
 class DetailsPresenter: DetailsPresenterProtocol {
@@ -27,17 +27,14 @@ class DetailsPresenter: DetailsPresenterProtocol {
     }
 
     private let getMovieUseCase: GetMovieUseCaseProtocol
-    private let changeMovieFavouriteStateUseCase: ChangeMovieFavouriteStateUseCaseProtocol
-    private let changeMovieInWatchlistStateUseCase: ChangeMovieInWatchlistStateUseCaseProtocol
+    private let toggleMovieCollectionUseCase: ToggleMovieCollectionUseCaseProtocol
     private var movie: Movie?
 
     init(getMovieUseCase: GetMovieUseCaseProtocol,
-         changeMovieFavouriteStateUseCase: ChangeMovieFavouriteStateUseCaseProtocol,
-         changeMovieInWatchlistStateUseCase: ChangeMovieInWatchlistStateUseCaseProtocol) {
+         toggleMovieCollectionUseCase: ToggleMovieCollectionUseCaseProtocol) {
 
         self.getMovieUseCase = getMovieUseCase
-        self.changeMovieFavouriteStateUseCase = changeMovieFavouriteStateUseCase
-        self.changeMovieInWatchlistStateUseCase = changeMovieInWatchlistStateUseCase
+        self.toggleMovieCollectionUseCase = toggleMovieCollectionUseCase
     }
 
     func getContent() {
@@ -49,21 +46,15 @@ class DetailsPresenter: DetailsPresenterProtocol {
         getMovie()
     }
 
-    func markMovie(state: Movie.List) {
+    func markMovie(_ collection: Movie.Collection) {
         guard let movie = movie else { return }
 
-        let handler: Handler<Movie> = { [weak self] result in
+        toggleMovieCollectionUseCase.execute(with: movie, collection: collection) { [weak self] result in
             switch result {
             case .failure(let error): self?.view?.presentMarkError(error)
             case .success(let movie): self?.process(movie)
             }
         }
-
-        let action = state == .favourites
-            ? changeMovieFavouriteStateUseCase.execute
-            : changeMovieInWatchlistStateUseCase.execute
-
-        action(movie, handler)
     }
 
     private func getMovie() {

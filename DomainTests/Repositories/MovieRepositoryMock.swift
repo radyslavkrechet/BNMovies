@@ -3,7 +3,7 @@
 //  DomainTests
 //
 //  Created by Radyslav Krechet on 26.11.2019.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Domain
@@ -14,20 +14,17 @@ class MovieRepositoryMock: MovieRepositoryProtocol {
     }
 
     struct Calls {
-        var getMovies = false
-        var getFavourites = false
-        var getWatchlist = false
+        var getChart = false
+        var getCollection = false
         var getMovie = false
         var getSimilarMovies = false
-        var addToFavourites = false
-        var deleteFromFavourites = false
-        var addToWatchlist = false
-        var deleteFromWatchlist = false
+        var toggleMovieCollection = false
     }
 
     struct Arguments {
         var chart: Movie.Chart?
         var page: Int?
+        var collection: Movie.Collection?
         var id: String?
         var movie: Movie?
     }
@@ -36,20 +33,16 @@ class MovieRepositoryMock: MovieRepositoryProtocol {
     var calls = Calls()
     var arguments = Arguments()
 
-    func getMovies(_ chart: Movie.Chart, page: Int, handler: @escaping Handler<[Movie]>) {
-        calls.getMovies = true
+    func getChart(_ chart: Movie.Chart, page: Int, handler: @escaping Handler<[Movie]>) {
+        calls.getChart = true
         arguments.chart = chart
         arguments.page = page
         movies(handler: handler)
     }
 
-    func getFavourites(handler: @escaping Handler<[Movie]>) {
-        calls.getFavourites = true
-        movies(handler: handler)
-    }
-
-    func getWatchlist(handler: @escaping Handler<[Movie]>) {
-        calls.getWatchlist = true
+    func getCollection(_ collection: Movie.Collection, handler: @escaping Handler<[Movie]>) {
+        calls.getCollection = true
+        arguments.collection = collection
         movies(handler: handler)
     }
 
@@ -65,27 +58,10 @@ class MovieRepositoryMock: MovieRepositoryProtocol {
         movies(handler: handler)
     }
 
-    func addToFavourites(_ movie: Movie, handler: @escaping Handler<Movie>) {
-        calls.addToFavourites = true
+    func toggleMovieCollection(_ movie: Movie, collection: Movie.Collection, handler: @escaping Handler<Movie>) {
+        calls.toggleMovieCollection = true
         arguments.movie = movie
-        self.movie(handler: handler)
-    }
-
-    func deleteFromFavourites(_ movie: Movie, handler: @escaping Handler<Movie>) {
-        calls.deleteFromFavourites = true
-        arguments.movie = movie
-        self.movie(handler: handler)
-    }
-
-    func addToWatchlist(_ movie: Movie, handler: @escaping Handler<Movie>) {
-        calls.addToWatchlist = true
-        arguments.movie = movie
-        self.movie(handler: handler)
-    }
-
-    func deleteFromWatchlist(_ movie: Movie, handler: @escaping Handler<Movie>) {
-        calls.deleteFromWatchlist = true
-        arguments.movie = movie
+        arguments.collection = collection
         self.movie(handler: handler)
     }
 

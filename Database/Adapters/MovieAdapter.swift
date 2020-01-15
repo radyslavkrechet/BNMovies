@@ -3,7 +3,7 @@
 //  Database
 //
 //  Created by Radyslav Krechet on 9/2/19.
-//  Copyright © 2019 Radyslav Krechet. All rights reserved.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
 import Domain
@@ -30,7 +30,7 @@ struct MovieAdapter: MovieAdapterProtocol {
                      releaseDate: entity.releaseDate.value,
                      userScore: entity.userScore.value,
                      genres: entity.genres.map { genreAdapter.fromStorage($0) },
-                     isFavourite: entity.isFavourite.value,
+                     isInFavourites: entity.isInFavourites.value,
                      isInWatchlist: entity.isInWatchlist.value)
     }
 
@@ -44,7 +44,7 @@ struct MovieAdapter: MovieAdapterProtocol {
         entity.releaseDate.value = object.releaseDate
         entity.userScore.value = object.userScore
         entity.genres.value = relationship
-        entity.isFavourite.value = object.isFavourite
+        entity.isInFavourites.value = object.isInFavourites
         entity.isInWatchlist.value = object.isInWatchlist
         return entity
     }
