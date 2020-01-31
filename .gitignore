@@ -40,8 +40,3 @@ Frameworks/
 
 Carthage/Checkouts
 Carthage/Build
-
-# Secrets
-
-App/Resources/Configurations
-App/Resources/Lists/GoogleService-Info.plist

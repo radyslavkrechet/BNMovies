@@ -86,7 +86,6 @@
 		0B52EF14232B890D004939FE /* CoderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B204A9123228D2C00CE54BB /* CoderService.swift */; };
 		0B5D154B232BB008008C9F30 /* AnalyticsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA83095232A4BED00D81840 /* AnalyticsAssembly.swift */; };
 		0B5D154D232BB008008C9F30 /* AnalyticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B52EF2D232B9994004939FE /* AnalyticsManager.swift */; };
-		0B632623230D06D300B08D6F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0B632622230D06D300B08D6F /* GoogleService-Info.plist */; };
 		0B632661230FFEC100B08D6F /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B632660230FFEC100B08D6F /* SignInViewController.swift */; };
 		0B632663230FFECB00B08D6F /* SignInPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B632662230FFECB00B08D6F /* SignInPresenter.swift */; };
 		0B63266C2315310500B08D6F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0B63266B2315310500B08D6F /* Localizable.strings */; };
@@ -444,7 +443,6 @@
 		0B52EEDF232B83AF004939FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B52EF2D232B9994004939FE /* AnalyticsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalyticsManager.swift; sourceTree = "<group>"; };
 		0B63261F230C2F5700B08D6F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0B632622230D06D300B08D6F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0B632625230EB28300B08D6F /* SignInUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInUseCase.swift; sourceTree = "<group>"; };
 		0B632627230EB31100B08D6F /* AuthRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepositoryProtocol.swift; sourceTree = "<group>"; };
 		0B632629230EB32300B08D6F /* UserRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryProtocol.swift; sourceTree = "<group>"; };
@@ -984,9 +982,9 @@
 			isa = PBXGroup;
 			children = (
 				0B1EE9942306D6E900380A29 /* Configurations */,
-				0B63261D230C2F5700B08D6F /* Lists */,
 				0B1EE9932306D6CC00380A29 /* Storyboards */,
 				0B1EE9812306D6BC00380A29 /* Assets.xcassets */,
+				0B63261F230C2F5700B08D6F /* Info.plist */,
 				0B63266B2315310500B08D6F /* Localizable.strings */,
 			);
 			path = Resources;
@@ -1180,15 +1178,6 @@
 				0B52EF2D232B9994004939FE /* AnalyticsManager.swift */,
 			);
 			path = Analytics;
-			sourceTree = "<group>";
-		};
-		0B63261D230C2F5700B08D6F /* Lists */ = {
-			isa = PBXGroup;
-			children = (
-				0B63261F230C2F5700B08D6F /* Info.plist */,
-				0B632622230D06D300B08D6F /* GoogleService-Info.plist */,
-			);
-			path = Lists;
 			sourceTree = "<group>";
 		};
 		0B63264E230FAF9600B08D6F /* Auth */ = {
@@ -2304,7 +2293,6 @@
 				0B63266C2315310500B08D6F /* Localizable.strings in Resources */,
 				0B4FD6B723C8A44E0000D19E /* UserDetailsTableViewCell.xib in Resources */,
 				0BE7D860230AD29E0003A02E /* LoadingView.xib in Resources */,
-				0B632623230D06D300B08D6F /* GoogleService-Info.plist in Resources */,
 				0B204A90232248D300CE54BB /* SimilarMovieCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3232,7 +3220,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = BM3ZT94MUH;
-				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Lists/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3257,7 +3245,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = BM3ZT94MUH;
-				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Lists/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3345,7 +3333,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = BM3ZT94MUH;
-				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Lists/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3433,7 +3421,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = BM3ZT94MUH;
-				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Lists/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3516,7 +3504,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = BM3ZT94MUH;
-				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Lists/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3599,7 +3587,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = BM3ZT94MUH;
-				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Lists/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/App/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
