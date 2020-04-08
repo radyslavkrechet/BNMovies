@@ -9,6 +9,9 @@
 import Foundation
 
 public struct Movie: Identifiable, Equatable {
+    public enum Error: Swift.Error {
+        case noPersistence
+    }
     public enum Chart: Int, Equatable {
         case popular, topRated
     }

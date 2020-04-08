@@ -13,6 +13,7 @@ public struct RepositoriesAssembly: Assembly {
     public init() {}
 
     public func assemble(container: Container) {
+        #if !os(tvOS)
         container.register(AuthRepositoryProtocol.self) { resolver in
             let authAPI = resolver.resolve(AuthAPIProtocol.self)!
             let sessionDAO = resolver.resolve(SessionDAOProtocol.self)!
@@ -24,10 +25,16 @@ public struct RepositoriesAssembly: Assembly {
             let userDAO = resolver.resolve(UserDAOProtocol.self)!
             return UserRepository(userAPI: userAPI, userDAO: userDAO)
         }.inObjectScope(.container)
+        #endif
 
         container.register(MovieRepositoryProtocol.self) { resolver in
             let movieAPI = resolver.resolve(MovieAPIProtocol.self)!
-            let movieDAO = resolver.resolve(MovieDAOProtocol.self)!
+
+            var movieDAO: MovieDAOProtocol?
+            #if !os(tvOS)
+            movieDAO = resolver.resolve(MovieDAOProtocol.self)!
+            #endif
+
             return MovieRepository(movieAPI: movieAPI, movieDAO: movieDAO)
         }.inObjectScope(.container)
     }

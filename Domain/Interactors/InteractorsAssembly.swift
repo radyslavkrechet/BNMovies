@@ -12,8 +12,11 @@ public struct InteractorsAssembly: Assembly {
     public init() {}
 
     public func assemble(container: Container) {
+        #if !os(tvOS)
         registerAuthInteractors(in: container)
         registerUserInteractors(in: container)
+        #endif
+
         registerMovieInteractors(in: container)
     }
 

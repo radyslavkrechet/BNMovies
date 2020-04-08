@@ -10,9 +10,9 @@ import Domain
 
 class MovieRepository: MovieRepositoryProtocol {
     private let movieAPI: MovieAPIProtocol
-    private let movieDAO: MovieDAOProtocol
+    private let movieDAO: MovieDAOProtocol?
 
-    init(movieAPI: MovieAPIProtocol, movieDAO: MovieDAOProtocol) {
+    init(movieAPI: MovieAPIProtocol, movieDAO: MovieDAOProtocol?) {
         self.movieAPI = movieAPI
         self.movieDAO = movieDAO
     }
@@ -22,10 +22,21 @@ class MovieRepository: MovieRepositoryProtocol {
     }
 
     func getCollection(_ collection: Movie.Collection, handler: @escaping Handler<[Movie]>) {
+        guard let movieDAO = movieDAO else {
+            handler(.failure(Movie.Error.noPersistence))
+            return
+        }
+
         movieDAO.getMovies(collection, handler: handler)
     }
 
     func getMovie(with id: String, handler: @escaping Handler<Movie>) {
+        guard let movieDAO = movieDAO else {
+            movieAPI.getMovie(with: id, handler: handler)
+
+            return
+        }
+
         movieDAO.getMovie(with: id) { result in
             switch result {
             case .failure(let error): handler(.failure(error))
@@ -40,7 +51,7 @@ class MovieRepository: MovieRepositoryProtocol {
                         let isInFavourites = daoMovie?.isInFavourites ?? apiMovie.isInFavourites
                         let isInWatchlist = daoMovie?.isInWatchlist ?? apiMovie.isInWatchlist
                         let movie = apiMovie.copy(isInFavourites: isInFavourites, isInWatchlist: isInWatchlist)
-                        self.movieDAO.set(movie, handler: handler)
+                        movieDAO.set(movie, handler: handler)
                     }
                 }
             }
@@ -52,6 +63,11 @@ class MovieRepository: MovieRepositoryProtocol {
     }
 
     func toggleMovieCollection(_ movie: Movie, collection: Movie.Collection, handler: @escaping Handler<Movie>) {
+        guard let movieDAO = movieDAO else {
+            handler(.failure(Movie.Error.noPersistence))
+            return
+        }
+
         var clone: Movie!
 
         switch collection {

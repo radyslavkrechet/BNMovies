@@ -22,4 +22,6 @@ struct AsyncOnMain<Success> {
     }
 
     private var handler: Handler<Success>!
+
+    init() {}
 }
