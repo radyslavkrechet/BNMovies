@@ -1,10 +1,12 @@
 //
 //  SplashViewMock.swift
-//  DomainTests
+//  MoviesTests
 //
 //  Created by Radyslav Krechet on 09.12.2019.
 //  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
+
+import Core
 
 @testable import Movies
 

@@ -1,0 +1,20 @@
+//
+//  UICollectionView+Cell.swift
+//  Core
+//
+//  Created by Radyslav Krechet on 9/5/19.
+//  Copyright © 2020 Radyslav Krechet. All rights reserved.
+//
+
+import UIKit
+
+public extension UICollectionView {
+    func registerNibForCell<Cell: UICollectionViewCell>(_ cell: Cell.Type) {
+        let cellNib = UINib(nibName: Cell.nameOfClass, bundle: nil)
+        register(cellNib, forCellWithReuseIdentifier: Cell.nameOfClass)
+    }
+
+    func dequeueReusableCellForIndexPath<Cell: UICollectionViewCell>(_ indexPath: IndexPath) -> Cell {
+        return dequeueReusableCell(withReuseIdentifier: Cell.nameOfClass, for: indexPath) as? Cell ?? Cell()
+    }
+}

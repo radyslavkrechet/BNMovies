@@ -19,7 +19,6 @@ struct SignInModuleAssembly: Assembly {
         container.storyboardInitCompleted(SignInViewController.self) { resolver, controller in
             controller.presenter = resolver.resolve(SignInPresenter.self)!
             controller.presenter.view = controller
-            controller.analyticsService = resolver.resolve(AnalyticsServiceProtocol.self)
         }
     }
 }

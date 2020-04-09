@@ -7,6 +7,12 @@
 //
 
 import UIKit
+import Core
+import Domain
+import Data
+import Net
+import Database
+import Swinject
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +22,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     override init() {
         if ProcessInfo.shouldLaunchApp {
             dependencyInjectionManager = DependencyInjectionManager()
+
+            let net = NetAssembly(baseURL: dependencyInjectionManager.baseURL,
+                                  apiKey: dependencyInjectionManager.apiKey)
+
+            dependencyInjectionManager.apply(assembly: net)
+
+            let database = DatabaseAssembly()
+            dependencyInjectionManager.apply(assembly: database)
+
+            let repositories = RepositoriesAssembly()
+            dependencyInjectionManager.apply(assembly: repositories)
+
+            let interactors = InteractorsAssembly()
+            dependencyInjectionManager.apply(assembly: interactors)
+
+            let splashModule = SplashModuleAssembly()
+            let signInModule = SignInModuleAssembly()
+            let mainModule = MainModuleAssembly()
+            let modules: [Assembly] = [splashModule, signInModule, mainModule]
+            dependencyInjectionManager.apply(assemblies: modules)
         }
 
         super.init()
@@ -29,10 +55,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard ProcessInfo.shouldLaunchApp else {
             return false
         }
-
-        #if DEBUG
-        DebuggingManager.setup()
-        #endif
 
         AppearanceService.setup()
         UIStoryboard.set(.Splash)

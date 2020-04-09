@@ -26,7 +26,46 @@
       buildConfiguration = "Debug (Development)"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES"
+      onlyGenerateCoverageForSpecifiedTargets = "YES">
+      <CodeCoverageTargets>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0B60F00F243E0CA500933275"
+            BuildableName = "Movies.app"
+            BlueprintName = "App-tvOS"
+            ReferencedContainer = "container:Movies.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0B60F10A243F23A700933275"
+            BuildableName = "Core.framework"
+            BlueprintName = "Core-tvOS"
+            ReferencedContainer = "container:Movies.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0B60EF91243DF5B500933275"
+            BuildableName = "Data.framework"
+            BlueprintName = "Data-tvOS"
+            ReferencedContainer = "container:Movies.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0B60EF6A243DF0C500933275"
+            BuildableName = "Domain.framework"
+            BlueprintName = "Domain-tvOS"
+            ReferencedContainer = "container:Movies.xcodeproj">
+         </BuildableReference>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "0B60EFA2243DF5C400933275"
+            BuildableName = "Net.framework"
+            BlueprintName = "Net-tvOS"
+            ReferencedContainer = "container:Movies.xcodeproj">
+         </BuildableReference>
+      </CodeCoverageTargets>
       <Testables>
          <TestableReference
             skipped = "NO"
@@ -69,6 +108,17 @@
                BlueprintIdentifier = "0B60EFD6243DF91C00933275"
                BuildableName = "NetTests.xctest"
                BlueprintName = "NetTests-tvOS"
+               ReferencedContainer = "container:Movies.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            testExecutionOrdering = "random">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0B60F154243F2A7E00933275"
+               BuildableName = "CoreTests.xctest"
+               BlueprintName = "CoreTests-tvOS"
                ReferencedContainer = "container:Movies.xcodeproj">
             </BuildableReference>
          </TestableReference>

@@ -19,7 +19,6 @@ struct SplashModuleAssembly: Assembly {
         container.storyboardInitCompleted(SplashViewController.self) { resolver, controller in
             controller.presenter = resolver.resolve(SplashPresenter.self)!
             controller.presenter.view = controller
-            controller.analyticsService = resolver.resolve(AnalyticsServiceProtocol.self)
         }
     }
 }

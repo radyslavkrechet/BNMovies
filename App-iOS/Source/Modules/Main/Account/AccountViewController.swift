@@ -6,6 +6,7 @@
 //  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
+import Core
 import Domain
 import Kingfisher
 
@@ -68,7 +69,6 @@ class AccountViewController: ContentViewController<AccountPresenter>, AccountVie
     }
 
     func userDidSignOut() {
-        analyticsService?.logSignOut()
         UIStoryboard.set(.SignIn)
     }
 }

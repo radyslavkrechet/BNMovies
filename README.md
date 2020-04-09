@@ -9,7 +9,7 @@
 
 ### Architecture ###
 
-* App (aka Presentation) contains modules, utils and analytics
+* App (aka Presentation) contains modules and utils
 * Domain contains DTOs (Data Transfer Objects), interactors (aka use cases) and protocols of repositories
 * Data contains implementations of repositories and protocols of API and DAO
 * Net contains adapters, request and response models, routers, utils and implementations of API
@@ -51,10 +51,8 @@
 * Alamofire is used to network requests
 * Kingfisher is used to downloading and caching images
 * CoreStore is used to database CRUD operations
-* Firebase/Analytics, Fabric and Crashlytics are used to collect analytics/crashes
 * Swinject and SwinjectStoryboard are used to dependency injection
 * SwiftLint is used to compliance code style
-* FLEX is used to in-app debugging
 * Quick and Nimble are used to unit tests
 
 ### Setup ###

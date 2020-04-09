@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Core
 
 protocol SignInViewProtocol: ViewProtocol {
     func populate(with state: SignInState)
@@ -110,7 +111,6 @@ class SignInViewController: ViewController<SignInPresenter>, SignInViewProtocol,
     }
 
     func userDidSignIn() {
-        analyticsService?.logSignIn()
         UIStoryboard.set(.Main)
     }
 

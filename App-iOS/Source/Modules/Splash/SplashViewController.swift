@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Core
 
 protocol SplashViewProtocol: ContentViewProtocol {
     func navigate(_ isSignedIn: Bool)

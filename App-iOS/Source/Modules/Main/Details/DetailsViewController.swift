@@ -6,6 +6,7 @@
 //  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
+import Core
 import Domain
 import Kingfisher
 
@@ -46,19 +47,11 @@ class DetailsViewController: ContentViewController<DetailsPresenter>, DetailsVie
         let activityItems = [presenter.shareURL]
         let activityViewController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
         present(activityViewController, animated: true)
-
-        if let title = sender.title {
-            analyticsService?.logClick(in: self.nameOfClass, senderTitle: title)
-        }
     }
 
     @IBAction private func markButtonDidTap(_ sender: UIBarButtonItem) {
         let collection = Movie.Collection(rawValue: sender.tag)!
         presenter.markMovie(collection)
-
-        if let title = sender.title {
-            analyticsService?.logClick(in: self.nameOfClass, senderTitle: title)
-        }
     }
 
     // MARK: - DetailsViewProtocol

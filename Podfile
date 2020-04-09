@@ -1,10 +1,12 @@
 inhibit_all_warnings!
 
-def swinject
-  pod 'Swinject', '2.6.2'
+def app
+  pod 'Kingfisher'
+  pod 'SwinjectStoryboard'
 end
 
-def swift_lint
+def di_and_lint
+  pod 'Swinject', '2.6.2'
   pod 'SwiftLint'
 end
 
@@ -17,18 +19,8 @@ target 'App-iOS' do
   platform :ios, '13.0'
   use_frameworks!
 
-  pod 'Kingfisher'
-
-  pod 'SwinjectStoryboard'
-
-  pod 'Firebase/Analytics'
-  pod 'Fabric'
-  pod 'Crashlytics'
-
-  pod 'FLEX', :configurations => ['Debug (Development)']
-
-  swinject
-  swift_lint
+  app
+  di_and_lint
 
   target 'AppTests-iOS' do
     use_frameworks!
@@ -41,14 +33,36 @@ target 'App-tvOS' do
   platform :tvos, '13.0'
   use_frameworks!
 
-  pod 'Kingfisher'
-
-  pod 'SwinjectStoryboard'
-
-  swinject
-  swift_lint
+  app
+  di_and_lint
 
   target 'AppTests-tvOS' do
+    use_frameworks!
+
+    tests
+  end
+end
+
+target 'Core-iOS' do
+  platform :ios, '13.0'
+  use_frameworks!
+
+  di_and_lint
+
+  target 'CoreTests-iOS' do
+    use_frameworks!
+
+    tests
+  end
+end
+
+target 'Core-tvOS' do
+  platform :tvos, '13.0'
+  use_frameworks!
+
+  di_and_lint
+
+  target 'CoreTests-tvOS' do
     use_frameworks!
 
     tests
@@ -59,8 +73,7 @@ target 'Domain-iOS' do
   platform :ios, '13.0'
   use_frameworks!
 
-  swinject
-  swift_lint
+  di_and_lint
 
   target 'DomainTests-iOS' do
     use_frameworks!
@@ -73,8 +86,7 @@ target 'Domain-tvOS' do
   platform :tvos, '13.0'
   use_frameworks!
 
-  swinject
-  swift_lint
+  di_and_lint
 
   target 'DomainTests-tvOS' do
     use_frameworks!
@@ -87,8 +99,7 @@ target 'Data-iOS' do
   platform :ios, '13.0'
   use_frameworks!
 
-  swinject
-  swift_lint
+  di_and_lint
 
   target 'DataTests-iOS' do
     use_frameworks!
@@ -101,8 +112,7 @@ target 'Data-tvOS' do
   platform :tvos, '13.0'
   use_frameworks!
 
-  swinject
-  swift_lint
+  di_and_lint
 
   target 'DataTests-tvOS' do
     use_frameworks!
@@ -117,8 +127,7 @@ target 'Net-iOS' do
 
   pod 'Alamofire'
 
-  swinject
-  swift_lint
+  di_and_lint
 
   target 'NetTests-iOS' do
     use_frameworks!
@@ -133,8 +142,7 @@ target 'Net-tvOS' do
 
   pod 'Alamofire'
 
-  swinject
-  swift_lint
+  di_and_lint
 
   target 'NetTests-tvOS' do
     use_frameworks!
@@ -149,8 +157,7 @@ target 'Database-iOS' do
 
   pod 'CoreStore'
 
-  swinject
-  swift_lint
+  di_and_lint
 
   target 'DatabaseTests-iOS' do
     use_frameworks!

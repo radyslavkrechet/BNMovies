@@ -6,6 +6,7 @@
 //  Copyright © 2020 Radyslav Krechet. All rights reserved.
 //
 
+import Core
 import Domain
 
 protocol AccountPresenterProtocol: ContentPresenterProtocol {

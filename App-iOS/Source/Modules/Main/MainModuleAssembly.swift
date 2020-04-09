@@ -65,34 +65,29 @@ struct MainModuleAssembly: Assembly {
             controller.presenter = resolver.resolve(HomePresenter.self)!
             controller.presenter.view = controller
             controller.dataSource = resolver.resolve(MoviesDataSource.self)!
-            controller.analyticsService = resolver.resolve(AnalyticsServiceProtocol.self)
         }
 
         container.storyboardInitCompleted(AccountViewController.self) { resolver, controller in
             controller.presenter = resolver.resolve(AccountPresenter.self)!
             controller.presenter.view = controller
             controller.dataSource = resolver.resolve(AccountDataSource.self)!
-            controller.analyticsService = resolver.resolve(AnalyticsServiceProtocol.self)
         }
 
         container.storyboardInitCompleted(CollectionViewController.self) { resolver, controller in
             controller.presenter = resolver.resolve(CollectionPresenter.self)!
             controller.presenter.view = controller
             controller.dataSource = resolver.resolve(MoviesDataSource.self)!
-            controller.analyticsService = resolver.resolve(AnalyticsServiceProtocol.self)
         }
 
         container.storyboardInitCompleted(DetailsViewController.self) { resolver, controller in
             controller.presenter = resolver.resolve(DetailsPresenter.self)!
             controller.presenter.view = controller
-            controller.analyticsService = resolver.resolve(AnalyticsServiceProtocol.self)
         }
 
         container.storyboardInitCompleted(SimilarMoviesViewController.self) { resolver, controller in
             controller.presenter = resolver.resolve(SimilarMoviesPresenter.self)!
             controller.presenter.view = controller
             controller.dataSource = resolver.resolve(SimilarMoviesDataSource.self)!
-            controller.analyticsService = resolver.resolve(AnalyticsServiceProtocol.self)
         }
     }
 }
