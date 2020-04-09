@@ -20,6 +20,7 @@ public struct InteractorsAssembly: Assembly {
         registerMovieInteractors(in: container)
     }
 
+    #if !os(tvOS)
     private func registerAuthInteractors(in container: Container) {
         container.register(SignInUseCaseProtocol.self) { resolver in
             let authRepository = resolver.resolve(AuthRepositoryProtocol.self)!
@@ -46,6 +47,7 @@ public struct InteractorsAssembly: Assembly {
             return GetUserUseCase(authRepository: authRepository, userRepository: userRepository)
         }
     }
+    #endif
 
     private func registerMovieInteractors(in container: Container) {
         container.register(GetChartUseCaseProtocol.self) { resolver in

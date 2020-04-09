@@ -1,4 +1,3 @@
-platform :ios, '12.0'
 inhibit_all_warnings!
 
 def swinject
@@ -14,7 +13,8 @@ def tests
   pod 'Nimble'
 end
 
-target 'Movies' do
+target 'App-iOS' do
+  platform :ios, '13.0'
   use_frameworks!
 
   pod 'Kingfisher'
@@ -30,40 +30,89 @@ target 'Movies' do
   swinject
   swift_lint
 
-  target 'MoviesTests' do
+  target 'AppTests-iOS' do
     use_frameworks!
 
     tests
   end
 end
 
-target 'Domain' do
+target 'App-tvOS' do
+  platform :tvos, '13.0'
+  use_frameworks!
+
+  pod 'Kingfisher'
+
+  pod 'SwinjectStoryboard'
+
+  swinject
+  swift_lint
+
+  target 'AppTests-tvOS' do
+    use_frameworks!
+
+    tests
+  end
+end
+
+target 'Domain-iOS' do
+  platform :ios, '13.0'
   use_frameworks!
 
   swinject
   swift_lint
 
-  target 'DomainTests' do
+  target 'DomainTests-iOS' do
     use_frameworks!
 
     tests
   end
 end
 
-target 'Data' do
+target 'Domain-tvOS' do
+  platform :tvos, '13.0'
   use_frameworks!
 
   swinject
   swift_lint
 
-  target 'DataTests' do
+  target 'DomainTests-tvOS' do
     use_frameworks!
 
     tests
   end
 end
 
-target 'Net' do
+target 'Data-iOS' do
+  platform :ios, '13.0'
+  use_frameworks!
+
+  swinject
+  swift_lint
+
+  target 'DataTests-iOS' do
+    use_frameworks!
+
+    tests
+  end
+end
+
+target 'Data-tvOS' do
+  platform :tvos, '13.0'
+  use_frameworks!
+
+  swinject
+  swift_lint
+
+  target 'DataTests-tvOS' do
+    use_frameworks!
+
+    tests
+  end
+end
+
+target 'Net-iOS' do
+  platform :ios, '13.0'
   use_frameworks!
 
   pod 'Alamofire'
@@ -71,14 +120,31 @@ target 'Net' do
   swinject
   swift_lint
 
-  target 'NetTests' do
+  target 'NetTests-iOS' do
     use_frameworks!
 
     tests
   end
 end
 
-target 'Database' do
+target 'Net-tvOS' do
+  platform :tvos, '13.0'
+  use_frameworks!
+
+  pod 'Alamofire'
+
+  swinject
+  swift_lint
+
+  target 'NetTests-tvOS' do
+    use_frameworks!
+
+    tests
+  end
+end
+
+target 'Database-iOS' do
+  platform :ios, '13.0'
   use_frameworks!
 
   pod 'CoreStore'
@@ -86,7 +152,7 @@ target 'Database' do
   swinject
   swift_lint
 
-  target 'DatabaseTests' do
+  target 'DatabaseTests-iOS' do
     use_frameworks!
 
     tests
