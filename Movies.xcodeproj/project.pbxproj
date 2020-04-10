@@ -84,13 +84,11 @@
 		0B5AAF40243F57C1006D8559 /* NSObject+NameOfClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE7D88E230AD5280003A02E /* NSObject+NameOfClass.swift */; };
 		0B5AAF41243F57C1006D8559 /* ProcessInfo+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B32B2BF239A60F600523402 /* ProcessInfo+Tests.swift */; };
 		0B5AAF42243F57C1006D8559 /* UIView+LoadFromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE7D890230AD5280003A02E /* UIView+LoadFromNib.swift */; };
-		0B5AAF43243F57C1006D8559 /* UIView+CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B204A7523215CF000CE54BB /* UIView+CornerRadius.swift */; };
 		0B5AAF44243F57C1006D8559 /* UITableView+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B204A7923215E2B00CE54BB /* UITableView+Cell.swift */; };
 		0B5AAF45243F57C1006D8559 /* UICollectionView+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B204A7B23215E5600CE54BB /* UICollectionView+Cell.swift */; };
 		0B5AAF49243F57C2006D8559 /* NSObject+NameOfClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE7D88E230AD5280003A02E /* NSObject+NameOfClass.swift */; };
 		0B5AAF4A243F57C2006D8559 /* ProcessInfo+Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B32B2BF239A60F600523402 /* ProcessInfo+Tests.swift */; };
 		0B5AAF4B243F57C2006D8559 /* UIView+LoadFromNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE7D890230AD5280003A02E /* UIView+LoadFromNib.swift */; };
-		0B5AAF4C243F57C2006D8559 /* UIView+CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B204A7523215CF000CE54BB /* UIView+CornerRadius.swift */; };
 		0B5AAF4D243F57C2006D8559 /* UITableView+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B204A7923215E2B00CE54BB /* UITableView+Cell.swift */; };
 		0B5AAF4E243F57C2006D8559 /* UICollectionView+Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B204A7B23215E5600CE54BB /* UICollectionView+Cell.swift */; };
 		0B5AAF54243F5F73006D8559 /* DependencyInjectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5AAF52243F5EC8006D8559 /* DependencyInjectionManager.swift */; };
@@ -125,6 +123,7 @@
 		0B5AAF992440580F006D8559 /* MovieCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B5AAF982440580F006D8559 /* MovieCollectionViewCell.xib */; };
 		0B5AAF9B24408EC5006D8559 /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5AAF9A24408EC5006D8559 /* DetailsPresenter.swift */; };
 		0B5AAF9D24408ECF006D8559 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B5AAF9C24408ECF006D8559 /* DetailsViewController.swift */; };
+		0B5AAF9E2440CA79006D8559 /* UIView+CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B204A7523215CF000CE54BB /* UIView+CornerRadius.swift */; };
 		0B60EF77243DF16F00933275 /* Domain.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BA83110232A664700D81840 /* Domain.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0B60EF78243DF18100933275 /* Handler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B63262D230EB92400B08D6F /* Handler.swift */; };
 		0B60EF79243DF18100933275 /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B204AA22327BF5400CE54BB /* Identifiable.swift */; };
@@ -1891,7 +1890,6 @@
 			isa = PBXGroup;
 			children = (
 				0BE7D890230AD5280003A02E /* UIView+LoadFromNib.swift */,
-				0B204A7523215CF000CE54BB /* UIView+CornerRadius.swift */,
 				0B204A7923215E2B00CE54BB /* UITableView+Cell.swift */,
 				0B204A7B23215E5600CE54BB /* UICollectionView+Cell.swift */,
 			);
@@ -2533,6 +2531,7 @@
 		0BD66079237EEAEB00E6EFA7 /* UIKit */ = {
 			isa = PBXGroup;
 			children = (
+				0B204A7523215CF000CE54BB /* UIView+CornerRadius.swift */,
 				0B6326B12316B78A00B08D6F /* UIViewController+Navigation.swift */,
 				0B204A7723215D7200CE54BB /* UIViewController+Alert.swift */,
 				0B6326DB2319329300B08D6F /* UIStoryboard+Navigation.swift */,
@@ -4575,6 +4574,7 @@
 				0B4FD6B523C8A43D0000D19E /* UserDetailsTableViewCell.swift in Sources */,
 				0BF517D923CC653500D370DC /* CollectionViewController.swift in Sources */,
 				0B089D9223C89A3200D1A353 /* AccountDataSource.swift in Sources */,
+				0B5AAF9E2440CA79006D8559 /* UIView+CornerRadius.swift in Sources */,
 				0B6326AC2316774F00B08D6F /* DetailsViewController.swift in Sources */,
 				0B632661230FFEC100B08D6F /* SignInViewController.swift in Sources */,
 				0B1EE9922306D6BC00380A29 /* AppDelegate.swift in Sources */,
@@ -4870,7 +4870,6 @@
 				0B5AAF26243F5658006D8559 /* ContentPresenter.swift in Sources */,
 				0B5AAF24243F5658006D8559 /* ViewController.swift in Sources */,
 				0B5AAF36243F56E5006D8559 /* LoadingView.swift in Sources */,
-				0B5AAF43243F57C1006D8559 /* UIView+CornerRadius.swift in Sources */,
 				0B5AAF29243F5658006D8559 /* ListViewController.swift in Sources */,
 				0B5AAF40243F57C1006D8559 /* NSObject+NameOfClass.swift in Sources */,
 				0B5AAF41243F57C1006D8559 /* ProcessInfo+Tests.swift in Sources */,
@@ -4901,7 +4900,6 @@
 				0B5AAF1B243F5657006D8559 /* ContentPresenter.swift in Sources */,
 				0B5AAF19243F5657006D8559 /* ViewController.swift in Sources */,
 				0B5AAF2F243F56E4006D8559 /* LoadingView.swift in Sources */,
-				0B5AAF4C243F57C2006D8559 /* UIView+CornerRadius.swift in Sources */,
 				0B5AAF1E243F5657006D8559 /* ListViewController.swift in Sources */,
 				0B5AAF49243F57C2006D8559 /* NSObject+NameOfClass.swift in Sources */,
 				0B5AAF4A243F57C2006D8559 /* ProcessInfo+Tests.swift in Sources */,

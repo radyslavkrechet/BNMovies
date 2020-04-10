@@ -1,6 +1,6 @@
 //
 //  UIView+CornerRadius.swift
-//  Core
+//  Movies
 //
 //  Created by Radyslav Krechet on 9/5/19.
 //  Copyright © 2020 Radyslav Krechet. All rights reserved.
