@@ -1,6 +1,6 @@
 //
 //  AccountDataSource.swift
-//  Domain
+//  Movies
 //
 //  Created by Radyslav Krechet on 10.01.2020.
 //  Copyright © 2020 Radyslav Krechet. All rights reserved.

@@ -9,6 +9,9 @@
 import Foundation
 
 public protocol PaginationPresenterProtocol: ListPresenterProtocol {
+    #if !os(tvOS)
     func refreshContent()
+    #endif
+
     func getMoreContent()
 }

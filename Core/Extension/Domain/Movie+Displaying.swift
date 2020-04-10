@@ -1,6 +1,6 @@
 //
 //  Movie+Displaying.swift
-//  Domain
+//  Core
 //
 //  Created by Radyslav Krechet on 09.04.2020.
 //  Copyright © 2020 Radyslav Krechet. All rights reserved.

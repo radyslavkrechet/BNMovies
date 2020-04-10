@@ -9,13 +9,5 @@
 import UIKit
 
 class LoadingView: View {
-    @IBOutlet private(set) weak var textLabel: UILabel!
     @IBOutlet private(set) weak var activityIndicatorView: UIActivityIndicatorView!
-
-    // MARK: - Setup
-
-    func populate(with text: String? = nil) {
-        textLabel.isHidden = text == nil
-        textLabel.text = text
-    }
 }

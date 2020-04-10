@@ -44,7 +44,7 @@ class MoviesDataSource: NSObject, MoviesDataSourceProtocol {
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.item == items.count - 1 {
+        if indexPath.row == items.count - 1 {
             lastItemWillDisplay?()
         }
     }

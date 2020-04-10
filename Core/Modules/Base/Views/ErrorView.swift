@@ -13,18 +13,9 @@ protocol ErrorViewDelegate: class {
 }
 
 class ErrorView: View {
-    @IBOutlet private(set) weak var imageView: UIImageView!
     @IBOutlet private(set) weak var textLabel: UILabel!
 
     weak var delegate: ErrorViewDelegate?
-
-    // MARK: - Setup
-
-    func populate(with text: String, image: UIImage? = nil) {
-        textLabel.text = text
-        imageView.isHidden = image == nil
-        imageView.image = image
-    }
 
     // MARK: - Actions
 

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="16096" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="appleTV" appearance="dark"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmptyView" customModule="Core" customModuleProvider="target">
+            <connections>
+                <outlet property="textLabel" destination="eqI-q4-Iyi" id="sFH-y0-KWJ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eqI-q4-Iyi">
+                    <rect key="frame" x="106" y="517" width="1708" height="46"/>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstItem="eqI-q4-Iyi" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="djv-qG-GW4"/>
+                <constraint firstItem="eqI-q4-Iyi" firstAttribute="leading" secondItem="Pmt-tb-8Ig" secondAttribute="leading" constant="16" id="dla-ar-0hH"/>
+                <constraint firstItem="Pmt-tb-8Ig" firstAttribute="trailing" secondItem="eqI-q4-Iyi" secondAttribute="trailing" constant="16" id="kpz-E3-SjW"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Pmt-tb-8Ig"/>
+            <point key="canvasLocation" x="69" y="107"/>
+        </view>
+    </objects>
+</document>

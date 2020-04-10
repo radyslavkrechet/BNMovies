@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.XIB" version="3.0" toolsVersion="16096" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="appleTV" appearance="dark"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ErrorView" customModule="Core" customModuleProvider="target">
+            <connections>
+                <outlet property="textLabel" destination="IUW-vE-tSg" id="S9b-l9-IqM"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ErrorView" customModule="Core" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="98x-Zd-oxl">
+                    <rect key="frame" x="106" y="450" width="1708" height="180"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IUW-vE-tSg">
+                            <rect key="frame" x="819" y="0.0" width="70" height="46"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B59-qc-dsF">
+                            <rect key="frame" x="738" y="94" width="232" height="86"/>
+                            <inset key="contentEdgeInsets" minX="40" minY="20" maxX="40" maxY="20"/>
+                            <state key="normal" title="Try again"/>
+                            <connections>
+                                <action selector="tryAgainButtonDidTap:" destination="-1" eventType="primaryActionTriggered" id="iBa-zh-zpr"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="98x-Zd-oxl" firstAttribute="leading" secondItem="Pmt-tb-8Ig" secondAttribute="leading" constant="16" id="4H8-wi-8he"/>
+                <constraint firstItem="98x-Zd-oxl" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="i3r-1F-Stq"/>
+                <constraint firstItem="Pmt-tb-8Ig" firstAttribute="trailing" secondItem="98x-Zd-oxl" secondAttribute="trailing" constant="16" id="phX-B6-JZN"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Pmt-tb-8Ig"/>
+            <point key="canvasLocation" x="69" y="107"/>
+        </view>
+    </objects>
+</document>

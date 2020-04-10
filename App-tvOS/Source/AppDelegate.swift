@@ -11,6 +11,7 @@ import Core
 import Domain
 import Data
 import Net
+import SwinjectStoryboard
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -31,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             let interactors = InteractorsAssembly()
             dependencyInjectionManager.apply(assembly: interactors)
+
+            let mainModule = MainModuleAssembly()
+            dependencyInjectionManager.apply(assembly: mainModule)
         }
 
         super.init()
@@ -41,6 +45,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        return ProcessInfo.shouldLaunchApp
+        guard ProcessInfo.shouldLaunchApp else {
+            return false
+        }
+
+        let storyboard = SwinjectStoryboard.create(name: "Main",
+                                                   bundle: nil,
+                                                   container: dependencyInjectionManager.resolver)
+
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = storyboard.instantiateInitialViewController()
+        window?.makeKeyAndVisible()
+
+        return true
     }
 }

@@ -15,17 +15,8 @@ public protocol ContentViewProtocol: ViewProtocol {
 open class ContentViewController<Presenter: ContentPresenterProtocol>: ViewController<Presenter>, ContentViewProtocol,
     ErrorViewDelegate {
 
-    open var loadingStateText: String? {
-        return nil
-    }
     open var emptyStateText: String {
         return ""
-    }
-    open var emptyStateImage: UIImage? {
-        return nil
-    }
-    open var errorStateImage: UIImage? {
-        return nil
     }
 
     private var stateView: UIView? {
@@ -53,17 +44,16 @@ open class ContentViewController<Presenter: ContentPresenterProtocol>: ViewContr
         switch state {
         case .loading:
             let loadingView = LoadingView()
-            loadingView.populate(with: loadingStateText)
             stateView = loadingView
         case .empty:
             let emptyView = EmptyView()
-            emptyView.populate(with: emptyStateText, image: emptyStateImage)
+            emptyView.textLabel.text = emptyStateText
             stateView = emptyView
         case .content:
             stateView = nil
         case .error(let error):
             let errorView = ErrorView()
-            errorView.populate(with: error.localizedDescription, image: errorStateImage)
+            errorView.textLabel.text = error.localizedDescription
             errorView.delegate = self
             stateView = errorView
         }
