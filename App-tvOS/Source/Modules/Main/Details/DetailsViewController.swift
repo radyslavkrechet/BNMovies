@@ -31,7 +31,7 @@ class DetailsViewController: ContentViewController<DetailsPresenter>, DetailsVie
         posterImageView.kf.setImage(with: posterUrl)
 
         titleLabel.text = movie.title
-        infoLabel.text = "\(movie.genresToDisplay)\n\(movie.runtimeToDisplay)\n\(movie.releaseDateToDisplay)"
+        infoLabel.text = "\(movie.genresToDisplay) · \(movie.runtimeToDisplay) · \(movie.releaseDateToDisplay)"
         overviewLabel.text = movie.overview
     }
 }
